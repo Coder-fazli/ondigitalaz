@@ -13,6 +13,33 @@ add_action( 'customize_register', 'ondigital_customizer' );
 function ondigital_customizer( $wp_customize ) {
 
     // =========================================================================
+    // Logo Size (inside Site Identity section, below logo upload)
+    // =========================================================================
+    $wp_customize->add_setting( 'ondigital_logo_width', array(
+        'default'           => 150,
+        'sanitize_callback' => 'absint',
+    ) );
+    $wp_customize->add_control( 'ondigital_logo_width', array(
+        'label'       => __( 'Logo Width (px)', 'ondigital' ),
+        'section'     => 'title_tagline',
+        'type'        => 'number',
+        'input_attrs' => array( 'min' => 50, 'max' => 500, 'step' => 5 ),
+        'priority'    => 9,
+    ) );
+
+    $wp_customize->add_setting( 'ondigital_logo_height', array(
+        'default'           => 0,
+        'sanitize_callback' => 'absint',
+    ) );
+    $wp_customize->add_control( 'ondigital_logo_height', array(
+        'label'       => __( 'Logo Height (px) — 0 for auto', 'ondigital' ),
+        'section'     => 'title_tagline',
+        'type'        => 'number',
+        'input_attrs' => array( 'min' => 0, 'max' => 300, 'step' => 5 ),
+        'priority'    => 9,
+    ) );
+
+    // =========================================================================
     // Contact Info Section
     // =========================================================================
     $wp_customize->add_section( 'ondigital_contact', array(

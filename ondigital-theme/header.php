@@ -141,14 +141,16 @@ $font_class = $is_home ? 'font-heading-spacegrotesk-bold' : 'font-heading-beatri
     <div class="container large">
         <div class="header-area__inner">
             <div class="header__logo">
-                <?php if ( has_custom_logo() ) : ?>
+                <?php if ( has_custom_logo() ) :
+                    $logo_id  = get_theme_mod( 'custom_logo' );
+                    $logo_url = wp_get_attachment_image_url( $logo_id, 'full' );
+                    $logo_w   = absint( get_theme_mod( 'ondigital_logo_width', 150 ) );
+                    $logo_h   = absint( get_theme_mod( 'ondigital_logo_height', 0 ) );
+                    $logo_style = 'width:' . $logo_w . 'px;height:' . ( $logo_h ? $logo_h . 'px' : 'auto' ) . ';';
+                ?>
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                        <?php
-                        $logo_id = get_theme_mod( 'custom_logo' );
-                        $logo_url = wp_get_attachment_image_url( $logo_id, 'full' );
-                        ?>
-                        <img class="show-light" src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>">
-                        <img class="show-dark" src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>">
+                        <img class="show-light" src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" style="<?php echo esc_attr( $logo_style ); ?>">
+                        <img class="show-dark" src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" style="<?php echo esc_attr( $logo_style ); ?>">
                     </a>
                 <?php else : ?>
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
