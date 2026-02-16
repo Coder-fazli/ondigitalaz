@@ -365,6 +365,7 @@ function ondigital_enqueue_assets() {
     wp_enqueue_script( 'meanmenu', ONDIGITAL_URI . '/assets/js/vendor/jquery.meanmenu.min.js', array( 'jquery' ), '2.0.8', true );
     wp_enqueue_script( 'counter-up', ONDIGITAL_URI . '/assets/js/vendor/counter.js', array(), '2.1.0', true );
     wp_enqueue_script( 'progressbar-js', ONDIGITAL_URI . '/assets/js/vendor/progressbar.js', array( 'jquery' ), '1.0.0', true );
+    wp_enqueue_script( 'lottie', ONDIGITAL_URI . '/assets/js/vendor/lottie.min.js', array(), '5.12.2', true );
 
     // --- Global Theme JS ---
     wp_enqueue_script( 'ondigital-global', ONDIGITAL_URI . '/assets/js/global.js', array( 'jquery', 'gsap', 'bootstrap-bundle' ), ONDIGITAL_VERSION, true );

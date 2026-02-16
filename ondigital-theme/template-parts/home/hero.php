@@ -62,8 +62,24 @@ $hero_image        = ondigital_img( 'hero_image', '/assets/imgs/gallery/img-s-35
                 </div>
             </div>
             <div class="thumb">
-                <img src="<?php echo esc_url( $hero_image ); ?>" alt="<?php esc_attr_e( 'Hero image', 'ondigital' ); ?>">
+                <div id="hero-lottie" style="width:100%;height:100%;"></div>
+                <noscript>
+                    <img src="<?php echo esc_url( $hero_image ); ?>" alt="<?php esc_attr_e( 'Hero image', 'ondigital' ); ?>">
+                </noscript>
             </div>
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof lottie !== 'undefined') {
+                    lottie.loadAnimation({
+                        container: document.getElementById('hero-lottie'),
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        path: '<?php echo esc_url( ONDIGITAL_URI . '/assets/lottie/hero/data.json' ); ?>'
+                    });
+                }
+            });
+            </script>
         </div>
     </div>
 </section>
