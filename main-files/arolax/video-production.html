@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Arolax HTML5 Template">
+
+  <title>Arolax Video Production</title>
+
+  <!-- Fav Icon -->
+  <link rel="icon" type="image/x-icon" href="assets/imgs/logo/favicon.png">
+
+
+
+
+
+  <!-- All CSS files -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+  <link rel="stylesheet" href="assets/css/progressbar.css">
+  <link rel="stylesheet" href="assets/css/meanmenu.min.css">
+  <link rel="stylesheet" href="assets/css/magnific-popup.css">
+  <link rel="stylesheet" href="assets/css/master-video-production.css">
+
+
+</head>
+
+
+<body class="font-heading-khand-bold">
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div id="container" class="container-preloader">
+      <div class="animation-preloader">
+        <div class="spinner"></div>
+        <div class="txt-loading">
+          <span data-text="A" class="characters">A</span>
+          <span data-text="R" class="characters">R</span>
+          <span data-text="O" class="characters">O</span>
+          <span data-text="L" class="characters">L</span>
+          <span data-text="A" class="characters">A</span>
+          <span data-text="X" class="characters">X</span>
+        </div>
+      </div>
+      <div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+    </div>
+  </div>
+
+  <!-- Cursor Animation -->
+  <div class="cursor1"></div>
+  <div class="cursor2"></div>
+
+  <!-- Sroll to top -->
+  <div class="progress-wrap">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+      <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+    </svg>
+  </div>
+
+  <!-- Switcher Area Start -->
+  <div class="switcher__area">
+    <div class="switcher__icon">
+      <button id="switcher_open"><i class="fa-solid fa-gear"></i></button>
+      <button id="switcher_close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="switcher__items">
+      <div class="switcher__item">
+        <div class="switch__title-wrap">
+          <p class="switcher__title">mode</p>
+        </div>
+        <div class="switcher__btn mode-type wc-col-2">
+          <button class="active" data-mode="light">light</button>
+          <button data-mode="dark">dark</button>
+        </div>
+      </div>
+      <div class="switcher__item">
+        <div class="switch__title-wrap">
+          <p class="switcher__title">Language Support</p>
+        </div>
+        <div class="switcher__btn lang_dir wc-col-2">
+          <button class="active" data-mode="ltr">LTR</button>
+          <button data-mode="rtl">RTL</button>
+        </div>
+      </div>
+      <div class="switcher__item">
+        <div class="switch__title-wrap">
+          <p class="switcher__title">Layout</p>
+        </div>
+        <div class="switcher__btn layout-type wc-col-2">
+          <button class="active" data-mode="full-width">Full Width</button>
+          <button data-mode="box-layout">Box Layout</button>
+        </div>
+      </div>
+      <div class="switcher__item">
+        <div class="switch__title-wrap">
+          <p class="switcher__title">Cursor</p>
+        </div>
+        <div class="switcher__btn">
+          <select name="cursor-style" id="cursor_style">
+            <option value="1">default</option>
+            <option selected value="2">animated</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Switcher Area End -->
+
+  <!-- offcanvas start  -->
+  <div class="offcanvas-3__area">
+    <div class="offcanvas-3__inner">
+      <div class="offcanvas-3__meta-wrapper">
+        <div class="">
+          <button id="close_offcanvas" class="close-button close-offcanvas" onclick="hideCanvas3()">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <div class="">
+          <div class="offcanvas-3__meta mb-145 d-none d-md-block">
+            <ul>
+              <li><a href="tel:+2-352698102" class="unnerline"><u>+2-352 698 102</u></a></li>
+              <li><a href="mailto:contact@me.com">contact@me.com</a></li>
+              <li><a href="">27 Division St, <br>
+                  New York, NY 10002, USA</a></li>
+            </ul>
+          </div>
+          <div class="offcanvas-3__social d-none d-md-block">
+            <p class="title">Follow Me</p>
+            <div class="offcanvas-3__social-links">
+              <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+              <a href=""><i class="fa-brands fa-twitter"></i></a>
+              <a href=""><i class="fa-brands fa-dribbble"></i></a>
+              <a href=""><i class="fa-brands fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="offcanvas-3__menu-wrapper">
+        <nav class="nav-menu offcanvas-3__menu">
+          <ul>
+            <li><a href="#">home</a></li>
+            <li><a href="about-bold.html">about</a></li>
+            <li><a href="services-bold.html">services</a></li>
+            <li><a href="service-details-bold.html">service details</a></li>
+            <li><a href="works-bold.html">projects</a></li>
+            <li><a href="work-details-bold.html">project details</a></li>
+            <li><a href="team-bold.html">team</a></li>
+            <li><a href="team-details-bold.html">team details</a></li>
+            <li><a href="career-bold.html">career</a></li>
+            <li><a href="career-details-bold.html">career details</a></li>
+            <li><a href="faq-bold.html">faq</a></li>
+            <li><a href="404-bold.html">404 page</a></li>
+            <li><a href="blog-bold.html">blog</a></li>
+            <li><a href="blog-details-bold.html">blog details</a></li>
+            <li><a href="contact-bold.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- offcanvas end  -->
+
+
+  <!-- search modal start -->
+  <div class="modal fade" id="search-template" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="search-template" aria-hidden="true">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form action="#" class="form-search">
+            <input type="text" placeholder="Search">
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- search modal end -->
+
+  <!-- Header area start -->
+  <header class="header-area">
+    <div class="container large">
+      <div class="header-area__inner">
+        <div class="header__logo">
+          <a href="#">
+            <img class="show-light" src="assets/imgs/logo/logo.png" alt="Site Logo">
+            <img class="show-dark" src="assets/imgs/logo/logo-light.png" alt="Site Logo">
+          </a>
+        </div>
+        <div class="header__nav pos-center">
+          <nav class="main-menu">
+            <ul>
+              <li class="menu-item-has-children">
+                <a href="#">Demos</a>
+                <ul class="dp-menu col-2">
+                  <li><a href="branding-agency.html">Branding Agency</a></li>
+                  <li><a href="web-agency.html">Web Agency</a></li>
+                  <li><a href="seo-agency.html">SEO Agency</a></li>
+                  <li><a href="design-studio.html">Design Agency</a></li>
+                  <li><a href="video-production.html">Video Agency</a></li>
+                  <li><a href="ai-agency.html">AI Agency</a></li>
+                  <li><a href="creative-agency-classic.html">Creative Agency Classic</a></li>
+                  <li><a href="marketing-agency.html">Marketing Agency</a></li>
+                  <li><a href="corporate-agency.html">Corporate Agency</a></li>
+                  <li><a href="startup-agency.html">Startup Agency</a></li>
+                  <li><a href="modern-agency.html">Modern Agency</a></li>
+                  <li><a href="photography-studio.html">Photography Agency</a></li>
+                  <li><a href="creative-agency.html">Creative Agency</a></li>
+                  <li><a href="digital-agency.html">Digital Agency</a></li>
+                </ul>
+              </li>
+              <li><a href="about.html">about</a></li>
+              <li class="menu-item-has-children">
+                <a href="#">portfolio</a>
+                <ul class="dp-menu">
+                  <li><a href="portfolio-carousel.html">Portfolio Carousel</a></li>
+                  <li><a href="portfolio-material.html">Portfolio Material</a></li>
+                  <li><a href="portfolio-slicer.html">Portfolio Slicer</a></li>
+                  <li><a href="portfolio-spring.html">Portfolio Spring</a></li>
+                </ul>
+              </li>
+              <li class="menu-item-has-children">
+                <a href="#">Pages</a>
+                <ul class="dp-menu">
+                  <li class="menu-item-has-children">
+                    <a href="#">service pages</a>
+                    <ul>
+                      <li><a href="services.html">services</a></li>
+                      <li><a href="service-details.html">service details</a></li>
+                    </ul>
+                  </li>
+                  <li class="menu-item-has-children">
+                    <a href="#">project pages</a>
+                    <ul>
+                      <li><a href="works.html">project</a></li>
+                      <li><a href="work-details.html">project details</a></li>
+                    </ul>
+                  </li>
+                  <li class="menu-item-has-children">
+                    <a href="#">team pages</a>
+                    <ul>
+                      <li><a href="team.html">team</a></li>
+                      <li><a href="team-details.html">team details</a></li>
+                    </ul>
+                  </li>
+                  <li class="menu-item-has-children">
+                    <a href="#">career pages</a>
+                    <ul>
+                      <li><a href="career.html">career</a></li>
+                      <li><a href="career-details.html">career details</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="faq.html">faq</a></li>
+                  <li><a href="404.html">404 page</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">blog</a>
+                <ul class="dp-menu">
+                  <li><a href="blog.html">blog</a></li>
+                  <li><a href="blog-details.html">blog details</a></li>
+                </ul>
+              </li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="header__button">
+          <a class="wc-btn wc-btn-primary btn-text-flip" href="contact-bold.html"><span data-text="Get started">Get
+              started</span><i class="fa-solid fa-play"></i></a>
+        </div>
+        <div class="header__navicon d-xl-none">
+          <button onclick="showCanvas3()" class="open-offcanvas">
+            <i class="fa-solid fa-bars"></i></button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Header area end -->
+
+  <div class="has-smooth" id="has_smooth"></div>
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <div class="body-wrapper body-video-production">
+
+        <!-- overlay switcher close  -->
+        <div class="overlay-switcher-close"></div>
+
+        <main>
+
+          <!-- hero area start  -->
+          <section class="hero-area">
+            <div class="container large">
+              <div class="hero-area-inner section-spacing">
+                <div class="video-area">
+                  <video src="https://crowdytheme.com/assets/wp-content/uploads/2024/06/video_brodcust.mp4" autoplay
+                    loop></video>
+                  <div class="sticker has_fade_anim" data-fade-from="top" data-ease="bounce" data-fade-offset="100">
+                    <img class="show-light" src="assets/imgs/shape/img-s-37-light.webp" alt="shape image">
+                    <img class="show-dark" src="assets/imgs/shape/img-s-37.webp" alt="shape image">
+                    <h1 class="text">production <br>
+                      agency</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- hero area end  -->
+
+          <!-- text slider area start  -->
+          <div class="container large has_fade_anim">
+            <div class="text-slider">
+              <div class="swiper text-slider-active">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="text-slider-item">
+                      <h2 class="title"><a href="#">Some Creative videos</a></h2>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="text-slider-item">
+                      <h2 class="title"><a href="#">Some Creative videos</a></h2>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="text-slider-item">
+                      <h2 class="title"><a href="#">Some Creative videos</a></h2>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="text-slider-item">
+                      <h2 class="title"><a href="#">Some Creative videos</a></h2>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="text-slider-item">
+                      <h2 class="title"><a href="#">Some Creative videos</a></h2>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="text-slider-item">
+                      <h2 class="title"><a href="#">Some Creative videos</a></h2>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="text-slider-item">
+                      <h2 class="title"><a href="#">Some Creative videos</a></h2>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="text-slider-item">
+                      <h2 class="title"><a href="#">Some Creative videos</a></h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /text slider area end -->
+
+          <!-- gallery slider area start  -->
+          <div class="gallery-slider-area has_fade_anim">
+            <div class="container large">
+              <div class="gallery-slider">
+                <div class="swiper gallery-slider-active">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <div class="gallery-slider-item">
+                        <img src="assets/imgs/gallery/img-s-20.webp" alt="gallery image">
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="gallery-slider-item">
+                        <img src="assets/imgs/gallery/img-s-21.webp" alt="gallery image">
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="gallery-slider-item">
+                        <img src="assets/imgs/gallery/img-s-22.webp" alt="gallery image">
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="gallery-slider-item">
+                        <img src="assets/imgs/gallery/img-s-21.webp" alt="gallery image">
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="gallery-slider-item">
+                        <img src="assets/imgs/gallery/img-s-22.webp" alt="gallery image">
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="gallery-slider-item">
+                        <img src="assets/imgs/gallery/img-s-21.webp" alt="gallery image">
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="gallery-slider-item">
+                        <img src="assets/imgs/gallery/img-s-22.webp" alt="gallery image">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gallery-pagination pagination-dot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- gallery slider area end  -->
+
+          <!-- about area start  -->
+          <section class="about-area">
+            <div class="container">
+              <div class="about-area-inner section-spacing-top overflow-hidden">
+                <div class="section-title-image has_fade_anim" data-fade-from="bottom" data-fade-offset="50">
+                  <img class="show-light" src="assets/imgs/shape/img-s-38.webp" alt="shape image">
+                  <img class="show-dark" src="assets/imgs/shape/img-s-38-light.webp" alt="shape image">
+                </div>
+                <div class="section-content">
+                  <div class="section-thumb">
+                    <div class="about-thumb has_fade_anim" data-fade-from="top" data-ease="bounce">
+                      <img class="show-light" src="assets/imgs/shape/img-s-39.webp" alt="shape image">
+                      <img class="show-dark" src="assets/imgs/shape/img-s-39-light.webp" alt="shape image">
+                      <a href="https://crowdytheme.com/assets/wp-content/uploads/2024/05/insurance-video.mp4"
+                        class="wc-btn wc-btn-circle video-popup"><i class="fa-solid fa-play"></i></a>
+                    </div>
+                  </div>
+                  <div class="content-last">
+                    <div class="section-title-wrapper">
+                      <div class="title-wrapper">
+                        <h2 class="section-title has_text_move_anim">We are a
+                          family of
+                          creative Video
+                          production
+                          agency</h2>
+                      </div>
+                    </div>
+                    <div class="text-wrapper">
+                      <p class="text has_fade_anim" data-fade-from="left">We deploy world-class Creative Design team on
+                        demand. that can design, build, ship
+                        and scale your vision in the most efficient way. We believe that the surest measure of success
+                        is when a client partners with us more than once. Over half our clients stay with us for longer
+                        than a single project.</p>
+                    </div>
+                    <div class="btn-wrapper has_fade_anim" data-fade-from="left">
+                      <a href="about-bold.html" class="wc-btn wc-btn-primary btn-text-flip"> <span
+                          data-text="Lean more">Lean
+                          more</span><i class="fa-solid fa-play"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- about area end  -->
+
+          <!-- service area start  -->
+          <section class="service-area">
+            <div class="container">
+              <div class="service-area-inner section-spacing">
+                <div class="section-title-image has_fade_anim" data-fade-from="bottom" data-fade-offset="50">
+                  <img class="show-light" src="assets/imgs/shape/img-s-40.webp" alt="shape image">
+                  <img class="show-dark" src="assets/imgs/shape/img-s-40-light.webp" alt="shape image">
+                </div>
+                <div class="services-wrapper-box">
+                  <div class="services-wrapper">
+                    <div class="has_fade_anim" data-delay="0.15">
+                      <a href="service-details-bold.html">
+                        <div class="service-box">
+                          <span class="number">01</span>
+                          <div class="content-wrapper">
+                            <div class="content">
+                              <h2 class="title">Product
+                                Videos</h2>
+                              <p class="text">Creative Design team on demand that can design, build, ship and scale your
+                                real vision. </p>
+                            </div>
+                            <div class="btn-wrapper">
+                              <span class="cf_btn wc-btn-icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="has_fade_anim" data-delay="0.30">
+                      <a href="service-details-bold.html">
+                        <div class="service-box">
+                          <span class="number">02</span>
+                          <div class="content-wrapper">
+                            <div class="content">
+                              <h2 class="title">Brand
+                                Videos</h2>
+                              <p class="text">Creative Design team on demand that can design, build, ship and scale your
+                                real vision. </p>
+                            </div>
+                            <div class="btn-wrapper">
+                              <span class="cf_btn wc-btn-icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="has_fade_anim" data-delay="0.15">
+                      <a href="service-details-bold.html">
+                        <div class="service-box">
+                          <span class="number">03</span>
+                          <div class="content-wrapper">
+                            <div class="content">
+                              <h2 class="title">Animation
+                                video</h2>
+                              <p class="text">Creative Design team on demand that can design, build, ship and scale your
+                                real vision. </p>
+                            </div>
+                            <div class="btn-wrapper">
+                              <span class="cf_btn wc-btn-icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="has_fade_anim" data-delay="0.30">
+                      <a href="service-details-bold.html">
+                        <div class="service-box">
+                          <span class="number">04</span>
+                          <div class="content-wrapper">
+                            <div class="content">
+                              <h2 class="title">Tutorial
+                                video</h2>
+                              <p class="text">Creative Design team on demand that can design, build, ship and scale your
+                                real vision. </p>
+                            </div>
+                            <div class="btn-wrapper">
+                              <span class="cf_btn wc-btn-icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- service area end  -->
+
+          <!-- team area start  -->
+          <section class="team-area">
+            <div class="container large">
+              <div class="team-area-inner section-spacing">
+                <div class="container">
+                  <div class="section-header">
+                    <div class="section-title-wrapper">
+                      <div class="title-wrapper">
+                        <h2 class="section-title has_text_move_anim">Our team constantly explore new technology & We
+                          thrive on pushing
+                          boundaries.</h2>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="section-content">
+                    <div class="counter-wrapper-box">
+                      <div class="counter-wrapper has_fade_anim">
+                        <div class="team-count-box">
+                          <h3 class="number wc-counter">12<span>+</span></h3>
+                          <h3 class="title">Years of <br>
+                            experience</h3>
+                        </div>
+                        <div class="team-count-box">
+                          <h3 class="number wc-counter">5k</h3>
+                          <h3 class="title">Happy <br>
+                            customers</h3>
+                        </div>
+                        <div class="team-count-box">
+                          <h3 class="number wc-counter">2k<span>+</span></h3>
+                          <h3 class="title">Projects <br>
+                            completed</h3>
+                        </div>
+                        <div class="team-count-box">
+                          <h3 class="number wc-counter">18</h3>
+                          <h3 class="title">Team <br>
+                            Members</h3>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="content-last has_fade_anim">
+                      <h3 class="title"><span>Excellence</span><span>Expertise</span><span>Approach</span></h3>
+                      <div class="text-wrapper">
+                        <p class="text">The fragmented paid media landscape demands end-to-end guidance and tailored
+                          creative to extract its value. Our strategies target, segment, and convert audiences to scale
+                          your reach and when a client partners with us more than once. </p>
+                      </div>
+                      <div class="btn-wrapper">
+                        <a href="contact-bold.html" class="wc-btn wc-btn-primary btn-text-flip"> <span
+                            data-text="Get started">Get started</span><i class="fa-solid fa-play"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- team area end  -->
+
+          <!-- work area start  -->
+          <section class="work-area">
+            <div class="container large">
+              <div class="work-area-inner section-spacing">
+                <div class="section-title-image has_fade_anim" data-fade-from="bottom" data-fade-offset="50">
+                  <img class="show-light" src="assets/imgs/shape/img-s-41.webp" alt="shape image">
+                  <img class="show-dark" src="assets/imgs/shape/img-s-41-light.webp" alt="shape image">
+                </div>
+                <div class="works-wrapper-box">
+                  <div class="works-wrapper">
+                    <div class="work-box has_fade_anim">
+                      <div class="content-wrapper">
+                        <span class="number">01</span>
+                        <div class="content">
+                          <h2 class="title">Stage <br>
+                            Naga Dance</h2>
+                          <span class="date">Date: May, 2014</span>
+                        </div>
+                      </div>
+                      <div class="thumb">
+                        <img src="assets/imgs/works/img-s-23.webp" alt="work image">
+                        <a href="https://crowdytheme.com/assets/wp-content/uploads/2024/06/sassly-video.mp4"
+                          class="wc-btn wc-btn-circle video-popup pos-center"><i class="fa-solid fa-play"></i></a>
+                      </div>
+                    </div>
+                    <div class="work-box has_fade_anim">
+                      <div class="content-wrapper">
+                        <span class="number">02</span>
+                        <div class="content">
+                          <h2 class="title">Production <br>
+                            Video</h2>
+                          <span class="date">Date: May, 2014</span>
+                        </div>
+                      </div>
+                      <div class="thumb">
+                        <img src="assets/imgs/works/img-s-24.webp" alt="work image">
+                        <a href="https://crowdytheme.com/assets/wp-content/uploads/2024/06/video_brodcust.mp4"
+                          class="wc-btn wc-btn-circle video-popup pos-center"><i class="fa-solid fa-play"></i></a>
+                      </div>
+                    </div>
+                    <div class="work-box has_fade_anim">
+                      <div class="content-wrapper">
+                        <span class="number">03</span>
+                        <div class="content">
+                          <h2 class="title">Discussion <br>
+                            on Project</h2>
+                          <span class="date">Date: May, 2014</span>
+                        </div>
+                      </div>
+                      <div class="thumb">
+                        <img src="assets/imgs/works/img-s-25.webp" alt="work image">
+                        <a href="https://crowdytheme.com/assets/wp-content/uploads/2024/05/insurance-video.mp4"
+                          class="wc-btn wc-btn-circle video-popup pos-center"><i class="fa-solid fa-play"></i></a>
+                      </div>
+                    </div>
+                    <div class="work-box has_fade_anim">
+                      <div class="content-wrapper">
+                        <span class="number">04</span>
+                        <div class="content">
+                          <h2 class="title">Client <br>
+                            Requirement</h2>
+                          <span class="date">Date: May, 2014</span>
+                        </div>
+                      </div>
+                      <div class="thumb">
+                        <img src="assets/imgs/works/img-s-26.webp" alt="work image">
+                        <a href="https://crowdytheme.com/assets/wp-content/uploads/2024/05/it-consultancy-2.mp4"
+                          class="wc-btn wc-btn-circle video-popup pos-center"><i class="fa-solid fa-play"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- work area end  -->
+
+          <!-- testimonial area start  -->
+          <div class="testimonial-area has_fade_anim">
+            <div class="container">
+              <div class="testimonial-area-inner">
+                <div class="testimonial-wrapper-box">
+                  <div class="testimonial-wrapper">
+                    <div class="swiper testimonial-slide-content">
+                      <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                          <div class="testimonial-item">
+                            <div class="content">
+                              <div class="icon">
+                                <img class="quote-icon show-light" src="assets/imgs/icon/quote-4.webp" alt="Quote Icon">
+                                <img class="quote-icon show-dark" src="assets/imgs/icon/quote-4-light.webp"
+                                  alt="Quote Icon">
+                              </div>
+                              <div class="text-wrapper">
+                                <p class="text">They are truly changing the landscape of presentations!! Fast,
+                                  effective, and nice humans that listened to every detail of our needs. Creating a deck
+                                  with their template brings so much joy and ease</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="swiper-slide">
+                          <div class="testimonial-item">
+                            <div class="content">
+                              <div class="icon">
+                                <img class="quote-icon show-light" src="assets/imgs/icon/quote-4.webp" alt="Quote Icon">
+                                <img class="quote-icon show-dark" src="assets/imgs/icon/quote-4-light.webp"
+                                  alt="Quote Icon">
+                              </div>
+                              <div class="text-wrapper">
+                                <p class="text">They are truly changing the landscape of presentations!! Fast,
+                                  effective, and nice humans that listened to every detail of our needs. Creating a deck
+                                  with their template brings so much joy and ease</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="swiper-slide">
+                          <div class="testimonial-item">
+                            <div class="content">
+                              <div class="icon">
+                                <img class="quote-icon show-light" src="assets/imgs/icon/quote-4.webp" alt="Quote Icon">
+                                <img class="quote-icon show-dark" src="assets/imgs/icon/quote-4-light.webp"
+                                  alt="Quote Icon">
+                              </div>
+                              <div class="text-wrapper">
+                                <p class="text">They are truly changing the landscape of presentations!! Fast,
+                                  effective, and nice humans that listened to every detail of our needs. Creating a deck
+                                  with their template brings so much joy and ease</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="swiper-slide">
+                          <div class="testimonial-item">
+                            <div class="content">
+                              <div class="icon">
+                                <img class="quote-icon show-light" src="assets/imgs/icon/quote-4.webp" alt="Quote Icon">
+                                <img class="quote-icon show-dark" src="assets/imgs/icon/quote-4-light.webp"
+                                  alt="Quote Icon">
+                              </div>
+                              <div class="text-wrapper">
+                                <p class="text">They are truly changing the landscape of presentations!! Fast,
+                                  effective, and nice humans that listened to every detail of our needs. Creating a deck
+                                  with their template brings so much joy and ease</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="swiper-slide">
+                          <div class="testimonial-item">
+                            <div class="content">
+                              <div class="icon">
+                                <img class="quote-icon show-light" src="assets/imgs/icon/quote-4.webp" alt="Quote Icon">
+                                <img class="quote-icon show-dark" src="assets/imgs/icon/quote-4-light.webp"
+                                  alt="Quote Icon">
+                              </div>
+                              <div class="text-wrapper">
+                                <p class="text">They are truly changing the landscape of presentations!! Fast,
+                                  effective, and nice humans that listened to every detail of our needs. Creating a deck
+                                  with their template brings so much joy and ease</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="swiper testimonial-slide-thumb">
+                      <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                          <div class="testimonial-thumb">
+                            <div class="content">
+                              <div class="author">
+                                <div class="avatar">
+                                  <img src="assets/imgs/client/img-s-1.webp" alt="image">
+                                </div>
+                                <div class="meta">
+                                  <h3 class="name">Charry Maron</h3>
+                                  <span class="post">Developer</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="swiper-slide">
+                          <div class="testimonial-thumb">
+                            <div class="content">
+                              <div class="author">
+                                <div class="avatar">
+                                  <img src="assets/imgs/client/img-s-1.webp" alt="image">
+                                </div>
+                                <div class="meta">
+                                  <h3 class="name">Charry Maron</h3>
+                                  <span class="post">Developer</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="swiper-slide">
+                          <div class="testimonial-thumb">
+                            <div class="content">
+                              <div class="author">
+                                <div class="avatar">
+                                  <img src="assets/imgs/client/img-s-1.webp" alt="image">
+                                </div>
+                                <div class="meta">
+                                  <h3 class="name">Charry Maron</h3>
+                                  <span class="post">Developer</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="swiper-slide">
+                          <div class="testimonial-thumb">
+                            <div class="content">
+                              <div class="author">
+                                <div class="avatar">
+                                  <img src="assets/imgs/client/img-s-1.webp" alt="image">
+                                </div>
+                                <div class="meta">
+                                  <h3 class="name">Charry Maron</h3>
+                                  <span class="post">Developer</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="swiper-slide">
+                          <div class="testimonial-thumb">
+                            <div class="content">
+                              <div class="author">
+                                <div class="avatar">
+                                  <img src="assets/imgs/client/img-s-1.webp" alt="image">
+                                </div>
+                                <div class="meta">
+                                  <h3 class="name">Charry Maron</h3>
+                                  <span class="post">Developer</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- testimonial area end  -->
+
+          <!-- pricing area start  -->
+          <section class="pricing-area">
+            <div class="container">
+              <div class="pricing-area-inner section-spacing-top">
+                <div class="section-title-image has_fade_anim" data-fade-from="bottom" data-fade-offset="50">
+                  <img class="show-light" src="assets/imgs/shape/img-s-42.webp" alt="shape image">
+                  <img class="show-dark" src="assets/imgs/shape/img-s-42-light.webp" alt="shape image">
+                </div>
+                <div class="pricing-wrapper-box">
+                  <div class="pricing-wrapper">
+                    <div class="pricing-box has_fade_anim" data-fade-from="left" data-delay="0.15">
+                      <span class="tag">Basic</span>
+                      <h2 class="title">best for startup</h2>
+                      <p class="text">We immerse ourselves in your issues and we put our knowledge and expertise at your
+                        service.</p>
+                      <div class="feature-list">
+                        <ul>
+                          <li>
+                            <img class="show-light" src="assets/imgs/shape/check-light.webp" alt="icon image">
+                            <img class="show-dark" src="assets/imgs/shape/check.webp" alt="icon image">
+                            Multi-user Access
+                          </li>
+                          <li>
+                            <img class="show-light" src="assets/imgs/shape/check-light.webp" alt="icon image">
+                            <img class="show-dark" src="assets/imgs/shape/check.webp" alt="icon image">
+                            Customer Success Manager
+                          </li>
+                          <li>
+                            <img class="show-light" src="assets/imgs/shape/check-light.webp" alt="icon image">
+                            <img class="show-dark" src="assets/imgs/shape/check.webp" alt="icon image">
+                            Marketing Automation
+                          </li>
+                          <li>
+                            <img class="show-light" src="assets/imgs/shape/check-light.webp" alt="icon image">
+                            <img class="show-dark" src="assets/imgs/shape/check.webp" alt="icon image">
+                            CRM Platform
+                          </li>
+                          <li>
+                            <img class="show-light" src="assets/imgs/shape/check-light.webp" alt="icon image">
+                            <img class="show-dark" src="assets/imgs/shape/check.webp" alt="icon image">
+                            Priority Sending
+                          </li>
+                        </ul>
+                      </div>
+                      <h3 class="price">$139.00</h3>
+                      <a href="contact-bold.html" class="wc-btn wc-btn-primary btn-text-flip"> <span
+                          data-text="Choose Now">Choose Now</span><i class="fa-solid fa-play"></i></a>
+                    </div>
+                    <div class="pricing-box has_fade_anim" data-fade-from="left" data-delay="0.30">
+                      <span class="tag popular">Premium</span>
+                      <h2 class="title">best for Enterprise</h2>
+                      <p class="text">We immerse ourselves in your issues and we put our knowledge and expertise at your
+                        service.</p>
+                      <div class="feature-list">
+                        <ul>
+                          <li>
+                            <img class="show-light" src="assets/imgs/shape/check-light.webp" alt="icon image">
+                            <img class="show-dark" src="assets/imgs/shape/check.webp" alt="icon image">
+                            Multi-user Access
+                          </li>
+                          <li>
+                            <img class="show-light" src="assets/imgs/shape/check-light.webp" alt="icon image">
+                            <img class="show-dark" src="assets/imgs/shape/check.webp" alt="icon image">
+                            Customer Success Manager
+                          </li>
+                          <li>
+                            <img class="show-light" src="assets/imgs/shape/check-light.webp" alt="icon image">
+                            <img class="show-dark" src="assets/imgs/shape/check.webp" alt="icon image">
+                            Marketing Automation
+                          </li>
+                          <li>
+                            <img class="show-light" src="assets/imgs/shape/check-light.webp" alt="icon image">
+                            <img class="show-dark" src="assets/imgs/shape/check.webp" alt="icon image">
+                            CRM Platform
+                          </li>
+                          <li>
+                            <img class="show-light" src="assets/imgs/shape/check-light.webp" alt="icon image">
+                            <img class="show-dark" src="assets/imgs/shape/check.webp" alt="icon image">
+                            Priority Sending
+                          </li>
+                        </ul>
+                      </div>
+                      <h3 class="price">$439.00</h3>
+                      <a href="contact-bold.html" class="wc-btn wc-btn-primary btn-text-flip"> <span
+                          data-text="Choose Now">Choose Now</span><i class="fa-solid fa-play"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- pricing area end  -->
+
+          <!-- clients area start  -->
+          <section class="clients-area">
+            <div class="container">
+              <div class="clinets-area-inner section-spacing-top">
+                <div class="section-header">
+                  <div class="section-title-wrapper">
+                    <div class="title-wrapper">
+                      <h2 class="section-title has_fade_anim" data-fade-from="bottom" data-fade-offset="50">We Worked
+                        with top agency
+                        world-wide</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="clients-wrapper-box has_fade_anim" data-fade-from="bottom" data-fade-offset="50">
+                  <div class="clients-wrapper">
+                    <div class="client-box">
+                      <img class="show-light" src="assets/imgs/brand/img-s-1.webp" alt="client image">
+                      <img class="show-dark" src="assets/imgs/brand/img-s-1-light.webp" alt="client image">
+                    </div>
+                    <div class="client-box">
+                      <img class="show-light" src="assets/imgs/brand/img-s-2.webp" alt="client image">
+                      <img class="show-dark" src="assets/imgs/brand/img-s-2-light.webp" alt="client image">
+                    </div>
+                    <div class="client-box">
+                      <img class="show-light" src="assets/imgs/brand/img-s-3.webp" alt="client image">
+                      <img class="show-dark" src="assets/imgs/brand/img-s-3-light.webp" alt="client image">
+                    </div>
+                    <div class="client-box">
+                      <img class="show-light" src="assets/imgs/brand/img-s-4.webp" alt="client image">
+                      <img class="show-dark" src="assets/imgs/brand/img-s-4-light.webp" alt="client image">
+                    </div>
+                    <div class="client-box">
+                      <img class="show-light" src="assets/imgs/brand/img-s-5.webp" alt="client image">
+                      <img class="show-dark" src="assets/imgs/brand/img-s-5-light.webp" alt="client image">
+                    </div>
+                    <div class="client-box">
+                      <img class="show-light" src="assets/imgs/brand/img-s-6.webp" alt="client image">
+                      <img class="show-dark" src="assets/imgs/brand/img-s-6-light.webp" alt="client image">
+                    </div>
+                    <div class="client-box">
+                      <img class="show-light" src="assets/imgs/brand/img-s-7.webp" alt="client image">
+                      <img class="show-dark" src="assets/imgs/brand/img-s-7-light.webp" alt="client image">
+                    </div>
+                    <div class="client-box">
+                      <img class="show-light" src="assets/imgs/brand/img-s-8.webp" alt="client image">
+                      <img class="show-dark" src="assets/imgs/brand/img-s-8-light.webp" alt="client image">
+                    </div>
+                    <div class="client-box">
+                      <img class="show-light" src="assets/imgs/brand/img-s-9.webp" alt="client image">
+                      <img class="show-dark" src="assets/imgs/brand/img-s-9-light.webp" alt="client image">
+                    </div>
+                    <div class="client-box">
+                      <img class="show-light" src="assets/imgs/brand/img-s-10.webp" alt="client image">
+                      <img class="show-dark" src="assets/imgs/brand/img-s-10-light.webp" alt="client image">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- clients area end  -->
+
+          <!-- cta area start  -->
+          <div class="cta-area">
+            <div class="container">
+              <div class="cta-area-inner section-spacing-top">
+                <a href="contact-bold.html">
+                  <div class="section-title-image has_fade_anim" data-fade-from="bottom" data-fade-offset="50">
+                    <img class="show-light" src="assets/imgs/shape/img-s-43.webp" alt="shape image">
+                    <img class="show-dark" src="assets/imgs/shape/img-s-43-light.webp" alt="shape image">
+                    <img class="show-light shape-1" src="assets/imgs/shape/img-s-44-light.webp" alt="image">
+                    <img class="show-dark shape-1" src="assets/imgs/shape/img-s-44.webp" alt="image">
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- cta area end  -->
+
+        </main>
+
+        <!-- footer area start  -->
+        <footer class="footer-area">
+          <div class="container">
+            <div class="copyright-area-inner">
+              <div class="copyright-text">
+                <p class="text">© 2024-25 <a href="https://themeforest.net/user/crowdytheme"
+                    target="_blank">crowdyTheme</a> Agency</p>
+              </div>
+              <ul class="footer-nav-list">
+                <li><a href="#">Agency</a></li>
+                <li><a href="#">Career</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms & condition</a></li>
+              </ul>
+              <ul class="social-links">
+                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+        <!-- footer area end  -->
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- All JS files -->
+  <script src="assets/js/jquery-3.6.0.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/jquery.magnific-popup.min.js"></script>
+  <script src="assets/js/swiper-bundle.min.js"></script>
+  <script src="assets/js/counter.js"></script>
+  <script src="assets/js/progressbar.js"></script>
+  <script src="assets/js/gsap.min.js"></script>
+  <script src="assets/js/ScrollSmoother.min.js"></script>
+  <script src="assets/js/ScrollToPlugin.min.js"></script>
+  <script src="assets/js/ScrollTrigger.min.js"></script>
+  <script src="assets/js/SplitText.min.js"></script>
+  <script src="assets/js/jquery.meanmenu.min.js"></script>
+  <script src="assets/js/backToTop.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/error-handling.js"></script>
+  <script src="assets/js/offcanvas.js"></script>
+
+  <script>
+
+    // text slider 
+    if ('.text-slider-active') {
+      var text_slider_active = new Swiper(".text-slider-active", {
+        slidesPerView: 'auto',
+        loop: true,
+        autoplay: true,
+        spaceBetween: 60,
+        speed: 10000,
+        autoplay: {
+          delay: 1,
+        },
+      });
+    }
+
+    // gallery slider
+    if (('.gallery-slider-active').length) {
+      var gallery_slider = new Swiper(".gallery-slider-active", {
+        loop: false,
+        slidesPerView: 'auto',
+        spaceBetween: 30,
+        speed: 1800,
+        watchSlidesProgress: true,
+        navigation: {
+          prevEl: ".gallery-button-prev",
+          nextEl: ".gallery-button-next",
+        },
+        pagination: {
+          el: '.gallery-pagination',
+          type: 'bullets',
+          clickable: true
+        },
+      });
+    }
+
+    // testimonial slider 
+    if (('.testimonial-slide-thumb').length) {
+      var test_content = new Swiper(".testimonial-slide-thumb", {
+        spaceBetween: 20,
+        slidesPerView: 1,
+        freeMode: true,
+        watchSlidesProgress: true,
+        breakpoints: {
+          576: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        },
+      });
+      var test_thumb = new Swiper(".testimonial-slide-content", {
+        spaceBetween: 30,
+        thumbs: {
+          swiper: test_content,
+        },
+      });
+    }
+
+
+
+  </script>
+
+</body>
+
+</html>
