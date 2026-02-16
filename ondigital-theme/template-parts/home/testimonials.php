@@ -5,23 +5,32 @@
  * @package OnDigital
  */
 
-$testimonials = array(
+$t_subtitle     = ondigital_get_option( 'testimonials_subtitle', "Client's Feedback" );
+$t_title        = ondigital_get_option( 'testimonials_title', 'What our happy client <span>say</span>' );
+$t_body         = ondigital_get_option( 'testimonials_body', 'Optimize your impact this holiday season with an AI-driven, multichannel marketing strategy.' );
+$t_rating       = ondigital_get_option( 'testimonials_rating', '4.9' );
+$t_review_count = ondigital_get_option( 'testimonials_review_count', '30+ client reviews' );
+$t_platform     = ondigital_get_option( 'testimonials_platform', 'Trustpilot' );
+
+$default_testimonials = array(
     array(
-        'text' => __( 'Analysts used Mode\'s advanced analytics capabilities to build parameterized report and visualizations with live data. The customer success team then used the intuitive drag interface to delve', 'ondigital' ),
-        'name' => 'John Butler',
-        'post' => __( 'Developer', 'ondigital' ),
+        'quote' => __( "Analysts used Mode's advanced analytics capabilities to build parameterized report and visualizations with live data. The customer success team then used the intuitive drag interface to delve", 'ondigital' ),
+        'name'  => 'John Butler',
+        'role'  => __( 'Developer', 'ondigital' ),
     ),
     array(
-        'text' => __( 'Analysts used Mode\'s advanced analytics capabilities to build parameterized report and visualizations with live data. The customer success team then used the intuitive drag interface to delve', 'ondigital' ),
-        'name' => 'Sarah Johnson',
-        'post' => __( 'Marketing Director', 'ondigital' ),
+        'quote' => __( "Analysts used Mode's advanced analytics capabilities to build parameterized report and visualizations with live data. The customer success team then used the intuitive drag interface to delve", 'ondigital' ),
+        'name'  => 'Sarah Johnson',
+        'role'  => __( 'Marketing Director', 'ondigital' ),
     ),
     array(
-        'text' => __( 'Analysts used Mode\'s advanced analytics capabilities to build parameterized report and visualizations with live data. The customer success team then used the intuitive drag interface to delve', 'ondigital' ),
-        'name' => 'Michael Chen',
-        'post' => __( 'CEO', 'ondigital' ),
+        'quote' => __( "Analysts used Mode's advanced analytics capabilities to build parameterized report and visualizations with live data. The customer success team then used the intuitive drag interface to delve", 'ondigital' ),
+        'name'  => 'Michael Chen',
+        'role'  => __( 'CEO', 'ondigital' ),
     ),
 );
+
+$testimonials = ondigital_get_repeater( 'testimonials', $default_testimonials );
 ?>
 <div class="testimonial-area">
     <div class="container">
@@ -31,28 +40,28 @@ $testimonials = array(
                     <div class="subtitle-wrapper has_fade_anim" data-fade-from="left">
                         <img class="show-light" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/client/img-s-2.webp' ); ?>" alt="<?php esc_attr_e( 'clients', 'ondigital' ); ?>">
                         <img class="show-dark" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/client/img-s-2-dark.webp' ); ?>" alt="<?php esc_attr_e( 'clients', 'ondigital' ); ?>">
-                        <span class="section-subtitle"><?php esc_html_e( 'Client\'s Feedback', 'ondigital' ); ?></span>
+                        <span class="section-subtitle"><?php echo esc_html( $t_subtitle ); ?></span>
                     </div>
                     <div class="title-wrapper">
                         <h2 class="section-title has_fade_anim" data-fade-from="left">
-                            <?php echo wp_kses_post( __( 'What our happy client <span>say</span>', 'ondigital' ) ); ?>
+                            <?php echo wp_kses_post( $t_title ); ?>
                         </h2>
                     </div>
                 </div>
                 <div class="text-wrapper">
                     <p class="text has_fade_anim" data-fade-from="left">
-                        <?php esc_html_e( 'Optimize your impact this holiday season with an AI-driven, multichannel marketing strategy.', 'ondigital' ); ?>
+                        <?php echo esc_html( $t_body ); ?>
                     </p>
                 </div>
                 <div class="review-wrapper-box">
                     <div class="review-wrapper has_fade_anim" data-fade-from="left">
                         <div class="review-author">
-                            <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/star-3.webp' ); ?>" alt="<?php esc_attr_e( 'Trustpilot', 'ondigital' ); ?>">
-                            <h3 class="text">Trustpilot <br>reviews</h3>
+                            <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/star-3.webp' ); ?>" alt="<?php echo esc_attr( $t_platform ); ?>">
+                            <h3 class="text"><?php echo esc_html( $t_platform ); ?> <br>reviews</h3>
                         </div>
                         <div class="review-rating">
                             <div class="ratings">
-                                <h3 class="number">4.9</h3>
+                                <h3 class="number"><?php echo esc_html( $t_rating ); ?></h3>
                                 <ul class="icon-list">
                                     <?php for ( $i = 0; $i < 4; $i++ ) : ?>
                                         <li>
@@ -66,7 +75,7 @@ $testimonials = array(
                                     </li>
                                 </ul>
                             </div>
-                            <h3 class="text"><?php esc_html_e( '30+ client reviews', 'ondigital' ); ?></h3>
+                            <h3 class="text"><?php echo esc_html( $t_review_count ); ?></h3>
                         </div>
                     </div>
                 </div>
@@ -84,12 +93,12 @@ $testimonials = array(
                                                 <img class="quote-icon show-dark" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/quote-7-light.webp' ); ?>" alt="<?php esc_attr_e( 'Quote', 'ondigital' ); ?>">
                                             </div>
                                             <div class="text-wrapper">
-                                                <p class="text"><?php echo esc_html( $testimonial['text'] ); ?></p>
+                                                <p class="text"><?php echo esc_html( $testimonial['quote'] ?? $testimonial['text'] ?? '' ); ?></p>
                                             </div>
                                             <div class="author">
                                                 <div class="meta">
-                                                    <span class="name"><?php echo esc_html( $testimonial['name'] ); ?></span>
-                                                    <span class="post"><?php echo esc_html( $testimonial['post'] ); ?></span>
+                                                    <span class="name"><?php echo esc_html( $testimonial['name'] ?? '' ); ?></span>
+                                                    <span class="post"><?php echo esc_html( $testimonial['role'] ?? $testimonial['post'] ?? '' ); ?></span>
                                                 </div>
                                             </div>
                                         </div>

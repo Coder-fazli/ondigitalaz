@@ -34,8 +34,11 @@ $static_blogs = array(
             <div class="section-header">
                 <div class="section-title-wrapper">
                     <div class="title-wrapper">
+                        <?php
+                        $blog_title = ondigital_get_option( 'blog_title', 'Keep up with the latest industry trends, tips with <span>journal</span>' );
+                        ?>
                         <h2 class="section-title has_text_move_anim">
-                            <?php echo wp_kses_post( __( 'Keep up with the latest industry trends, tips with <span>journal</span>', 'ondigital' ) ); ?>
+                            <?php echo wp_kses_post( $blog_title ); ?>
                         </h2>
                     </div>
                 </div>

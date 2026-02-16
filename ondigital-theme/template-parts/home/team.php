@@ -53,7 +53,20 @@ $delays = array( '0.15', '0.30', '0.45', '0.60' );
             </div>
             <div class="team-wrapper">
                 <?php if ( $team_query->have_posts() ) : ?>
-                    <?php $i = 0; while ( $team_query->have_posts() ) : $team_query->the_post(); ?>
+                    <?php $i = 0; while ( $team_query->have_posts() ) : $team_query->the_post();
+                        $member_role = get_post_meta( get_the_ID(), '_team_role', true );
+                        $linkedin    = get_post_meta( get_the_ID(), '_team_linkedin', true );
+                        $twitter     = get_post_meta( get_the_ID(), '_team_twitter', true );
+                        $instagram   = get_post_meta( get_the_ID(), '_team_instagram', true );
+                        $behance     = get_post_meta( get_the_ID(), '_team_behance', true );
+
+                        // Build social links array
+                        $socials = array();
+                        if ( $linkedin )  $socials[] = array( 'url' => $linkedin,  'icon' => 'fa-linkedin-in', 'label' => 'LinkedIn' );
+                        if ( $twitter )   $socials[] = array( 'url' => $twitter,   'icon' => 'fa-twitter',     'label' => 'Twitter' );
+                        if ( $instagram ) $socials[] = array( 'url' => $instagram, 'icon' => 'fa-instagram',   'label' => 'Instagram' );
+                        if ( $behance )   $socials[] = array( 'url' => $behance,   'icon' => 'fa-behance',     'label' => 'Behance' );
+                    ?>
                         <div class="team-box has_fade_anim" data-fade-from="bottom" data-delay="<?php echo esc_attr( $delays[ $i % 4 ] ); ?>">
                             <div class="thumb">
                                 <a href="<?php the_permalink(); ?>">
@@ -63,8 +76,20 @@ $delays = array( '0.15', '0.30', '0.45', '0.60' );
                             <div class="content">
                                 <div class="top">
                                     <h3 class="name"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                    <p class="post"><?php echo esc_html( get_the_excerpt() ); ?></p>
+                                    <p class="post"><?php echo esc_html( $member_role ); ?></p>
                                 </div>
+                                <?php if ( ! empty( $socials ) ) : ?>
+                                    <div class="wc-btn-group">
+                                        <?php $primary = $socials[0]; ?>
+                                        <a class="wc-btn wc-btn-circle" href="<?php echo esc_url( $primary['url'] ); ?>" target="_blank" rel="noopener">
+                                            <i class="fa-brands <?php echo esc_attr( $primary['icon'] ); ?>"></i>
+                                        </a>
+                                        <a class="wc-btn wc-btn-primary" href="<?php echo esc_url( $primary['url'] ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $primary['label'] ); ?></a>
+                                        <a class="wc-btn wc-btn-circle" href="<?php echo esc_url( $primary['url'] ); ?>" target="_blank" rel="noopener">
+                                            <i class="fa-brands <?php echo esc_attr( $primary['icon'] ); ?>"></i>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php $i++; endwhile; ?>

@@ -27,8 +27,11 @@ $static_projects = array(
                 <div class="section-header">
                     <div class="section-title-wrapper">
                         <div class="title-wrapper">
+                            <?php
+                            $projects_title = ondigital_get_option( 'projects_title', 'Our exclusive <span>case</span> studies' );
+                            ?>
                             <h2 class="section-title has_text_move_anim">
-                                <?php echo wp_kses_post( __( 'Our exclusive <span>case</span> studies', 'ondigital' ) ); ?>
+                                <?php echo wp_kses_post( $projects_title ); ?>
                             </h2>
                         </div>
                     </div>

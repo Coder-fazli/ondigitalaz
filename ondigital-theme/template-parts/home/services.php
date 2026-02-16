@@ -47,8 +47,11 @@ $static_services = array(
                 <div class="section-header">
                     <div class="section-title-wrapper">
                         <div class="title-wrapper">
+                            <?php
+                            $services_title = ondigital_get_option( 'services_title', 'It\'s big challenge to grow-up your sales by providing best <span>services</span>' );
+                            ?>
                             <h2 class="section-title has_text_move_anim">
-                                <?php echo wp_kses_post( __( 'It\'s big challenge to grow-up your sales by providing best <span>services</span>', 'ondigital' ) ); ?>
+                                <?php echo wp_kses_post( $services_title ); ?>
                             </h2>
                         </div>
                     </div>

@@ -5,59 +5,22 @@
  * @package OnDigital
  */
 
-$faq_items = array(
-    array(
-        'question' => __( 'Search Engine Optimization (SEO)', 'ondigital' ),
-        'answer'   => __( 'Each social media platform releases its information, making it easier to platforms', 'ondigital' ),
-    ),
-    array(
-        'question' => __( 'Reach the right audience in marketing', 'ondigital' ),
-        'answer'   => __( 'Each social media platform releases its information, making it easier to platforms', 'ondigital' ),
-        'open'     => true,
-    ),
-    array(
-        'question' => __( '3 social media advertising', 'ondigital' ),
-        'answer'   => __( 'Each social media platform releases its information, making it easier to platforms', 'ondigital' ),
-    ),
+$default_faq = array(
+    array( 'question' => __( 'Search Engine Optimization (SEO)', 'ondigital' ), 'answer' => __( 'Each social media platform releases its information, making it easier to platforms', 'ondigital' ), 'open' => 0 ),
+    array( 'question' => __( 'Reach the right audience in marketing', 'ondigital' ), 'answer' => __( 'Each social media platform releases its information, making it easier to platforms', 'ondigital' ), 'open' => 1 ),
+    array( 'question' => __( '3 social media advertising', 'ondigital' ), 'answer' => __( 'Each social media platform releases its information, making it easier to platforms', 'ondigital' ), 'open' => 0 ),
 );
 
-$pricing_plans = array(
-    array(
-        'tag'      => __( 'Basic', 'ondigital' ),
-        'price'    => '$9.00',
-        'features' => array(
-            __( 'Unlimited cards', 'ondigital' ),
-            __( 'Automated management', 'ondigital' ),
-            __( 'SOX compliance', 'ondigital' ),
-        ),
-        'delay' => '0.15',
-    ),
-    array(
-        'tag'      => __( 'Standard', 'ondigital' ),
-        'price'    => '$29.00',
-        'features' => array(
-            __( 'Unlimited cards', 'ondigital' ),
-            __( 'Automated management', 'ondigital' ),
-            __( 'SOX compliance', 'ondigital' ),
-            __( 'Enterprise ERP integrations', 'ondigital' ),
-            __( 'Limited tools', 'ondigital' ),
-        ),
-        'delay' => '0.30',
-    ),
-    array(
-        'tag'      => __( 'Premium', 'ondigital' ),
-        'price'    => '$69.00',
-        'features' => array(
-            __( 'Unlimited cards', 'ondigital' ),
-            __( 'Automated management', 'ondigital' ),
-            __( 'SOX compliance', 'ondigital' ),
-            __( 'Enterprise ERP integrations', 'ondigital' ),
-            __( 'Unlimited tools', 'ondigital' ),
-            __( 'Local video issuance', 'ondigital' ),
-        ),
-        'delay' => '0.45',
-    ),
+$default_pricing = array(
+    array( 'name' => __( 'Basic', 'ondigital' ),    'price' => '$9.00',  'features' => "Unlimited cards\nAutomated management\nSOX compliance", 'cta_url' => '' ),
+    array( 'name' => __( 'Standard', 'ondigital' ), 'price' => '$29.00', 'features' => "Unlimited cards\nAutomated management\nSOX compliance\nEnterprise ERP integrations\nLimited tools", 'cta_url' => '' ),
+    array( 'name' => __( 'Premium', 'ondigital' ),  'price' => '$69.00', 'features' => "Unlimited cards\nAutomated management\nSOX compliance\nEnterprise ERP integrations\nUnlimited tools\nLocal video issuance", 'cta_url' => '' ),
 );
+
+$faq_items     = ondigital_get_repeater( 'faq', $default_faq );
+$pricing_plans = ondigital_get_repeater( 'pricing', $default_pricing );
+
+$delays = array( '0.15', '0.30', '0.45' );
 ?>
 <section class="pricing-area">
     <div class="container">
@@ -93,13 +56,17 @@ $pricing_plans = array(
             </div>
             <div class="pricing-wrapper-box">
                 <div class="pricing-wrapper">
-                    <?php foreach ( $pricing_plans as $plan ) : ?>
-                        <div class="pricing-box has_fade_anim" data-delay="<?php echo esc_attr( $plan['delay'] ); ?>">
-                            <span class="tag"><?php echo esc_html( $plan['tag'] ); ?></span>
-                            <h3 class="price"><?php echo esc_html( $plan['price'] ); ?></h3>
+                    <?php foreach ( $pricing_plans as $pi => $plan ) :
+                        $features_text = $plan['features'] ?? '';
+                        $features_list = array_filter( array_map( 'trim', explode( "\n", $features_text ) ) );
+                        $plan_cta_url  = ! empty( $plan['cta_url'] ) ? $plan['cta_url'] : home_url( '/elaqe/' );
+                    ?>
+                        <div class="pricing-box has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $pi % 3 ] ); ?>">
+                            <span class="tag"><?php echo esc_html( $plan['name'] ?? '' ); ?></span>
+                            <h3 class="price"><?php echo esc_html( $plan['price'] ?? '' ); ?></h3>
                             <div class="feature-list">
                                 <ul>
-                                    <?php foreach ( $plan['features'] as $feature ) : ?>
+                                    <?php foreach ( $features_list as $feature ) : ?>
                                         <li>
                                             <img class="show-light" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/check-2.webp' ); ?>" alt="<?php esc_attr_e( 'check', 'ondigital' ); ?>">
                                             <img class="show-dark" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/check-2-light.webp' ); ?>" alt="<?php esc_attr_e( 'check', 'ondigital' ); ?>">
@@ -108,7 +75,7 @@ $pricing_plans = array(
                                     <?php endforeach; ?>
                                 </ul>
                             </div>
-                            <a href="<?php echo esc_url( home_url( '/elaqe/' ) ); ?>" class="wc-btn wc-btn-primary btn-text-flip">
+                            <a href="<?php echo esc_url( $plan_cta_url ); ?>" class="wc-btn wc-btn-primary btn-text-flip">
                                 <span data-text="<?php esc_attr_e( 'Choose plan', 'ondigital' ); ?>"><?php esc_html_e( 'Choose plan', 'ondigital' ); ?></span>
                             </a>
                         </div>

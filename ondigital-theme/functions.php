@@ -14,6 +14,12 @@ define( 'ONDIGITAL_VERSION', '1.0.0' );
 define( 'ONDIGITAL_DIR', get_template_directory() );
 define( 'ONDIGITAL_URI', get_template_directory_uri() );
 
+// Include files
+require_once ONDIGITAL_DIR . '/inc/helpers.php';
+require_once ONDIGITAL_DIR . '/inc/customizer.php';
+require_once ONDIGITAL_DIR . '/inc/meta-boxes.php';
+require_once ONDIGITAL_DIR . '/inc/admin-page.php';
+
 // =============================================================================
 // 1. THEME SETUP
 // =============================================================================
@@ -759,67 +765,12 @@ function ondigital_register_taxonomies() {
 
 
 // =============================================================================
-// 7. THEME CUSTOMIZER
+// 7. THEME CUSTOMIZER — moved to inc/customizer.php
 // =============================================================================
 
-add_action( 'customize_register', 'ondigital_customizer' );
-function ondigital_customizer( $wp_customize ) {
-
-    // --- Contact Info Section ---
-    $wp_customize->add_section( 'ondigital_contact', array(
-        'title'    => __( 'Contact Information', 'ondigital' ),
-        'priority' => 30,
-    ) );
-
-    $contact_fields = array(
-        'phone'     => array( 'label' => __( 'Phone Number', 'ondigital' ), 'default' => '+994 (55) 431 47 50' ),
-        'email'     => array( 'label' => __( 'Email Address', 'ondigital' ), 'default' => 'office@ondigital.az' ),
-        'address'   => array( 'label' => __( 'Address', 'ondigital' ), 'default' => 'Old Town Plaza, Baku' ),
-    );
-
-    foreach ( $contact_fields as $key => $field ) {
-        $wp_customize->add_setting( 'ondigital_' . $key, array(
-            'default'           => $field['default'],
-            'sanitize_callback' => 'sanitize_text_field',
-        ) );
-        $wp_customize->add_control( 'ondigital_' . $key, array(
-            'label'   => $field['label'],
-            'section' => 'ondigital_contact',
-            'type'    => 'text',
-        ) );
-    }
-
-    // --- Social Media Section ---
-    $wp_customize->add_section( 'ondigital_social', array(
-        'title'    => __( 'Social Media Links', 'ondigital' ),
-        'priority' => 35,
-    ) );
-
-    $socials = array( 'facebook', 'instagram', 'linkedin', 'tiktok', 'youtube', 'behance', 'pinterest' );
-    foreach ( $socials as $social ) {
-        $wp_customize->add_setting( 'ondigital_' . $social, array(
-            'default'           => '',
-            'sanitize_callback' => 'esc_url_raw',
-        ) );
-        $wp_customize->add_control( 'ondigital_' . $social, array(
-            'label'   => ucfirst( $social ) . ' URL',
-            'section' => 'ondigital_social',
-            'type'    => 'url',
-        ) );
-    }
-}
-
-
 // =============================================================================
-// 8. HELPER FUNCTIONS
+// 8. HELPER FUNCTIONS — core helpers moved to inc/helpers.php
 // =============================================================================
-
-/**
- * Get theme mod with fallback.
- */
-function ondigital_get_option( $key, $default = '' ) {
-    return get_theme_mod( 'ondigital_' . $key, $default );
-}
 
 /**
  * Get social media links as array.
