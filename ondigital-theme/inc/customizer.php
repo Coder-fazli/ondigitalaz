@@ -55,6 +55,35 @@ function ondigital_customizer( $wp_customize ) {
     ) ) );
 
     // =========================================================================
+    // Footer Section
+    // =========================================================================
+    $wp_customize->add_section( 'ondigital_footer', array(
+        'title'    => __( 'Footer', 'ondigital' ),
+        'priority' => 28,
+    ) );
+
+    $footer_fields = array(
+        'footer_info_text'        => array( 'label' => __( 'Info Text (below logo)', 'ondigital' ),       'default' => 'OnDigital rəqəmsal marketinq agentliyidir',                                                                                           'sanitize' => 'sanitize_text_field',    'type' => 'text' ),
+        'footer_services_title'   => array( 'label' => __( 'Services Column Title', 'ondigital' ),        'default' => 'Xidmətlər',                                                                                                                            'sanitize' => 'sanitize_text_field',    'type' => 'text' ),
+        'footer_company_title'    => array( 'label' => __( 'Company Column Title', 'ondigital' ),         'default' => 'Şirkət',                                                                                                                               'sanitize' => 'sanitize_text_field',    'type' => 'text' ),
+        'footer_newsletter_title' => array( 'label' => __( 'Newsletter Column Title', 'ondigital' ),      'default' => 'Xəbər bülleteni',                                                                                                                      'sanitize' => 'sanitize_text_field',    'type' => 'text' ),
+        'footer_newsletter_text'  => array( 'label' => __( 'Newsletter Body Text', 'ondigital' ),         'default' => 'Bizimlə əməkdaşlıq etmək və ya sadəcə söhbət etmək istəyirsinizsə, sizindən xəbər almaqdan məmnun olarıq.',                           'sanitize' => 'sanitize_textarea_field','type' => 'textarea' ),
+        'footer_copyright'        => array( 'label' => __( 'Copyright Text (HTML allowed)', 'ondigital' ),'default' => '© ' . date( 'Y' ) . ' OnDigital Agency. Bütün hüquqlar qorunur.',                                                                     'sanitize' => 'wp_kses_post',           'type' => 'text' ),
+    );
+
+    foreach ( $footer_fields as $key => $field ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array(
+            'default'           => $field['default'],
+            'sanitize_callback' => $field['sanitize'],
+        ) );
+        $wp_customize->add_control( 'ondigital_' . $key, array(
+            'label'   => $field['label'],
+            'section' => 'ondigital_footer',
+            'type'    => $field['type'],
+        ) );
+    }
+
+    // =========================================================================
     // Contact Info Section
     // =========================================================================
     $wp_customize->add_section( 'ondigital_contact', array(
