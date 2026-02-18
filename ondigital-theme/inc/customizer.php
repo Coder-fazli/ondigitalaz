@@ -40,6 +40,21 @@ function ondigital_customizer( $wp_customize ) {
     ) );
 
     // =========================================================================
+    // Highlight Image (title word brush stroke background)
+    // =========================================================================
+    $wp_customize->add_setting( 'ondigital_highlight_image', array(
+        'default'           => '',
+        'sanitize_callback' => 'absint',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'ondigital_highlight_image', array(
+        'label'     => __( 'Title Highlight Image', 'ondigital' ),
+        'description' => __( 'The brush stroke / marker image shown behind highlighted words in section titles.', 'ondigital' ),
+        'section'   => 'title_tagline',
+        'mime_type' => 'image',
+        'priority'  => 10,
+    ) ) );
+
+    // =========================================================================
     // Contact Info Section
     // =========================================================================
     $wp_customize->add_section( 'ondigital_contact', array(
@@ -434,4 +449,18 @@ function ondigital_customizer( $wp_customize ) {
         'section' => 'ondigital_partners_home',
         'type'    => 'text',
     ) );
+}
+
+// Output inline CSS to override the highlight image if a custom one is set
+add_action( 'wp_head', 'ondigital_highlight_image_css' );
+function ondigital_highlight_image_css() {
+    $attachment_id = get_theme_mod( 'ondigital_highlight_image' );
+    if ( ! $attachment_id ) {
+        return;
+    }
+    $url = wp_get_attachment_image_url( $attachment_id, 'full' );
+    if ( ! $url ) {
+        return;
+    }
+    echo '<style>.section-title span{background-image:url(' . esc_url( $url ) . ')}</style>' . "\n";
 }
