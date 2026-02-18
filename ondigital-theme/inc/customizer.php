@@ -480,6 +480,55 @@ function ondigital_customizer( $wp_customize ) {
     ) );
 
     // =========================================================================
+    // Services Page Content Panel
+    // =========================================================================
+    $wp_customize->add_panel( 'ondigital_services_panel', array(
+        'title'    => __( 'Services Page Content', 'ondigital' ),
+        'priority' => 41,
+    ) );
+
+    // Hero Section
+    $wp_customize->add_section( 'ondigital_services_hero', array(
+        'title' => __( 'Hero Section', 'ondigital' ),
+        'panel' => 'ondigital_services_panel',
+    ) );
+
+    foreach ( array(
+        'services_hero_title' => array( 'label' => __( 'Title (HTML ok)', 'ondigital' ),  'default' => 'Rəqəmsal dünyada fərq yaradan dizayn və xidmətlər.', 'type' => 'textarea', 'sanitize' => 'wp_kses_post' ),
+        'services_hero_body'  => array( 'label' => __( 'Body Text', 'ondigital' ),         'default' => 'Müasir və unikal dizayn yanaşması ilə istifadəçi dostu rəqəmsal həllər yaradırıq.', 'type' => 'textarea', 'sanitize' => 'sanitize_textarea_field' ),
+    ) as $key => $field ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => $field['default'], 'sanitize_callback' => $field['sanitize'] ) );
+        $wp_customize->add_control( 'ondigital_' . $key, array( 'label' => $field['label'], 'section' => 'ondigital_services_hero', 'type' => $field['type'] ) );
+    }
+
+    foreach ( array(
+        'services_hero_thumb'      => __( 'Hero Image', 'ondigital' ),
+        'services_hero_icon_light' => __( 'Decorative Icon (light)', 'ondigital' ),
+        'services_hero_icon_dark'  => __( 'Decorative Icon (dark)', 'ondigital' ),
+    ) as $key => $label ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => '', 'sanitize_callback' => 'absint' ) );
+        $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'ondigital_' . $key, array(
+            'label'     => $label,
+            'section'   => 'ondigital_services_hero',
+            'mime_type' => 'image',
+        ) ) );
+    }
+
+    // Services Grid Section
+    $wp_customize->add_section( 'ondigital_services_grid', array(
+        'title' => __( 'Services Grid Section', 'ondigital' ),
+        'panel' => 'ondigital_services_panel',
+    ) );
+
+    foreach ( array(
+        'services_grid_title' => array( 'label' => __( 'Section Title (HTML ok)', 'ondigital' ), 'default' => 'Eksklüziv <br> xidmətlərimiz', 'type' => 'textarea', 'sanitize' => 'wp_kses_post' ),
+        'services_grid_body'  => array( 'label' => __( 'Body Text', 'ondigital' ),               'default' => 'Kateqoriyanı dəyişdirən və insanların həyatına dəyər qatan brendlərə investisiya edirik', 'type' => 'textarea', 'sanitize' => 'sanitize_textarea_field' ),
+    ) as $key => $field ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => $field['default'], 'sanitize_callback' => $field['sanitize'] ) );
+        $wp_customize->add_control( 'ondigital_' . $key, array( 'label' => $field['label'], 'section' => 'ondigital_services_grid', 'type' => $field['type'] ) );
+    }
+
+    // =========================================================================
     // About Page Content Panel
     // =========================================================================
     $wp_customize->add_panel( 'ondigital_about_panel', array(

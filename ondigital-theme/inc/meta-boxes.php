@@ -55,9 +55,12 @@ function ondigital_service_meta_callback( $post ) {
     $icon_id = get_post_meta( $post->ID, '_service_icon', true );
     $icon_url = $icon_id ? wp_get_attachment_image_url( $icon_id, 'thumbnail' ) : '';
     ?>
+    <?php
+    $features = get_post_meta( $post->ID, '_service_features', true );
+    ?>
     <table class="form-table">
         <tr>
-            <th><label for="_service_icon"><?php esc_html_e( 'Service Icon Image', 'ondigital' ); ?></label></th>
+            <th><label for="_service_icon"><?php esc_html_e( 'Service Icon (Light)', 'ondigital' ); ?></label></th>
             <td>
                 <input type="hidden" name="_service_icon" id="_service_icon" value="<?php echo esc_attr( $icon_id ); ?>">
                 <div id="service-icon-preview" style="margin-bottom:10px;">
@@ -67,6 +70,13 @@ function ondigital_service_meta_callback( $post ) {
                 </div>
                 <button type="button" class="button ondigital-upload-btn" data-target="#_service_icon" data-preview="#service-icon-preview"><?php esc_html_e( 'Select Image', 'ondigital' ); ?></button>
                 <button type="button" class="button ondigital-remove-btn" data-target="#_service_icon" data-preview="#service-icon-preview"><?php esc_html_e( 'Remove', 'ondigital' ); ?></button>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="_service_features"><?php esc_html_e( 'Feature List', 'ondigital' ); ?></label></th>
+            <td>
+                <textarea name="_service_features" id="_service_features" rows="7" style="width:100%;"><?php echo esc_textarea( $features ); ?></textarea>
+                <p class="description"><?php esc_html_e( 'One feature per line. e.g. UI/UX Design', 'ondigital' ); ?></p>
             </td>
         </tr>
     </table>
@@ -162,6 +172,9 @@ function ondigital_save_meta_boxes( $post_id ) {
     if ( isset( $_POST['ondigital_service_meta_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_meta_nonce'], 'ondigital_service_meta' ) ) {
         if ( isset( $_POST['_service_icon'] ) ) {
             update_post_meta( $post_id, '_service_icon', absint( $_POST['_service_icon'] ) );
+        }
+        if ( isset( $_POST['_service_features'] ) ) {
+            update_post_meta( $post_id, '_service_features', sanitize_textarea_field( $_POST['_service_features'] ) );
         }
     }
 
