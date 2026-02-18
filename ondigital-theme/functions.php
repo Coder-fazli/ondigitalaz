@@ -349,6 +349,9 @@ function ondigital_enqueue_assets() {
     wp_enqueue_style( 'meanmenu', ONDIGITAL_URI . '/assets/css/vendor/meanmenu.min.css', array(), '2.0.8' );
     wp_enqueue_style( 'magnific-popup', ONDIGITAL_URI . '/assets/css/vendor/magnific-popup.css', array(), '1.1.0' );
 
+    // --- Shared footer styles (overrides inner-page CSS footer variants) ---
+    wp_enqueue_style( 'ondigital-footer', ONDIGITAL_URI . '/assets/css/footer.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+
     // --- Page-Specific Master CSS (each includes all needed styles) ---
     ondigital_enqueue_page_assets();
 
