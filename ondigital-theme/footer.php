@@ -6,6 +6,9 @@
  */
 
 $footer_info_text       = ondigital_get_option( 'footer_info_text', 'OnDigital rəqəmsal marketinq agentliyidir' );
+$footer_contact_address = ondigital_get_option( 'footer_contact_address', '' );
+$footer_contact_phone   = ondigital_get_option( 'footer_contact_phone', '' );
+$footer_contact_email   = ondigital_get_option( 'footer_contact_email', '' );
 $footer_services_title  = ondigital_get_option( 'footer_services_title', 'Xidmətlər' );
 $footer_company_title   = ondigital_get_option( 'footer_company_title', 'Şirkət' );
 $footer_newsletter_title = ondigital_get_option( 'footer_newsletter_title', 'Xəbər bülleteni' );
@@ -74,7 +77,7 @@ $footer_copyright        = ondigital_get_option( 'footer_copyright', '© ' . dat
                     ?>
                 </div>
 
-                <!-- Column 3: Company Links -->
+                <!-- Column 3: Company Links + Contact Info -->
                 <div class="footer-widget-wrapper">
                     <h2 class="title"><?php echo esc_html( $footer_company_title ); ?></h2>
                     <?php
@@ -86,6 +89,19 @@ $footer_copyright        = ondigital_get_option( 'footer_copyright', '© ' . dat
                         'depth'          => 1,
                     ) );
                     ?>
+                    <?php if ( $footer_contact_address || $footer_contact_phone || $footer_contact_email ) : ?>
+                    <ul class="footer-nav-list footer-contact-info">
+                        <?php if ( $footer_contact_address ) : ?>
+                            <li><i class="fa-solid fa-location-dot"></i> <?php echo esc_html( $footer_contact_address ); ?></li>
+                        <?php endif; ?>
+                        <?php if ( $footer_contact_phone ) : ?>
+                            <li><i class="fa-solid fa-phone"></i> <a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $footer_contact_phone ) ); ?>"><?php echo esc_html( $footer_contact_phone ); ?></a></li>
+                        <?php endif; ?>
+                        <?php if ( $footer_contact_email ) : ?>
+                            <li><i class="fa-solid fa-envelope"></i> <a href="mailto:<?php echo esc_attr( $footer_contact_email ); ?>"><?php echo esc_html( $footer_contact_email ); ?></a></li>
+                        <?php endif; ?>
+                    </ul>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Column 4: Newsletter -->
