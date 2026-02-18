@@ -449,6 +449,179 @@ function ondigital_customizer( $wp_customize ) {
         'section' => 'ondigital_partners_home',
         'type'    => 'text',
     ) );
+
+    // =========================================================================
+    // About Page Content Panel
+    // =========================================================================
+    $wp_customize->add_panel( 'ondigital_about_panel', array(
+        'title'    => __( 'About Page Content', 'ondigital' ),
+        'priority' => 41,
+    ) );
+
+    // -------------------------------------------------------------------------
+    // Hero Section
+    // -------------------------------------------------------------------------
+    $wp_customize->add_section( 'ondigital_about_hero', array(
+        'title' => __( 'Hero Section', 'ondigital' ),
+        'panel' => 'ondigital_about_panel',
+    ) );
+
+    foreach ( array(
+        'about_hero_title'    => array( 'label' => __( 'Title', 'ondigital' ),    'default' => 'Biz "OnDigital" - rəqəmsal marketinq və kreativ agentlik, Bakıda fəaliyyət göstəririk', 'type' => 'textarea', 'sanitize' => 'wp_kses_post' ),
+        'about_hero_subtitle' => array( 'label' => __( 'Subtitle Label', 'ondigital' ), 'default' => '01. Haqqımızda', 'type' => 'text', 'sanitize' => 'sanitize_text_field' ),
+        'about_hero_body'     => array( 'label' => __( 'Body Text', 'ondigital' ),  'default' => '2017-ci ildən bəri müştərilərimizin rəqəmsal dünyada uğur qazanmasına kömək edirik. Kreativ yanaşma, strateji düşüncə və müasir texnologiyalarla biznesinizi irəli aparırıq.', 'type' => 'textarea', 'sanitize' => 'sanitize_textarea_field' ),
+    ) as $key => $field ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => $field['default'], 'sanitize_callback' => $field['sanitize'] ) );
+        $wp_customize->add_control( 'ondigital_' . $key, array( 'label' => $field['label'], 'section' => 'ondigital_about_hero', 'type' => $field['type'] ) );
+    }
+
+    // -------------------------------------------------------------------------
+    // Counter Section
+    // -------------------------------------------------------------------------
+    $wp_customize->add_section( 'ondigital_about_counter', array(
+        'title' => __( 'Counter Section', 'ondigital' ),
+        'panel' => 'ondigital_about_panel',
+    ) );
+
+    foreach ( array( 'about_counter_img1', 'about_counter_img2', 'about_counter_img3' ) as $i => $key ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => '', 'sanitize_callback' => 'absint' ) );
+        $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'ondigital_' . $key, array(
+            'label'     => sprintf( __( 'Image %d', 'ondigital' ), $i + 1 ),
+            'section'   => 'ondigital_about_counter',
+            'mime_type' => 'image',
+        ) ) );
+    }
+
+    foreach ( array(
+        'about_counter1_number' => array( 'label' => __( 'Counter 1 — Number', 'ondigital' ), 'default' => '100+' ),
+        'about_counter1_text'   => array( 'label' => __( 'Counter 1 — Text (HTML ok)', 'ondigital' ), 'default' => '100+ <br> məmnun müştəri' ),
+        'about_counter2_number' => array( 'label' => __( 'Counter 2 — Number', 'ondigital' ), 'default' => '7+' ),
+        'about_counter2_text'   => array( 'label' => __( 'Counter 2 — Text (HTML ok)', 'ondigital' ), 'default' => '7+ il<br>təcrübə ilə<br>xidmətinizdəyik' ),
+    ) as $key => $field ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => $field['default'], 'sanitize_callback' => 'wp_kses_post' ) );
+        $wp_customize->add_control( 'ondigital_' . $key, array( 'label' => $field['label'], 'section' => 'ondigital_about_counter', 'type' => 'text' ) );
+    }
+
+    // -------------------------------------------------------------------------
+    // Awards / Who We Are Section
+    // -------------------------------------------------------------------------
+    $wp_customize->add_section( 'ondigital_about_awards', array(
+        'title' => __( 'Awards / Who We Are', 'ondigital' ),
+        'panel' => 'ondigital_about_panel',
+    ) );
+
+    foreach ( array(
+        'about_awards_subtitle' => array( 'label' => __( 'Subtitle Label', 'ondigital' ), 'default' => '02. Biz kimik', 'type' => 'text', 'sanitize' => 'sanitize_text_field' ),
+        'about_awards_title'    => array( 'label' => __( 'Title', 'ondigital' ), 'default' => 'OnDigital ilə biznesinizin strateji inkişafını təmin edirik!', 'type' => 'text', 'sanitize' => 'sanitize_text_field' ),
+        'about_awards_body'     => array( 'label' => __( 'Body Text', 'ondigital' ), 'default' => 'Dünya səviyyəsində kreativ dizayn, peşəkar komanda və müasir texnologiyalarla müştərilərimizin rəqəmsal dünyada uğur qazanmasına kömək edirik.', 'type' => 'textarea', 'sanitize' => 'sanitize_textarea_field' ),
+        'about_award1_number'   => array( 'label' => __( 'Stat 1 — Number', 'ondigital' ), 'default' => '50+', 'type' => 'text', 'sanitize' => 'sanitize_text_field' ),
+        'about_award1_text'     => array( 'label' => __( 'Stat 1 — Label', 'ondigital' ), 'default' => 'uğurlu layihə 99% müştəri məmnuniyyəti', 'type' => 'text', 'sanitize' => 'sanitize_text_field' ),
+        'about_award2_number'   => array( 'label' => __( 'Stat 2 — Number', 'ondigital' ), 'default' => '12+', 'type' => 'text', 'sanitize' => 'sanitize_text_field' ),
+        'about_award2_text'     => array( 'label' => __( 'Stat 2 — Label', 'ondigital' ), 'default' => 'rəqəmsal innovasiya mükafatı', 'type' => 'text', 'sanitize' => 'sanitize_text_field' ),
+    ) as $key => $field ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => $field['default'], 'sanitize_callback' => $field['sanitize'] ) );
+        $wp_customize->add_control( 'ondigital_' . $key, array( 'label' => $field['label'], 'section' => 'ondigital_about_awards', 'type' => $field['type'] ) );
+    }
+
+    foreach ( array(
+        'about_award1_icon'      => __( 'Stat 1 Icon (light)', 'ondigital' ),
+        'about_award1_icon_dark' => __( 'Stat 1 Icon (dark)', 'ondigital' ),
+        'about_award2_icon'      => __( 'Stat 2 Icon (light)', 'ondigital' ),
+        'about_award2_icon_dark' => __( 'Stat 2 Icon (dark)', 'ondigital' ),
+        'about_awards_thumb1'    => __( 'Thumbnail Image 1', 'ondigital' ),
+        'about_awards_thumb2'    => __( 'Thumbnail Image 2', 'ondigital' ),
+    ) as $key => $label ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => '', 'sanitize_callback' => 'absint' ) );
+        $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'ondigital_' . $key, array(
+            'label'     => $label,
+            'section'   => 'ondigital_about_awards',
+            'mime_type' => 'image',
+        ) ) );
+    }
+
+    // -------------------------------------------------------------------------
+    // About Content Section
+    // -------------------------------------------------------------------------
+    $wp_customize->add_section( 'ondigital_about_content', array(
+        'title' => __( 'About Content Section', 'ondigital' ),
+        'panel' => 'ondigital_about_panel',
+    ) );
+
+    foreach ( array(
+        'about_content_thumb'    => __( 'Main Image', 'ondigital' ),
+        'about_content_bg'       => __( 'Background Image', 'ondigital' ),
+    ) as $key => $label ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => '', 'sanitize_callback' => 'absint' ) );
+        $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'ondigital_' . $key, array(
+            'label'     => $label,
+            'section'   => 'ondigital_about_content',
+            'mime_type' => 'image',
+        ) ) );
+    }
+
+    foreach ( array(
+        'about_content_title'    => array( 'label' => __( 'Title', 'ondigital' ), 'default' => 'Sadə amma peşəkar səviyyədə agentlik', 'type' => 'text', 'sanitize' => 'sanitize_text_field' ),
+        'about_content_body'     => array( 'label' => __( 'Body Text (HTML ok)', 'ondigital' ), 'default' => 'Veb saytınızın hər bir <span>statik elementi</span> üzərində tam nəzarətə sahib olun', 'type' => 'textarea', 'sanitize' => 'wp_kses_post' ),
+        'about_content_btn_text' => array( 'label' => __( 'Button Text', 'ondigital' ), 'default' => 'Ətraflı', 'type' => 'text', 'sanitize' => 'sanitize_text_field' ),
+        'about_content_btn_url'  => array( 'label' => __( 'Button URL', 'ondigital' ), 'default' => '', 'type' => 'url', 'sanitize' => 'esc_url_raw' ),
+    ) as $key => $field ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => $field['default'], 'sanitize_callback' => $field['sanitize'] ) );
+        $wp_customize->add_control( 'ondigital_' . $key, array( 'label' => $field['label'], 'section' => 'ondigital_about_content', 'type' => $field['type'] ) );
+    }
+
+    // -------------------------------------------------------------------------
+    // FAQ Section
+    // -------------------------------------------------------------------------
+    $wp_customize->add_section( 'ondigital_about_faq', array(
+        'title' => __( 'FAQ Section', 'ondigital' ),
+        'panel' => 'ondigital_about_panel',
+    ) );
+
+    $wp_customize->add_setting( 'ondigital_about_faq_thumb', array( 'default' => '', 'sanitize_callback' => 'absint' ) );
+    $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'ondigital_about_faq_thumb', array(
+        'label'     => __( 'Thumbnail Image', 'ondigital' ),
+        'section'   => 'ondigital_about_faq',
+        'mime_type' => 'image',
+    ) ) );
+
+    foreach ( array(
+        'about_faq_video_url' => array( 'label' => __( 'Video URL', 'ondigital' ), 'default' => 'https://www.youtube.com/watch?v=AzwC6umvd1s', 'type' => 'url', 'sanitize' => 'esc_url_raw' ),
+        'about_faq_title'     => array( 'label' => __( 'Title', 'ondigital' ), 'default' => 'UI/UX dizayn və kreativ istiqamətdə fəaliyyət göstəririk.', 'type' => 'textarea', 'sanitize' => 'sanitize_textarea_field' ),
+    ) as $key => $field ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => $field['default'], 'sanitize_callback' => $field['sanitize'] ) );
+        $wp_customize->add_control( 'ondigital_' . $key, array( 'label' => $field['label'], 'section' => 'ondigital_about_faq', 'type' => $field['type'] ) );
+    }
+
+    // -------------------------------------------------------------------------
+    // Team Section
+    // -------------------------------------------------------------------------
+    $wp_customize->add_section( 'ondigital_about_team', array(
+        'title' => __( 'Team Section', 'ondigital' ),
+        'panel' => 'ondigital_about_panel',
+    ) );
+
+    foreach ( array(
+        'about_team_title' => array( 'label' => __( 'Title', 'ondigital' ), 'default' => 'Peşəkar komanda', 'type' => 'text', 'sanitize' => 'sanitize_text_field' ),
+        'about_team_body'  => array( 'label' => __( 'Body Text', 'ondigital' ), 'default' => 'Dünya səviyyəsində kreativ dizayn komandası ilə müştərilərimizin rəqəmsal dünyada uğur qazanmasına kömək edirik.', 'type' => 'textarea', 'sanitize' => 'sanitize_textarea_field' ),
+    ) as $key => $field ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => $field['default'], 'sanitize_callback' => $field['sanitize'] ) );
+        $wp_customize->add_control( 'ondigital_' . $key, array( 'label' => $field['label'], 'section' => 'ondigital_about_team', 'type' => $field['type'] ) );
+    }
+
+    // -------------------------------------------------------------------------
+    // Clients Section
+    // -------------------------------------------------------------------------
+    $wp_customize->add_section( 'ondigital_about_clients', array(
+        'title' => __( 'Clients Section', 'ondigital' ),
+        'panel' => 'ondigital_about_panel',
+    ) );
+
+    $wp_customize->add_setting( 'ondigital_about_clients_title', array( 'default' => 'Ən böyük qlobal brendlərlə əməkdaşlıq etdik', 'sanitize_callback' => 'sanitize_text_field' ) );
+    $wp_customize->add_control( 'ondigital_about_clients_title', array(
+        'label'   => __( 'Section Title', 'ondigital' ),
+        'section' => 'ondigital_about_clients',
+        'type'    => 'text',
+    ) );
 }
 
 // Output inline CSS to override the highlight image if a custom one is set

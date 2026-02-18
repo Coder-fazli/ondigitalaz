@@ -180,6 +180,36 @@ function ondigital_theme_options_save() {
         update_option( 'ondigital_text_slider', array() );
     }
 
+    // Clients
+    if ( isset( $_POST['ondigital_about_clients'] ) && is_array( $_POST['ondigital_about_clients'] ) ) {
+        $clients = array();
+        foreach ( $_POST['ondigital_about_clients'] as $item ) {
+            $clients[] = array(
+                'img_light' => absint( $item['img_light'] ?? 0 ),
+                'img_dark'  => absint( $item['img_dark']  ?? 0 ),
+                'alt'       => sanitize_text_field( $item['alt'] ?? '' ),
+            );
+        }
+        update_option( 'ondigital_about_clients', $clients );
+    } else {
+        update_option( 'ondigital_about_clients', array() );
+    }
+
+    // About FAQ
+    if ( isset( $_POST['ondigital_about_faq_items'] ) && is_array( $_POST['ondigital_about_faq_items'] ) ) {
+        $about_faq = array();
+        foreach ( $_POST['ondigital_about_faq_items'] as $item ) {
+            $about_faq[] = array(
+                'question' => sanitize_text_field( $item['question'] ?? '' ),
+                'answer'   => sanitize_textarea_field( $item['answer'] ?? '' ),
+                'open'     => absint( $item['open'] ?? 0 ),
+            );
+        }
+        update_option( 'ondigital_about_faq_items', $about_faq );
+    } else {
+        update_option( 'ondigital_about_faq_items', array() );
+    }
+
     add_settings_error( 'ondigital_theme_options', 'settings_updated', __( 'Settings saved.', 'ondigital' ), 'updated' );
 }
 
@@ -202,6 +232,8 @@ function ondigital_theme_options_page_render() {
         'stats'        => __( 'Stats', 'ondigital' ),
         'testimonials' => __( 'Testimonials', 'ondigital' ),
         'text_slider'  => __( 'Text Slider', 'ondigital' ),
+        'clients'      => __( 'Clients', 'ondigital' ),
+        'about_faq'    => __( 'About FAQ', 'ondigital' ),
     );
 
     $active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'partners';
@@ -217,6 +249,8 @@ function ondigital_theme_options_page_render() {
     $stats        = get_option( 'ondigital_stats', array() );
     $testimonials = get_option( 'ondigital_testimonials', array() );
     $text_slider  = get_option( 'ondigital_text_slider', array() );
+    $clients      = get_option( 'ondigital_about_clients', array() );
+    $about_faq    = get_option( 'ondigital_about_faq_items', array() );
     ?>
     <div class="wrap">
         <h1><?php esc_html_e( 'OnDigital Theme Options', 'ondigital' ); ?></h1>
@@ -321,6 +355,32 @@ function ondigital_theme_options_page_render() {
                     <?php endif; ?>
                 </div>
                 <button type="button" class="button add-row-btn" data-repeater="text_slider" data-type="text_slider"><?php esc_html_e( 'Add Slide', 'ondigital' ); ?></button>
+            </div>
+
+            <!-- Clients Tab -->
+            <div class="ondigital-tab-content <?php echo $active_tab === 'clients' ? 'active' : ''; ?>" data-tab="clients">
+                <h2><?php esc_html_e( 'Client Logos', 'ondigital' ); ?></h2>
+                <div id="clients-repeater">
+                    <?php if ( ! empty( $clients ) ) : ?>
+                        <?php foreach ( $clients as $i => $client ) : ?>
+                            <?php ondigital_render_client_row( $i, $client ); ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+                <button type="button" class="button add-row-btn" data-repeater="clients" data-type="client"><?php esc_html_e( 'Add Client', 'ondigital' ); ?></button>
+            </div>
+
+            <!-- About FAQ Tab -->
+            <div class="ondigital-tab-content <?php echo $active_tab === 'about_faq' ? 'active' : ''; ?>" data-tab="about_faq">
+                <h2><?php esc_html_e( 'About Page FAQ Items', 'ondigital' ); ?></h2>
+                <div id="about_faq-repeater">
+                    <?php if ( ! empty( $about_faq ) ) : ?>
+                        <?php foreach ( $about_faq as $i => $item ) : ?>
+                            <?php ondigital_render_about_faq_row( $i, $item ); ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+                <button type="button" class="button add-row-btn" data-repeater="about_faq" data-type="about_faq"><?php esc_html_e( 'Add FAQ Item', 'ondigital' ); ?></button>
             </div>
 
             <?php submit_button( __( 'Save Settings', 'ondigital' ) ); ?>
@@ -445,6 +505,46 @@ function ondigital_render_text_slider_row( $i, $data ) {
         <input type="text" name="ondigital_text_slider[<?php echo esc_attr( $i ); ?>][text]" value="<?php echo esc_attr( $data['text'] ?? '' ); ?>">
         <label><?php esc_html_e( 'Highlighted Word', 'ondigital' ); ?></label>
         <input type="text" name="ondigital_text_slider[<?php echo esc_attr( $i ); ?>][highlighted]" value="<?php echo esc_attr( $data['highlighted'] ?? '' ); ?>">
+    </div>
+    <?php
+}
+
+function ondigital_render_client_row( $i, $data ) {
+    $light_url = ! empty( $data['img_light'] ) ? wp_get_attachment_image_url( $data['img_light'], 'thumbnail' ) : '';
+    $dark_url  = ! empty( $data['img_dark'] )  ? wp_get_attachment_image_url( $data['img_dark'],  'thumbnail' ) : '';
+    ?>
+    <div class="ondigital-repeater-row">
+        <button type="button" class="remove-row">&times;</button>
+        <label><?php esc_html_e( 'Logo (Light)', 'ondigital' ); ?></label>
+        <input type="hidden" name="ondigital_about_clients[<?php echo esc_attr( $i ); ?>][img_light]" value="<?php echo esc_attr( $data['img_light'] ?? '' ); ?>" class="media-id">
+        <button type="button" class="button upload-media-btn"><?php esc_html_e( 'Select Image', 'ondigital' ); ?></button>
+        <?php if ( $light_url ) : ?><img src="<?php echo esc_url( $light_url ); ?>" class="ondigital-img-preview"><?php endif; ?>
+
+        <label><?php esc_html_e( 'Logo (Dark)', 'ondigital' ); ?></label>
+        <input type="hidden" name="ondigital_about_clients[<?php echo esc_attr( $i ); ?>][img_dark]" value="<?php echo esc_attr( $data['img_dark'] ?? '' ); ?>" class="media-id">
+        <button type="button" class="button upload-media-btn"><?php esc_html_e( 'Select Image', 'ondigital' ); ?></button>
+        <?php if ( $dark_url ) : ?><img src="<?php echo esc_url( $dark_url ); ?>" class="ondigital-img-preview"><?php endif; ?>
+
+        <label><?php esc_html_e( 'Alt Text', 'ondigital' ); ?></label>
+        <input type="text" name="ondigital_about_clients[<?php echo esc_attr( $i ); ?>][alt]" value="<?php echo esc_attr( $data['alt'] ?? '' ); ?>">
+    </div>
+    <?php
+}
+
+function ondigital_render_about_faq_row( $i, $data ) {
+    ?>
+    <div class="ondigital-repeater-row">
+        <button type="button" class="remove-row">&times;</button>
+        <label><?php esc_html_e( 'Question', 'ondigital' ); ?></label>
+        <input type="text" name="ondigital_about_faq_items[<?php echo esc_attr( $i ); ?>][question]" value="<?php echo esc_attr( $data['question'] ?? '' ); ?>">
+
+        <label><?php esc_html_e( 'Answer', 'ondigital' ); ?></label>
+        <textarea name="ondigital_about_faq_items[<?php echo esc_attr( $i ); ?>][answer]" rows="3"><?php echo esc_textarea( $data['answer'] ?? '' ); ?></textarea>
+
+        <label>
+            <input type="checkbox" name="ondigital_about_faq_items[<?php echo esc_attr( $i ); ?>][open]" value="1" <?php checked( ! empty( $data['open'] ) ); ?>>
+            <?php esc_html_e( 'Open by default', 'ondigital' ); ?>
+        </label>
     </div>
     <?php
 }

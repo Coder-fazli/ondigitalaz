@@ -5,6 +5,9 @@
  * @package OnDigital
  */
 
+$team_title = ondigital_get_option( 'about_team_title', 'Peşəkar komanda' );
+$team_body  = ondigital_get_option( 'about_team_body', 'Dünya səviyyəsində kreativ dizayn komandası ilə müştərilərimizin rəqəmsal dünyada uğur qazanmasına kömək edirik.' );
+
 $team_query = new WP_Query( array(
     'post_type'      => 'team_member',
     'posts_per_page' => 4,
@@ -13,26 +16,10 @@ $team_query = new WP_Query( array(
 ) );
 
 $static_team = array(
-    array(
-        'name'     => 'Kamal Abraham',
-        'position' => __( 'CEO, OnDigital', 'ondigital' ),
-        'image'    => 'img-s-1.webp',
-    ),
-    array(
-        'name'     => 'Selina Gomaze',
-        'position' => __( 'Marketinq Meneceri', 'ondigital' ),
-        'image'    => 'img-s-2.webp',
-    ),
-    array(
-        'name'     => 'Pedrik Vadra',
-        'position' => __( 'Baş Developer', 'ondigital' ),
-        'image'    => 'img-s-3.webp',
-    ),
-    array(
-        'name'     => 'Thomas Ribbon',
-        'position' => __( 'UX Dizayner', 'ondigital' ),
-        'image'    => 'img-s-4.webp',
-    ),
+    array( 'name' => 'Kamal Abraham',  'position' => 'CEO, OnDigital',       'image' => 'img-s-1.webp' ),
+    array( 'name' => 'Selina Gomaze',  'position' => 'Marketinq Meneceri',   'image' => 'img-s-2.webp' ),
+    array( 'name' => 'Pedrik Vadra',   'position' => 'Baş Developer',        'image' => 'img-s-3.webp' ),
+    array( 'name' => 'Thomas Ribbon',  'position' => 'UX Dizayner',          'image' => 'img-s-4.webp' ),
 );
 ?>
 <section class="team-area">
@@ -41,13 +28,11 @@ $static_team = array(
             <div class="section-header">
                 <div class="section-title-wrapper">
                     <div class="title-wrapper">
-                        <h2 class="section-title has_fade_anim"><?php esc_html_e( 'Peşəkar komanda', 'ondigital' ); ?></h2>
+                        <h2 class="section-title has_fade_anim"><?php echo esc_html( $team_title ); ?></h2>
                     </div>
                 </div>
                 <div class="text-wrapper">
-                    <p class="text has_fade_anim">
-                        <?php esc_html_e( 'Dünya səviyyəsində kreativ dizayn komandası ilə müştərilərimizin rəqəmsal dünyada uğur qazanmasına kömək edirik.', 'ondigital' ); ?>
-                    </p>
+                    <p class="text has_fade_anim"><?php echo esc_html( $team_body ); ?></p>
                 </div>
             </div>
             <div class="team-wrapper-box">
@@ -57,9 +42,7 @@ $static_team = array(
                             <div class="team-box has_fade_anim" data-fade-from="left" data-delay="<?php echo esc_attr( $delay ); ?>">
                                 <a href="<?php the_permalink(); ?>">
                                     <div class="thumb">
-                                        <?php if ( has_post_thumbnail() ) : ?>
-                                            <?php the_post_thumbnail( 'ondigital-team' ); ?>
-                                        <?php endif; ?>
+                                        <?php if ( has_post_thumbnail() ) : the_post_thumbnail( 'ondigital-team' ); endif; ?>
                                     </div>
                                     <div class="content">
                                         <h3 class="title"><?php the_title(); ?></h3>
@@ -67,8 +50,7 @@ $static_team = array(
                                     </div>
                                 </a>
                             </div>
-                        <?php $delay += 0.15; endwhile; ?>
-                        <?php wp_reset_postdata(); ?>
+                        <?php $delay += 0.15; endwhile; wp_reset_postdata(); ?>
                     <?php else : ?>
                         <?php foreach ( $static_team as $i => $member ) : ?>
                             <div class="team-box has_fade_anim" data-fade-from="left" data-delay="<?php echo esc_attr( 0.15 + ( $i * 0.15 ) ); ?>">

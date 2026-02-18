@@ -147,6 +147,29 @@
                 '<label>Highlighted Word</label>' +
                 '<input type="text" name="ondigital_text_slider[' + i + '][highlighted]" value="">' +
                 '</div>';
+        },
+        client: function (i) {
+            return '<div class="ondigital-repeater-row">' +
+                '<button type="button" class="remove-row">&times;</button>' +
+                '<label>Logo (Light)</label>' +
+                '<input type="hidden" name="ondigital_about_clients[' + i + '][img_light]" value="" class="media-id">' +
+                '<button type="button" class="button upload-media-btn">Select Image</button>' +
+                '<label>Logo (Dark)</label>' +
+                '<input type="hidden" name="ondigital_about_clients[' + i + '][img_dark]" value="" class="media-id">' +
+                '<button type="button" class="button upload-media-btn">Select Image</button>' +
+                '<label>Alt Text</label>' +
+                '<input type="text" name="ondigital_about_clients[' + i + '][alt]" value="">' +
+                '</div>';
+        },
+        about_faq: function (i) {
+            return '<div class="ondigital-repeater-row">' +
+                '<button type="button" class="remove-row">&times;</button>' +
+                '<label>Question</label>' +
+                '<input type="text" name="ondigital_about_faq_items[' + i + '][question]" value="">' +
+                '<label>Answer</label>' +
+                '<textarea name="ondigital_about_faq_items[' + i + '][answer]" rows="3"></textarea>' +
+                '<label><input type="checkbox" name="ondigital_about_faq_items[' + i + '][open]" value="1"> Open by default</label>' +
+                '</div>';
         }
     };
 
