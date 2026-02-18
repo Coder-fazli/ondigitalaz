@@ -528,6 +528,46 @@ function ondigital_customizer( $wp_customize ) {
         $wp_customize->add_control( 'ondigital_' . $key, array( 'label' => $field['label'], 'section' => 'ondigital_services_grid', 'type' => $field['type'] ) );
     }
 
+    // Services About Section
+    $wp_customize->add_section( 'ondigital_services_about', array(
+        'title' => __( 'About Section', 'ondigital' ),
+        'panel' => 'ondigital_services_panel',
+    ) );
+
+    foreach ( array(
+        'services_about_title'    => array( 'label' => __( 'Title (HTML ok)', 'ondigital' ),  'default' => 'Sadə amma peşəkar <br> agentlik', 'type' => 'textarea', 'sanitize' => 'wp_kses_post' ),
+        'services_about_body'     => array( 'label' => __( 'Body Text', 'ondigital' ),         'default' => 'Müştərilərimizin saytlarını vizual cəhətdən cəlbedici, funksional və istifadəçi dostu hala gətiririk.', 'type' => 'textarea', 'sanitize' => 'sanitize_textarea_field' ),
+        'services_about_btn_text' => array( 'label' => __( 'Button Text', 'ondigital' ),       'default' => 'Ətraflı', 'type' => 'text', 'sanitize' => 'sanitize_text_field' ),
+        'services_about_btn_url'  => array( 'label' => __( 'Button URL', 'ondigital' ),        'default' => '', 'type' => 'url', 'sanitize' => 'esc_url_raw' ),
+    ) as $key => $field ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => $field['default'], 'sanitize_callback' => $field['sanitize'] ) );
+        $wp_customize->add_control( 'ondigital_' . $key, array( 'label' => $field['label'], 'section' => 'ondigital_services_about', 'type' => $field['type'] ) );
+    }
+
+    foreach ( array( 'services_about_thumb' => 'Thumb Image', 'services_about_bg' => 'Background Image' ) as $key => $label ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => '', 'sanitize_callback' => 'absint' ) );
+        $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'ondigital_' . $key, array(
+            'label'     => __( $label, 'ondigital' ),
+            'section'   => 'ondigital_services_about',
+            'mime_type' => 'image',
+        ) ) );
+    }
+
+    // Services Contact CTA Section
+    $wp_customize->add_section( 'ondigital_services_cta', array(
+        'title' => __( 'Contact CTA Section', 'ondigital' ),
+        'panel' => 'ondigital_services_panel',
+    ) );
+
+    foreach ( array(
+        'services_cta_title'    => array( 'label' => __( 'Title', 'ondigital' ),       'default' => 'Arolax ilə təcrübənizə başlayın', 'type' => 'textarea', 'sanitize' => 'wp_kses_post' ),
+        'services_cta_btn_text' => array( 'label' => __( 'Button Text', 'ondigital' ), 'default' => 'Əlaqə saxlayaq', 'type' => 'text', 'sanitize' => 'sanitize_text_field' ),
+        'services_cta_btn_url'  => array( 'label' => __( 'Button URL', 'ondigital' ),  'default' => '', 'type' => 'url', 'sanitize' => 'esc_url_raw' ),
+    ) as $key => $field ) {
+        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => $field['default'], 'sanitize_callback' => $field['sanitize'] ) );
+        $wp_customize->add_control( 'ondigital_' . $key, array( 'label' => $field['label'], 'section' => 'ondigital_services_cta', 'type' => $field['type'] ) );
+    }
+
     // =========================================================================
     // About Page Content Panel
     // =========================================================================
