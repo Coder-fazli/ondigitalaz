@@ -422,6 +422,30 @@ function ondigital_enqueue_page_assets() {
         }
     }
 
+    // Services archive
+    if ( is_post_type_archive( 'service' ) ) {
+        $css_file = ONDIGITAL_DIR . '/assets/css/pages/services.css';
+        if ( file_exists( $css_file ) ) {
+            wp_enqueue_style( 'ondigital-services', ONDIGITAL_URI . '/assets/css/pages/services.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+        }
+        $js_file = ONDIGITAL_DIR . '/assets/js/pages/services.js';
+        if ( file_exists( $js_file ) ) {
+            wp_enqueue_script( 'ondigital-services', ONDIGITAL_URI . '/assets/js/pages/services.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
+        }
+    }
+
+    // Projects archive
+    if ( is_post_type_archive( 'project' ) ) {
+        $css_file = ONDIGITAL_DIR . '/assets/css/pages/projects.css';
+        if ( file_exists( $css_file ) ) {
+            wp_enqueue_style( 'ondigital-projects', ONDIGITAL_URI . '/assets/css/pages/projects.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+        }
+        $js_file = ONDIGITAL_DIR . '/assets/js/pages/projects.js';
+        if ( file_exists( $js_file ) ) {
+            wp_enqueue_script( 'ondigital-projects', ONDIGITAL_URI . '/assets/js/pages/projects.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
+        }
+    }
+
     // Single Service
     if ( is_singular( 'service' ) ) {
         $css_file = ONDIGITAL_DIR . '/assets/css/pages/service-details.css';
