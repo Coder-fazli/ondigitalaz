@@ -124,7 +124,9 @@
                 '<button type="button" class="remove-row">&times;</button>' +
                 '<label>Number</label>' +
                 '<input type="text" name="ondigital_stats[' + i + '][number]" value="">' +
-                '<label>Label</label>' +
+                '<label>Suffix (e.g. +, %)</label>' +
+                '<input type="text" name="ondigital_stats[' + i + '][suffix]" value="" style="max-width:80px;">' +
+                '<label>Label (two lines, use Enter)</label>' +
                 '<input type="text" name="ondigital_stats[' + i + '][label]" value="">' +
                 '</div>';
         },

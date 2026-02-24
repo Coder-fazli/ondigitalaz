@@ -143,6 +143,7 @@ function ondigital_theme_options_save() {
         foreach ( $_POST['ondigital_stats'] as $item ) {
             $stats[] = array(
                 'number' => sanitize_text_field( $item['number'] ?? '' ),
+                'suffix' => sanitize_text_field( $item['suffix'] ?? '' ),
                 'label'  => sanitize_text_field( $item['label'] ?? '' ),
             );
         }
@@ -477,7 +478,9 @@ function ondigital_render_stats_row( $i, $data ) {
         <button type="button" class="remove-row">&times;</button>
         <label><?php esc_html_e( 'Number', 'ondigital' ); ?></label>
         <input type="text" name="ondigital_stats[<?php echo esc_attr( $i ); ?>][number]" value="<?php echo esc_attr( $data['number'] ?? '' ); ?>">
-        <label><?php esc_html_e( 'Label', 'ondigital' ); ?></label>
+        <label><?php esc_html_e( 'Suffix (e.g. +, %)', 'ondigital' ); ?></label>
+        <input type="text" name="ondigital_stats[<?php echo esc_attr( $i ); ?>][suffix]" value="<?php echo esc_attr( $data['suffix'] ?? '' ); ?>" style="max-width:80px;">
+        <label><?php esc_html_e( 'Label (two lines, use Enter)', 'ondigital' ); ?></label>
         <input type="text" name="ondigital_stats[<?php echo esc_attr( $i ); ?>][label]" value="<?php echo esc_attr( $data['label'] ?? '' ); ?>">
     </div>
     <?php

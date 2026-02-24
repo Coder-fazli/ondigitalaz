@@ -409,6 +409,11 @@ function ondigital_enqueue_page_assets() {
             if ( file_exists( $js_file ) ) {
                 wp_enqueue_script( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/js/pages/' . $slug . '.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
             }
+
+            // Home page: load counter component CSS
+            if ( 'home' === $slug ) {
+                wp_enqueue_style( 'ondigital-counter', ONDIGITAL_URI . '/assets/css/components/counter.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
+            }
             break;
         }
     }

@@ -1,44 +1,48 @@
 <?php
 /**
- * Home - Fun Facts / Stats Section
+ * Home - Counter / Stats Section (creative-agency style)
  *
  * @package OnDigital
  */
 
-$stats_title = ondigital_get_option( 'stats_title', 'The reasons why you should <span>work</span> with us' );
-
 $default_counters = array(
-    array( 'number' => '7',    'label' => __( 'Years experience', 'ondigital' ) ),
-    array( 'number' => '500+', 'label' => __( 'Projects done successfully', 'ondigital' ) ),
-    array( 'number' => '15',   'label' => __( 'Marketing team member', 'ondigital' ) ),
-    array( 'number' => '10',   'label' => __( 'We achieved awards', 'ondigital' ) ),
+    array( 'number' => '7',   'suffix' => '',  'label' => "İllik\ntəcrübə" ),
+    array( 'number' => '500', 'suffix' => '+', 'label' => "Uğurla\ntamamlanan" ),
+    array( 'number' => '15',  'suffix' => '',  'label' => "Komanda\nüzvü" ),
+    array( 'number' => '98',  'suffix' => '%', 'label' => "Müştəri\nməmnuniyyəti" ),
 );
 
 $counters = ondigital_get_repeater( 'stats', $default_counters );
-$delays   = array( '0.15', '0.30', '0.45', '0.60' );
+
+// Alternate fade directions: left, right, left, right …
+$directions = array( 'left', 'right', 'left', 'right' );
+$delays     = array( '0.45', '0.15', '0.15', '0.45' );
 ?>
-<section class="fun-fact-area">
+<div class="counter-area">
     <div class="container">
-        <div class="fun-fact-area-inner section-spacing-top">
-            <div class="section-header">
-                <div class="section-title-wrapper">
-                    <div class="title-wrapper">
-                        <h2 class="section-title has_text_move_anim">
-                            <?php echo wp_kses_post( $stats_title ); ?>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="counter-wrapper-box">
-                <div class="counter-wrapper">
-                    <?php foreach ( $counters as $i => $counter ) : ?>
-                        <div class="counter-box has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $i % 4 ] ); ?>">
-                            <h3 class="number wc-counter"><?php echo esc_html( $counter['number'] ); ?></h3>
-                            <h3 class="text"><?php echo wp_kses_post( nl2br( $counter['label'] ) ); ?></h3>
+        <div class="counter-area-inner">
+            <div class="counter-items">
+                <?php foreach ( $counters as $i => $counter ) :
+                    $dir    = $directions[ $i % 4 ];
+                    $delay  = $delays[ $i % 4 ];
+                    $suffix = $counter['suffix'] ?? '';
+                ?>
+                    <div class="counter-item has_fade_anim"
+                         data-fade-from="<?php echo esc_attr( $dir ); ?>"
+                         data-duration="0.75"
+                         data-delay="<?php echo esc_attr( $delay ); ?>">
+                        <div class="counter-item-content">
+                            <h2 class="title wc-counter"><?php echo esc_html( $counter['number'] ); ?></h2>
+                            <p class="text">
+                                <?php if ( $suffix ) : ?>
+                                    <span><?php echo esc_html( $suffix ); ?></span>
+                                <?php endif; ?>
+                                <?php echo wp_kses_post( nl2br( esc_html( $counter['label'] ) ) ); ?>
+                            </p>
                         </div>
-                    <?php endforeach; ?>
-                </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
-</section>
+</div>
