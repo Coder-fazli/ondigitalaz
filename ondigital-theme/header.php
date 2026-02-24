@@ -41,10 +41,6 @@ $font_class = $is_home ? 'font-heading-spacegrotesk-bold' : 'font-heading-beatri
     </div>
 </div>
 
-<!-- Cursor Animation -->
-<div class="cursor1"></div>
-<div class="cursor2"></div>
-
 <!-- Scroll to top -->
 <div class="progress-wrap">
     <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">

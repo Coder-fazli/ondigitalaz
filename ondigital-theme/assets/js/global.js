@@ -178,17 +178,6 @@
                 tl.from(image, 1.5, { xPercent: 100, scale: 1.3, delay: -1.5, ease: "power2.out" });
             });
 
-            // Cursor Movement
-            document.addEventListener("mousemove", function (e) {
-                try {
-                    var tl = gsap.timeline({
-                        defaults: { x: e.clientX, y: e.clientY }
-                    });
-                    tl.to(".cursor1", { ease: "power2.out" })
-                      .to(".cursor2", { ease: "power2.out" }, "-=0.4");
-                } catch (err) {}
-            });
-
             // Button move parallax
             var all_btn = gsap.utils.toArray(".btn-move");
             var all_btn_circle = gsap.utils.toArray(".btn-item");
