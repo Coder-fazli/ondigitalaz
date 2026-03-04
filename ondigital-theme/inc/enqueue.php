@@ -94,6 +94,7 @@ function ondigital_enqueue_page_assets() {
         if ( 'home' === $slug ) {
             wp_enqueue_style( 'ondigital-counter',       ONDIGITAL_URI . '/assets/css/components/counter.css',       array( 'ondigital-home' ), ONDIGITAL_VERSION );
             wp_enqueue_style( 'ondigital-services-home', ONDIGITAL_URI . '/assets/css/components/services-home.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-blog-home',     ONDIGITAL_URI . '/assets/css/components/blog-home.css',     array( 'ondigital-home' ), ONDIGITAL_VERSION );
         }
 
         break;
