@@ -208,9 +208,21 @@
 }
 
 .service-area .services-wrapper {
-    display: grid;
-    gap: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    padding-bottom: 50px;
+}
+
+.service-area .services-pagination {
+    bottom: 0;
+}
+
+.service-area .services-pagination .swiper-pagination-bullet {
+    background-color: var(--white);
+    opacity: 0.4;
+}
+
+.service-area .services-pagination .swiper-pagination-bullet-active {
+    background-color: var(--theme);
+    opacity: 1;
 }
 
 

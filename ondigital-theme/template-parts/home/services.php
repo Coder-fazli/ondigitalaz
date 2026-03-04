@@ -86,47 +86,54 @@ $services_query = new WP_Query( array(
 
             <!-- Cards -->
             <div class="services-wrapper-box">
-                <div class="services-wrapper">
+                <div class="services-wrapper swiper" id="services-slider">
+                    <div class="swiper-wrapper">
                     <?php if ( $services_query->have_posts() ) : ?>
                         <?php $i = 0; while ( $services_query->have_posts() ) : $services_query->the_post();
                             $icon_id  = get_post_meta( get_the_ID(), '_service_icon', true );
                             $icon_url = $icon_id ? wp_get_attachment_image_url( $icon_id, 'thumbnail' ) : '';
                         ?>
-                            <div class="service-box has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $i % 4 ] ); ?>">
-                                <a href="<?php the_permalink(); ?>">
-                                    <?php if ( $icon_url ) : ?>
-                                        <div class="thumb">
-                                            <img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php the_title_attribute(); ?>">
+                            <div class="swiper-slide">
+                                <div class="service-box has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $i % 4 ] ); ?>">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <?php if ( $icon_url ) : ?>
+                                            <div class="thumb">
+                                                <img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php the_title_attribute(); ?>">
+                                            </div>
+                                        <?php endif; ?>
+                                        <div class="content">
+                                            <h2 class="title"><?php the_title(); ?></h2>
+                                            <p class="text"><?php echo esc_html( get_the_excerpt() ); ?></p>
+                                            <div class="btn-wrapper">
+                                                <span class="wc-btn-normal"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
+                                            </div>
                                         </div>
-                                    <?php endif; ?>
-                                    <div class="content">
-                                        <h2 class="title"><?php the_title(); ?></h2>
-                                        <p class="text"><?php echo esc_html( get_the_excerpt() ); ?></p>
-                                        <div class="btn-wrapper">
-                                            <span class="wc-btn-normal"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
-                                        </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
                         <?php $i++; endwhile; wp_reset_postdata(); ?>
                     <?php else : ?>
                         <?php foreach ( $static_services as $i => $service ) : ?>
-                            <div class="service-box has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $i ] ); ?>">
-                                <a href="<?php echo esc_url( $service['url'] ); ?>">
-                                    <div class="thumb">
-                                        <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/' . $service['icon'] ); ?>" alt="<?php echo esc_attr( $service['title'] ); ?>">
-                                    </div>
-                                    <div class="content">
-                                        <h2 class="title"><?php echo esc_html( $service['title'] ); ?></h2>
-                                        <p class="text"><?php echo esc_html( $service['text'] ); ?></p>
-                                        <div class="btn-wrapper">
-                                            <span class="wc-btn-normal"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
+                            <div class="swiper-slide">
+                                <div class="service-box has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $i ] ); ?>">
+                                    <a href="<?php echo esc_url( $service['url'] ); ?>">
+                                        <div class="thumb">
+                                            <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/' . $service['icon'] ); ?>" alt="<?php echo esc_attr( $service['title'] ); ?>">
                                         </div>
-                                    </div>
-                                </a>
+                                        <div class="content">
+                                            <h2 class="title"><?php echo esc_html( $service['title'] ); ?></h2>
+                                            <p class="text"><?php echo esc_html( $service['text'] ); ?></p>
+                                            <div class="btn-wrapper">
+                                                <span class="wc-btn-normal"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         <?php endforeach; ?>
                     <?php endif; ?>
+                    </div>
+                    <div class="swiper-pagination services-pagination"></div>
                 </div>
             </div>
 

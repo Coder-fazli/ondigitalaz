@@ -8,6 +8,25 @@
 
     $(document).ready(function () {
 
+        // Services slider
+        if (document.querySelector('#services-slider')) {
+            new Swiper("#services-slider", {
+                loop: false,
+                slidesPerView: 1,
+                spaceBetween: 30,
+                speed: 800,
+                pagination: {
+                    el: ".services-pagination",
+                    clickable: true,
+                },
+                breakpoints: {
+                    576: { slidesPerView: 2 },
+                    992: { slidesPerView: 3 },
+                    1200: { slidesPerView: 4 },
+                }
+            });
+        }
+
         // Client logos auto-scroll slider
         if (document.querySelector('.client-slider-active')) {
             new Swiper(".client-slider-active", {
