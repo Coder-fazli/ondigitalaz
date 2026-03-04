@@ -15,6 +15,10 @@
                 slidesPerView: 1,
                 spaceBetween: 30,
                 speed: 800,
+                navigation: {
+                    prevEl: ".services-prev",
+                    nextEl: ".services-next",
+                },
                 pagination: {
                     el: ".services-pagination",
                     clickable: true,

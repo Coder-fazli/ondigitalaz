@@ -211,6 +211,58 @@
     padding-bottom: 50px;
 }
 
+.service-area .services-prev,
+.service-area .services-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.service-area .services-prev:hover,
+.service-area .services-next:hover {
+    background-color: var(--theme);
+    border-color: var(--theme);
+    color: var(--black);
+}
+
+.service-area .services-prev {
+    left: -70px;
+}
+
+.service-area .services-next {
+    right: -70px;
+}
+
+.service-area .services-prev.swiper-button-disabled,
+.service-area .services-next.swiper-button-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+@media only screen and (max-width: 1400px) {
+    .service-area .services-prev {
+        left: 0;
+    }
+    .service-area .services-next {
+        right: 0;
+    }
+    .service-area .services-wrapper-box {
+        padding: 0 60px;
+    }
+}
+
 .service-area .services-pagination {
     bottom: 0;
 }
