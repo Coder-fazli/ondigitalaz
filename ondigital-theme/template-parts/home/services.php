@@ -42,7 +42,7 @@ $delays = array( '0.15', '0.30', '0.45', '0.60' );
 // Query CPT services
 $services_query = new WP_Query( array(
     'post_type'      => 'service',
-    'posts_per_page' => 4,
+    'posts_per_page' => -1,
     'orderby'        => 'menu_order',
     'order'          => 'ASC',
 ) );
@@ -86,6 +86,8 @@ $services_query = new WP_Query( array(
 
             <!-- Cards -->
             <div class="services-wrapper-box">
+                <div class="services-slider-wrap">
+                <div class="services-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
                 <div class="services-wrapper swiper" id="services-slider">
                     <div class="swiper-wrapper">
                     <?php if ( $services_query->have_posts() ) : ?>
@@ -133,11 +135,9 @@ $services_query = new WP_Query( array(
                         <?php endforeach; ?>
                     <?php endif; ?>
                     </div>
-                </div>
-                <div class="services-nav">
-                    <div class="services-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
                     <div class="swiper-pagination services-pagination"></div>
-                    <div class="services-next"><i class="fa-solid fa-arrow-right-long"></i></div>
+                </div>
+                <div class="services-next"><i class="fa-solid fa-arrow-right-long"></i></div>
                 </div>
             </div>
 
