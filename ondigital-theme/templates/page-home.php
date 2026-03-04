@@ -28,10 +28,7 @@ get_template_part( 'template-parts/home/report' );
 // Section 7: Projects slider
 get_template_part( 'template-parts/home/projects' );
 
-// Section 8: Pricing + Accordion FAQ
-get_template_part( 'template-parts/home/pricing' );
-
-// Section 9: Fun Facts / Stats counters
+// Section 8: Fun Facts / Stats counters
 get_template_part( 'template-parts/home/stats' );
 
 // Section 10: Testimonials
