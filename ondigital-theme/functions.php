@@ -16,6 +16,7 @@ define( 'ONDIGITAL_URI', get_template_directory_uri() );
 
 // Include files
 require_once ONDIGITAL_DIR . '/inc/helpers.php';
+require_once ONDIGITAL_DIR . '/inc/enqueue.php';
 require_once ONDIGITAL_DIR . '/inc/customizer.php';
 require_once ONDIGITAL_DIR . '/inc/meta-boxes.php';
 require_once ONDIGITAL_DIR . '/inc/admin-page.php';
@@ -335,160 +336,8 @@ class OnDigital_Nav_Walker extends Walker_Nav_Menu {
 
 
 // =============================================================================
-// 2. ENQUEUE STYLES & SCRIPTS
+// 2. ENQUEUE STYLES & SCRIPTS — see inc/enqueue.php
 // =============================================================================
-
-add_action( 'wp_enqueue_scripts', 'ondigital_enqueue_assets' );
-function ondigital_enqueue_assets() {
-
-    // --- Global Vendor CSS ---
-    wp_enqueue_style( 'bootstrap', ONDIGITAL_URI . '/assets/css/vendor/bootstrap.min.css', array(), '5.3.0' );
-    wp_enqueue_style( 'fontawesome', ONDIGITAL_URI . '/assets/css/vendor/all.min.css', array(), '6.5.0' );
-    wp_enqueue_style( 'swiper', ONDIGITAL_URI . '/assets/css/vendor/swiper-bundle.min.css', array(), '11.0.0' );
-    wp_enqueue_style( 'progressbar', ONDIGITAL_URI . '/assets/css/vendor/progressbar.css', array(), '1.0.0' );
-    wp_enqueue_style( 'meanmenu', ONDIGITAL_URI . '/assets/css/vendor/meanmenu.min.css', array(), '2.0.8' );
-    wp_enqueue_style( 'magnific-popup', ONDIGITAL_URI . '/assets/css/vendor/magnific-popup.css', array(), '1.1.0' );
-
-    // --- Shared footer styles (overrides inner-page CSS footer variants) ---
-    wp_enqueue_style( 'ondigital-footer', ONDIGITAL_URI . '/assets/css/footer.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-
-    // --- Page-Specific Master CSS (each includes all needed styles) ---
-    ondigital_enqueue_page_assets();
-
-    // --- Global Vendor JS ---
-    wp_enqueue_script( 'jquery' ); // WP bundled jQuery
-    wp_enqueue_script( 'bootstrap-bundle', ONDIGITAL_URI . '/assets/js/vendor/bootstrap.bundle.min.js', array( 'jquery' ), '5.3.0', true );
-    wp_enqueue_script( 'gsap', ONDIGITAL_URI . '/assets/js/vendor/gsap.min.js', array(), '3.12.0', true );
-    wp_enqueue_script( 'gsap-scroll-trigger', ONDIGITAL_URI . '/assets/js/vendor/ScrollTrigger.min.js', array( 'gsap' ), '3.12.0', true );
-    wp_enqueue_script( 'gsap-scroll-smoother', ONDIGITAL_URI . '/assets/js/vendor/ScrollSmoother.min.js', array( 'gsap' ), '3.12.0', true );
-    wp_enqueue_script( 'gsap-scroll-to', ONDIGITAL_URI . '/assets/js/vendor/ScrollToPlugin.min.js', array( 'gsap' ), '3.12.0', true );
-    wp_enqueue_script( 'gsap-split-text', ONDIGITAL_URI . '/assets/js/vendor/SplitText.min.js', array( 'gsap' ), '3.12.0', true );
-    wp_enqueue_script( 'swiper', ONDIGITAL_URI . '/assets/js/vendor/swiper-bundle.min.js', array(), '11.0.0', true );
-    wp_enqueue_script( 'magnific-popup', ONDIGITAL_URI . '/assets/js/vendor/jquery.magnific-popup.min.js', array( 'jquery' ), '1.1.0', true );
-    wp_enqueue_script( 'meanmenu', ONDIGITAL_URI . '/assets/js/vendor/jquery.meanmenu.min.js', array( 'jquery' ), '2.0.8', true );
-    wp_enqueue_script( 'counter-up', ONDIGITAL_URI . '/assets/js/vendor/counter.js', array(), '2.1.0', true );
-    wp_enqueue_script( 'progressbar-js', ONDIGITAL_URI . '/assets/js/vendor/progressbar.js', array( 'jquery' ), '1.0.0', true );
-    wp_enqueue_script( 'lottie', ONDIGITAL_URI . '/assets/js/vendor/lottie.min.js', array(), '5.12.2', true );
-
-    // --- Global Theme JS ---
-    wp_enqueue_script( 'ondigital-global', ONDIGITAL_URI . '/assets/js/global.js', array( 'jquery', 'gsap', 'bootstrap-bundle' ), ONDIGITAL_VERSION, true );
-
-    // Localize for AJAX
-    wp_localize_script( 'ondigital-global', 'ondigital_ajax', array(
-        'ajax_url' => admin_url( 'admin-ajax.php' ),
-        'nonce'    => wp_create_nonce( 'ondigital_nonce' ),
-        'site_url' => home_url( '/' ),
-    ) );
-}
-
-/**
- * Conditionally enqueue per-page CSS/JS based on the current template.
- */
-function ondigital_enqueue_page_assets() {
-    $page_styles = array(
-        'page-home.php'            => 'home',
-        'page-about.php'           => 'about',
-        'page-services.php'        => 'services',
-        'page-service-details.php' => 'service-details',
-        'page-projects.php'        => 'projects',
-        'page-blog.php'            => 'blog',
-        'page-contact.php'         => 'contact',
-        'page-quote.php'           => 'quote',
-        'page-faq.php'             => 'faq',
-        'page-team.php'            => 'team',
-    );
-
-    foreach ( $page_styles as $template => $slug ) {
-        if ( is_page_template( 'templates/' . $template ) ) {
-            $css_file = ONDIGITAL_DIR . '/assets/css/pages/' . $slug . '.css';
-            if ( file_exists( $css_file ) ) {
-                wp_enqueue_style( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/css/pages/' . $slug . '.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-            }
-
-            $js_file = ONDIGITAL_DIR . '/assets/js/pages/' . $slug . '.js';
-            if ( file_exists( $js_file ) ) {
-                wp_enqueue_script( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/js/pages/' . $slug . '.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
-            }
-
-            // Home page: load component CSS overrides
-            if ( 'home' === $slug ) {
-                wp_enqueue_style( 'ondigital-counter',       ONDIGITAL_URI . '/assets/css/components/counter.css',       array( 'ondigital-home' ), ONDIGITAL_VERSION );
-                wp_enqueue_style( 'ondigital-services-home', ONDIGITAL_URI . '/assets/css/components/services-home.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
-            }
-            break;
-        }
-    }
-
-    // Blog single post
-    if ( is_singular( 'post' ) ) {
-        $css_file = ONDIGITAL_DIR . '/assets/css/pages/blog-details.css';
-        if ( file_exists( $css_file ) ) {
-            wp_enqueue_style( 'ondigital-blog-details', ONDIGITAL_URI . '/assets/css/pages/blog-details.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-        }
-        $js_file = ONDIGITAL_DIR . '/assets/js/pages/blog-details.js';
-        if ( file_exists( $js_file ) ) {
-            wp_enqueue_script( 'ondigital-blog-details', ONDIGITAL_URI . '/assets/js/pages/blog-details.js', array( 'bootstrap' ), ONDIGITAL_VERSION, true );
-        }
-    }
-
-    // Services archive
-    if ( is_post_type_archive( 'service' ) ) {
-        $css_file = ONDIGITAL_DIR . '/assets/css/pages/services.css';
-        if ( file_exists( $css_file ) ) {
-            wp_enqueue_style( 'ondigital-services', ONDIGITAL_URI . '/assets/css/pages/services.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-        }
-        $js_file = ONDIGITAL_DIR . '/assets/js/pages/services.js';
-        if ( file_exists( $js_file ) ) {
-            wp_enqueue_script( 'ondigital-services', ONDIGITAL_URI . '/assets/js/pages/services.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
-        }
-    }
-
-    // Projects archive
-    if ( is_post_type_archive( 'project' ) ) {
-        $css_file = ONDIGITAL_DIR . '/assets/css/pages/projects.css';
-        if ( file_exists( $css_file ) ) {
-            wp_enqueue_style( 'ondigital-projects', ONDIGITAL_URI . '/assets/css/pages/projects.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-        }
-        $js_file = ONDIGITAL_DIR . '/assets/js/pages/projects.js';
-        if ( file_exists( $js_file ) ) {
-            wp_enqueue_script( 'ondigital-projects', ONDIGITAL_URI . '/assets/js/pages/projects.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
-        }
-    }
-
-    // Single Service
-    if ( is_singular( 'service' ) ) {
-        $css_file = ONDIGITAL_DIR . '/assets/css/pages/service-details.css';
-        if ( file_exists( $css_file ) ) {
-            wp_enqueue_style( 'ondigital-service-details', ONDIGITAL_URI . '/assets/css/pages/service-details.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-        }
-    }
-
-    // Single Project
-    if ( is_singular( 'project' ) ) {
-        $css_file = ONDIGITAL_DIR . '/assets/css/pages/project-details.css';
-        if ( file_exists( $css_file ) ) {
-            wp_enqueue_style( 'ondigital-project-details', ONDIGITAL_URI . '/assets/css/pages/project-details.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-        }
-    }
-
-    // 404
-    if ( is_404() ) {
-        $css_file = ONDIGITAL_DIR . '/assets/css/pages/404.css';
-        if ( file_exists( $css_file ) ) {
-            wp_enqueue_style( 'ondigital-404', ONDIGITAL_URI . '/assets/css/pages/404.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-        }
-        return;
-    }
-
-    // Fallback: if no page-specific CSS was loaded, use the corporate-agency (inner page) CSS
-    if ( ! wp_style_is( 'ondigital-home' ) && ! wp_style_is( 'ondigital-about' ) && ! wp_style_is( 'ondigital-services' )
-        && ! wp_style_is( 'ondigital-projects' ) && ! wp_style_is( 'ondigital-blog' ) && ! wp_style_is( 'ondigital-contact' )
-        && ! wp_style_is( 'ondigital-faq' ) && ! wp_style_is( 'ondigital-team' ) && ! wp_style_is( 'ondigital-quote' )
-        && ! wp_style_is( 'ondigital-blog-details' ) && ! wp_style_is( 'ondigital-service-details' )
-        && ! wp_style_is( 'ondigital-project-details' ) && ! wp_style_is( 'ondigital-404' ) ) {
-        wp_enqueue_style( 'ondigital-default', ONDIGITAL_URI . '/assets/css/global.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-    }
-}
 
 
 // =============================================================================
