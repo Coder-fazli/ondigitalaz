@@ -214,11 +214,13 @@
 }
 
 
-/* Card */
+/* Card — reset home.css generic .service-box grid layout */
 .service-area .service-box {
+    display: block;
     background-color: #1b1b1b;
     padding: 50px 40px 48px;
     border-radius: 40px;
+    border-bottom: none;
 }
 
 .dark .service-area .service-box {
@@ -247,6 +249,8 @@
 }
 
 .service-area .service-box .content {
+    display: block;
+    grid-template-columns: unset;
     margin-top: 47px;
 }
 
