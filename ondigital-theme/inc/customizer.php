@@ -55,6 +55,34 @@ function ondigital_customizer( $wp_customize ) {
     ) ) );
 
     // =========================================================================
+    // Header Section
+    // =========================================================================
+    $wp_customize->add_section( 'ondigital_header', array(
+        'title'    => __( 'Header', 'ondigital' ),
+        'priority' => 25,
+    ) );
+
+    $wp_customize->add_setting( 'ondigital_header_btn_text', array(
+        'default'           => 'Get started',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'ondigital_header_btn_text', array(
+        'label'   => __( 'Nav Button Text', 'ondigital' ),
+        'section' => 'ondigital_header',
+        'type'    => 'text',
+    ) );
+
+    $wp_customize->add_setting( 'ondigital_header_btn_url', array(
+        'default'           => '/teklif-al/',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'ondigital_header_btn_url', array(
+        'label'   => __( 'Nav Button URL', 'ondigital' ),
+        'section' => 'ondigital_header',
+        'type'    => 'url',
+    ) );
+
+    // =========================================================================
     // Footer Section
     // =========================================================================
     $wp_customize->add_section( 'ondigital_footer', array(

@@ -169,8 +169,12 @@ $font_class = $is_home ? 'font-heading-spacegrotesk-bold' : 'font-heading-beatri
                 </nav>
             </div>
             <div class="header__button">
-                <a class="wc-btn wc-btn-primary btn-text-flip" href="<?php echo esc_url( home_url( '/teklif-al/' ) ); ?>">
-                    <span data-text="<?php esc_attr_e( 'Get started', 'ondigital' ); ?>"><?php esc_html_e( 'Get started', 'ondigital' ); ?></span>
+                <?php
+                $header_btn_text = get_theme_mod( 'ondigital_header_btn_text', 'Get started' );
+                $header_btn_url  = get_theme_mod( 'ondigital_header_btn_url', '/teklif-al/' );
+                ?>
+                <a class="wc-btn wc-btn-primary btn-text-flip" href="<?php echo esc_url( $header_btn_url ); ?>">
+                    <span data-text="<?php echo esc_attr( $header_btn_text ); ?>"><?php echo esc_html( $header_btn_text ); ?></span>
                 </a>
             </div>
             <div class="header__navicon d-xl-none">
