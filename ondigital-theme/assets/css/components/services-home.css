@@ -206,8 +206,8 @@
     }
 }
 
-.service-area .services-wrapper-box {
-    position: relative;
+.service-area .services-wrapper.swiper {
+    overflow: visible;
 }
 
 .service-area .services-prev,
@@ -230,11 +230,16 @@
 }
 
 .service-area .services-prev {
-    left: -27px;
+    left: -70px;
 }
 
 .service-area .services-next {
-    right: -27px;
+    right: -70px;
+}
+
+@media only screen and (max-width: 1300px) {
+    .service-area .services-prev { left: -30px; }
+    .service-area .services-next { right: -30px; }
 }
 
 .service-area .services-prev:hover,
