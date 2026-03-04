@@ -191,7 +191,9 @@
 
 /* Cards grid */
 .service-area .services-wrapper-box {
+    position: relative;
     margin-top: 86px;
+    padding-bottom: 40px; /* space for pagination dots below cards */
 }
 
 @media only screen and (max-width: 1399px) {
@@ -213,7 +215,8 @@
 .service-area .services-prev,
 .service-area .services-next {
     position: absolute;
-    top: 50%;
+    /* Center on card area: 50% of total height minus half the 40px pagination padding */
+    top: calc(50% - 20px);
     transform: translateY(-50%);
     z-index: 10;
     width: 54px;
@@ -237,9 +240,14 @@
     right: -70px;
 }
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1500px) {
     .service-area .services-prev { left: -30px; }
     .service-area .services-next { right: -30px; }
+}
+
+@media only screen and (max-width: 1300px) {
+    .service-area .services-prev { left: -20px; }
+    .service-area .services-next { right: -20px; }
 }
 
 .service-area .services-prev:hover,
@@ -256,7 +264,11 @@
 }
 
 .service-area .services-pagination {
-    bottom: 0;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
 
 .service-area .services-pagination .swiper-pagination-bullet {

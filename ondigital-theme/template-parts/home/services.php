@@ -133,10 +133,12 @@ $services_query = new WP_Query( array(
                         <?php endforeach; ?>
                     <?php endif; ?>
                     </div>
-                    <div class="swiper-pagination services-pagination"></div>
-                    <div class="services-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
-                    <div class="services-next"><i class="fa-solid fa-arrow-right-long"></i></div>
                 </div>
+                <!-- Navigation arrows outside swiper so top:50% is relative to card height only -->
+                <div class="services-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
+                <div class="services-next"><i class="fa-solid fa-arrow-right-long"></i></div>
+                <!-- Pagination outside swiper to prevent swiper from adding internal padding -->
+                <div class="swiper-pagination services-pagination"></div>
             </div>
 
         </div>
