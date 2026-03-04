@@ -410,9 +410,10 @@ function ondigital_enqueue_page_assets() {
                 wp_enqueue_script( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/js/pages/' . $slug . '.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
             }
 
-            // Home page: load counter component CSS
+            // Home page: load component CSS overrides
             if ( 'home' === $slug ) {
-                wp_enqueue_style( 'ondigital-counter', ONDIGITAL_URI . '/assets/css/components/counter.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
+                wp_enqueue_style( 'ondigital-counter',       ONDIGITAL_URI . '/assets/css/components/counter.css',       array( 'ondigital-home' ), ONDIGITAL_VERSION );
+                wp_enqueue_style( 'ondigital-services-home', ONDIGITAL_URI . '/assets/css/components/services-home.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
             }
             break;
         }

@@ -390,12 +390,32 @@ function ondigital_customizer( $wp_customize ) {
         'panel' => 'ondigital_home_panel',
     ) );
 
+    $wp_customize->add_setting( 'ondigital_services_subtitle', array(
+        'default'           => 'Əsas Xüsusiyyətlər',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'ondigital_services_subtitle', array(
+        'label'   => __( 'Subtitle Label (small text with line)', 'ondigital' ),
+        'section' => 'ondigital_services_home',
+        'type'    => 'text',
+    ) );
+
     $wp_customize->add_setting( 'ondigital_services_title', array(
-        'default'           => 'It\'s big challenge to grow-up your sales by providing best <span>services</span>',
+        'default'           => 'Təqdim etdiyimiz <br> xidmətlər',
         'sanitize_callback' => 'wp_kses_post',
     ) );
     $wp_customize->add_control( 'ondigital_services_title', array(
         'label'   => __( 'Section Title (HTML allowed)', 'ondigital' ),
+        'section' => 'ondigital_services_home',
+        'type'    => 'textarea',
+    ) );
+
+    $wp_customize->add_setting( 'ondigital_services_body', array(
+        'default'           => 'İstər vizual cəhətdən gözəl brend kimliyi yaratmaq, istərsə də immersiv rəqəmsal təcrübələr dizayn etmək olsun.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ) );
+    $wp_customize->add_control( 'ondigital_services_body', array(
+        'label'   => __( 'Body Text (right side)', 'ondigital' ),
         'section' => 'ondigital_services_home',
         'type'    => 'textarea',
     ) );

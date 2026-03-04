@@ -1,107 +1,135 @@
 <?php
 /**
- * Home - Services Section
+ * Home - Services Section (startup-agency style)
  *
  * @package OnDigital
  */
 
-// Query services from CPT
+$services_subtitle = ondigital_get_option( 'services_subtitle', 'Əsas Xüsusiyyətlər' );
+$services_title    = ondigital_get_option( 'services_title', 'Təqdim etdiyimiz <br> xidmətlər' );
+$services_body     = ondigital_get_option( 'services_body', 'İstər vizual cəhətdən gözəl brend kimliyi yaratmaq, istərsə də immersiv rəqəmsal təcrübələr dizayn etmək olsun.' );
+
+// Static fallback services (icon-s-5 … icon-s-8 from startup-agency)
+$static_services = array(
+    array(
+        'title' => __( 'İnkişaf', 'ondigital' ),
+        'text'  => __( 'Ən yaxşı istifadəçi təcrübəsi strategiyası ilə möhtəşəm rəqəmsal məhsullar yaratmaq.', 'ondigital' ),
+        'icon'  => 'icon-s-5.webp',
+        'url'   => home_url( '/xidmetler/' ),
+    ),
+    array(
+        'title' => __( 'Marketinq', 'ondigital' ),
+        'text'  => __( 'Marketinq xidmətləri strategiya çərçivəsində başlayır, vayfreymlər və möhkəm prototiplərlə bitir.', 'ondigital' ),
+        'icon'  => 'icon-s-6.webp',
+        'url'   => home_url( '/xidmetler/' ),
+    ),
+    array(
+        'title' => __( 'Dizayn', 'ondigital' ),
+        'text'  => __( 'Axtarış mühərrikləri və istifadəçi dostu, peşəkar görünüşlü sadə loqolar dizayn edirik.', 'ondigital' ),
+        'icon'  => 'icon-s-7.webp',
+        'url'   => home_url( '/xidmetler/' ),
+    ),
+    array(
+        'title' => __( 'Texnologiya', 'ondigital' ),
+        'text'  => __( 'Sosial media postları dizaynı, infoqrafik dizayn və e-poçt vizual təhlükəsizliyi.', 'ondigital' ),
+        'icon'  => 'icon-s-8.webp',
+        'url'   => home_url( '/xidmetler/' ),
+    ),
+);
+
+$delays = array( '0.15', '0.30', '0.45', '0.60' );
+
+// Query CPT services
 $services_query = new WP_Query( array(
     'post_type'      => 'service',
     'posts_per_page' => 4,
     'orderby'        => 'menu_order',
     'order'          => 'ASC',
 ) );
-
-// Fallback static services if no CPT entries yet
-$static_services = array(
-    array(
-        'title' => __( 'SEO Marketing', 'ondigital' ),
-        'text'  => __( 'We immerse ourselves in your issues and we put our knowledge and expertise at your service', 'ondigital' ),
-        'image' => 'img-s-39.webp',
-    ),
-    array(
-        'title' => __( 'Social Marketing', 'ondigital' ),
-        'text'  => __( 'We immerse ourselves in your issues and we put our knowledge and expertise at your service', 'ondigital' ),
-        'image' => 'img-s-40.webp',
-    ),
-    array(
-        'title' => __( 'Content Marketing', 'ondigital' ),
-        'text'  => __( 'We immerse ourselves in your issues and we put our knowledge and expertise at your service', 'ondigital' ),
-        'image' => 'img-s-41.webp',
-    ),
-    array(
-        'title' => __( 'Email Marketing', 'ondigital' ),
-        'text'  => __( 'We immerse ourselves in your issues and we put our knowledge and expertise at your service', 'ondigital' ),
-        'image' => 'img-s-42.webp',
-    ),
-);
 ?>
-<div class="container large">
-    <section class="service-area">
-        <div class="service-area-inner section-spacing">
-            <div class="bg">
-                <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/shape/img-s-54.webp' ); ?>" alt="<?php esc_attr_e( 'background shape', 'ondigital' ); ?>">
+<section class="service-area">
+    <div class="container">
+        <div class="service-area-inner section-spacing-bottom">
+
+            <!-- Decorative shapes -->
+            <div class="shape-1">
+                <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/shape/img-s-10.webp' ); ?>" alt="">
             </div>
-            <div class="container">
-                <div class="section-header">
-                    <div class="section-title-wrapper">
-                        <div class="title-wrapper">
-                            <?php
-                            $services_title = ondigital_get_option( 'services_title', 'It\'s big challenge to grow-up your sales by providing best <span>services</span>' );
-                            ?>
-                            <h2 class="section-title has_text_move_anim">
-                                <?php echo wp_kses_post( $services_title ); ?>
-                            </h2>
-                        </div>
+            <div class="shape-2">
+                <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/shape/img-s-9.webp' ); ?>" alt="">
+            </div>
+            <div class="shape-3">
+                <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/shape/img-s-12.webp' ); ?>" alt="">
+            </div>
+            <div class="shape-4">
+                <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/shape/img-s-11.webp' ); ?>" alt="">
+            </div>
+
+            <!-- Section header: title left, body right -->
+            <div class="section-header">
+                <div class="section-title-wrapper">
+                    <div class="subtitle-wrapper">
+                        <span class="section-subtitle has-left-line has_fade_anim">
+                            <?php echo esc_html( $services_subtitle ); ?>
+                        </span>
+                    </div>
+                    <div class="title-wrapper">
+                        <h2 class="section-title has_text_move_anim">
+                            <?php echo wp_kses_post( $services_title ); ?>
+                        </h2>
                     </div>
                 </div>
-                <div class="services-wrapper-box">
-                    <div class="services-wrapper">
-                        <?php if ( $services_query->have_posts() ) : ?>
-                            <?php $counter = 1; ?>
-                            <?php while ( $services_query->have_posts() ) : $services_query->the_post(); ?>
-                                <div class="has_fade_anim">
-                                    <a href="<?php the_permalink(); ?>">
-                                        <div class="service-box">
-                                            <h3 class="number"><?php echo esc_html( str_pad( $counter, 2, '0', STR_PAD_LEFT ) ); ?></h3>
-                                            <div class="thumb">
-                                                <?php if ( has_post_thumbnail() ) : ?>
-                                                    <?php the_post_thumbnail( 'medium' ); ?>
-                                                <?php endif; ?>
-                                            </div>
-                                            <div class="content">
-                                                <h3 class="title"><?php the_title(); ?></h3>
-                                                <p class="text"><?php echo esc_html( get_the_excerpt() ); ?></p>
-                                                <span class="wc-btn wc-btn-circle"><i class="fa-solid fa-arrow-right"></i></span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            <?php $counter++; endwhile; ?>
-                            <?php wp_reset_postdata(); ?>
-                        <?php else : ?>
-                            <?php foreach ( $static_services as $index => $service ) : ?>
-                                <div class="has_fade_anim">
-                                    <a href="<?php echo esc_url( home_url( '/xidmetler/' ) ); ?>">
-                                        <div class="service-box">
-                                            <h3 class="number"><?php echo esc_html( str_pad( $index + 1, 2, '0', STR_PAD_LEFT ) ); ?></h3>
-                                            <div class="thumb">
-                                                <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/gallery/' . $service['image'] ); ?>" alt="<?php echo esc_attr( $service['title'] ); ?>">
-                                            </div>
-                                            <div class="content">
-                                                <h3 class="title"><?php echo esc_html( $service['title'] ); ?></h3>
-                                                <p class="text"><?php echo esc_html( $service['text'] ); ?></p>
-                                                <span class="wc-btn wc-btn-circle"><i class="fa-solid fa-arrow-right"></i></span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
+                <div class="text-wrapper">
+                    <p class="text has_fade_anim"><?php echo esc_html( $services_body ); ?></p>
                 </div>
             </div>
+
+            <!-- Cards -->
+            <div class="services-wrapper-box">
+                <div class="services-wrapper">
+                    <?php if ( $services_query->have_posts() ) : ?>
+                        <?php $i = 0; while ( $services_query->have_posts() ) : $services_query->the_post();
+                            $icon_id  = get_post_meta( get_the_ID(), '_service_icon', true );
+                            $icon_url = $icon_id ? wp_get_attachment_image_url( $icon_id, 'thumbnail' ) : '';
+                        ?>
+                            <div class="service-box has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $i % 4 ] ); ?>">
+                                <a href="<?php the_permalink(); ?>">
+                                    <?php if ( $icon_url ) : ?>
+                                        <div class="thumb">
+                                            <img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php the_title_attribute(); ?>">
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="content">
+                                        <h2 class="title"><?php the_title(); ?></h2>
+                                        <p class="text"><?php echo esc_html( get_the_excerpt() ); ?></p>
+                                        <div class="btn-wrapper">
+                                            <span class="wc-btn-normal"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php $i++; endwhile; wp_reset_postdata(); ?>
+                    <?php else : ?>
+                        <?php foreach ( $static_services as $i => $service ) : ?>
+                            <div class="service-box has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $i ] ); ?>">
+                                <a href="<?php echo esc_url( $service['url'] ); ?>">
+                                    <div class="thumb">
+                                        <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/' . $service['icon'] ); ?>" alt="<?php echo esc_attr( $service['title'] ); ?>">
+                                    </div>
+                                    <div class="content">
+                                        <h2 class="title"><?php echo esc_html( $service['title'] ); ?></h2>
+                                        <p class="text"><?php echo esc_html( $service['text'] ); ?></p>
+                                        <div class="btn-wrapper">
+                                            <span class="wc-btn-normal"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+
         </div>
-    </section>
-</div>
+    </div>
+</section>
