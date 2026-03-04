@@ -31,10 +31,9 @@
             var smoothEl = document.querySelector('#has_smooth');
             if (smoothEl && smoothEl.classList.contains('has-smooth')) {
                 ScrollSmoother.create({
-                    smooth: 0.5,
+                    smooth: 1,
                     effects: device_width < 1025 ? false : true,
-                    smoothTouch: 0.5,
-                    normalizeScroll: true,
+                    smoothTouch: 0.1,
                     ignoreMobileResize: true,
                 });
             }
