@@ -644,6 +644,23 @@ function ondigital_register_taxonomies() {
         'rewrite'      => array( 'slug' => 'layihe-kateqoriya' ),
         'show_in_rest' => true,
     ) );
+
+    register_taxonomy( 'service_category', 'service', array(
+        'labels' => array(
+            'name'              => __( 'Service Categories', 'ondigital' ),
+            'singular_name'     => __( 'Service Category', 'ondigital' ),
+            'add_new_item'      => __( 'Add New Service Category', 'ondigital' ),
+            'edit_item'         => __( 'Edit Service Category', 'ondigital' ),
+            'all_items'         => __( 'All Service Categories', 'ondigital' ),
+            'search_items'      => __( 'Search Service Categories', 'ondigital' ),
+            'not_found'         => __( 'No service categories found.', 'ondigital' ),
+            'menu_name'         => __( 'Categories', 'ondigital' ),
+        ),
+        'public'       => true,
+        'hierarchical' => true,
+        'rewrite'      => array( 'slug' => 'xidmet-kateqoriya' ),
+        'show_in_rest' => true,
+    ) );
 }
 
 
