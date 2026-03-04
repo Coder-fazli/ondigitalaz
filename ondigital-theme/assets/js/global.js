@@ -26,19 +26,6 @@
             });
         }
 
-        // Initialize ScrollSmoother (must run before animations)
-        if (typeof ScrollSmoother !== 'undefined' && device_width > 767) {
-            var smoothEl = document.querySelector('#has_smooth');
-            if (smoothEl && smoothEl.classList.contains('has-smooth')) {
-                ScrollSmoother.create({
-                    smooth: 1,
-                    effects: device_width < 1025 ? false : true,
-                    smoothTouch: 0.1,
-                    ignoreMobileResize: true,
-                });
-            }
-        }
-
         // Initialize everything after preloader
         setTimeout(function () {
             initAnimations();
