@@ -133,8 +133,10 @@ $services_query = new WP_Query( array(
                         <?php endforeach; ?>
                     <?php endif; ?>
                     </div>
-                    <div class="swiper-pagination services-pagination"></div>
+                </div>
+                <div class="services-nav">
                     <div class="services-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
+                    <div class="swiper-pagination services-pagination"></div>
                     <div class="services-next"><i class="fa-solid fa-arrow-right-long"></i></div>
                 </div>
             </div>
