@@ -34,10 +34,7 @@ get_template_part( 'template-parts/home/stats' );
 // Section 10: Testimonials
 get_template_part( 'template-parts/home/testimonials' );
 
-// Section 11: Team
-get_template_part( 'template-parts/home/team' );
-
-// Section 12: Blog
+// Section 11: Blog
 get_template_part( 'template-parts/home/blog' );
 
 // Section 13: Text Slider / Marquee

@@ -762,22 +762,6 @@ function ondigital_customizer( $wp_customize ) {
     }
 
     // -------------------------------------------------------------------------
-    // Team Section
-    // -------------------------------------------------------------------------
-    $wp_customize->add_section( 'ondigital_about_team', array(
-        'title' => __( 'Team Section', 'ondigital' ),
-        'panel' => 'ondigital_about_panel',
-    ) );
-
-    foreach ( array(
-        'about_team_title' => array( 'label' => __( 'Title', 'ondigital' ), 'default' => 'Peşəkar komanda', 'type' => 'text', 'sanitize' => 'sanitize_text_field' ),
-        'about_team_body'  => array( 'label' => __( 'Body Text', 'ondigital' ), 'default' => 'Dünya səviyyəsində kreativ dizayn komandası ilə müştərilərimizin rəqəmsal dünyada uğur qazanmasına kömək edirik.', 'type' => 'textarea', 'sanitize' => 'sanitize_textarea_field' ),
-    ) as $key => $field ) {
-        $wp_customize->add_setting( 'ondigital_' . $key, array( 'default' => $field['default'], 'sanitize_callback' => $field['sanitize'] ) );
-        $wp_customize->add_control( 'ondigital_' . $key, array( 'label' => $field['label'], 'section' => 'ondigital_about_team', 'type' => $field['type'] ) );
-    }
-
-    // -------------------------------------------------------------------------
     // Clients Section
     // -------------------------------------------------------------------------
     $wp_customize->add_section( 'ondigital_about_clients', array(
