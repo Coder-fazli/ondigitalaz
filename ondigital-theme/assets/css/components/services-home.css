@@ -56,7 +56,6 @@
 /* Section wrapper */
 .service-area {
     background-color: var(--primary);
-    overflow: hidden;
 }
 
 .dark .service-area {
@@ -207,20 +206,16 @@
     }
 }
 
-.service-area .services-slider-wrap {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.service-area .services-wrapper {
-    flex: 1;
-    min-width: 0;
+.service-area .services-wrapper-box {
+    position: relative;
 }
 
 .service-area .services-prev,
 .service-area .services-next {
-    flex-shrink: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
     width: 54px;
     height: 54px;
     border: 1px solid rgba(255, 255, 255, 0.5);
@@ -232,6 +227,14 @@
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s;
+}
+
+.service-area .services-prev {
+    left: -27px;
+}
+
+.service-area .services-next {
+    right: -27px;
 }
 
 .service-area .services-prev:hover,

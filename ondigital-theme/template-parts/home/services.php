@@ -86,8 +86,8 @@ $services_query = new WP_Query( array(
 
             <!-- Cards -->
             <div class="services-wrapper-box">
-                <div class="services-slider-wrap">
                 <div class="services-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
+                <div class="services-next"><i class="fa-solid fa-arrow-right-long"></i></div>
                 <div class="services-wrapper swiper" id="services-slider">
                     <div class="swiper-wrapper">
                     <?php if ( $services_query->have_posts() ) : ?>
@@ -136,8 +136,6 @@ $services_query = new WP_Query( array(
                     <?php endif; ?>
                     </div>
                     <div class="swiper-pagination services-pagination"></div>
-                </div>
-                <div class="services-next"><i class="fa-solid fa-arrow-right-long"></i></div>
                 </div>
             </div>
 
