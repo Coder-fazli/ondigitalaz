@@ -157,7 +157,7 @@
                     if (fade_direction == "right") animation_settings.x = fade_offset;
 
                     if (onscroll_value == 1) {
-                        animation_settings.scrollTrigger = { trigger: item, start: 'top 85%' };
+                        animation_settings.scrollTrigger = { trigger: item, start: 'top 95%' };
                     }
                     gsap.from(item, animation_settings);
                 });
