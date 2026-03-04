@@ -145,6 +145,7 @@
 
                     if (onscroll_value == 1) {
                         animation_settings.scrollTrigger = { trigger: item, start: 'top 95%' };
+                        animation_settings.immediateRender = false;
                     }
                     gsap.from(item, animation_settings);
                 });
