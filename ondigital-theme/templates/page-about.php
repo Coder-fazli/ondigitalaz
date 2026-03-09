@@ -22,13 +22,13 @@ get_template_part( 'template-parts/about/about-content' );
 // Section 5: Testimonials
 get_template_part( 'template-parts/about/testimonials' );
 
-// Section 6: FAQ
-get_template_part( 'template-parts/about/faq' );
-
-// Section 7: Clients
+// Section 6: Clients
 get_template_part( 'template-parts/about/clients' );
 
-// Section 9: CTA (shared)
+// Section 7: CTA (shared)
 get_template_part( 'template-parts/shared/cta' );
+
+// Section 8: FAQ — last section before footer
+get_template_part( 'template-parts/about/faq' );
 
 get_footer();
