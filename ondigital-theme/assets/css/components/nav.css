@@ -1,4 +1,20 @@
 /* =============================================================================
+   Global — Primary button color override
+   ============================================================================= */
+
+.wc-btn-primary {
+    background-color: #25f281 !important;
+    border-color: #25f281 !important;
+    color: #121212 !important;
+}
+
+.wc-btn-primary:hover {
+    background-color: transparent !important;
+    color: #25f281 !important;
+    border-color: #25f281 !important;
+}
+
+/* =============================================================================
    Nav — Dropdown style overrides
    Dark background, clean minimal corners
    ============================================================================= */

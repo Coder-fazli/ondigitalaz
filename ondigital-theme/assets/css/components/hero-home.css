@@ -13,6 +13,17 @@
     background: linear-gradient(135deg, #d4f5d4 0%, #b8edb8 40%, #e8fae8 100%);
 }
 
+/* Push hero section away from the navbar */
+.hero-area {
+    margin-top: 130px !important;
+}
+
+@media only screen and (max-width: 991px) {
+    .hero-area {
+        margin-top: 100px !important;
+    }
+}
+
 /* Reduce card height by cutting top/bottom padding */
 .hero-area .section-content {
     padding-top: 80px !important;
