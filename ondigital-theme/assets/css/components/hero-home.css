@@ -42,6 +42,17 @@
     color: #ffffff !important;
 }
 
+/* Move vertical subtitle away from content (compensate for reduced padding) */
+.hero-area .section-content .subtitle-wrapper {
+    inset-inline-start: 16px !important;
+}
+
+/* Body text full width — match title width */
+.hero-area .section-content .text {
+    max-width: 100% !important;
+    font-size: 20px !important;
+}
+
 /* Push hero section away from the navbar */
 .hero-area {
     margin-top: 130px !important;
