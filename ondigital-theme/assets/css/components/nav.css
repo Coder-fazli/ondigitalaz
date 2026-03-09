@@ -1,0 +1,45 @@
+/* =============================================================================
+   Nav — Submenu overrides
+   Flattens 3rd-level flyout submenus into inline groups within the dropdown
+   ============================================================================= */
+
+/* Make nested sub-menu (3rd level) always visible, inline below its parent */
+.main-menu ul.dp-menu ul {
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: all !important;
+    width: auto !important;
+    background: transparent !important;
+    padding: 2px 0 6px 0 !important;
+    inset-inline-start: auto !important;
+    top: auto !important;
+    transform: none !important;
+}
+
+/* Remove the flyout arrow on parent items inside the dropdown */
+.main-menu ul.dp-menu li.menu-item-has-children > a::after {
+    display: none !important;
+}
+
+/* Style the parent item (e.g. "SEO Xidməti") as a group label */
+.main-menu ul.dp-menu li.menu-item-has-children > a {
+    color: var(--white) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+}
+
+/* Indent + style child items */
+.main-menu ul.dp-menu ul li {
+    padding: 0 25px !important;
+}
+
+.main-menu ul.dp-menu ul li a {
+    padding: 6px 0 !important;
+    font-size: 14px !important;
+    color: #777 !important;
+}
+
+.main-menu ul.dp-menu ul li a:hover {
+    color: var(--white) !important;
+}

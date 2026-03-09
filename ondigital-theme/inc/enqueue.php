@@ -27,6 +27,9 @@ function ondigital_enqueue_assets() {
     // --- Shared footer styles ---
     wp_enqueue_style( 'ondigital-footer', ONDIGITAL_URI . '/assets/css/footer.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
 
+    // --- Nav overrides (global, loaded last so it overrides compiled page CSS) ---
+    wp_enqueue_style( 'ondigital-nav', ONDIGITAL_URI . '/assets/css/components/nav.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+
     // --- Page-specific CSS / JS ---
     ondigital_enqueue_page_assets();
 
