@@ -64,6 +64,12 @@
     }
 }
 
+@media only screen and (max-width: 767px) {
+    .hero-area {
+        margin-top: 70px !important;
+    }
+}
+
 /* Reduce card height and fix narrow content */
 .hero-area .section-content {
     padding-top: 80px !important;
@@ -125,7 +131,9 @@
     .hero-area .thumb {
         order: -1 !important;
         width: 100% !important;
-        min-height: 280px !important;
+        min-height: 220px !important;
+        max-height: 240px !important;
+        overflow: hidden !important;
     }
 
     .hero-area .section-content {
@@ -145,6 +153,11 @@
     /* Smaller body text */
     .hero-area .section-content .text {
         font-size: 15px !important;
+    }
+
+    /* Slightly stronger green on mobile */
+    .hero-area .section-content .bg {
+        background: linear-gradient(135deg, #c8f0c8 0%, #a8e6a8 40%, #daf5da 100%) !important;
     }
 
     /* Hide vertical subtitle on mobile — no room */
