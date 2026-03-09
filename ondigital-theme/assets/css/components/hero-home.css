@@ -70,26 +70,26 @@
     }
 }
 
-/* Reduce card height and fix narrow content */
+/* Card padding */
 .hero-area .section-content {
-    padding-top: 80px !important;
-    padding-bottom: 80px !important;
+    padding-top: 140px !important;
+    padding-bottom: 140px !important;
     padding-inline-start: 80px !important;
     padding-inline-end: 60px !important;
 }
 
 @media only screen and (max-width: 1919px) {
     .hero-area .section-content {
-        padding-top: 70px !important;
-        padding-bottom: 70px !important;
+        padding-top: 120px !important;
+        padding-bottom: 120px !important;
         padding-inline-start: 70px !important;
     }
 }
 
 @media only screen and (max-width: 1399px) {
     .hero-area .section-content {
-        padding-top: 60px !important;
-        padding-bottom: 60px !important;
+        padding-top: 100px !important;
+        padding-bottom: 100px !important;
         padding-inline-start: 60px !important;
     }
 }
