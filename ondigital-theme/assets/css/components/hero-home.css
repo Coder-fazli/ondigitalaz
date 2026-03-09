@@ -53,16 +53,19 @@
     }
 }
 
-/* Reduce card height by cutting top/bottom padding */
+/* Reduce card height and fix narrow content */
 .hero-area .section-content {
     padding-top: 80px !important;
     padding-bottom: 80px !important;
+    padding-inline-start: 80px !important;
+    padding-inline-end: 60px !important;
 }
 
 @media only screen and (max-width: 1919px) {
     .hero-area .section-content {
         padding-top: 70px !important;
         padding-bottom: 70px !important;
+        padding-inline-start: 70px !important;
     }
 }
 
@@ -70,5 +73,29 @@
     .hero-area .section-content {
         padding-top: 60px !important;
         padding-bottom: 60px !important;
+        padding-inline-start: 60px !important;
+    }
+}
+
+/* Reduce H1 size — long Azerbaijani text needs smaller font */
+.hero-area .section-content .section-title {
+    font-size: 68px !important;
+}
+
+@media only screen and (max-width: 1919px) {
+    .hero-area .section-content .section-title {
+        font-size: 60px !important;
+    }
+}
+
+@media only screen and (max-width: 1399px) {
+    .hero-area .section-content .section-title {
+        font-size: 52px !important;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .hero-area .section-content .section-title {
+        font-size: 38px !important;
     }
 }
