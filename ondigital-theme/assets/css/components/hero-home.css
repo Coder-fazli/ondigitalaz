@@ -13,6 +13,19 @@
     background: linear-gradient(135deg, #d4f5d4 0%, #b8edb8 40%, #e8fae8 100%);
 }
 
+/* Hero card button — dark */
+.hero-area .section-content .wc-btn-primary {
+    background-color: #121212 !important;
+    border-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+.hero-area .section-content .wc-btn-primary:hover {
+    background-color: #121212 !important;
+    border-color: #121212 !important;
+    color: #ffffff !important;
+}
+
 /* Push hero section away from the navbar */
 .hero-area {
     margin-top: 130px !important;

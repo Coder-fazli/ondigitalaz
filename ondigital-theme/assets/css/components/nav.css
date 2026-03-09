@@ -9,9 +9,9 @@
 }
 
 .wc-btn-primary:hover {
-    background-color: transparent !important;
-    color: #25f281 !important;
+    background-color: #25f281 !important;
     border-color: #25f281 !important;
+    color: #121212 !important;
 }
 
 /* =============================================================================
