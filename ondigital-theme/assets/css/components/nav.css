@@ -9,17 +9,17 @@
     border-radius: 12px !important;
     padding: 10px 0 !important;
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: none !important;
 }
 
-/* Nested flyout (3rd level) */
+/* Nested flyout (3rd level) — no gap so mouse doesn't leave hover zone */
 .main-menu ul.dp-menu ul {
     background-color: #18181b !important;
     border-radius: 12px !important;
     padding: 10px 0 !important;
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
-    inset-inline-start: calc(100% + 6px) !important;
+    box-shadow: none !important;
+    inset-inline-start: 100% !important;
 }
 
 /* Menu item links */
