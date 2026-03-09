@@ -3,8 +3,12 @@
    Previous design backed up in git (revert this file to restore)
    ============================================================================= */
 
-/* Reduce the background image opacity so the card feels lighter */
+/* Hide the original bg image */
 .hero-area .section-content .bg img {
-    opacity: 0.45;
-    filter: brightness(1.3) saturate(0.6);
+    opacity: 0;
+}
+
+/* Light green gradient overlay on the card */
+.hero-area .section-content .bg {
+    background: linear-gradient(135deg, #d4f5d4 0%, #b8edb8 40%, #e8fae8 100%);
 }
