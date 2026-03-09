@@ -12,3 +12,23 @@
 .hero-area .section-content .bg {
     background: linear-gradient(135deg, #d4f5d4 0%, #b8edb8 40%, #e8fae8 100%);
 }
+
+/* Reduce card height by cutting top/bottom padding */
+.hero-area .section-content {
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+}
+
+@media only screen and (max-width: 1919px) {
+    .hero-area .section-content {
+        padding-top: 70px !important;
+        padding-bottom: 70px !important;
+    }
+}
+
+@media only screen and (max-width: 1399px) {
+    .hero-area .section-content {
+        padding-top: 60px !important;
+        padding-bottom: 60px !important;
+    }
+}
