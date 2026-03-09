@@ -1,45 +1,29 @@
 /* =============================================================================
-   Nav — Submenu overrides
-   Flattens 3rd-level flyout submenus into inline groups within the dropdown
+   Nav — Dropdown style overrides
+   Dark background, clean minimal corners
    ============================================================================= */
 
-/* Make nested sub-menu (3rd level) always visible, inline below its parent */
+/* First-level dropdown */
+.main-menu ul.dp-menu {
+    background-color: #18181b !important;
+    border-radius: 12px !important;
+    padding: 10px 0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Nested flyout (3rd level) */
 .main-menu ul.dp-menu ul {
-    position: static !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: all !important;
-    width: auto !important;
-    background: transparent !important;
-    padding: 2px 0 6px 0 !important;
-    inset-inline-start: auto !important;
-    top: auto !important;
-    transform: none !important;
+    background-color: #18181b !important;
+    border-radius: 12px !important;
+    padding: 10px 0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+    inset-inline-start: calc(100% + 6px) !important;
 }
 
-/* Remove the flyout arrow on parent items inside the dropdown */
-.main-menu ul.dp-menu li.menu-item-has-children > a::after {
-    display: none !important;
-}
-
-/* Style the parent item (e.g. "SEO Xidməti") as a group label */
-.main-menu ul.dp-menu li.menu-item-has-children > a {
-    color: var(--white) !important;
-    font-weight: 600 !important;
-    letter-spacing: 0 !important;
-}
-
-/* Indent + style child items */
-.main-menu ul.dp-menu ul li {
-    padding: 0 25px !important;
-}
-
-.main-menu ul.dp-menu ul li a {
-    padding: 6px 0 !important;
-    font-size: 14px !important;
-    color: #777 !important;
-}
-
-.main-menu ul.dp-menu ul li a:hover {
-    color: var(--white) !important;
+/* Menu item links */
+.main-menu ul.dp-menu li a {
+    border-radius: 0 !important;
+    padding: 10px 22px !important;
 }
