@@ -110,3 +110,50 @@
         font-size: 38px !important;
     }
 }
+
+/* =========================================================================
+   Mobile overrides (≤767px)
+   ========================================================================= */
+@media only screen and (max-width: 767px) {
+
+    /* Animation (thumb) first, card below */
+    .hero-area-inner {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .hero-area .thumb {
+        order: -1 !important;
+        width: 100% !important;
+        min-height: 280px !important;
+    }
+
+    .hero-area .section-content {
+        order: 1 !important;
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+        padding-inline-start: 28px !important;
+        padding-inline-end: 28px !important;
+    }
+
+    /* Tighter H1 */
+    .hero-area .section-content .section-title {
+        font-size: 34px !important;
+        line-height: 1.1 !important;
+    }
+
+    /* Smaller body text */
+    .hero-area .section-content .text {
+        font-size: 15px !important;
+    }
+
+    /* Hide vertical subtitle on mobile — no room */
+    .hero-area .section-content .subtitle-wrapper {
+        display: none !important;
+    }
+
+    /* Smaller rating section */
+    .hero-area .section-content .review-wrapper .rating {
+        font-size: 28px !important;
+    }
+}
