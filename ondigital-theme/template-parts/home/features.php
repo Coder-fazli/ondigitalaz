@@ -28,10 +28,8 @@ $features = ondigital_get_repeater( 'features', $default_features );
                         </h2>
                     </div>
                 </div>
-                <div class="text-wrapper">
-                    <p class="text has_fade_anim">
-                        <?php echo esc_html( $features_desc ); ?>
-                    </p>
+                <div class="text-wrapper features-team-img-wrapper">
+                    <img class="features-team-img has_fade_anim" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/features-team.png' ); ?>" alt="<?php esc_attr_e( 'Team', 'ondigital' ); ?>">
                 </div>
             </div>
             <div class="features-wrapper-box">

@@ -1,4 +1,20 @@
 /* =============================================================================
+   Features Section — team image replacing description text
+   ============================================================================= */
+
+.features-area .features-team-img-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.features-area .features-team-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* =============================================================================
    Home Hero — left card softening
    Previous design backed up in git (revert this file to restore)
    ============================================================================= */
