@@ -33,7 +33,7 @@ function ondigital_panel_save(): void {
         if ( is_array( $value ) ) {
             continue;
         }
-        if ( str_ends_with( $key, '_url' ) ) {
+        if ( substr( $key, -4 ) === '_url' ) {
             $updated[ $key ] = esc_url_raw( $value );
         } else {
             $updated[ $key ] = wp_kses( $value, array( 'span' => array( 'class' => array() ) ) );
