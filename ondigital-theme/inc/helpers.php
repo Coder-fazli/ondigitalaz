@@ -10,45 +10,84 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Get theme mod with fallback.
+ * Get the current language code (az or en).
  */
-function ondigital_get_option( $key, $default = '' ) {
-    return get_theme_mod( 'ondigital_' . $key, $default );
+function ondigital_get_lang(): string {
+    if ( function_exists( 'pll_current_language' ) ) {
+        return pll_current_language() ?: 'az';
+    }
+    return 'az';
 }
 
 /**
- * Convert an attachment ID to a URL, with fallback to a default path.
- *
- * @param string $mod_name  Theme mod name (without prefix).
- * @param string $fallback  Fallback path relative to theme URI (e.g. '/assets/imgs/gallery/img.webp').
- * @param string $size      Image size for wp_get_attachment_image_url().
- * @return string Image URL.
+ * Read a scalar option from the central options array.
+ * Tries language-specific key first, falls back to AZ, then $default.
  */
-function ondigital_img( $mod_name, $fallback = '', $size = 'full' ) {
-    $attachment_id = get_theme_mod( 'ondigital_' . $mod_name );
+function ondigital_get_option( string $key, string $default = '' ): string {
+    static $options = null;
+    if ( $options === null ) {
+        $options = get_option( 'ondigital_options', array() );
+    }
+
+    $lang     = ondigital_get_lang();
+    $lang_key = $key . '_' . $lang;
+    $az_key   = $key . '_az';
+
+    if ( ! empty( $options[ $lang_key ] ) ) {
+        return $options[ $lang_key ];
+    }
+    if ( ! empty( $options[ $az_key ] ) ) {
+        return $options[ $az_key ];
+    }
+    // Legacy fallback (no suffix) — covers transition period
+    if ( ! empty( $options[ $key ] ) ) {
+        return $options[ $key ];
+    }
+    return $default;
+}
+
+/**
+ * Convert an attachment ID (stored in options) to a URL.
+ * Falls back to a theme asset path.
+ */
+function ondigital_img( string $key, string $fallback = '', string $size = 'full' ): string {
+    static $options = null;
+    if ( $options === null ) {
+        $options = get_option( 'ondigital_options', array() );
+    }
+
+    $attachment_id = ! empty( $options[ $key ] ) ? absint( $options[ $key ] ) : 0;
     if ( $attachment_id ) {
         $url = wp_get_attachment_image_url( $attachment_id, $size );
         if ( $url ) {
             return $url;
         }
     }
-    if ( $fallback ) {
-        return ONDIGITAL_URI . $fallback;
-    }
-    return '';
+    return $fallback ? ONDIGITAL_URI . $fallback : '';
 }
 
 /**
- * Get a repeater option (serialized array stored via Theme Options page).
- *
- * @param string $key     Option name.
- * @param array  $default Default value if option doesn't exist.
- * @return array
+ * Return array of non-empty social media URLs.
  */
-function ondigital_get_repeater( $key, $default = array() ) {
-    $data = get_option( 'ondigital_' . $key, $default );
-    if ( ! is_array( $data ) || empty( $data ) ) {
-        return $default;
+function ondigital_get_social_links(): array {
+    $keys = array( 'facebook', 'instagram', 'linkedin', 'tiktok', 'youtube', 'behance', 'pinterest' );
+    $options = get_option( 'ondigital_options', array() );
+    $links   = array();
+    foreach ( $keys as $key ) {
+        if ( ! empty( $options[ $key ] ) ) {
+            $links[ $key ] = esc_url( $options[ $key ] );
+        }
     }
-    return $data;
+    return $links;
+}
+
+/**
+ * Get a repeater array stored as its own option.
+ */
+function ondigital_get_repeater( string $key, array $default = array() ): array {
+    $data = get_option( 'ondigital_' . $key, null );
+    if ( is_array( $data ) && ! empty( $data ) ) {
+        return $data;
+    }
+    return $default;
 }

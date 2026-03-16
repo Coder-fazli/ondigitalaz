@@ -17,9 +17,9 @@ define( 'ONDIGITAL_URI', get_template_directory_uri() );
 // Include files
 require_once ONDIGITAL_DIR . '/inc/helpers.php';
 require_once ONDIGITAL_DIR . '/inc/enqueue.php';
-require_once ONDIGITAL_DIR . '/inc/customizer.php';
 require_once ONDIGITAL_DIR . '/inc/meta-boxes.php';
-require_once ONDIGITAL_DIR . '/inc/admin-page.php';
+require_once ONDIGITAL_DIR . '/inc/admin/panel.php';
+require_once ONDIGITAL_DIR . '/inc/contact-form.php';
 
 // =============================================================================
 // 1. THEME SETUP
@@ -672,20 +672,6 @@ function ondigital_register_taxonomies() {
 // 8. HELPER FUNCTIONS — core helpers moved to inc/helpers.php
 // =============================================================================
 
-/**
- * Get social media links as array.
- */
-function ondigital_get_social_links() {
-    $socials = array( 'facebook', 'instagram', 'linkedin', 'tiktok', 'youtube', 'behance', 'pinterest' );
-    $links = array();
-    foreach ( $socials as $social ) {
-        $url = ondigital_get_option( $social );
-        if ( ! empty( $url ) ) {
-            $links[ $social ] = $url;
-        }
-    }
-    return $links;
-}
 
 /**
  * Sanitize SVG output.
