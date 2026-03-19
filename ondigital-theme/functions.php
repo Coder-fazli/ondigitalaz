@@ -65,7 +65,7 @@ function ondigital_setup() {
     // Image sizes
     add_image_size( 'ondigital-hero', 1920, 1080, true );
     add_image_size( 'ondigital-blog-card', 600, 400, true );
-    add_image_size( 'ondigital-project-card', 800, 600, true );
+    add_image_size( 'ondigital-project-card', 600, 740, true );
     add_image_size( 'ondigital-service-icon', 120, 120, true );
 }
 

@@ -1,0 +1,15 @@
+.project-box .thumb {
+    height: 520px;
+}
+
+@media (max-width: 1199px) {
+    .project-box .thumb {
+        height: 420px;
+    }
+}
+
+@media (max-width: 767px) {
+    .project-box .thumb {
+        height: 320px;
+    }
+}
