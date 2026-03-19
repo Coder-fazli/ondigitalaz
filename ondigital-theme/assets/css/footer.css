@@ -70,8 +70,8 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
 
 /* Mobile: standalone shown full-width, inline hidden */
 @media only screen and (max-width: 767px) {
-    .footer-col-social { display: block; grid-area: social; }
-    .footer-social-in-contact { display: none; }
+    .footer-col-social { display: block !important; grid-area: social; }
+    .footer-social-in-contact { display: none !important; }
 }
 
 @media only screen and (max-width: 767px) {
@@ -106,7 +106,8 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
 
     /* Services column — allow wrapping at readable size */
     .footer-col-services .title { font-size: 16px !important; }
-    .footer-col-services .footer-nav-list li { font-size: 14px !important; padding: 4px 0; }
+    .footer-col-services .footer-nav-list li { font-size: 15px !important; padding: 4px 0; }
+    .footer-col-services .footer-nav-list li a { font-size: 15px !important; }
 
     /* Quick links and contact titles stay on one line */
     .footer-col-quicklinks .title,
@@ -118,7 +119,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
     /* Contact info readable and not cut off */
     .footer-area .footer-contact-info li a,
     .footer-area .footer-contact-info li span {
-        font-size: 12px !important;
+        font-size: 13px !important;
         white-space: normal !important;
         word-break: break-word !important;
         overflow: hidden !important;
