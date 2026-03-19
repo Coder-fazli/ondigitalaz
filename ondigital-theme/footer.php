@@ -93,7 +93,7 @@ $footer_terms_url  = ondigital_get_option( 'footer_terms_url_' . $lang, '' );
         </div>
 
         <!-- Column 2: Quick Links -->
-        <div class="footer-widget-wrapper">
+        <div class="footer-widget-wrapper footer-col-quicklinks">
             <h2 class="title"><?php echo esc_html( $footer_quick_links_title ); ?></h2>
             <?php if ( ! empty( $footer_quick_links ) ) : ?>
                 <ul class="footer-nav-list">
@@ -113,7 +113,7 @@ $footer_terms_url  = ondigital_get_option( 'footer_terms_url_' . $lang, '' );
         </div>
 
         <!-- Column 3: Services Links -->
-        <div class="footer-widget-wrapper">
+        <div class="footer-widget-wrapper footer-col-services">
             <h2 class="title"><?php echo esc_html( $footer_services_col_title ); ?></h2>
             <?php if ( ! empty( $footer_services_links ) ) : ?>
                 <ul class="footer-nav-list">
