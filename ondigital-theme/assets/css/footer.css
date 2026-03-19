@@ -240,9 +240,9 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
 /* Social subtitle */
 .footer-social-title {
     color: #ffffff;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
-    margin-top: 28px;
+    margin-top: 22px;
     margin-bottom: 0;
 }
 
@@ -250,8 +250,8 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
 .footer-area .social-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 18px;
-    margin-top: 16px;
+    gap: 22px;
+    margin-top: 14px;
 }
 
 .footer-area .social-links li {
@@ -260,7 +260,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
 
 .footer-area .social-links li a {
     color: rgba(255, 255, 255, 0.62);
-    font-size: 18px;
+    font-size: 22px;
     transition: color 0.25s ease;
 }
 
