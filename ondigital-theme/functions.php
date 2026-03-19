@@ -247,6 +247,33 @@ function ondigital_setup_demo_content() {
 }
 
 /**
+ * Seed social media links into ondigital_options if not already set.
+ * Runs once on first init after deploy.
+ */
+add_action( 'init', 'ondigital_seed_social_defaults' );
+function ondigital_seed_social_defaults(): void {
+    if ( get_option( 'ondigital_socials_seeded' ) ) {
+        return;
+    }
+    $options  = get_option( 'ondigital_options', array() );
+    $defaults = array(
+        'facebook'  => 'https://www.facebook.com/ondigital.az',
+        'linkedin'  => 'https://www.linkedin.com/company/ondigital-az/',
+        'tiktok'    => 'https://www.tiktok.com/@ondigital.az',
+        'instagram' => 'https://www.instagram.com/ondigital.az/',
+        'behance'   => 'https://www.behance.net/ondigitalaz/moodboards',
+        'pinterest' => 'https://www.pinterest.com/ondigital_az/',
+    );
+    foreach ( $defaults as $key => $url ) {
+        if ( empty( $options[ $key ] ) ) {
+            $options[ $key ] = $url;
+        }
+    }
+    update_option( 'ondigital_options', $options );
+    update_option( 'ondigital_socials_seeded', true );
+}
+
+/**
  * Fallback menu when no menu is assigned in wp-admin.
  */
 function ondigital_fallback_menu() {

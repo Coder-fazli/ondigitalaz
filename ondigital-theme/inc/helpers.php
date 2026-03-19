@@ -70,14 +70,28 @@ function ondigital_img( string $key, string $fallback = '', string $size = 'full
  * Return array of non-empty social media URLs.
  */
 function ondigital_get_social_links(): array {
-    $keys = array( 'facebook', 'instagram', 'linkedin', 'tiktok', 'youtube', 'behance', 'pinterest' );
+    $defaults = array(
+        'facebook'  => 'https://www.facebook.com/ondigital.az',
+        'linkedin'  => 'https://www.linkedin.com/company/ondigital-az/',
+        'tiktok'    => 'https://www.tiktok.com/@ondigital.az',
+        'instagram' => 'https://www.instagram.com/ondigital.az/',
+        'behance'   => 'https://www.behance.net/ondigitalaz/moodboards',
+        'pinterest' => 'https://www.pinterest.com/ondigital_az/',
+    );
+
     $options = get_option( 'ondigital_options', array() );
     $links   = array();
-    foreach ( $keys as $key ) {
-        if ( ! empty( $options[ $key ] ) ) {
-            $links[ $key ] = esc_url( $options[ $key ] );
-        }
+
+    foreach ( $defaults as $key => $default_url ) {
+        $url = ! empty( $options[ $key ] ) ? $options[ $key ] : $default_url;
+        $links[ $key ] = esc_url( $url );
     }
+
+    // youtube only if explicitly set (no default)
+    if ( ! empty( $options['youtube'] ) ) {
+        $links['youtube'] = esc_url( $options['youtube'] );
+    }
+
     return $links;
 }
 
