@@ -15,10 +15,29 @@ $footer_partner_badge = ondigital_get_option( 'footer_partner_badge', '' );
 // Quick links column
 $footer_quick_links_title = ondigital_get_option( 'footer_quick_links_title_' . $lang, 'Sürətli keçidlər' );
 $footer_quick_links       = ondigital_get_repeater( 'footer_quick_links', array() );
+if ( empty( $footer_quick_links ) ) {
+    $footer_quick_links = array(
+        array( 'label' => __( 'Haqqımızda', 'ondigital' ), 'url' => home_url( '/about' ) ),
+        array( 'label' => __( 'Xidmətlər', 'ondigital' ),  'url' => home_url( '/services' ) ),
+        array( 'label' => __( 'Layihələr', 'ondigital' ),  'url' => home_url( '/projects' ) ),
+        array( 'label' => __( 'Bloq', 'ondigital' ),       'url' => home_url( '/blog' ) ),
+        array( 'label' => __( 'Əlaqə', 'ondigital' ),      'url' => home_url( '/contact' ) ),
+    );
+}
 
 // Services links column
 $footer_services_col_title = ondigital_get_option( 'footer_services_col_title_' . $lang, 'Xidmətlər' );
 $footer_services_links     = ondigital_get_repeater( 'footer_services_links', array() );
+if ( empty( $footer_services_links ) ) {
+    $footer_services_links = array(
+        array( 'label' => __( 'Rəqəmsal Marketinq', 'ondigital' ),     'url' => home_url( '/services' ) ),
+        array( 'label' => __( 'SEO Xidməti', 'ondigital' ),            'url' => home_url( '/services' ) ),
+        array( 'label' => __( 'Sosial Media Marketinq', 'ondigital' ), 'url' => home_url( '/services' ) ),
+        array( 'label' => __( 'Web Development', 'ondigital' ),        'url' => home_url( '/services' ) ),
+        array( 'label' => __( 'Brendinq & Dizayn', 'ondigital' ),      'url' => home_url( '/services' ) ),
+        array( 'label' => __( 'Email marketinq', 'ondigital' ),        'url' => home_url( '/services' ) ),
+    );
+}
 
 // Contact column
 $footer_contact_title  = ondigital_get_option( 'footer_contact_title_' . $lang, 'Əlaqə' );
