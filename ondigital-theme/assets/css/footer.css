@@ -74,40 +74,50 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
 }
 
 @media only screen and (max-width: 767px) {
+    .footer-area {
+        padding: 0 20px;
+    }
+
     .footer-area-inner {
         grid-template-columns: 1fr 1fr;
-        gap: 36px 20px;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+            "brand      services"
+            "quicklinks contact"
+            "social     social";
+        gap: 36px 24px;
     }
 
-    /* Row 1: Brand | Services */
-    .footer-col-brand      { grid-area: 1 / 1; }
-    .footer-col-services   { grid-area: 1 / 2; }
+    .footer-col-brand      { grid-area: brand; }
+    .footer-col-services   { grid-area: services; }
+    .footer-col-quicklinks { grid-area: quicklinks; }
+    .footer-col-contact    { grid-area: contact; }
+    .footer-col-social     { grid-area: social; }
 
-    /* Row 2: Quick links | Contact */
-    .footer-col-quicklinks { grid-area: 2 / 1; }
-    .footer-col-contact    { grid-area: 2 / 2; }
-
-    /* Row 3: Social — full width */
-    .footer-col-social     { grid-column: 1 / -1; }
-
-    /* Services: smaller so names fit */
-    .footer-col-services .title { font-size: 16px; }
-    .footer-col-services .footer-nav-list li { font-size: 13px; }
-    .footer-col-services .footer-nav-list li a { white-space: normal; }
-
-    /* Column titles: no wrap */
-    .footer-col-quicklinks .title,
-    .footer-col-contact .title {
-        white-space: nowrap;
-        font-size: 16px;
-    }
-
-    /* Contact info: allow numbers to wrap, don't cut */
-    .footer-contact-info li a,
-    .footer-contact-info li span {
+    /* All nav links wrap on mobile — no overflow */
+    .footer-area .footer-nav-list li a {
         white-space: normal;
         word-break: break-word;
-        font-size: 13px;
+    }
+
+    /* Services column smaller */
+    .footer-col-services .title { font-size: 15px; }
+    .footer-col-services .footer-nav-list li { font-size: 12px; padding: 3px 0; }
+
+    /* Quick links and contact titles stay on one line */
+    .footer-col-brand .title,
+    .footer-col-quicklinks .title,
+    .footer-col-contact .title {
+        font-size: 16px;
+        white-space: nowrap;
+    }
+
+    /* Contact info readable */
+    .footer-contact-info li a,
+    .footer-contact-info li span {
+        font-size: 12px;
+        white-space: normal;
+        word-break: break-word;
     }
 }
 
