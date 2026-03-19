@@ -126,6 +126,22 @@
                 '<div class="od-field"><label>Text</label><input type="text" name="ondigital_text_slider[' + i + '][text]" value=""></div>' +
                 '<div class="od-field"><label>Highlighted Word</label><input type="text" name="ondigital_text_slider[' + i + '][highlighted]" value=""></div>' +
                 '</div></div>';
+        },
+        footer_quick_link: function (i) {
+            return '<div class="od-repeater-row">' +
+                '<div class="od-repeater-row-head"><span>Link ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
+                '<div class="od-field-row">' +
+                '<div class="od-field"><label>Label</label><input type="text" name="ondigital_footer_quick_links[' + i + '][label]" value=""></div>' +
+                '<div class="od-field"><label>URL</label><input type="url" name="ondigital_footer_quick_links[' + i + '][url]" value="" placeholder="https://"></div>' +
+                '</div></div>';
+        },
+        footer_service_link: function (i) {
+            return '<div class="od-repeater-row">' +
+                '<div class="od-repeater-row-head"><span>Service ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
+                '<div class="od-field-row">' +
+                '<div class="od-field"><label>Label</label><input type="text" name="ondigital_footer_services_links[' + i + '][label]" value=""></div>' +
+                '<div class="od-field"><label>URL</label><input type="url" name="ondigital_footer_services_links[' + i + '][url]" value="" placeholder="https://"></div>' +
+                '</div></div>';
         }
     };
 

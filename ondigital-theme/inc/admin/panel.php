@@ -31,6 +31,7 @@ function ondigital_panel_menu(): void {
 
     add_submenu_page( 'ondigital', __( 'General', 'ondigital' ),   __( 'General', 'ondigital' ),   'manage_options', 'ondigital',                'ondigital_panel_render' );
     add_submenu_page( 'ondigital', __( 'Home Page', 'ondigital' ), __( 'Home Page', 'ondigital' ), 'manage_options', 'ondigital&section=home',   'ondigital_panel_render' );
+    add_submenu_page( 'ondigital', __( 'Footer', 'ondigital' ),    __( 'Footer', 'ondigital' ),    'manage_options', 'ondigital&section=footer', 'ondigital_panel_render' );
 }
 
 // =============================================================================
@@ -68,6 +69,11 @@ function ondigital_panel_sections(): array {
             'title' => __( 'Home Page', 'ondigital' ),
             'icon'  => 'dashicons-admin-home',
             'file'  => 'home',
+        ),
+        'footer' => array(
+            'title' => __( 'Footer', 'ondigital' ),
+            'icon'  => 'dashicons-layout',
+            'file'  => 'footer',
         ),
     );
 }

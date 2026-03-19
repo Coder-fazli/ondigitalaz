@@ -43,7 +43,7 @@ function ondigital_panel_save(): void {
     update_option( 'ondigital_options', $updated );
 
     // Handle repeaters
-    $repeater_keys = array( 'partners', 'features', 'pricing', 'faq', 'stats', 'testimonials', 'text_slider', 'about_clients', 'about_faq_items' );
+    $repeater_keys = array( 'partners', 'features', 'pricing', 'faq', 'stats', 'testimonials', 'text_slider', 'about_clients', 'about_faq_items', 'footer_quick_links', 'footer_services_links' );
 
     foreach ( $repeater_keys as $rkey ) {
         if ( ! isset( $_POST[ 'ondigital_' . $rkey ] ) ) {
@@ -121,6 +121,13 @@ function ondigital_sanitize_repeater( string $key, array $raw ): array {
                     'img_light' => absint( $item['img_light'] ?? 0 ),
                     'img_dark'  => absint( $item['img_dark'] ?? 0 ),
                     'alt'       => sanitize_text_field( $item['alt'] ?? '' ),
+                );
+                break;
+            case 'footer_quick_links':
+            case 'footer_services_links':
+                $out[] = array(
+                    'label' => sanitize_text_field( $item['label'] ?? '' ),
+                    'url'   => esc_url_raw( $item['url'] ?? '' ),
                 );
                 break;
         }
