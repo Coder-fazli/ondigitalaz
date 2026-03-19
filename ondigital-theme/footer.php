@@ -155,32 +155,41 @@ $footer_terms_url  = ondigital_get_option( 'footer_terms_url_' . $lang, '' );
                     </li>
                 <?php endif; ?>
             </ul>
+            <?php /* Social shown here on DESKTOP only (inside contact column) */ ?>
+            <?php
+            $social_links = ondigital_get_social_links();
+            $social_icons = array(
+                'facebook'  => 'fa-facebook-f',
+                'instagram' => 'fa-instagram',
+                'linkedin'  => 'fa-linkedin-in',
+                'tiktok'    => 'fa-tiktok',
+                'youtube'   => 'fa-youtube',
+                'behance'   => 'fa-behance',
+                'pinterest' => 'fa-pinterest-p',
+            );
+            ?>
+            <div class="footer-social-in-contact">
+                <p class="footer-social-title"><?php echo esc_html( $footer_social_title ); ?></p>
+                <ul class="social-links">
+                    <?php foreach ( $social_links as $platform => $url ) :
+                        $icon = $social_icons[ $platform ] ?? '';
+                        if ( ! $icon ) continue;
+                    ?>
+                        <li><a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener noreferrer"><i class="fa-brands <?php echo esc_attr( $icon ); ?>"></i></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </div>
 
-        <!-- Social — col 4 row 2 on desktop, full-width row 3 on mobile -->
+        <?php /* Social shown here on MOBILE only (full-width row) */ ?>
         <div class="footer-col-social">
             <p class="footer-social-title"><?php echo esc_html( $footer_social_title ); ?></p>
             <ul class="social-links">
-                <?php
-                $social_links = ondigital_get_social_links();
-                $social_icons = array(
-                    'facebook'  => 'fa-facebook-f',
-                    'instagram' => 'fa-instagram',
-                    'linkedin'  => 'fa-linkedin-in',
-                    'tiktok'    => 'fa-tiktok',
-                    'youtube'   => 'fa-youtube',
-                    'behance'   => 'fa-behance',
-                    'pinterest' => 'fa-pinterest-p',
-                );
-                foreach ( $social_links as $platform => $url ) :
+                <?php foreach ( $social_links as $platform => $url ) :
                     $icon = $social_icons[ $platform ] ?? '';
                     if ( ! $icon ) continue;
                 ?>
-                    <li>
-                        <a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener noreferrer">
-                            <i class="fa-brands <?php echo esc_attr( $icon ); ?>"></i>
-                        </a>
-                    </li>
+                    <li><a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener noreferrer"><i class="fa-brands <?php echo esc_attr( $icon ); ?>"></i></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>
