@@ -3,6 +3,11 @@
    Overrides inner-page CSS files that use a different footer HTML structure
    ============================================================================= */
 
+:root {
+    --font_tasa_orbiter: "TASA Orbiter Display", sans-serif;
+    --font_tasa_orbiter_text: "TASA Orbiter Text", sans-serif;
+}
+
 .footer-area {
     background-color: var(--black);
     padding: 0 45px;
