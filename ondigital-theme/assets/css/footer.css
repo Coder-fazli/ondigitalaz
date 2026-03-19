@@ -4,16 +4,11 @@
    ============================================================================= */
 
 :root {
-    --font_tasa_orbiter: "TASA Orbiter Display", sans-serif;
-    --font_tasa_orbiter_text: "TASA Orbiter Text", sans-serif;
+    --font_tasa_orbiter: "TASA Orbiter", sans-serif;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
-    font-family: "TASA Orbiter Text", sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: "TASA Orbiter Display", sans-serif;
+    font-family: "TASA Orbiter", sans-serif;
 }
 
 .footer-area {
