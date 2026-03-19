@@ -58,37 +58,57 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
     }
 }
 
+.footer-area .footer-area-inner > * {
+    min-width: 0;
+}
+
+/* Desktop: social sits in col 4 below contact */
+.footer-col-social {
+    grid-column: 4;
+}
+
+@media only screen and (max-width: 1199px) {
+    .footer-col-social {
+        grid-column: auto;
+    }
+}
+
 @media only screen and (max-width: 767px) {
     .footer-area-inner {
         grid-template-columns: 1fr 1fr;
-        gap: 36px 24px;
+        gap: 36px 20px;
     }
 
-    /* Row 1: Brand (left) | Services (right) */
-    .footer-col-brand    { grid-area: 1 / 1; }
-    .footer-col-services { grid-area: 1 / 2; }
+    /* Row 1: Brand | Services */
+    .footer-col-brand      { grid-area: 1 / 1; }
+    .footer-col-services   { grid-area: 1 / 2; }
 
-    /* Row 2: Quick links (left) | Contact (right) */
+    /* Row 2: Quick links | Contact */
     .footer-col-quicklinks { grid-area: 2 / 1; }
     .footer-col-contact    { grid-area: 2 / 2; }
 
-    /* Services column: slightly smaller on mobile */
-    .footer-col-services .title { font-size: 17px; }
+    /* Row 3: Social — full width */
+    .footer-col-social     { grid-column: 1 / -1; }
+
+    /* Services: smaller so names fit */
+    .footer-col-services .title { font-size: 16px; }
     .footer-col-services .footer-nav-list li { font-size: 13px; }
     .footer-col-services .footer-nav-list li a { white-space: normal; }
-}
 
-@media (max-width: 460px) {
-    .footer-area-inner {
-        grid-template-columns: 1fr 1fr;
-        gap: 28px 16px;
+    /* Column titles: no wrap */
+    .footer-col-quicklinks .title,
+    .footer-col-contact .title {
+        white-space: nowrap;
+        font-size: 16px;
     }
-    .footer-col-services .title { font-size: 15px; }
-    .footer-col-services .footer-nav-list li { font-size: 12px; }
-}
 
-.footer-area .footer-area-inner > * {
-    min-width: 0;
+    /* Contact info: allow numbers to wrap, don't cut */
+    .footer-contact-info li a,
+    .footer-contact-info li span {
+        white-space: normal;
+        word-break: break-word;
+        font-size: 13px;
+    }
 }
 
 /* Logo */

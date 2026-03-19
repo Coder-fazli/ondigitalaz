@@ -132,7 +132,7 @@ $footer_terms_url  = ondigital_get_option( 'footer_terms_url_' . $lang, '' );
             <?php endif; ?>
         </div>
 
-        <!-- Column 4: Contact + Social -->
+        <!-- Column 4: Contact -->
         <div class="footer-widget-wrapper footer-col-contact">
             <h2 class="title"><?php echo esc_html( $footer_contact_title ); ?></h2>
             <ul class="footer-nav-list footer-contact-info">
@@ -155,7 +155,10 @@ $footer_terms_url  = ondigital_get_option( 'footer_terms_url_' . $lang, '' );
                     </li>
                 <?php endif; ?>
             </ul>
+        </div>
 
+        <!-- Social — full-width row on mobile -->
+        <div class="footer-col-social">
             <p class="footer-social-title"><?php echo esc_html( $footer_social_title ); ?></p>
             <ul class="social-links">
                 <?php
