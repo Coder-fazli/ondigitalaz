@@ -171,16 +171,41 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
 
 .footer-area .footer-nav-list li {
     font-size: 18px;
-    line-height: 30px;
     color: var(--white-2);
+    padding: 7px 0;
 }
 
 .footer-area .footer-nav-list li a {
     color: var(--white-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    transition: color 0.25s ease, gap 0.25s ease;
+}
+
+.footer-area .footer-nav-list li a::before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--theme);
+    flex-shrink: 0;
+    opacity: 0;
+    transform: scale(0);
+    margin-right: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease, margin-right 0.25s ease;
 }
 
 .footer-area .footer-nav-list li a:hover {
-    color: var(--white);
+    color: var(--theme);
+    gap: 8px;
+}
+
+.footer-area .footer-nav-list li a:hover::before {
+    opacity: 1;
+    transform: scale(1);
+    margin-right: 0;
 }
 
 /* Contact info */
