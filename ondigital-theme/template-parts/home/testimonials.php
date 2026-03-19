@@ -5,12 +5,12 @@
  * @package OnDigital
  */
 
-$t_subtitle     = ondigital_get_option( 'testimonials_subtitle', "Client's Feedback" );
-$t_title        = ondigital_get_option( 'testimonials_title', 'What our happy client <span>say</span>' );
-$t_body         = ondigital_get_option( 'testimonials_body', 'Optimize your impact this holiday season with an AI-driven, multichannel marketing strategy.' );
-$t_rating       = ondigital_get_option( 'testimonials_rating', '4.9' );
-$t_review_count = ondigital_get_option( 'testimonials_review_count', '30+ client reviews' );
-$t_platform     = ondigital_get_option( 'testimonials_platform', 'Trustpilot' );
+$t_subtitle     = ondigital_get_option( 'testi_subtitle', "Client's Feedback" );
+$t_title        = ondigital_get_option( 'testi_title', 'What our happy client <span>say</span>' );
+$t_body         = ondigital_get_option( 'testi_body', 'Optimize your impact this holiday season with an AI-driven, multichannel marketing strategy.' );
+$t_rating       = ondigital_get_option( 'testi_rating', '4.9' );
+$t_review_count = ondigital_get_option( 'testi_review_count', '30+ client reviews' );
+$t_platform     = ondigital_get_option( 'testi_platform', 'Trustpilot' );
 
 $default_testimonials = array(
     array(

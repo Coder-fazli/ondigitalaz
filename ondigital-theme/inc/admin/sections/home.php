@@ -280,6 +280,8 @@ $langs = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
         od_text( 'testi_title_' . $lang, __( 'Title', 'ondigital' ), $options );
         od_textarea( 'testi_body_' . $lang, __( 'Body Text', 'ondigital' ), $options );
         od_row_open();
+        od_text( 'testi_platform_' . $lang, __( 'Platform Name (e.g. Trustpilot)', 'ondigital' ), $options );
+        od_row_open();
         od_text( 'testi_rating_' . $lang, __( 'Rating Number', 'ondigital' ), $options );
         od_text( 'testi_review_count_' . $lang, __( 'Review Count', 'ondigital' ), $options );
         od_row_close();

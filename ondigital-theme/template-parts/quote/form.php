@@ -63,7 +63,19 @@ if ( empty( $service_options ) ) {
                     </ul>
                 </div>
                 <div class="contact-wrap has_fade_anim" data-delay="0.30">
-                    <form action="#" method="post">
+                    <?php
+                    $contact_status = isset( $_GET['contact'] ) ? sanitize_key( $_GET['contact'] ) : '';
+                    if ( 'success' === $contact_status ) :
+                    ?>
+                        <div class="contact-feedback contact-feedback--success">
+                            <?php esc_html_e( 'Müraciətiniz qəbul edildi! Tezliklə sizinlə əlaqə saxlayacağıq.', 'ondigital' ); ?>
+                        </div>
+                    <?php elseif ( 'error' === $contact_status || 'failed' === $contact_status ) : ?>
+                        <div class="contact-feedback contact-feedback--error">
+                            <?php esc_html_e( 'Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.', 'ondigital' ); ?>
+                        </div>
+                    <?php endif; ?>
+                    <form action="<?php echo esc_url( get_permalink() ); ?>" method="post">
                         <?php wp_nonce_field( 'ondigital_quote', 'quote_nonce' ); ?>
                         <div class="contact-formwrap">
                             <div class="contact-formfield">
