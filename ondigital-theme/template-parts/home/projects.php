@@ -10,6 +10,7 @@ $projects_query = new WP_Query( array(
     'posts_per_page' => 8,
     'orderby'        => 'date',
     'order'          => 'DESC',
+    'lang'           => '',
 ) );
 
 // Fallback static projects

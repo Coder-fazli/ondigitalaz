@@ -12,6 +12,7 @@ $blog_query = new WP_Query( array(
     'posts_per_page' => 3,
     'orderby'        => 'date',
     'order'          => 'DESC',
+    'lang'           => '',
 ) );
 
 // Fallback static posts

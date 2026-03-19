@@ -13,6 +13,7 @@ $service_query = new WP_Query( array(
     'posts_per_page' => -1,
     'orderby'        => 'menu_order',
     'order'          => 'ASC',
+    'lang'           => '',
 ) );
 
 $static_services = array(

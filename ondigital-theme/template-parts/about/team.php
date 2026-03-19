@@ -13,6 +13,7 @@ $team_query = new WP_Query( array(
     'posts_per_page' => 4,
     'orderby'        => 'menu_order',
     'order'          => 'ASC',
+    'lang'           => '',
 ) );
 
 $static_team = array(
