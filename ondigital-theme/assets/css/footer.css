@@ -63,15 +63,14 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
     min-width: 0;
 }
 
-/* Desktop: social sits in col 4 below contact */
-.footer-col-social {
-    grid-column: 4;
-}
+/* Desktop: standalone social hidden, inline social shown */
+.footer-col-social { display: none; }
+.footer-social-desktop { display: block; }
 
-@media only screen and (max-width: 1199px) {
-    .footer-col-social {
-        grid-column: auto;
-    }
+@media only screen and (max-width: 767px) {
+    /* Mobile: standalone social shown full-width, inline hidden */
+    .footer-col-social { display: block; }
+    .footer-social-desktop { display: none; }
 }
 
 @media only screen and (max-width: 767px) {
