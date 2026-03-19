@@ -132,7 +132,7 @@ $footer_terms_url  = ondigital_get_option( 'footer_terms_url_' . $lang, '' );
             <?php endif; ?>
         </div>
 
-        <!-- Column 4: Contact + Social (desktop) -->
+        <!-- Column 4: Contact -->
         <div class="footer-widget-wrapper footer-col-contact">
             <h2 class="title"><?php echo esc_html( $footer_contact_title ); ?></h2>
             <ul class="footer-nav-list footer-contact-info">
@@ -155,41 +155,24 @@ $footer_terms_url  = ondigital_get_option( 'footer_terms_url_' . $lang, '' );
                     </li>
                 <?php endif; ?>
             </ul>
-            <!-- Social inside contact — shown on desktop only -->
-            <?php
-            $social_links = ondigital_get_social_links();
-            $social_icons = array(
-                'facebook'  => 'fa-facebook-f',
-                'instagram' => 'fa-instagram',
-                'linkedin'  => 'fa-linkedin-in',
-                'tiktok'    => 'fa-tiktok',
-                'youtube'   => 'fa-youtube',
-                'behance'   => 'fa-behance',
-                'pinterest' => 'fa-pinterest-p',
-            );
-            ?>
-            <div class="footer-social-desktop">
-                <p class="footer-social-title"><?php echo esc_html( $footer_social_title ); ?></p>
-                <ul class="social-links">
-                    <?php foreach ( $social_links as $platform => $url ) :
-                        $icon = $social_icons[ $platform ] ?? '';
-                        if ( ! $icon ) continue;
-                    ?>
-                        <li>
-                            <a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener noreferrer">
-                                <i class="fa-brands <?php echo esc_attr( $icon ); ?>"></i>
-                            </a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
         </div>
 
-        <!-- Social — full-width on mobile only -->
+        <!-- Social — col 4 row 2 on desktop, full-width row 3 on mobile -->
         <div class="footer-col-social">
             <p class="footer-social-title"><?php echo esc_html( $footer_social_title ); ?></p>
             <ul class="social-links">
-                <?php foreach ( $social_links as $platform => $url ) :
+                <?php
+                $social_links = ondigital_get_social_links();
+                $social_icons = array(
+                    'facebook'  => 'fa-facebook-f',
+                    'instagram' => 'fa-instagram',
+                    'linkedin'  => 'fa-linkedin-in',
+                    'tiktok'    => 'fa-tiktok',
+                    'youtube'   => 'fa-youtube',
+                    'behance'   => 'fa-behance',
+                    'pinterest' => 'fa-pinterest-p',
+                );
+                foreach ( $social_links as $platform => $url ) :
                     $icon = $social_icons[ $platform ] ?? '';
                     if ( ! $icon ) continue;
                 ?>

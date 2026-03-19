@@ -23,20 +23,22 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
     }
 }
 
-/* 4-column grid */
+/* 4-column grid — row-gap 0 keeps social tight under contact */
 .footer-area-inner {
     display: grid;
-    gap: 60px 80px;
+    column-gap: 80px;
+    row-gap: 0;
     grid-template-columns: 1fr 180px 200px 280px;
     padding-top: 70px;
     padding-bottom: 70px;
+    align-items: start;
 }
 
 @media only screen and (max-width: 1919px) {
     .footer-area-inner {
         padding-top: 65px;
         padding-bottom: 65px;
-        gap: 60px 70px;
+        column-gap: 70px;
         grid-template-columns: 1fr 175px 195px 265px;
     }
 }
@@ -46,7 +48,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
         padding-top: 55px;
         padding-bottom: 55px;
         grid-template-columns: 1fr 160px 185px 240px;
-        gap: 50px 50px;
+        column-gap: 50px;
     }
 }
 
@@ -54,8 +56,13 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
     .footer-area-inner {
         padding-top: 50px;
         padding-bottom: 50px;
-        gap: 45px 40px;
+        column-gap: 40px;
+        row-gap: 45px;
         grid-template-columns: auto auto auto;
+    }
+    .footer-col-social {
+        grid-column: auto;
+        grid-row: auto;
     }
 }
 
@@ -63,14 +70,11 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
     min-width: 0;
 }
 
-/* Desktop: standalone social hidden, inline social shown */
-.footer-col-social { display: none; }
-.footer-social-desktop { display: block; }
-
-@media only screen and (max-width: 767px) {
-    /* Mobile: standalone social shown full-width, inline hidden */
-    .footer-col-social { display: block; }
-    .footer-social-desktop { display: none; }
+/* Desktop: social sits in col 4 row 2, tight under contact (no row gap) */
+.footer-col-social {
+    grid-column: 4;
+    grid-row: 2;
+    align-self: start;
 }
 
 @media only screen and (max-width: 767px) {
