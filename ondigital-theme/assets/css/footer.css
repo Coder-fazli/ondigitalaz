@@ -250,7 +250,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
 .footer-area .social-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 22px;
+    gap: 12px;
     margin-top: 14px;
 }
 
@@ -259,13 +259,23 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
 }
 
 .footer-area .social-links li a {
-    color: rgba(255, 255, 255, 0.62);
-    font-size: 22px;
-    transition: color 0.25s ease;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 17px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
 .footer-area .social-links li a:hover {
-    color: var(--footer-green);
+    background-color: var(--footer-green);
+    border-color: var(--footer-green);
+    color: #ffffff;
+    transform: scale(1.1);
 }
 
 /* Copyright bar */
