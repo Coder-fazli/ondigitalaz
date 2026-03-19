@@ -3,11 +3,11 @@
    ============================================================================= */
 
 :root {
-    --font_tasa_orbiter: "TASA Orbiter", sans-serif;
+    --font-poppins: "Poppins", sans-serif;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
-    font-family: "TASA Orbiter", sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .footer-area {
@@ -122,17 +122,18 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
 
 /* Tagline / info text */
 .footer-area .info-text {
-    max-width: 270px;
-    margin-top: 26px;
+    max-width: 240px;
+    margin-top: 18px;
+    font-size: 15px;
     color: var(--white-2);
 }
 
 /* Partner section */
 .footer-partner {
-    margin-top: 30px;
+    margin-top: 22px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .footer-partner-label {

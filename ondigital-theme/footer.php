@@ -40,11 +40,11 @@ if ( empty( $footer_services_links ) ) {
 }
 
 // Contact column
-$footer_contact_title  = ondigital_get_option( 'footer_contact_title_' . $lang, 'Əlaqə' );
-$footer_social_title   = ondigital_get_option( 'footer_social_title_' . $lang, 'Sosial media' );
-$footer_contact_phone  = ondigital_get_option( 'contact_phone', '' );
-$footer_contact_email  = ondigital_get_option( 'contact_email', '' );
-$footer_contact_address = ondigital_get_option( 'contact_address_' . $lang, '' );
+$footer_contact_title   = ondigital_get_option( 'footer_contact_title_' . $lang, 'Əlaqə' );
+$footer_social_title    = ondigital_get_option( 'footer_social_title_' . $lang, 'Sosial media' );
+$footer_contact_phone   = ondigital_get_option( 'contact_phone', '+994 (55) 431 47 50' );
+$footer_contact_email   = ondigital_get_option( 'contact_email', 'office@ondigital.az' );
+$footer_contact_address = ondigital_get_option( 'contact_address_' . $lang, 'Old Town Plaza, 10-cu mərtəbə, №1007. 123 Bəşir Səfəroğlu Küçəsi, Bakı' );
 
 // Copyright bar
 $footer_copyright  = ondigital_get_option( 'footer_copyright_' . $lang, 'Copyright <strong>OnDigital</strong> ' . date( 'Y' ) );

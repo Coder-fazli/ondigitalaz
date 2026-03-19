@@ -252,17 +252,20 @@ function ondigital_setup_demo_content() {
  */
 add_action( 'init', 'ondigital_seed_social_defaults' );
 function ondigital_seed_social_defaults(): void {
-    if ( get_option( 'ondigital_socials_seeded' ) ) {
+    if ( get_option( 'ondigital_socials_seeded_v2' ) ) {
         return;
     }
     $options  = get_option( 'ondigital_options', array() );
     $defaults = array(
-        'facebook'  => 'https://www.facebook.com/ondigital.az',
-        'linkedin'  => 'https://www.linkedin.com/company/ondigital-az/',
-        'tiktok'    => 'https://www.tiktok.com/@ondigital.az',
-        'instagram' => 'https://www.instagram.com/ondigital.az/',
-        'behance'   => 'https://www.behance.net/ondigitalaz/moodboards',
-        'pinterest' => 'https://www.pinterest.com/ondigital_az/',
+        'facebook'        => 'https://www.facebook.com/ondigital.az',
+        'linkedin'        => 'https://www.linkedin.com/company/ondigital-az/',
+        'tiktok'          => 'https://www.tiktok.com/@ondigital.az',
+        'instagram'       => 'https://www.instagram.com/ondigital.az/',
+        'behance'         => 'https://www.behance.net/ondigitalaz/moodboards',
+        'pinterest'       => 'https://www.pinterest.com/ondigital_az/',
+        'contact_phone'   => '+994 (55) 431 47 50',
+        'contact_email'   => 'office@ondigital.az',
+        'contact_address_az' => 'Old Town Plaza, 10-cu mərtəbə, №1007. 123 Bəşir Səfəroğlu Küçəsi, Bakı',
     );
     foreach ( $defaults as $key => $url ) {
         if ( empty( $options[ $key ] ) ) {
@@ -270,7 +273,7 @@ function ondigital_seed_social_defaults(): void {
         }
     }
     update_option( 'ondigital_options', $options );
-    update_option( 'ondigital_socials_seeded', true );
+    update_option( 'ondigital_socials_seeded_v2', true );
 }
 
 /**
