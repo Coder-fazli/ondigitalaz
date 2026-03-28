@@ -57,9 +57,6 @@ $archive_url = get_post_type_archive_link( 'od_glossary' );
 
 <!-- ======================== HERO ======================== -->
 <section class="glossary-hero">
-    <div class="glossary-hero__glow glossary-hero__glow--tl"></div>
-    <div class="glossary-hero__glow glossary-hero__glow--br"></div>
-
     <div class="container">
         <div class="glossary-hero__inner">
             <h1 class="glossary-hero__title">

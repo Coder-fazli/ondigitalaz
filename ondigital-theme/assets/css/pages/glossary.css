@@ -4,37 +4,10 @@
 
 /* ── Hero ── */
 .glossary-hero {
-    position: relative;
     background: #111;
-    overflow: hidden;
     padding: 100px 0 80px;
 }
 
-.glossary-hero__glow {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    filter: blur(120px);
-    opacity: .12;
-}
-
-.glossary-hero__glow--tl {
-    top: -10%;
-    left: -10%;
-    width: 40%;
-    height: 40%;
-    background: #27ff7d;
-}
-
-.glossary-hero__glow--br {
-    bottom: -10%;
-    right: -10%;
-    width: 30%;
-    height: 30%;
-    background: #27ff7d;
-    opacity: .06;
-    filter: blur(100px);
-}
 
 .glossary-hero__inner {
     text-align: center;

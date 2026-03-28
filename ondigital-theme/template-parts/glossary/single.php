@@ -59,7 +59,6 @@ $related = new WP_Query( $related_args );
 
 <!-- ======================== SINGLE HERO ======================== -->
 <section class="glossary-single-hero">
-    <div class="glossary-hero__glow glossary-hero__glow--tl"></div>
     <div class="container">
         <div class="glossary-single-hero__inner">
             <?php if ( $cat ) : ?>

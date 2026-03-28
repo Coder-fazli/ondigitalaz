@@ -38,10 +38,8 @@
 
 /* ── Single hero ── */
 .glossary-single-hero {
-    position: relative;
     background: #111;
     padding: 70px 0 60px;
-    overflow: hidden;
 }
 
 .glossary-single-hero__inner {
