@@ -1,14 +1,22 @@
 (function () {
     'use strict';
 
+    console.log('[ODF] forms.js loaded');
+
     // ── Open trigger — always listen, look up overlay at click time ────────────
     document.addEventListener('click', function (e) {
         var trigger = e.target.closest('[data-od-form]');
         if (!trigger) return;
         e.preventDefault();
 
+        console.log('[ODF] trigger clicked:', trigger.getAttribute('data-od-form'));
+
         var overlay = document.getElementById('odf-overlay');
-        if (!overlay) return;
+        console.log('[ODF] overlay found:', overlay);
+        if (!overlay) {
+            console.error('[ODF] ERROR: #odf-overlay not found in DOM. Plugin modal not rendered.');
+            return;
+        }
 
         overlay.classList.add('is-open');
         overlay.setAttribute('aria-hidden', 'false');
