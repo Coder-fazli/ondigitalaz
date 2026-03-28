@@ -157,13 +157,13 @@ function ondigital_enqueue_page_assets() {
         }
     }
 
-    if ( is_post_type_archive( 'od_glossary' ) || is_tax( 'glossary_cat' ) ) {
-        wp_enqueue_style( 'ondigital-glossary', ONDIGITAL_URI . '/assets/css/pages/glossary.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-    }
-
-    if ( is_singular( 'od_glossary' ) ) {
-        wp_enqueue_style( 'ondigital-glossary', ONDIGITAL_URI . '/assets/css/pages/glossary.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-        wp_enqueue_style( 'ondigital-glossary-single', ONDIGITAL_URI . '/assets/css/pages/glossary-single.css', array( 'ondigital-glossary' ), ONDIGITAL_VERSION );
+    if ( is_post_type_archive( 'od_glossary' ) || is_tax( 'glossary_cat' ) || is_singular( 'od_glossary' ) ) {
+        // Load full base theme CSS first (same as global.css fallback) so offcanvas/nav/preloader styles are present
+        wp_enqueue_style( 'ondigital-default', ONDIGITAL_URI . '/assets/css/global.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+        wp_enqueue_style( 'ondigital-glossary', ONDIGITAL_URI . '/assets/css/pages/glossary.css', array( 'ondigital-default' ), ONDIGITAL_VERSION );
+        if ( is_singular( 'od_glossary' ) ) {
+            wp_enqueue_style( 'ondigital-glossary-single', ONDIGITAL_URI . '/assets/css/pages/glossary-single.css', array( 'ondigital-glossary' ), ONDIGITAL_VERSION );
+        }
     }
 
     // 404
@@ -179,8 +179,7 @@ function ondigital_enqueue_page_assets() {
     $loaded = array( 'ondigital-home', 'ondigital-about', 'ondigital-services', 'ondigital-projects',
                      'ondigital-blog', 'ondigital-contact', 'ondigital-faq', 'ondigital-team',
                      'ondigital-quote', 'ondigital-blog-details', 'ondigital-service-details',
-                     'ondigital-project-details', 'ondigital-404',
-                     'ondigital-glossary', 'ondigital-glossary-single' );
+                     'ondigital-project-details', 'ondigital-404' );
 
     foreach ( $loaded as $handle ) {
         if ( wp_style_is( $handle ) ) {
