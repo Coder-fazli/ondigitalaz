@@ -31,8 +31,7 @@ function odf_admin_menu(): void {
 // Enqueue admin assets
 add_action( 'admin_enqueue_scripts', 'odf_admin_enqueue' );
 function odf_admin_enqueue( string $hook ): void {
-    $pages = array( 'toplevel_page_odf-templates', 'od-forms_page_odf-settings', 'od-forms_page_odf-messages' );
-    if ( ! in_array( $hook, $pages, true ) ) {
+    if ( strpos( $hook, 'odf-' ) === false ) {
         return;
     }
     wp_enqueue_style( 'odf-admin', ODF_URI . 'assets/css/admin.css', array(), ODF_VERSION );
