@@ -6,8 +6,12 @@
 .glossary-single-breadcrumb,
 .glossary-single-hero,
 .glossary-single-content-section,
-.glossary-single-sidebar {
-    font-family: 'Roboto', sans-serif;
+.glossary-single-sidebar,
+.glossary-single-body,
+.glossary-single-body *,
+.glossary-sidebar-card,
+.glossary-sidebar-related__link {
+    font-family: 'Roboto', sans-serif !important;
 }
 
 /* ── Single hero (contains breadcrumb) ── */
@@ -82,8 +86,9 @@
 }
 
 .glossary-single-hero__excerpt {
-    font-size: 1.05rem;
-    color: #aaa;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.75);
     line-height: 1.7;
     max-width: 640px;
     margin: 0;
