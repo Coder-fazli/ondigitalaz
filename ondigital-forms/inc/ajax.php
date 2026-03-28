@@ -35,6 +35,16 @@ function odf_handle_submit(): void {
         wp_send_json_error( array( 'message' => 'Please fill in at least one field.' ) );
     }
 
+    // Save to database
+    odf_save_submission( array(
+        'name'      => $name,
+        'email'     => $email,
+        'phone'     => $phone,
+        'company'   => $company,
+        'ecommerce' => $ecomm,
+        'source'    => implode( ',', $sources ),
+    ) );
+
     $subject = sprintf( '[%s] New Contact Form Submission', get_bloginfo( 'name' ) );
 
     $lines = array( 'New submission received:', '' );

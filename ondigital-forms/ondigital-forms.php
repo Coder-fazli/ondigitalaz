@@ -17,16 +17,21 @@ define( 'ODF_VERSION', '1.0.0' );
 define( 'ODF_DIR',     plugin_dir_path( __FILE__ ) );
 define( 'ODF_URI',     plugin_dir_url( __FILE__ ) );
 
+require_once ODF_DIR . 'inc/db.php';
+
+// Ensure table exists on every load (safe — uses CREATE TABLE IF NOT EXISTS)
+add_action( 'init', 'odf_create_table' );
 require_once ODF_DIR . 'inc/admin.php';
+require_once ODF_DIR . 'inc/messages.php';
 require_once ODF_DIR . 'inc/frontend.php';
 require_once ODF_DIR . 'inc/ajax.php';
 
 register_activation_hook( __FILE__, 'odf_activate' );
 function odf_activate(): void {
-    if ( get_option( 'odf_options' ) ) {
-        return;
+    odf_create_table();
+    if ( ! get_option( 'odf_options' ) ) {
+        add_option( 'odf_options', odf_default_options() );
     }
-    add_option( 'odf_options', odf_default_options() );
 }
 
 function odf_default_options(): array {
