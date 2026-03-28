@@ -16,6 +16,7 @@ define( 'ONDIGITAL_URI', get_template_directory_uri() );
 
 // Include files
 require_once ONDIGITAL_DIR . '/inc/helpers.php';
+require_once ONDIGITAL_DIR . '/inc/smtp.php';
 require_once ONDIGITAL_DIR . '/inc/enqueue.php';
 require_once ONDIGITAL_DIR . '/inc/meta-boxes.php';
 require_once ONDIGITAL_DIR . '/inc/admin/panel.php';

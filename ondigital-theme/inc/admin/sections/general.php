@@ -25,6 +25,21 @@ if ( ! defined( 'ABSPATH' ) ) {
         <?php od_text( 'address', __( 'Address', 'ondigital' ), $options ); ?>
     <?php od_card_close(); ?>
 
+    <?php od_card_open( __( 'SMTP / Email', 'ondigital' ), 'dashicons-email-alt' ); ?>
+        <div class="od-field-row">
+            <?php od_text( 'smtp_host', __( 'SMTP Host', 'ondigital' ), $options, 'smtp.titan.email' ); ?>
+            <?php od_text( 'smtp_port', __( 'SMTP Port', 'ondigital' ), $options, '587' ); ?>
+        </div>
+        <div class="od-field-row">
+            <?php od_select( 'smtp_encryption', __( 'Encryption', 'ondigital' ), $options, array( 'tls' => 'TLS (587)', 'ssl' => 'SSL (465)', '' => 'None' ) ); ?>
+            <?php od_text( 'smtp_from_name', __( 'From Name', 'ondigital' ), $options, 'OnDigital' ); ?>
+        </div>
+        <div class="od-field-row">
+            <?php od_text( 'smtp_username', __( 'Username (Email)', 'ondigital' ), $options, 'office@ondigital.az' ); ?>
+            <?php od_password( 'smtp_password', __( 'Password', 'ondigital' ), $options ); ?>
+        </div>
+    <?php od_card_close(); ?>
+
     <?php od_card_open( __( 'Social Media', 'ondigital' ), 'dashicons-share' ); ?>
         <div class="od-field-row">
             <?php od_url( 'facebook', 'Facebook', $options ); ?>

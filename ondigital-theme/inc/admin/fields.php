@@ -132,6 +132,37 @@ function od_row_close(): void {
 }
 
 /**
+ * Password input field.
+ * Never pre-fills the value — shows placeholder if a value is already stored.
+ */
+function od_password( string $key, string $label, array $options ): void {
+    $has_value = ! empty( $options[ $key ] );
+    echo '<div class="od-field">';
+    echo '<label>' . esc_html( $label ) . '</label>';
+    echo '<input type="password" name="options[' . esc_attr( $key ) . ']" value="" autocomplete="new-password" placeholder="' . ( $has_value ? '••••••••' : '' ) . '">';
+    if ( $has_value ) {
+        echo '<span class="od-hint">' . esc_html__( 'Leave blank to keep current password', 'ondigital' ) . '</span>';
+    }
+    echo '</div>';
+}
+
+/**
+ * Select / dropdown field.
+ */
+function od_select( string $key, string $label, array $options, array $choices ): void {
+    $val = $options[ $key ] ?? '';
+    echo '<div class="od-field">';
+    echo '<label>' . esc_html( $label ) . '</label>';
+    echo '<select name="options[' . esc_attr( $key ) . ']">';
+    foreach ( $choices as $choice_val => $choice_label ) {
+        $selected = selected( $val, $choice_val, false );
+        echo '<option value="' . esc_attr( $choice_val ) . '" ' . $selected . '>' . esc_html( $choice_label ) . '</option>';
+    }
+    echo '</select>';
+    echo '</div>';
+}
+
+/**
  * Horizontal divider.
  */
 function od_divider(): void {

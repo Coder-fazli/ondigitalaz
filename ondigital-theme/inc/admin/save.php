@@ -28,13 +28,22 @@ function ondigital_panel_save(): void {
     $existing = get_option( 'ondigital_options', array() );
     $updated  = $existing;
 
+    // Keys treated as passwords — never overwrite with empty string
+    $password_keys = array( 'smtp_password' );
+
     foreach ( $posted as $key => $value ) {
         $key = sanitize_key( $key );
         if ( is_array( $value ) ) {
             continue;
         }
+        // Don't wipe a stored password if the field was left blank
+        if ( in_array( $key, $password_keys, true ) && $value === '' ) {
+            continue;
+        }
         if ( substr( $key, -4 ) === '_url' ) {
             $updated[ $key ] = esc_url_raw( $value );
+        } elseif ( in_array( $key, $password_keys, true ) ) {
+            $updated[ $key ] = $value; // store as-is, no kses stripping
         } else {
             $updated[ $key ] = wp_kses( $value, array( 'span' => array( 'class' => array() ) ) );
         }
