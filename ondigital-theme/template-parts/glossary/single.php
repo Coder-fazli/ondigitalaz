@@ -34,8 +34,8 @@ if ( $cat ) {
 $related = new WP_Query( $related_args );
 ?>
 
-<!-- ======================== BREADCRUMB ======================== -->
-<div class="glossary-single-breadcrumb">
+<!-- ======================== SINGLE HERO + BREADCRUMB ======================== -->
+<section class="glossary-single-hero">
     <div class="container">
         <nav class="glossary-breadcrumb" aria-label="breadcrumb">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="glossary-breadcrumb__link">
@@ -45,21 +45,16 @@ $related = new WP_Query( $related_args );
             <a href="<?php echo esc_url( $archive_url ); ?>" class="glossary-breadcrumb__link">
                 <?php esc_html_e( 'Sözlük', 'ondigital' ); ?>
             </a>
-            <i class="fa-solid fa-chevron-right glossary-breadcrumb__sep"></i>
             <?php if ( $cat ) : ?>
+            <i class="fa-solid fa-chevron-right glossary-breadcrumb__sep"></i>
             <a href="<?php echo esc_url( get_term_link( $cat ) ); ?>" class="glossary-breadcrumb__link">
                 <?php echo esc_html( $cat->name ); ?>
             </a>
-            <i class="fa-solid fa-chevron-right glossary-breadcrumb__sep"></i>
             <?php endif; ?>
+            <i class="fa-solid fa-chevron-right glossary-breadcrumb__sep"></i>
             <span class="glossary-breadcrumb__current"><?php the_title(); ?></span>
         </nav>
-    </div>
-</div>
 
-<!-- ======================== SINGLE HERO ======================== -->
-<section class="glossary-single-hero">
-    <div class="container">
         <div class="glossary-single-hero__inner">
             <?php if ( $cat ) : ?>
             <a href="<?php echo esc_url( get_term_link( $cat ) ); ?>" class="glossary-single-hero__cat">

@@ -2,23 +2,25 @@
    Glossary Single Term — glossary-single.css
    ============================================================================= */
 
-/* ── Breadcrumb ── */
-.glossary-single-breadcrumb {
-    background: #f8f8f8;
-    padding: 14px 0;
-    border-bottom: 1px solid #eee;
+/* ── Single hero (contains breadcrumb) ── */
+.glossary-single-hero {
+    background: #111;
+    padding: 100px 0 40px; /* top clears the fixed header (~80px) */
+    font-family: 'Poppins', sans-serif;
 }
 
+/* Breadcrumb — inside dark hero */
 .glossary-breadcrumb {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 6px;
-    font-size: 13px;
+    font-size: 12px;
+    margin-bottom: 20px;
 }
 
 .glossary-breadcrumb__link {
-    color: #777;
+    color: rgba(255,255,255,.5);
     text-decoration: none;
     font-weight: 500;
     transition: color .15s;
@@ -27,20 +29,13 @@
 .glossary-breadcrumb__link:hover { color: #27ff7d; }
 
 .glossary-breadcrumb__sep {
-    font-size: 10px;
-    color: #bbb;
+    font-size: 9px;
+    color: rgba(255,255,255,.25);
 }
 
 .glossary-breadcrumb__current {
-    color: #111;
+    color: rgba(255,255,255,.85);
     font-weight: 600;
-}
-
-/* ── Single hero ── */
-.glossary-single-hero {
-    background: #111;
-    padding: 40px 0 36px;
-    font-family: 'Poppins', sans-serif;
 }
 
 .glossary-single-hero__inner {
