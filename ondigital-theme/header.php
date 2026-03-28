@@ -173,7 +173,7 @@ $font_class = $is_home ? 'font-heading-spacegrotesk-bold' : 'font-heading-beatri
                 $header_btn_text  = ondigital_get_option( 'header_btn_text', 'Başlayaq' );
                 $header_btn_url   = ondigital_get_option( 'header_btn_url', '/teklif-al/' );
                 $_opts            = get_option( 'ondigital_options', array() );
-                $header_btn_popup = ! empty( $_opts['header_btn_popup'] );
+                $header_btn_popup = isset( $_opts['header_btn_popup'] ) && $_opts['header_btn_popup'] === '1';
                 ?>
                 <a class="wc-btn wc-btn-primary btn-text-flip"
                    href="<?php echo $header_btn_popup ? '#' : esc_url( $header_btn_url ); ?>"

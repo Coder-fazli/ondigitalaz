@@ -178,7 +178,12 @@
         var options = {};
         form.find('[name^="options["]').each(function () {
             var match = $(this).attr('name').match(/^options\[(.+)\]$/);
-            if (match) {
+            if (!match) return;
+            var type = $(this).attr('type');
+            if (type === 'radio' && !$(this).is(':checked')) return;
+            if (type === 'checkbox') {
+                options[match[1]] = $(this).is(':checked') ? '1' : '0';
+            } else {
                 options[match[1]] = $(this).val();
             }
         });
