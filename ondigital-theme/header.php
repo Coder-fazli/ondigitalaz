@@ -170,10 +170,14 @@ $font_class = $is_home ? 'font-heading-spacegrotesk-bold' : 'font-heading-beatri
             </div>
             <div class="header__button">
                 <?php
-                $header_btn_text = ondigital_get_option( 'header_btn_text', 'Başlayaq' );
-                $header_btn_url  = ondigital_get_option( 'header_btn_url', '/teklif-al/' );
+                $header_btn_text  = ondigital_get_option( 'header_btn_text', 'Başlayaq' );
+                $header_btn_url   = ondigital_get_option( 'header_btn_url', '/teklif-al/' );
+                $_opts            = get_option( 'ondigital_options', array() );
+                $header_btn_popup = ! empty( $_opts['header_btn_popup'] );
                 ?>
-                <a class="wc-btn wc-btn-primary btn-text-flip" href="#" data-od-form="contact">
+                <a class="wc-btn wc-btn-primary btn-text-flip"
+                   href="<?php echo $header_btn_popup ? '#' : esc_url( $header_btn_url ); ?>"
+                   <?php echo $header_btn_popup ? 'data-od-form="contact"' : ''; ?>>
                     <span data-text="<?php echo esc_attr( $header_btn_text ); ?>"><?php echo esc_html( $header_btn_text ); ?></span>
                 </a>
             </div>
