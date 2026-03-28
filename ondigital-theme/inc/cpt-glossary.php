@@ -102,6 +102,15 @@ function ondigital_glossary_flush_rewrites(): void {
 // Demo content seeder (runs once on init)
 // =============================================================================
 
+add_action( 'init', 'ondigital_glossary_maybe_flush', 15 );
+function ondigital_glossary_maybe_flush(): void {
+    if ( get_option( 'ondigital_glossary_flushed_v1' ) ) {
+        return;
+    }
+    flush_rewrite_rules();
+    update_option( 'ondigital_glossary_flushed_v1', true );
+}
+
 add_action( 'init', 'ondigital_glossary_seed_demo', 20 );
 function ondigital_glossary_seed_demo(): void {
     if ( get_option( 'ondigital_glossary_demo_seeded_v1' ) ) {
