@@ -29,7 +29,8 @@ function ondigital_panel_menu(): void {
         3
     );
 
-    add_submenu_page( 'ondigital', __( 'General', 'ondigital' ),   __( 'General', 'ondigital' ),   'manage_options', 'ondigital',                'ondigital_panel_render' );
+    add_submenu_page( 'ondigital', __( 'General', 'ondigital' ),   __( 'General', 'ondigital' ),   'manage_options', 'ondigital',                 'ondigital_panel_render' );
+    add_submenu_page( 'ondigital', __( 'Header', 'ondigital' ),   __( 'Header', 'ondigital' ),    'manage_options', 'ondigital&section=header',  'ondigital_panel_render' );
     add_submenu_page( 'ondigital', __( 'Home Page', 'ondigital' ), __( 'Home Page', 'ondigital' ), 'manage_options', 'ondigital&section=home',   'ondigital_panel_render' );
     add_submenu_page( 'ondigital', __( 'Footer', 'ondigital' ),    __( 'Footer', 'ondigital' ),    'manage_options', 'ondigital&section=footer', 'ondigital_panel_render' );
 }
@@ -64,6 +65,11 @@ function ondigital_panel_sections(): array {
             'title' => __( 'General', 'ondigital' ),
             'icon'  => 'dashicons-admin-settings',
             'file'  => 'general',
+        ),
+        'header' => array(
+            'title' => __( 'Header', 'ondigital' ),
+            'icon'  => 'dashicons-minus',
+            'file'  => 'header',
         ),
         'home' => array(
             'title' => __( 'Home Page', 'ondigital' ),
