@@ -157,6 +157,15 @@ function ondigital_enqueue_page_assets() {
         }
     }
 
+    if ( is_post_type_archive( 'od_glossary' ) || is_tax( 'glossary_cat' ) ) {
+        wp_enqueue_style( 'ondigital-glossary', ONDIGITAL_URI . '/assets/css/pages/glossary.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+    }
+
+    if ( is_singular( 'od_glossary' ) ) {
+        wp_enqueue_style( 'ondigital-glossary', ONDIGITAL_URI . '/assets/css/pages/glossary.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+        wp_enqueue_style( 'ondigital-glossary-single', ONDIGITAL_URI . '/assets/css/pages/glossary-single.css', array( 'ondigital-glossary' ), ONDIGITAL_VERSION );
+    }
+
     // 404
     if ( is_404() ) {
         $css = ONDIGITAL_DIR . '/assets/css/pages/404.css';
@@ -170,7 +179,8 @@ function ondigital_enqueue_page_assets() {
     $loaded = array( 'ondigital-home', 'ondigital-about', 'ondigital-services', 'ondigital-projects',
                      'ondigital-blog', 'ondigital-contact', 'ondigital-faq', 'ondigital-team',
                      'ondigital-quote', 'ondigital-blog-details', 'ondigital-service-details',
-                     'ondigital-project-details', 'ondigital-404' );
+                     'ondigital-project-details', 'ondigital-404',
+                     'ondigital-glossary', 'ondigital-glossary-single' );
 
     foreach ( $loaded as $handle ) {
         if ( wp_style_is( $handle ) ) {
