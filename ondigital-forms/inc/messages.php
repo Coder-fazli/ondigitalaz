@@ -15,7 +15,7 @@ function odf_register_messages_menu(): void {
         : '';
 
     add_submenu_page(
-        'odf-settings',
+        'odf-templates',
         __( 'Messages', 'odf' ),
         __( 'Messages', 'odf' ) . $badge,
         'manage_options',
@@ -34,7 +34,7 @@ function odf_badge_main_menu(): void {
         return;
     }
     foreach ( $menu as $key => $item ) {
-        if ( isset( $item[2] ) && $item[2] === 'odf-settings' ) {
+        if ( isset( $item[2] ) && $item[2] === 'odf-templates' ) {
             $menu[ $key ][0] .= ' <span class="update-plugins count-' . $unread . '"><span class="plugin-count">' . $unread . '</span></span>';
             break;
         }
