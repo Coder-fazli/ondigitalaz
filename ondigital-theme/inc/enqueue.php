@@ -158,6 +158,7 @@ function ondigital_enqueue_page_assets() {
     }
 
     if ( is_post_type_archive( 'od_glossary' ) || is_tax( 'glossary_cat' ) || is_singular( 'od_glossary' ) ) {
+        wp_enqueue_style( 'roboto', 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap', array(), null );
         // Load full base theme CSS first (same as global.css fallback) so offcanvas/nav/preloader styles are present
         wp_enqueue_style( 'ondigital-default', ONDIGITAL_URI . '/assets/css/global.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
         wp_enqueue_style( 'ondigital-glossary', ONDIGITAL_URI . '/assets/css/pages/glossary.css', array( 'ondigital-default' ), ONDIGITAL_VERSION );

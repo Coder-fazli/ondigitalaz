@@ -5,8 +5,9 @@
 /* ── Hero ── */
 .glossary-hero {
     background: #111;
-    padding: 120px 0 50px; /* top clears fixed header (~80px) + breathing room */
-    font-family: 'Poppins', sans-serif;
+    margin-top: 80px; /* push section below fixed header so nav stays visible */
+    padding: 50px 0 50px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .glossary-hero__inner {
@@ -16,7 +17,7 @@
 }
 
 .glossary-hero__title {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(1.6rem, 3.5vw, 2.4rem);
     font-weight: 700;
     color: #fff;
@@ -29,7 +30,7 @@
 }
 
 .glossary-hero__sub {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 0.95rem;
     color: #aaa;
     margin-bottom: 24px;
@@ -76,6 +77,15 @@
 
 .glossary-search__input:focus {
     border-color: #27ff7d;
+}
+
+/* ── Global font override for all glossary elements ── */
+.glossary-hero,
+.glossary-alpha-bar,
+.glossary-grid-section,
+.glossary-pagination,
+.glossary-empty {
+    font-family: 'Roboto', sans-serif;
 }
 
 /* ── Alphabet bar ── */
