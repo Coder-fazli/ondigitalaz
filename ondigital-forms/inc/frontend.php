@@ -7,11 +7,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-// DEBUG: confirm plugin frontend is loading
-add_action( 'wp_footer', function() {
-    echo '<script>console.log("[ODF DEBUG] wp_footer fired, plugin frontend.php loaded");</script>';
-}, 1 );
-
 add_action( 'wp_enqueue_scripts', 'odf_enqueue_frontend' );
 function odf_enqueue_frontend(): void {
     wp_enqueue_style( 'odf-forms', ODF_URI . 'assets/css/forms.css', array(), ODF_VERSION );
