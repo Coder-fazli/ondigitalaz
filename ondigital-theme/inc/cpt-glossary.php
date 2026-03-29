@@ -113,7 +113,7 @@ function ondigital_glossary_maybe_flush(): void {
 
 add_action( 'init', 'ondigital_glossary_seed_demo', 20 );
 function ondigital_glossary_seed_demo(): void {
-    if ( get_option( 'ondigital_glossary_demo_seeded_v1' ) ) {
+    if ( get_option( 'ondigital_glossary_demo_seeded_v2' ) ) {
         return;
     }
 
@@ -235,7 +235,13 @@ function ondigital_glossary_seed_demo(): void {
 
     foreach ( $terms as $item ) {
         // Skip if already exists
-        $existing = get_page_by_title( $item['title'], OBJECT, 'od_glossary' );
+        $existing = get_posts( array(
+            'post_type'      => 'od_glossary',
+            'title'          => $item['title'],
+            'posts_per_page' => 1,
+            'fields'         => 'ids',
+            'post_status'    => 'publish',
+        ) );
         if ( $existing ) {
             continue;
         }
@@ -265,5 +271,5 @@ function ondigital_glossary_seed_demo(): void {
         }
     }
 
-    update_option( 'ondigital_glossary_demo_seeded_v1', true );
+    update_option( 'ondigital_glossary_demo_seeded_v2', true );
 }
