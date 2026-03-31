@@ -74,7 +74,7 @@
 .hcc-b4 { height: 38px; background: linear-gradient(180deg,#16a34a,#15803d); animation-delay: 1.35s; }
 .hcc-b5 { height: 46px; background: linear-gradient(180deg,#22c55e,#14532d); animation-delay: 1.45s; }
 
-/* Pulsing dot on tallest bar */
+/* Pulsing dot on tallest bar — hidden until bar is fully grown */
 .hcc-b5::before {
     content: '';
     position: absolute;
@@ -84,7 +84,12 @@
     background: #4ade80;
     border-radius: 50%;
     box-shadow: 0 0 0 0 rgba(74,222,128,.6);
-    animation: hccPulse 1.5s ease-out 2s infinite;
+    opacity: 0;
+    animation: hccDotAppear 0s forwards 2s, hccPulse 1.5s ease-out 2s infinite;
+}
+
+@keyframes hccDotAppear {
+    to { opacity: 1; }
 }
 
 @keyframes hccPulse {
@@ -97,50 +102,20 @@
     to { transform: scaleY(1); }
 }
 
-/* Character — floats above first bar */
-.hcc-face {
-    position: absolute;
-    top: -20px;
-    left: 8px;
-    width: 20px;
-    height: 20px;
-    background: #f0fdf4;
-    border: 1.5px solid #86efac;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 3px 2px 2px;
+/* Growth label above bars */
+.hcc-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: #16a34a;
+    letter-spacing: .03em;
+    margin-bottom: 4px;
     opacity: 0;
-    animation: hccFaceFloat 2.8s ease-in-out 1.6s infinite;
-    animation-fill-mode: forwards;
-    box-sizing: border-box;
-    gap: 2px;
+    animation: hccLabelIn 0.4s ease-out 1.0s forwards;
 }
 
-@keyframes hccFaceFloat {
-    0%   { transform: translateY(0);    opacity: 1; }
-    50%  { transform: translateY(-5px); opacity: 1; }
-    100% { transform: translateY(0);    opacity: 1; }
-}
-
-.hcc-eye {
-    width: 2.5px;
-    height: 2.5px;
-    background: #15803d;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.hcc-smile {
-    width: 7px;
-    height: 3.5px;
-    border: 1.5px solid #15803d;
-    border-top: none;
-    border-radius: 0 0 8px 8px;
-    flex-basis: 100%;
-    margin-left: 2px;
+@keyframes hccLabelIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0);   }
 }
 
 /* =============================================================================

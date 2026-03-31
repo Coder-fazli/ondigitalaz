@@ -31,11 +31,7 @@ $hero_image        = ondigital_img( 'hero_image', '/assets/imgs/gallery/img-s-35
                         <h1 class="section-title has_text_move_anim">
                             <?php echo esc_html( $hero_h1_line1 ); ?>
                             <span class="shape-1 hero-chart-card" aria-hidden="true">
-                                <span class="hcc-face">
-                                    <span class="hcc-eye"></span>
-                                    <span class="hcc-eye"></span>
-                                    <span class="hcc-smile"></span>
-                                </span>
+                                <span class="hcc-label">+87%</span>
                                 <span class="hcc-bars">
                                     <span class="hcc-bar hcc-b1"></span>
                                     <span class="hcc-bar hcc-b2"></span>
