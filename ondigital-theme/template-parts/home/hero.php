@@ -30,23 +30,23 @@ $hero_image        = ondigital_img( 'hero_image', '/assets/imgs/gallery/img-s-35
                     <div class="title-wrapper">
                         <h1 class="section-title has_text_move_anim">
                             <?php echo esc_html( $hero_h1_line1 ); ?>
-                            <img class="shape-1 has_fade_anim" data-delay="0.7" data-fade-offset="100" data-fade-from="top" data-ease="bounce" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/shape/img-s-50.webp' ); ?>" alt="<?php esc_attr_e( 'shape', 'ondigital' ); ?>"><br>
+                            <img class="shape-1 has_fade_anim" data-on-scroll="0" data-delay="0.3" data-fade-offset="60" data-fade-from="top" data-ease="bounce" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/shape/img-s-50.webp' ); ?>" alt="<?php esc_attr_e( 'shape', 'ondigital' ); ?>"><br>
                             <?php echo esc_html( $hero_h1_line2 ); ?>
                         </h1>
                     </div>
                 </div>
                 <div class="text-wrapper">
-                    <p class="text has_fade_anim" data-fade-from="left" data-delay="0.7">
+                    <p class="text has_fade_anim" data-on-scroll="0" data-fade-from="left" data-delay="0.2">
                         <?php echo esc_html( $hero_body ); ?>
                     </p>
                 </div>
-                <div class="btn-wrapper has_fade_anim" data-fade-from="left" data-delay="1.2">
+                <div class="btn-wrapper has_fade_anim" data-on-scroll="0" data-fade-from="left" data-delay="0.35">
                     <a href="<?php echo esc_url( $hero_cta_url ); ?>" class="wc-btn wc-btn-primary btn-text-flip">
                         <span data-text="<?php echo esc_attr( $hero_cta_text ); ?>"><?php echo esc_html( $hero_cta_text ); ?></span>
                         <i class="fa-solid fa-angle-right"></i>
                     </a>
                 </div>
-                <div class="review-wrapper has_fade_anim" data-delay="1.2" data-on-scroll="0">
+                <div class="review-wrapper has_fade_anim" data-delay="0.45" data-on-scroll="0">
                     <div class="reviews">
                         <h2 class="rating"><?php echo esc_html( $hero_rating ); ?></h2>
                         <span class="review"><?php echo esc_html( $hero_review_count ); ?></span>
