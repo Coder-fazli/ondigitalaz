@@ -346,24 +346,8 @@
         margin-top: 14px !important;
     }
 
-    /* Shrink the chart card on mobile and clip overflow */
+    /* Hide chart card on mobile */
     .hero-chart-card {
-        padding: 6px 8px 6px !important;
-        margin: 0 4px -4px !important;
-        overflow: hidden !important;
+        display: none !important;
     }
-
-    .hcc-bars {
-        height: 28px !important;
-        overflow: hidden !important;
-    }
-
-    .hero-chart-card .hcc-b1 { height: 10px !important; }
-    .hero-chart-card .hcc-b2 { height: 14px !important; }
-    .hero-chart-card .hcc-b3 { height: 18px !important; }
-    .hero-chart-card .hcc-b4 { height: 22px !important; }
-    .hero-chart-card .hcc-b5 { height: 28px !important; }
-
-    /* Hide pulsing dot on mobile — it overflows the clipped card */
-    .hero-chart-card .hcc-b5::before { display: none !important; }
 }
