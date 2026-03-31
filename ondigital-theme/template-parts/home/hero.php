@@ -30,18 +30,20 @@ $hero_image        = ondigital_img( 'hero_image', '/assets/imgs/gallery/img-s-35
                     <div class="title-wrapper">
                         <h1 class="section-title has_text_move_anim">
                             <?php echo esc_html( $hero_h1_line1 ); ?>
-                            <svg class="shape-1 hero-chart-anim" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 52" fill="none" aria-hidden="true">
-                                <!-- Bars: y1=baseline(50), y2=top — draws bottom to top -->
-                                <line class="hero-chart-bar b1" x1="7"  y1="50" x2="7"  y2="40" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
-                                <line class="hero-chart-bar b2" x1="23" y1="50" x2="23" y2="32" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
-                                <line class="hero-chart-bar b3" x1="39" y1="50" x2="39" y2="22" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
-                                <line class="hero-chart-bar b4" x1="55" y1="50" x2="55" y2="14" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
-                                <line class="hero-chart-bar b5" x1="71" y1="50" x2="71" y2="6"  stroke="#fff" stroke-width="9" stroke-linecap="round"/>
-                                <!-- Trend line draws left to right across bar tops -->
-                                <polyline class="hero-chart-line" points="7,40 23,32 39,22 55,14 71,6 100,6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                <!-- Arrow -->
-                                <polyline class="hero-chart-arrow" points="93,1 100,6 93,11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                            </svg><br>
+                            <span class="shape-1 hero-chart-card" aria-hidden="true">
+                                <span class="hcc-face">
+                                    <span class="hcc-eye"></span>
+                                    <span class="hcc-eye"></span>
+                                    <span class="hcc-smile"></span>
+                                </span>
+                                <span class="hcc-bars">
+                                    <span class="hcc-bar hcc-b1"></span>
+                                    <span class="hcc-bar hcc-b2"></span>
+                                    <span class="hcc-bar hcc-b3"></span>
+                                    <span class="hcc-bar hcc-b4"></span>
+                                    <span class="hcc-bar hcc-b5"></span>
+                                </span>
+                            </span><br>
                             <?php echo esc_html( $hero_h1_line2 ); ?>
                         </h1>
                     </div>
