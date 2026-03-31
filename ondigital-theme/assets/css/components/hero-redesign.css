@@ -347,24 +347,25 @@
 .ond-hero__stat:last-child { border-right: none; }
 
 .ond-hero__stat-num {
-    font-size: 42px;
-    font-weight: 900;
+    font-size: 52px;
+    font-weight: 600;
     color: #0a0a0a;
-    letter-spacing: -.04em;
+    letter-spacing: -.03em;
     line-height: 1;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     font-family: 'Inter', sans-serif;
 }
 .ond-hero__stat-num sup {
-    font-size: 22px;
-    color: #3a5000;
-    font-weight: 800;
+    font-size: 26px;
+    color: #D1F843;
+    font-weight: 700;
+    -webkit-text-stroke: 1px #5a7000;
 }
 
 .ond-hero__stat-label {
     font-size: 12px;
-    color: rgba(0,0,0,.35);
-    font-weight: 500;
+    color: rgba(0,0,0,.45);
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .1em;
 }
