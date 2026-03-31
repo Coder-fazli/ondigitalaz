@@ -15,43 +15,83 @@
 .hero-chart-card {
     display: inline-flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     background: #fff;
     border-radius: 1.5rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,.13);
-    padding: 10px 12px 8px;
+    box-shadow: 0 4px 24px rgba(22,163,74,.18), 0 1px 4px rgba(0,0,0,.08);
+    padding: 12px 14px 10px;
     vertical-align: middle;
     margin: 0 8px -4px;
     position: relative;
-    animation: hccFloat 3.5s ease-in-out infinite;
+    animation: hccFloat 4s ease-in-out infinite;
+    border-top: 3px solid #4ade80;
 }
 
 @keyframes hccFloat {
     0%, 100% { transform: translateY(0);    }
-    50%       { transform: translateY(-6px); }
+    50%       { transform: translateY(-7px); }
 }
 
 /* Bars container */
 .hcc-bars {
     display: flex;
     align-items: flex-end;
-    gap: 5px;
-    height: 44px;
+    gap: 4px;
+    height: 46px;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid #f0fdf4;
+    position: relative;
 }
 
-/* Individual bars */
+/* Individual bars — thin pill shape */
 .hcc-bar {
-    width: 11px;
-    border-radius: 3px 3px 0 0;
+    width: 6px;
+    border-radius: 99px;
     transform: scaleY(0);
     transform-origin: bottom center;
-    animation: hccBarGrow 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    position: relative;
+    animation: hccBarGrow 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards;
 }
-.hcc-b1 { height: 18px; background: #86efac; animation-delay: 1.05s; }
-.hcc-b2 { height: 26px; background: #4ade80; animation-delay: 1.15s; }
-.hcc-b3 { height: 32px; background: #22c55e; animation-delay: 1.25s; }
-.hcc-b4 { height: 38px; background: #16a34a; animation-delay: 1.35s; }
-.hcc-b5 { height: 44px; background: #15803d; animation-delay: 1.45s; }
+
+/* Shimmer sweep after grow */
+.hcc-bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(255,255,255,.5) 0%, transparent 60%);
+    animation: hccShimmer 2s ease-in-out infinite;
+}
+
+@keyframes hccShimmer {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 1;   }
+}
+
+.hcc-b1 { height: 16px; background: linear-gradient(180deg,#86efac,#4ade80); animation-delay: 1.05s; }
+.hcc-b2 { height: 24px; background: linear-gradient(180deg,#4ade80,#22c55e); animation-delay: 1.15s; }
+.hcc-b3 { height: 32px; background: linear-gradient(180deg,#22c55e,#16a34a); animation-delay: 1.25s; }
+.hcc-b4 { height: 38px; background: linear-gradient(180deg,#16a34a,#15803d); animation-delay: 1.35s; }
+.hcc-b5 { height: 46px; background: linear-gradient(180deg,#22c55e,#14532d); animation-delay: 1.45s; }
+
+/* Pulsing dot on tallest bar */
+.hcc-b5::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: 50%;
+    transform: translateX(-50%);
+    width: 6px; height: 6px;
+    background: #4ade80;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(74,222,128,.6);
+    animation: hccPulse 1.5s ease-out 2s infinite;
+}
+
+@keyframes hccPulse {
+    0%   { box-shadow: 0 0 0 0   rgba(74,222,128,.6); }
+    70%  { box-shadow: 0 0 0 7px rgba(74,222,128,0);  }
+    100% { box-shadow: 0 0 0 0   rgba(74,222,128,0);  }
+}
 
 @keyframes hccBarGrow {
     to { transform: scaleY(1); }
@@ -60,49 +100,47 @@
 /* Character — floats above first bar */
 .hcc-face {
     position: absolute;
-    top: -22px;
-    left: 10px;
-    width: 22px;
-    height: 22px;
-    background: #fff;
-    border: 2px solid #86efac;
+    top: -20px;
+    left: 8px;
+    width: 20px;
+    height: 20px;
+    background: #f0fdf4;
+    border: 1.5px solid #86efac;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 2px;
-    padding: 4px 3px 2px;
-    animation: hccFaceFloat 2.5s ease-in-out infinite;
+    padding: 3px 2px 2px;
     opacity: 0;
-    animation-delay: 1.6s;
+    animation: hccFaceFloat 2.8s ease-in-out 1.6s infinite;
     animation-fill-mode: forwards;
     box-sizing: border-box;
+    gap: 2px;
 }
 
 @keyframes hccFaceFloat {
     0%   { transform: translateY(0);    opacity: 1; }
-    50%  { transform: translateY(-4px); opacity: 1; }
+    50%  { transform: translateY(-5px); opacity: 1; }
     100% { transform: translateY(0);    opacity: 1; }
 }
 
 .hcc-eye {
-    width: 3px;
-    height: 3px;
+    width: 2.5px;
+    height: 2.5px;
     background: #15803d;
     border-radius: 50%;
     flex-shrink: 0;
 }
 
 .hcc-smile {
-    width: 8px;
-    height: 4px;
-    border: 2px solid #15803d;
+    width: 7px;
+    height: 3.5px;
+    border: 1.5px solid #15803d;
     border-top: none;
     border-radius: 0 0 8px 8px;
-    margin-top: 1px;
     flex-basis: 100%;
-    margin-left: 3px;
+    margin-left: 2px;
 }
 
 /* =============================================================================
