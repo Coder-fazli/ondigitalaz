@@ -31,16 +31,13 @@ $hero_image        = ondigital_img( 'hero_image', '/assets/imgs/gallery/img-s-35
                         <h1 class="section-title has_text_move_anim">
                             <?php echo esc_html( $hero_h1_line1 ); ?>
                             <svg class="shape-1 hero-chart-anim" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 48" fill="none" aria-hidden="true">
-                                <!-- Bars -->
-                                <rect class="hero-chart-bar" x="2"  y="36" width="10" height="10" rx="2" fill="#27ff7d"/>
-                                <rect class="hero-chart-bar" x="16" y="28" width="10" height="18" rx="2" fill="#27ff7d"/>
-                                <rect class="hero-chart-bar" x="30" y="20" width="10" height="26" rx="2" fill="#27ff7d"/>
-                                <rect class="hero-chart-bar" x="44" y="12" width="10" height="34" rx="2" fill="#27ff7d"/>
-                                <rect class="hero-chart-bar" x="58" y="6"  width="10" height="40" rx="2" fill="#27ff7d"/>
-                                <!-- Rising trend line -->
-                                <polyline class="hero-chart-line" points="7,36 21,28 35,20 49,12 63,6 98,6" stroke="#27ff7d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <!-- Arrow head -->
-                                <polyline points="90,0 98,6 90,12" stroke="#27ff7d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <rect class="hero-chart-bar b1" x="2"  y="36" width="10" height="10" rx="2" fill="#fff"/>
+                                <rect class="hero-chart-bar b2" x="16" y="28" width="10" height="18" rx="2" fill="#fff"/>
+                                <rect class="hero-chart-bar b3" x="30" y="20" width="10" height="26" rx="2" fill="#fff"/>
+                                <rect class="hero-chart-bar b4" x="44" y="12" width="10" height="34" rx="2" fill="#fff"/>
+                                <rect class="hero-chart-bar b5" x="58" y="6"  width="10" height="40" rx="2" fill="#fff"/>
+                                <polyline class="hero-chart-line" points="7,36 21,28 35,20 49,12 63,6 98,6" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <polyline class="hero-chart-arrow" points="90,0 98,6 90,12" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg><br>
                             <?php echo esc_html( $hero_h1_line2 ); ?>
                         </h1>
