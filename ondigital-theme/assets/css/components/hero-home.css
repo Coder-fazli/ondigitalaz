@@ -122,37 +122,37 @@
    ========================================================================= */
 @media only screen and (max-width: 767px) {
 
-    /* Animation (thumb) first, card below */
+    /* Content first, animation/motion below */
     .hero-area-inner {
         display: flex !important;
         flex-direction: column !important;
     }
 
-    .hero-area .thumb {
+    .hero-area .section-content {
         order: -1 !important;
+        padding-top: 30px !important;
+        padding-bottom: 24px !important;
+        padding-inline-start: 22px !important;
+        padding-inline-end: 22px !important;
+    }
+
+    .hero-area .thumb {
+        order: 1 !important;
         width: 100% !important;
-        min-height: 220px !important;
-        max-height: 240px !important;
+        min-height: 200px !important;
+        max-height: 220px !important;
         overflow: hidden !important;
     }
 
-    .hero-area .section-content {
-        order: 1 !important;
-        padding-top: 40px !important;
-        padding-bottom: 40px !important;
-        padding-inline-start: 28px !important;
-        padding-inline-end: 28px !important;
-    }
-
-    /* Tighter H1 */
+    /* Compact H1 */
     .hero-area .section-content .section-title {
-        font-size: 34px !important;
+        font-size: 30px !important;
         line-height: 1.1 !important;
     }
 
     /* Smaller body text */
     .hero-area .section-content .text {
-        font-size: 15px !important;
+        font-size: 14px !important;
     }
 
     /* Slightly stronger green on mobile */
@@ -167,6 +167,6 @@
 
     /* Smaller rating section */
     .hero-area .section-content .review-wrapper .rating {
-        font-size: 28px !important;
+        font-size: 24px !important;
     }
 }
