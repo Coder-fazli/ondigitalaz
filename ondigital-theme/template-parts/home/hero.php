@@ -54,19 +54,8 @@ $hero_image        = ondigital_img( 'hero_image', '/assets/imgs/gallery/img-s-35
                         <i class="fa-solid fa-angle-right"></i>
                     </a>
                 </div>
-                <div class="review-wrapper has_fade_anim" data-delay="0.45" data-on-scroll="0">
-                    <div class="reviews">
-                        <h2 class="rating"><?php echo esc_html( $hero_rating ); ?></h2>
-                        <span class="review"><?php echo esc_html( $hero_review_count ); ?></span>
-                    </div>
-                    <div class="ratings">
-                        <span class="rating-text"><?php esc_html_e( 'Average Rating', 'ondigital' ); ?></span>
-                        <div class="rating-icons">
-                            <?php for ( $i = 0; $i < 5; $i++ ) : ?>
-                                <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/star-2.webp' ); ?>" alt="<?php esc_attr_e( 'star', 'ondigital' ); ?>">
-                            <?php endfor; ?>
-                        </div>
-                    </div>
+                <div class="hero-partner-badge has_fade_anim" data-delay="0.45" data-on-scroll="0">
+                    <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/google-partner.webp' ); ?>" alt="<?php esc_attr_e( 'Google Partner', 'ondigital' ); ?>" width="150">
                 </div>
             </div>
             <div class="thumb">

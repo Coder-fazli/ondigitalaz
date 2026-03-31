@@ -197,6 +197,16 @@
     color: #ffffff !important;
 }
 
+/* Google Partner badge */
+.hero-partner-badge {
+    margin-top: 24px;
+}
+
+.hero-partner-badge img {
+    display: block;
+    height: auto;
+}
+
 /* Move vertical subtitle away from content (compensate for reduced padding) */
 .hero-area .section-content .subtitle-wrapper {
     inset-inline-start: 16px !important;
