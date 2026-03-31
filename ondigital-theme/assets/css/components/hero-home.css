@@ -11,33 +11,30 @@
     overflow: visible;
 }
 
-/* Bars — fade + slide up (reliable cross-browser SVG animation) */
-.hero-chart-bar {
-    opacity: 0;
-    animation: heroBarIn 0.4s ease-out forwards;
-}
-.b1 { animation-delay: 1.1s; }
-.b2 { animation-delay: 1.2s; }
-.b3 { animation-delay: 1.3s; }
-.b4 { animation-delay: 1.4s; }
-.b5 { animation-delay: 1.5s; }
+/* Each bar: stroke-dasharray = its exact height, draws bottom→top */
+.hero-chart-bar { stroke-dashoffset: var(--h); stroke-dasharray: var(--h); }
+.b1 { --h: 10px; animation: heroBarDraw 0.35s ease-out 1.1s forwards; }
+.b2 { --h: 18px; animation: heroBarDraw 0.4s  ease-out 1.2s forwards; }
+.b3 { --h: 28px; animation: heroBarDraw 0.45s ease-out 1.3s forwards; }
+.b4 { --h: 36px; animation: heroBarDraw 0.5s  ease-out 1.4s forwards; }
+.b5 { --h: 44px; animation: heroBarDraw 0.55s ease-out 1.5s forwards; }
 
-@keyframes heroBarIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0);   }
+@keyframes heroBarDraw {
+    to { stroke-dashoffset: 0; }
 }
 
-/* Trend line draws itself */
+/* Trend line draws left→right */
 .hero-chart-line {
-    stroke-dasharray: 130;
-    stroke-dashoffset: 130;
-    animation: heroLineDraw 0.6s ease-out 1.6s forwards;
+    stroke-dasharray: 120;
+    stroke-dashoffset: 120;
+    animation: heroLineDraw 0.55s ease-out 1.65s forwards;
 }
 
-/* Arrow fades in after line */
+/* Arrow appears after line finishes */
 .hero-chart-arrow {
-    opacity: 0;
-    animation: heroBarIn 0.3s ease-out 2.1s forwards;
+    stroke-dasharray: 20;
+    stroke-dashoffset: 20;
+    animation: heroLineDraw 0.25s ease-out 2.15s forwards;
 }
 
 @keyframes heroLineDraw {
