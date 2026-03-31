@@ -20,26 +20,6 @@ $font_class = $is_home ? 'font-heading-spacegrotesk-bold' : 'font-heading-beatri
 <body <?php body_class( $font_class ); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Preloader -->
-<div id="preloader">
-    <div id="container" class="container-preloader">
-        <div class="animation-preloader">
-            <div class="spinner"></div>
-            <div class="txt-loading">
-                <?php
-                $site_name = strtoupper( get_bloginfo( 'name' ) );
-                $letters = str_split( $site_name );
-                foreach ( $letters as $letter ) :
-                    if ( $letter === ' ' ) continue;
-                ?>
-                    <span data-text="<?php echo esc_attr( $letter ); ?>" class="characters"><?php echo esc_html( $letter ); ?></span>
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-    </div>
-</div>
 
 <!-- Scroll to top -->
 <div class="progress-wrap">
