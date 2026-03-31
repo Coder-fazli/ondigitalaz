@@ -11,6 +11,15 @@
     overflow: visible;
 }
 
+/* Reset theme's .section-title span background-image that bleeds into our card */
+.hero-chart-card,
+.hero-chart-card span {
+    background-image: none !important;
+    background-repeat: initial !important;
+    background-size: initial !important;
+    background-position: initial !important;
+}
+
 /* ── Hero chart card ── */
 .hero-chart-card {
     display: inline-flex;
@@ -108,11 +117,11 @@
 }
 
 /* Bars: height + background + EQ bounce (wrapper already handled grow-in) */
-.hcc-b1 { height: 16px; background: linear-gradient(180deg,#86efac,#4ade80); animation: hccEQ1 1.1s ease-in-out 1.65s infinite; }
-.hcc-b2 { height: 24px; background: linear-gradient(180deg,#4ade80,#22c55e); animation: hccEQ2 1.5s ease-in-out 1.75s infinite; }
-.hcc-b3 { height: 32px; background: linear-gradient(180deg,#22c55e,#16a34a); animation: hccEQ3 0.9s ease-in-out 1.85s infinite; }
-.hcc-b4 { height: 38px; background: linear-gradient(180deg,#16a34a,#15803d); animation: hccEQ4 1.3s ease-in-out 1.95s infinite; }
-.hcc-b5 { height: 46px; background: linear-gradient(180deg,#22c55e,#14532d); animation: hccEQ5 1.7s ease-in-out 2.05s infinite; }
+.hcc-b1 { height: 16px; background: linear-gradient(180deg,#86efac,#4ade80) !important; animation: hccEQ1 1.1s ease-in-out 1.65s infinite; }
+.hcc-b2 { height: 24px; background: linear-gradient(180deg,#4ade80,#22c55e) !important; animation: hccEQ2 1.5s ease-in-out 1.75s infinite; }
+.hcc-b3 { height: 32px; background: linear-gradient(180deg,#22c55e,#16a34a) !important; animation: hccEQ3 0.9s ease-in-out 1.85s infinite; }
+.hcc-b4 { height: 38px; background: linear-gradient(180deg,#16a34a,#15803d) !important; animation: hccEQ4 1.3s ease-in-out 1.95s infinite; }
+.hcc-b5 { height: 46px; background: linear-gradient(180deg,#22c55e,#14532d) !important; animation: hccEQ5 1.7s ease-in-out 2.05s infinite; }
 
 /* Pulsing dot on tallest bar — hidden until bar is fully grown */
 .hcc-b5::before {
