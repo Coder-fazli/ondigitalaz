@@ -34,7 +34,7 @@
     margin: 0 8px -4px;
     position: relative;
     animation: hccFloat 4s ease-in-out infinite;
-    border-top: 3px solid #4ade80;
+    border-top: 1px solid #4ade80;
 }
 
 @keyframes hccFloat {
@@ -346,19 +346,24 @@
         margin-top: 14px !important;
     }
 
-    /* Shrink the chart card on mobile */
+    /* Shrink the chart card on mobile and clip overflow */
     .hero-chart-card {
-        padding: 8px 10px 7px !important;
-        margin: 0 5px -4px !important;
+        padding: 6px 8px 6px !important;
+        margin: 0 4px -4px !important;
+        overflow: hidden !important;
     }
 
     .hcc-bars {
-        height: 36px !important;
+        height: 28px !important;
+        overflow: hidden !important;
     }
 
-    .hcc-b1 { height: 12px !important; }
-    .hcc-b2 { height: 18px !important; }
-    .hcc-b3 { height: 24px !important; }
-    .hcc-b4 { height: 29px !important; }
-    .hcc-b5 { height: 36px !important; }
+    .hero-chart-card .hcc-b1 { height: 10px !important; }
+    .hero-chart-card .hcc-b2 { height: 14px !important; }
+    .hero-chart-card .hcc-b3 { height: 18px !important; }
+    .hero-chart-card .hcc-b4 { height: 22px !important; }
+    .hero-chart-card .hcc-b5 { height: 28px !important; }
+
+    /* Hide pulsing dot on mobile — it overflows the clipped card */
+    .hero-chart-card .hcc-b5::before { display: none !important; }
 }
