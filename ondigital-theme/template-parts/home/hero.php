@@ -32,11 +32,11 @@ $hero_image        = ondigital_img( 'hero_image', '/assets/imgs/gallery/img-s-35
                             <?php echo esc_html( $hero_h1_line1 ); ?>
                             <span class="shape-1 hero-chart-card" aria-hidden="true">
                                 <span class="hcc-bars">
-                                    <span class="hcc-bar hcc-b1"></span>
-                                    <span class="hcc-bar hcc-b2"></span>
-                                    <span class="hcc-bar hcc-b3"></span>
-                                    <span class="hcc-bar hcc-b4"></span>
-                                    <span class="hcc-bar hcc-b5"></span>
+                                    <span class="hcc-bw hcc-bw1"><span class="hcc-bar hcc-b1"></span></span>
+                                    <span class="hcc-bw hcc-bw2"><span class="hcc-bar hcc-b2"></span></span>
+                                    <span class="hcc-bw hcc-bw3"><span class="hcc-bar hcc-b3"></span></span>
+                                    <span class="hcc-bw hcc-bw4"><span class="hcc-bar hcc-b4"></span></span>
+                                    <span class="hcc-bw hcc-bw5"><span class="hcc-bar hcc-b5"></span></span>
                                 </span>
                             </span><br>
                             <?php echo esc_html( $hero_h1_line2 ); ?>
