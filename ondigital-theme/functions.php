@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'ONDIGITAL_VERSION', '1.0.0' );
+define( 'ONDIGITAL_VERSION', @filemtime( __DIR__ . '/style.css' ) ?: '1.0.0' );
 define( 'ONDIGITAL_DIR', get_template_directory() );
 define( 'ONDIGITAL_URI', get_template_directory_uri() );
 
