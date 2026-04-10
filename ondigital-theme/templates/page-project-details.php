@@ -5,11 +5,11 @@
  * @package OnDigital
  */
 
-// Force-enqueue CSS/JS and remove global.css fallback that breaks the nav
+// Load global.css (needed for nav) + project CSS after it so .cs-wrap overrides content styles
 add_action( 'wp_enqueue_scripts', function() {
-    wp_enqueue_style( 'ondigital-project-details-template', get_template_directory_uri() . '/assets/css/pages/project-details-template.css', array( 'bootstrap' ), '1.0.2' );
-    wp_enqueue_script( 'ondigital-project-details-template', get_template_directory_uri() . '/assets/js/pages/project-details-template.js', array( 'jquery' ), '1.0.2', true );
-    wp_dequeue_style( 'ondigital-default' ); // prevent global.css from loading and breaking nav
+    wp_enqueue_style( 'ondigital-default', get_template_directory_uri() . '/assets/css/global.css', array( 'bootstrap' ), '1.0.0' );
+    wp_enqueue_style( 'ondigital-project-details-template', get_template_directory_uri() . '/assets/css/pages/project-details-template.css', array( 'ondigital-default' ), '1.0.3' );
+    wp_enqueue_script( 'ondigital-project-details-template', get_template_directory_uri() . '/assets/js/pages/project-details-template.js', array( 'jquery' ), '1.0.3', true );
 }, 99 );
 
 get_header();
