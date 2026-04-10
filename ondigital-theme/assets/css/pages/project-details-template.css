@@ -463,3 +463,36 @@
     .cs-wrap .cs-gi:first-child { height:260px; grid-row:auto; }
     .cs-wrap .cs-gi:not(:first-child) { height:180px; }
 }
+
+/* =============================================================================
+   CTA SECTION
+   ============================================================================= */
+.cs-wrap .cs-cta-sec {
+    background: var(--cs-dark);
+    padding: 130px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.cs-wrap .cs-cta-line-t  { position:absolute; top:0; left:0; height:3px; background:linear-gradient(90deg,#D1F843,transparent); width:0; animation:cs-grow1 1.5s ease-out .5s forwards; }
+.cs-wrap .cs-cta-circle  { position:absolute; top:-60px; right:-60px; width:440px; height:440px; border-radius:50%; border:2px solid rgba(209,248,67,.25); animation:cs-spin 20s linear infinite; pointer-events:none; }
+.cs-wrap .cs-cta-dot     { position:absolute; bottom:12%; left:8%; width:80px; height:80px; border-radius:50%; background:#D1F843; opacity:.25; animation:cs-flt 8s ease-in-out infinite; pointer-events:none; }
+.cs-wrap .cs-cta-square  { position:absolute; bottom:5%; right:4%; width:200px; height:200px; border:1px solid rgba(209,248,67,.2); animation:cs-sqr 15s ease-in-out infinite; pointer-events:none; }
+.cs-wrap .cs-cta-inner   { position:relative; z-index:1; }
+.cs-wrap .cs-cta-ey      { font-size:11px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:#D1F843; margin-bottom:20px; }
+.cs-wrap .cs-cta-title   { font-size:clamp(48px,7vw,100px); font-weight:900; letter-spacing:-.04em; line-height:.92; color:#fff; margin-bottom:0; }
+.cs-wrap .cs-cta-title em { font-style:normal; color:#D1F843; }
+.cs-wrap .cs-cta-sub     { font-size:18px; color:rgba(255,255,255,.5); margin:24px auto 0; max-width:440px; line-height:1.7; }
+.cs-wrap .cs-cta-btns    { display:flex; align-items:center; justify-content:center; gap:14px; margin-top:48px; flex-wrap:wrap; }
+.cs-wrap .cs-btn-acc     { background:#D1F843; color:#0a0a0a; font-size:15px; font-weight:700; padding:16px 34px; border-radius:100px; border:none; cursor:pointer; display:inline-flex; align-items:center; gap:10px; transition:transform .15s,box-shadow .15s; text-decoration:none; }
+.cs-wrap .cs-btn-acc:hover { transform:translateY(-2px); box-shadow:0 16px 48px rgba(209,248,67,.4); color:#0a0a0a; }
+.cs-wrap .cs-btn-acc svg { width:16px; height:16px; stroke:#0a0a0a; fill:none; }
+.cs-wrap .cs-btn-wh      { background:transparent; color:#fff; font-size:15px; font-weight:600; padding:16px 30px; border-radius:100px; border:1.5px solid rgba(255,255,255,.15); cursor:pointer; transition:border-color .2s; text-decoration:none; display:inline-flex; align-items:center; }
+.cs-wrap .cs-btn-wh:hover { border-color:rgba(255,255,255,.35); color:#fff; }
+
+@media (max-width: 768px) {
+    .cs-wrap .cs-cta-sec  { padding:80px 20px; }
+    .cs-wrap .cs-cta-btns { flex-direction:column; }
+    .cs-wrap .cs-btn-acc,
+    .cs-wrap .cs-btn-wh   { width:100%; justify-content:center; }
+}
