@@ -19,8 +19,9 @@ add_action( 'wp_enqueue_scripts', function() {
 get_header();
 ?>
 <style>
-/* Kill ScrollSmoother on this page — normal browser scroll only */
-html, body { overflow: auto !important; height: auto !important; scroll-behavior: auto !important; }
+/* Kill ScrollSmoother + smooth scroll — normal browser scroll only */
+html { scroll-behavior: auto !important; overflow: auto !important; height: auto !important; }
+body { overflow: auto !important; height: auto !important; }
 #smooth-wrapper, #smooth-content { overflow: visible !important; position: static !important; height: auto !important; transform: none !important; will-change: auto !important; }
 </style>
 <div class="cs-wrap">

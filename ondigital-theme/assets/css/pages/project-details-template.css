@@ -34,7 +34,6 @@ html, body {
     --cs-ease:   cubic-bezier(.22,1,.36,1);
     font-family: 'Inter', 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
 }
 
 /* ── Fade-in on scroll ── */
