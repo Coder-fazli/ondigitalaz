@@ -16,21 +16,11 @@
     }
 
     // =====================================================
-    // PRELOADER
+    // INIT
     // =====================================================
     $(document).ready(function () {
-        $('#container').addClass('loaded');
-        if ($('#container').hasClass('loaded')) {
-            $('#preloader').delay(1000).queue(function () {
-                $(this).remove();
-            });
-        }
-
-        // Initialize everything after preloader
-        setTimeout(function () {
-            initAnimations();
-            initUI();
-        }, 100);
+        initAnimations();
+        initUI();
     });
 
     // =====================================================
