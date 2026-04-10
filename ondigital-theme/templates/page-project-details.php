@@ -18,6 +18,11 @@ add_action( 'wp_enqueue_scripts', function() {
 
 get_header();
 ?>
+<style>
+/* Kill ScrollSmoother on this page — normal browser scroll only */
+html, body { overflow: auto !important; height: auto !important; scroll-behavior: auto !important; }
+#smooth-wrapper, #smooth-content { overflow: visible !important; position: static !important; height: auto !important; transform: none !important; will-change: auto !important; }
+</style>
 <div class="cs-wrap">
     <?php get_template_part( 'template-parts/project-details/hero' ); ?>
     <?php get_template_part( 'template-parts/project-details/image' ); ?>

@@ -5,6 +5,14 @@
 (function () {
     'use strict';
 
+    // Kill ScrollSmoother — reset any inline transform/overflow GSAP may set
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
+    var sw = document.getElementById('smooth-wrapper');
+    var sc = document.getElementById('smooth-content');
+    if (sw) { sw.style.cssText = 'overflow:visible!important;position:static!important;height:auto!important;transform:none!important;'; }
+    if (sc) { sc.style.cssText = 'overflow:visible!important;position:static!important;height:auto!important;transform:none!important;'; }
+
     // ── Scroll-fade ──
     var fadeObs = new IntersectionObserver(
         function (entries) {
