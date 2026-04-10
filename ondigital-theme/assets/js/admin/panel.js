@@ -142,6 +142,18 @@
                 '<div class="od-field"><label>Label</label><input type="text" name="ondigital_footer_services_links[' + i + '][label]" value=""></div>' +
                 '<div class="od-field"><label>URL</label><input type="url" name="ondigital_footer_services_links[' + i + '][url]" value="" placeholder="https://"></div>' +
                 '</div></div>';
+        },
+        project_step: function (i) {
+            return '<div class="od-repeater-row">' +
+                '<div class="od-repeater-row-head"><span>Step ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
+                '<div class="od-field-row">' +
+                '<div class="od-field"><label>Title (AZ)</label><input type="text" name="ondigital_project_steps[' + i + '][title_az]" value=""></div>' +
+                '<div class="od-field"><label>Title (EN)</label><input type="text" name="ondigital_project_steps[' + i + '][title_en]" value=""></div>' +
+                '</div>' +
+                '<div class="od-field"><label>Description (AZ)</label><textarea name="ondigital_project_steps[' + i + '][desc_az]" rows="2"></textarea></div>' +
+                '<div class="od-field"><label>Description (EN)</label><textarea name="ondigital_project_steps[' + i + '][desc_en]" rows="2"></textarea></div>' +
+                '<div class="od-field"><label>Duration Badge</label><input type="text" name="ondigital_project_steps[' + i + '][duration]" value="" placeholder="e.g. 2 weeks"></div>' +
+                '</div>';
         }
     };
 

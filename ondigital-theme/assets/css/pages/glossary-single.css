@@ -39,7 +39,7 @@
     transition: color .15s;
 }
 
-.glossary-breadcrumb__link:hover { color: #27ff7d; }
+.glossary-breadcrumb__link:hover { color: #D1F843; }
 
 .glossary-breadcrumb__sep {
     font-size: 9px;
@@ -61,19 +61,19 @@
     display: inline-block;
     font-size: 11px;
     font-weight: 700;
-    color: #27ff7d;
+    color: #D1F843;
     text-transform: uppercase;
     letter-spacing: .08em;
     text-decoration: none;
     margin-bottom: 16px;
-    border: 1px solid rgba(39,255,125,.3);
+    border: 1px solid rgba(209,248,67,.3);
     padding: 4px 12px;
     border-radius: 20px;
     transition: background .15s;
 }
 
 .glossary-single-hero__cat:hover {
-    background: rgba(39,255,125,.1);
+    background: rgba(209,248,67,.1);
 }
 
 .glossary-single-hero__title {
@@ -159,16 +159,16 @@
 .glossary-single-body li { margin-bottom: .4em; }
 
 .glossary-single-body a {
-    color: #27ff7d;
+    color: #D1F843;
     text-decoration: underline;
     text-underline-offset: 3px;
 }
 
 .glossary-single-body blockquote {
-    border-left: 4px solid #27ff7d;
+    border-left: 4px solid #D1F843;
     margin: 1.5em 0;
     padding: 12px 20px;
-    background: #f5fff9;
+    background: #f8ffd9;
     border-radius: 0 8px 8px 0;
     font-style: italic;
     color: #555;
@@ -192,7 +192,7 @@
     transition: color .15s;
 }
 
-.glossary-single-back__link:hover { color: #27ff7d; }
+.glossary-single-back__link:hover { color: #D1F843; }
 
 /* ── Sidebar ── */
 .glossary-single-sidebar {
@@ -220,8 +220,8 @@
 
 .glossary-sidebar-card__cat-badge {
     display: inline-block;
-    background: rgba(39,255,125,.12);
-    color: #1b9950;
+    background: rgba(209,248,67,.12);
+    color: #4a6b00;
     font-size: 13px;
     font-weight: 700;
     padding: 6px 14px;
@@ -232,7 +232,7 @@
 }
 
 .glossary-sidebar-card__cat-badge:hover {
-    background: rgba(39,255,125,.22);
+    background: rgba(209,248,67,.22);
 }
 
 .glossary-sidebar-card__cat-desc {
@@ -266,12 +266,12 @@
 }
 
 .glossary-sidebar-related__link:hover {
-    background: #f5fff9;
-    color: #27ff7d;
+    background: #f8ffd9;
+    color: #D1F843;
 }
 
 .glossary-sidebar-related__link i {
     font-size: 12px;
-    color: #27ff7d;
+    color: #D1F843;
     flex-shrink: 0;
 }

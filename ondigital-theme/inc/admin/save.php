@@ -52,7 +52,7 @@ function ondigital_panel_save(): void {
     update_option( 'ondigital_options', $updated );
 
     // Handle repeaters
-    $repeater_keys = array( 'partners', 'features', 'pricing', 'faq', 'stats', 'testimonials', 'text_slider', 'about_clients', 'about_faq_items', 'footer_quick_links', 'footer_services_links' );
+    $repeater_keys = array( 'partners', 'features', 'pricing', 'faq', 'stats', 'testimonials', 'text_slider', 'about_clients', 'about_faq_items', 'footer_quick_links', 'footer_services_links', 'project_steps' );
 
     foreach ( $repeater_keys as $rkey ) {
         if ( ! isset( $_POST[ 'ondigital_' . $rkey ] ) ) {
@@ -137,6 +137,15 @@ function ondigital_sanitize_repeater( string $key, array $raw ): array {
                 $out[] = array(
                     'label' => sanitize_text_field( $item['label'] ?? '' ),
                     'url'   => esc_url_raw( $item['url'] ?? '' ),
+                );
+                break;
+            case 'project_steps':
+                $out[] = array(
+                    'title_az' => sanitize_text_field( $item['title_az'] ?? '' ),
+                    'title_en' => sanitize_text_field( $item['title_en'] ?? '' ),
+                    'desc_az'  => sanitize_textarea_field( $item['desc_az'] ?? '' ),
+                    'desc_en'  => sanitize_textarea_field( $item['desc_en'] ?? '' ),
+                    'duration' => sanitize_text_field( $item['duration'] ?? '' ),
                 );
                 break;
         }

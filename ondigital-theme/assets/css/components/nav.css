@@ -3,14 +3,14 @@
    ============================================================================= */
 
 .wc-btn-primary {
-    background-color: #D1F843 !important;
-    border-color: #D1F843 !important;
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
     color: #121212 !important;
 }
 
 .wc-btn-primary:hover {
-    background-color: #D1F843 !important;
-    border-color: #D1F843 !important;
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
     color: #121212 !important;
 }
 

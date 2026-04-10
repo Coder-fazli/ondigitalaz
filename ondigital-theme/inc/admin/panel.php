@@ -29,10 +29,11 @@ function ondigital_panel_menu(): void {
         3
     );
 
-    add_submenu_page( 'ondigital', __( 'General', 'ondigital' ),   __( 'General', 'ondigital' ),   'manage_options', 'ondigital',                 'ondigital_panel_render' );
-    add_submenu_page( 'ondigital', __( 'Header', 'ondigital' ),   __( 'Header', 'ondigital' ),    'manage_options', 'ondigital&section=header',  'ondigital_panel_render' );
-    add_submenu_page( 'ondigital', __( 'Home Page', 'ondigital' ), __( 'Home Page', 'ondigital' ), 'manage_options', 'ondigital&section=home',   'ondigital_panel_render' );
-    add_submenu_page( 'ondigital', __( 'Footer', 'ondigital' ),    __( 'Footer', 'ondigital' ),    'manage_options', 'ondigital&section=footer', 'ondigital_panel_render' );
+    add_submenu_page( 'ondigital', __( 'General', 'ondigital' ),   __( 'General', 'ondigital' ),   'manage_options', 'ondigital',                   'ondigital_panel_render' );
+    add_submenu_page( 'ondigital', __( 'Header', 'ondigital' ),   __( 'Header', 'ondigital' ),    'manage_options', 'ondigital&section=header',    'ondigital_panel_render' );
+    add_submenu_page( 'ondigital', __( 'Home Page', 'ondigital' ), __( 'Home Page', 'ondigital' ), 'manage_options', 'ondigital&section=home',     'ondigital_panel_render' );
+    add_submenu_page( 'ondigital', __( 'Project Page', 'ondigital' ), __( 'Project Page', 'ondigital' ), 'manage_options', 'ondigital&section=project', 'ondigital_panel_render' );
+    add_submenu_page( 'ondigital', __( 'Footer', 'ondigital' ),    __( 'Footer', 'ondigital' ),    'manage_options', 'ondigital&section=footer',   'ondigital_panel_render' );
 }
 
 // =============================================================================
@@ -75,6 +76,11 @@ function ondigital_panel_sections(): array {
             'title' => __( 'Home Page', 'ondigital' ),
             'icon'  => 'dashicons-admin-home',
             'file'  => 'home',
+        ),
+        'project' => array(
+            'title' => __( 'Project Page', 'ondigital' ),
+            'icon'  => 'dashicons-portfolio',
+            'file'  => 'project',
         ),
         'footer' => array(
             'title' => __( 'Footer', 'ondigital' ),

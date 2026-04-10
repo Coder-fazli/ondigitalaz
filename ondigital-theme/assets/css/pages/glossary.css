@@ -26,7 +26,7 @@
 }
 
 .glossary-hero__accent {
-    color: #27ff7d;
+    color: #D1F843;
 }
 
 .glossary-hero__sub {
@@ -58,7 +58,7 @@
 }
 
 .glossary-search:focus-within .glossary-search__icon {
-    color: #27ff7d;
+    color: #D1F843;
 }
 
 .glossary-search__input {
@@ -76,7 +76,7 @@
 .glossary-search__input::placeholder { color: #555; }
 
 .glossary-search__input:focus {
-    border-color: #27ff7d;
+    border-color: #D1F843;
 }
 
 /* ── Global font override for all glossary elements ── */
@@ -130,7 +130,7 @@
 }
 
 .glossary-alpha__btn.is-active {
-    background: #27ff7d;
+    background: #D1F843;
     color: #111;
 }
 
@@ -173,7 +173,7 @@
     display: inline-block;
     width: 4px;
     height: 28px;
-    background: #27ff7d;
+    background: #D1F843;
     border-radius: 4px;
     flex-shrink: 0;
 }
@@ -213,8 +213,8 @@
 }
 
 .glossary-card:hover {
-    border-color: #27ff7d;
-    box-shadow: 0 4px 20px rgba(39,255,125,.12);
+    border-color: #D1F843;
+    box-shadow: 0 4px 20px rgba(209,248,67,.12);
     transform: translateY(-2px);
 }
 
@@ -228,7 +228,7 @@
 .glossary-card__cat {
     font-size: 11px;
     font-weight: 700;
-    color: #27ff7d;
+    color: #D1F843;
     text-transform: uppercase;
     letter-spacing: .08em;
 }
@@ -240,7 +240,7 @@
 }
 
 .glossary-card:hover .glossary-card__arrow {
-    color: #27ff7d;
+    color: #D1F843;
 }
 
 .glossary-card__title {
@@ -252,7 +252,7 @@
 }
 
 .glossary-card:hover .glossary-card__title {
-    color: #27ff7d;
+    color: #D1F843;
 }
 
 .glossary-card__excerpt {
@@ -296,8 +296,8 @@
 
 .glossary-pagination__item.is-current > a,
 .glossary-pagination__item.is-current {
-    background: #27ff7d;
-    border-color: #27ff7d;
+    background: #D1F843;
+    border-color: #D1F843;
     color: #111;
 }
 
@@ -339,7 +339,7 @@
 
 .glossary-empty__reset {
     display: inline-block;
-    background: #27ff7d;
+    background: #D1F843;
     color: #111;
     font-weight: 700;
     font-size: 14px;

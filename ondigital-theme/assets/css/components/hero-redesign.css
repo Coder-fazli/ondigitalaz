@@ -3,13 +3,17 @@
    Standalone styles, no dependency on home.css hero rules
    ============================================================================= */
 
+:root {
+    --accent: var(--accent);
+}
+
 /* ── Section ── */
 .ond-hero {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr auto;
-    padding: 90px 80px 0;
+    padding: 82px 80px 0;
     position: relative;
     overflow: hidden;
     background: #fff;
@@ -19,6 +23,12 @@
 /* Override old .hero-area margin pushed by theme */
 .hero-area.ond-hero {
     margin-top: 0 !important;
+}
+
+/* When WP admin bar is visible, body-wrapper gets margin-top:32px — compensate so
+   hero content still sits just below the (now lower) fixed header */
+.admin-bar .ond-hero {
+    padding-top: 82px;
 }
 
 /* Grid lines — right side */
@@ -56,7 +66,8 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: 40px;
     padding-bottom: 60px;
 }
 
@@ -126,7 +137,7 @@
 }
 
 .ond-hero__highlight {
-    background: #D1F843;
+    background: var(--accent);
     padding: 4px 18px 4px 10px;
     border-radius: 8px;
     color: #0a0a0a;
@@ -153,7 +164,7 @@
 }
 
 .ond-hero__btn-primary {
-    background: #D1F843;
+    background: var(--accent);
     color: #0a0a0a;
     font-size: 15px;
     font-weight: 700;
@@ -216,7 +227,7 @@
     content: '';
     position: absolute;
     width: 420px; height: 420px;
-    background: #D1F843;
+    background: var(--accent);
     border-radius: 50%;
     opacity: .2;
     filter: blur(70px);
@@ -227,7 +238,7 @@
     background: #fff;
     border-radius: 2rem;
     box-shadow: 0 32px 80px rgba(0,0,0,.12), 0 4px 16px rgba(0,0,0,.06), 0 0 0 1px rgba(0,0,0,.04);
-    border-top: 2px solid #D1F843;
+    border-top: 2px solid var(--accent);
     padding: 40px 44px 32px;
     display: flex;
     flex-direction: column;
@@ -303,8 +314,8 @@
 @keyframes ondEQ4 { 0%,100%{transform:scaleY(1)} 25%{transform:scaleY(.7)} 60%{transform:scaleY(.5)} 85%{transform:scaleY(.85)} }
 @keyframes ondEQ5 { 0%,100%{transform:scaleY(1)} 35%{transform:scaleY(.6)} 65%{transform:scaleY(.85)} }
 
-.ond-b1 { height: 62px;  background: linear-gradient(180deg,#e8ff8a,#D1F843); animation: ondEQ1 1.1s ease-in-out 1.0s infinite; }
-.ond-b2 { height: 95px;  background: linear-gradient(180deg,#D1F843,#a8c200); animation: ondEQ2 1.5s ease-in-out 1.1s infinite; }
+.ond-b1 { height: 62px;  background: linear-gradient(180deg,#e8ff8a,var(--accent)); animation: ondEQ1 1.1s ease-in-out 1.0s infinite; }
+.ond-b2 { height: 95px;  background: linear-gradient(180deg,var(--accent),#a8c200); animation: ondEQ2 1.5s ease-in-out 1.1s infinite; }
 .ond-b3 { height: 124px; background: linear-gradient(180deg,#a8c200,#7a9000); animation: ondEQ3 0.9s ease-in-out 1.2s infinite; }
 .ond-b4 { height: 148px; background: linear-gradient(180deg,#7a9000,#5a7000); animation: ondEQ4 1.3s ease-in-out 1.3s infinite; }
 .ond-b5 { height: 180px; background: linear-gradient(180deg,#a8c200,#3a5000); animation: ondEQ5 1.7s ease-in-out 1.4s infinite; }
@@ -316,7 +327,7 @@
     top: -8px; left: 50%;
     transform: translateX(-50%);
     width: 10px; height: 10px;
-    background: #D1F843;
+    background: var(--accent);
     border-radius: 50%;
     opacity: 0;
     animation: ondDotShow 0s forwards 1.95s, ondDotPulse 1.5s ease-out 2s infinite;
@@ -357,7 +368,7 @@
 }
 .ond-hero__stat-num sup {
     font-size: 26px;
-    color: #D1F843;
+    color: var(--accent);
     font-weight: 700;
     -webkit-text-stroke: 1px #5a7000;
 }
@@ -374,7 +385,7 @@
    Responsive
    ============================================================================= */
 @media only screen and (max-width: 1399px) {
-    .ond-hero { padding: 88px 60px 0; }
+    .ond-hero { padding: 82px 60px 0; }
     .ond-hero__stats { margin: 0 -60px; }
 }
 

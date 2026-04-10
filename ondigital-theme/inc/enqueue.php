@@ -69,16 +69,17 @@ function ondigital_enqueue_page_assets() {
 
     // Page templates → CSS/JS slug map
     $page_styles = array(
-        'page-home.php'            => 'home',
-        'page-about.php'           => 'about',
-        'page-services.php'        => 'services',
-        'page-service-details.php' => 'service-details',
-        'page-projects.php'        => 'projects',
-        'page-blog.php'            => 'blog',
-        'page-contact.php'         => 'contact',
-        'page-quote.php'           => 'quote',
-        'page-faq.php'             => 'faq',
-        'page-team.php'            => 'team',
+        'page-home.php'                => 'home',
+        'page-about.php'               => 'about',
+        'page-services.php'            => 'services',
+        'page-service-details.php'     => 'service-details',
+        'page-projects.php'            => 'projects',
+        'page-project-details.php'     => 'project-details-template',
+        'page-blog.php'                => 'blog',
+        'page-contact.php'             => 'contact',
+        'page-quote.php'               => 'quote',
+        'page-faq.php'                 => 'faq',
+        'page-team.php'                => 'team',
     );
 
     foreach ( $page_styles as $template => $slug ) {
@@ -181,7 +182,7 @@ function ondigital_enqueue_page_assets() {
     $loaded = array( 'ondigital-home', 'ondigital-about', 'ondigital-services', 'ondigital-projects',
                      'ondigital-blog', 'ondigital-contact', 'ondigital-faq', 'ondigital-team',
                      'ondigital-quote', 'ondigital-blog-details', 'ondigital-service-details',
-                     'ondigital-project-details', 'ondigital-404' );
+                     'ondigital-project-details', 'ondigital-project-details-template', 'ondigital-404' );
 
     foreach ( $loaded as $handle ) {
         if ( wp_style_is( $handle ) ) {
