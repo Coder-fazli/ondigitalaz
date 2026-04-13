@@ -43,7 +43,4 @@ get_template_part( 'template-parts/home/text-slider' );
 // Section 14: CTA (shared)
 get_template_part( 'template-parts/shared/cta' );
 
-// Section 15: FAQ
-get_template_part( 'template-parts/faq/hero' );
-
 get_footer();
