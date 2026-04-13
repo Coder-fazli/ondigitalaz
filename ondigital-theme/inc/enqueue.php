@@ -104,6 +104,7 @@ function ondigital_enqueue_page_assets() {
             wp_enqueue_style( 'ondigital-services-home', ONDIGITAL_URI . '/assets/css/components/services-home.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
             wp_enqueue_style( 'ondigital-blog-home',     ONDIGITAL_URI . '/assets/css/components/blog-home.css',     array( 'ondigital-home' ), ONDIGITAL_VERSION );
             wp_enqueue_style( 'ondigital-projects-home', ONDIGITAL_URI . '/assets/css/components/projects-home.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-faq',           ONDIGITAL_URI . '/assets/css/pages/faq.css',               array( 'ondigital-home' ), ONDIGITAL_VERSION );
             wp_enqueue_script( 'ondigital-hero-redesign', ONDIGITAL_URI . '/assets/js/components/hero-redesign.js', array(), ONDIGITAL_VERSION, true );
         }
 
