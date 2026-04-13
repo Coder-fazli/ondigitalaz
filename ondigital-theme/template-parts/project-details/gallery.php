@@ -5,11 +5,13 @@
  * @package OnDigital
  */
 
+$id   = get_the_ID();
 $imgs = array();
+
 for ( $n = 1; $n <= 3; $n++ ) {
-    $id  = absint( ondigital_get_option( 'project_gallery_' . $n, '0' ) );
-    $url = $id ? wp_get_attachment_image_url( $id, 'large' ) : '';
-    $alt = $id ? get_post_meta( $id, '_wp_attachment_image_alt', true ) : '';
+    $img_id = absint( get_post_meta( $id, "_od_gallery_{$n}", true ) );
+    $url    = $img_id ? wp_get_attachment_image_url( $img_id, 'large' ) : '';
+    $alt    = $img_id ? get_post_meta( $img_id, '_wp_attachment_image_alt', true ) : '';
     if ( $url ) {
         $imgs[] = array( 'url' => $url, 'alt' => $alt );
     }
@@ -23,10 +25,8 @@ if ( empty( $imgs ) ) {
     <div class="cs-inner">
         <div class="cs-stag cs-fade"><?php esc_html_e( 'Project Gallery', 'ondigital' ); ?></div>
         <div class="cs-gg">
-            <?php foreach ( $imgs as $idx => $img ) :
-                $delay = 'd' . ( $idx + 1 );
-            ?>
-                <div class="cs-gi cs-fade <?php echo esc_attr( $delay ); ?>">
+            <?php foreach ( $imgs as $idx => $img ) : ?>
+                <div class="cs-gi cs-fade d<?php echo $idx + 1; ?>">
                     <img
                         src="<?php echo esc_url( $img['url'] ); ?>"
                         alt="<?php echo esc_attr( $img['alt'] ); ?>"

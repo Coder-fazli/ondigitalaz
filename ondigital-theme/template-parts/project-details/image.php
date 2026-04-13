@@ -5,7 +5,7 @@
  * @package OnDigital
  */
 
-$image_id  = absint( ondigital_get_option( 'project_hero_image', '0' ) );
+$image_id  = absint( get_post_meta( get_the_ID(), '_od_hero_image', true ) );
 $image_url = $image_id ? wp_get_attachment_image_url( $image_id, 'full' ) : '';
 
 if ( ! $image_url ) {

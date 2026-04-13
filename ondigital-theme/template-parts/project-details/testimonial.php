@@ -5,10 +5,11 @@
  * @package OnDigital
  */
 
-$quote    = ondigital_get_option( 'project_quote',       __( 'We were spending €8,000 a month on ads and barely breaking even. Ondigital completely changed how we think about our digital presence — the results speak for themselves.', 'ondigital' ) );
-$author   = ondigital_get_option( 'project_author',      'Sara Khalil' );
-$role     = ondigital_get_option( 'project_author_role', __( 'Founder, Alas Academy', 'ondigital' ) );
-$initials = ondigital_get_option( 'project_author_initials', 'SK' );
+$id       = get_the_ID();
+$quote    = get_post_meta( $id, '_od_quote',          true );
+$author   = get_post_meta( $id, '_od_author',         true );
+$role     = get_post_meta( $id, '_od_author_role',    true );
+$initials = get_post_meta( $id, '_od_author_initials',true );
 
 if ( ! $quote ) {
     return;

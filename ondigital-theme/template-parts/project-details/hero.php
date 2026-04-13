@@ -5,21 +5,20 @@
  * @package OnDigital
  */
 
-$tag           = ondigital_get_option( 'project_tag',           'Case Study — Education · 2025' );
-$title_main    = ondigital_get_option( 'project_title_main',    'Alas Academy' );
-$title_hl      = ondigital_get_option( 'project_title_hl',      'Ondigital' );
-$meta_date     = ondigital_get_option( 'project_meta_date',     'Jan – May 2025' );
-$meta_client   = ondigital_get_option( 'project_meta_client',   'Alas Academy' );
-$meta_services = ondigital_get_option( 'project_meta_services', 'Web · SEO · Paid Ads · Email' );
-$meta_outcome  = ondigital_get_option( 'project_meta_outcome',  '+340% Revenue · 4 months' );
-$live_url      = ondigital_get_option( 'project_live_url',      '' );
+$id            = get_the_ID();
+$tag           = get_post_meta( $id, '_od_tag',        true ) ?: get_the_title();
+$title_main    = get_post_meta( $id, '_od_title_main', true ) ?: get_the_title();
+$title_hl      = get_post_meta( $id, '_od_title_hl',   true ) ?: 'Ondigital';
+$meta_date     = get_post_meta( $id, '_od_date',       true );
+$meta_client   = get_post_meta( $id, '_od_client',     true );
+$meta_services = get_post_meta( $id, '_od_services',   true );
+$meta_outcome  = get_post_meta( $id, '_od_outcome',    true );
+$live_url      = get_post_meta( $id, '_od_live_url',   true );
 
-// Stats for floating cards (reuse results data)
-$stat1_val    = ondigital_get_option( 'project_stat1_value',  '340' );
-$stat1_suffix = ondigital_get_option( 'project_stat1_suffix', '%' );
-$stat1_label  = ondigital_get_option( 'project_stat1_label',  '' );
-$stat3_val    = ondigital_get_option( 'project_stat3_value',  '62' );
-$stat3_suffix = ondigital_get_option( 'project_stat3_suffix', '%' );
+$stat1_val    = get_post_meta( $id, '_od_stat1_value',  true ) ?: '0';
+$stat1_suffix = get_post_meta( $id, '_od_stat1_suffix', true ) ?: '%';
+$stat3_val    = get_post_meta( $id, '_od_stat3_value',  true ) ?: '0';
+$stat3_suffix = get_post_meta( $id, '_od_stat3_suffix', true ) ?: '%';
 ?>
 <section class="cs-hero">
 
@@ -59,7 +58,7 @@ $stat3_suffix = ondigital_get_option( 'project_stat3_suffix', '%' );
                 <span><?php esc_html_e( 'New Order', 'ondigital' ); ?></span>
                 <span class="cs-hc-time"><?php esc_html_e( 'just now', 'ondigital' ); ?></span>
             </div>
-            <div class="cs-hc-brand"><?php echo esc_html( $meta_client ?: 'Client' ); ?></div>
+            <div class="cs-hc-brand"><?php echo esc_html( $meta_client ?: get_the_title() ); ?></div>
             <div class="cs-hc-price">€1,240<small style="font-size:14px;font-weight:600;opacity:.5">.00</small></div>
             <div class="cs-hc-price-sub">+12 <?php esc_html_e( 'orders today', 'ondigital' ); ?></div>
         </div>
@@ -82,7 +81,7 @@ $stat3_suffix = ondigital_get_option( 'project_stat3_suffix', '%' );
                 <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
             </div>
             <div class="cs-hc-label"><?php esc_html_e( 'Organic Traffic', 'ondigital' ); ?></div>
-            <div class="cs-hc-big">+298%</div>
+            <div class="cs-hc-big">+<?php echo esc_html( $stat3_val . $stat3_suffix ); ?></div>
         </div>
 
         <div class="cs-hc cs-hc5">
@@ -115,8 +114,8 @@ $stat3_suffix = ondigital_get_option( 'project_stat3_suffix', '%' );
             </div>
         </div>
         <div class="cs-hp-stats">
-            <div class="cs-hp-stat"><div class="cs-hp-sn">3.8%</div><div class="cs-hp-sl"><?php esc_html_e( 'Conv Rate', 'ondigital' ); ?></div></div>
-            <div class="cs-hp-stat"><div class="cs-hp-sn">+298%</div><div class="cs-hp-sl"><?php esc_html_e( 'Organic', 'ondigital' ); ?></div></div>
+            <div class="cs-hp-stat"><div class="cs-hp-sn">+<?php echo esc_html( $stat1_val . $stat1_suffix ); ?></div><div class="cs-hp-sl"><?php esc_html_e( 'Revenue', 'ondigital' ); ?></div></div>
+            <div class="cs-hp-stat"><div class="cs-hp-sn">+<?php echo esc_html( $stat3_val . $stat3_suffix ); ?></div><div class="cs-hp-sl"><?php esc_html_e( 'Organic', 'ondigital' ); ?></div></div>
             <div class="cs-hp-stat"><div class="cs-hp-sn">4.2×</div><div class="cs-hp-sl">ROAS</div></div>
         </div>
     </div>
