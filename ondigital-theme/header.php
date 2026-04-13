@@ -14,10 +14,8 @@
     <?php wp_head(); ?>
 </head>
 <?php
-$is_home = is_page_template( 'templates/page-home.php' );
-$font_class = $is_home ? 'font-heading-spacegrotesk-bold' : 'font-heading-beatricetrial-regular-2';
 ?>
-<body <?php body_class( $font_class ); ?>>
+<body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
 

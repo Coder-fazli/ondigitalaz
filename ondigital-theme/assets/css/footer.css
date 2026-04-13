@@ -8,8 +8,9 @@
     --accent: #D1F843;
 }
 
-body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
-    font-family: "TASA Orbiter", sans-serif;
+body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select,
+[class*="font-heading-"] * {
+    font-family: "TASA Orbiter", sans-serif !important;
 }
 
 .footer-area {

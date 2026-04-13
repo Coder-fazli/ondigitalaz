@@ -62,7 +62,6 @@ html, body {
     --cs-muted:  rgba(0,0,0,.45);
     --cs-border: rgba(0,0,0,.08);
     --cs-ease:   cubic-bezier(.22,1,.36,1);
-    font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -379,7 +378,7 @@ html, body {
     pointer-events: none;
 }
 .cs-wrap .cs-qi    { max-width: 820px; margin: 0 auto; position: relative; z-index: 1; }
-.cs-wrap .cs-qmark { font-size: 140px; line-height: .8; font-family: Georgia, serif; color: rgba(0,0,0,.15); }
+.cs-wrap .cs-qmark { font-size: 140px; line-height: .8; color: rgba(0,0,0,.15); }
 .cs-wrap .cs-qtext {
     font-size: clamp(20px,2.8vw,32px); font-weight: 400;
     line-height: 1.55; color: rgba(0,0,0,.85); font-style: italic;
