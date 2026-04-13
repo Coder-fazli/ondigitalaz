@@ -4,12 +4,13 @@
 
 :root {
     --font-poppins: "Poppins", sans-serif;
+    --font-tasa: "TASA Orbiter Display", "Poppins", sans-serif;
     --footer-green: #3fd467;
     --accent: #D1F843;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select {
-    font-family: "Poppins", sans-serif;
+    font-family: "TASA Orbiter Display", "Poppins", sans-serif;
 }
 
 .footer-area {
