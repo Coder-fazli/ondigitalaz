@@ -7,15 +7,9 @@
 
 add_action( 'wp_enqueue_scripts', function() {
     wp_enqueue_style(
-        'inter-font',
-        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap',
-        array(),
-        null
-    );
-    wp_enqueue_style(
         'ondigital-projects-archive',
         get_template_directory_uri() . '/assets/css/components/projects-archive.css',
-        array( 'inter-font' ),
+        array(),
         ONDIGITAL_VERSION
     );
 }, 20 );
