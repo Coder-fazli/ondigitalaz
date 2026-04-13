@@ -10,6 +10,27 @@ html, body {
     overflow: auto !important;
     height: auto !important;
 }
+
+/* Fix header on project details page */
+.header-area {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important;
+    background: var(--white, #fff) !important;
+}
+
+/* Hide desktop nav + CTA button on mobile, show burger instead */
+@media (max-width: 1199px) {
+    .header-area .header__nav,
+    .header-area .header__button {
+        display: none !important;
+    }
+    .header-area .header__navicon {
+        display: block !important;
+    }
+}
 #smooth-wrapper {
     overflow: visible !important;
     position: static !important;
@@ -59,7 +80,7 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 0 60px 140px;
+    padding: 100px 60px 140px;
     position: relative;
     overflow: hidden;
     background: #fff;

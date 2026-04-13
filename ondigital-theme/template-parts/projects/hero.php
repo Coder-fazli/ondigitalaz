@@ -1,118 +1,213 @@
 <?php
 /**
- * Projects - Hero & Work Grid Section
+ * Projects Archive — Magazine Portfolio Layout
  *
  * @package OnDigital
  */
 
+// Fetch all projects
 $project_query = new WP_Query( array(
     'post_type'      => 'project',
     'posts_per_page' => -1,
-    'orderby'        => 'date',
-    'order'          => 'DESC',
+    'orderby'        => 'menu_order date',
+    'order'          => 'ASC',
     'lang'           => '',
 ) );
 
-$static_projects = array(
-    array(
-        'title' => 'Victoria Kinko',
-        'tag'   => __( 'Dizayn - 2023', 'ondigital' ),
-        'image' => 'img-s-12.webp',
-        'size'  => '',
-    ),
-    array(
-        'title' => 'Jimmy Fermin',
-        'tag'   => __( 'Dizayn - 2023', 'ondigital' ),
-        'image' => 'img-s-13.webp',
-        'size'  => '',
-    ),
-    array(
-        'title' => 'Briyokath Woody',
-        'tag'   => __( 'Dizayn - 2022', 'ondigital' ),
-        'image' => 'img-s-14.webp',
-        'size'  => 'large',
-    ),
-    array(
-        'title' => 'Mastartery',
-        'tag'   => __( 'Dizayn - 2022', 'ondigital' ),
-        'image' => 'img-s-15.webp',
-        'size'  => '',
-    ),
-    array(
-        'title' => 'Festonax Card',
-        'tag'   => __( 'Dizayn - 2021', 'ondigital' ),
-        'image' => 'img-s-16.webp',
-        'size'  => '',
-    ),
-);
+// Collect all project_category terms for filter bar
+$all_terms = get_terms( array(
+    'taxonomy'   => 'project_category',
+    'hide_empty' => true,
+) );
 ?>
-<section class="work-area">
-    <div class="container">
-        <div class="work-area-inner section-spacing-bottom">
-            <div class="section-content">
-                <div class="section-title-wrapper">
-                    <div class="title-wrapper">
-                        <h1 class="section-title large has_text_move_anim"><?php esc_html_e( 'Layihələr', 'ondigital' ); ?></h1>
-                    </div>
-                </div>
-                <div class="text-wrapper">
-                    <p class="text has_fade_anim">
-                        <?php esc_html_e( 'Müasir və unikal dizayn yanaşması ilə istifadəçi dostu rəqəmsal həllər yaradırıq.', 'ondigital' ); ?>
-                    </p>
-                </div>
-                <div class="icon has_fade_anim">
-                    <img class="show-light" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/shape/img-s-82.webp' ); ?>" alt="<?php esc_attr_e( 'dekor', 'ondigital' ); ?>">
-                    <img class="show-dark" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/shape/img-s-82-light.webp' ); ?>" alt="<?php esc_attr_e( 'dekor', 'ondigital' ); ?>">
-                </div>
-            </div>
-            <div class="works-wrapper-box">
-                <div class="works-wrapper">
-                    <?php if ( $project_query->have_posts() ) : ?>
-                        <?php while ( $project_query->have_posts() ) : $project_query->the_post(); ?>
-                            <div class="has_fade_anim">
-                                <a href="<?php the_permalink(); ?>">
-                                    <div class="work-box">
-                                        <div class="thumb">
-                                            <?php if ( has_post_thumbnail() ) : ?>
-                                                <?php the_post_thumbnail( 'ondigital-project-card' ); ?>
-                                            <?php endif; ?>
-                                        </div>
-                                        <div class="content">
-                                            <h3 class="title"><?php the_title(); ?></h3>
-                                            <div class="meta">
-                                                <?php
-                                                $categories = get_the_terms( get_the_ID(), 'project_category' );
-                                                $cat_name   = ! empty( $categories ) ? $categories[0]->name : '';
-                                                ?>
-                                                <span class="tag"><?php echo esc_html( $cat_name . ' - ' . get_the_date( 'Y' ) ); ?></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        <?php endwhile; ?>
-                        <?php wp_reset_postdata(); ?>
-                    <?php else : ?>
-                        <?php foreach ( $static_projects as $project ) : ?>
-                            <div class="has_fade_anim">
-                                <a <?php echo $project['size'] ? 'class="large"' : ''; ?> href="#">
-                                    <div class="work-box">
-                                        <div class="thumb">
-                                            <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/works/' . $project['image'] ); ?>" alt="<?php echo esc_attr( $project['title'] ); ?>">
-                                        </div>
-                                        <div class="content">
-                                            <h3 class="title"><?php echo esc_html( $project['title'] ); ?></h3>
-                                            <div class="meta">
-                                                <span class="tag"><?php echo esc_html( $project['tag'] ); ?></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </div>
-            </div>
+
+<div class="pa-section">
+
+  <!-- ── Hero ── -->
+  <div class="pa-hero">
+    <div class="pa-hero-line"></div>
+    <div class="pa-hero-inner">
+
+      <div class="pa-eyebrow has_fade_anim">
+        <span></span><?php esc_html_e( 'Layihələr və Keyslar', 'ondigital' ); ?>
+      </div>
+
+      <h1 class="pa-title has_text_move_anim">
+        <?php esc_html_e( 'Nəticə', 'ondigital' ); ?><br>
+        <em><?php esc_html_e( 'danışır.', 'ondigital' ); ?></em>
+      </h1>
+
+      <div class="pa-hero-bottom">
+        <p class="pa-desc has_fade_anim">
+          <?php esc_html_e( 'Hər layihə real problemlə başlayır, ölçülə bilən nəticə ilə bitir. Boş göstəricilər yox — yalnız böyüməni əks etdirən rəqəmlər.', 'ondigital' ); ?>
+        </p>
+        <div class="pa-stats has_fade_anim">
+          <div class="pa-stat">
+            <div class="pa-stat-n">24<em>+</em></div>
+            <div class="pa-stat-l"><?php esc_html_e( 'Müştəri', 'ondigital' ); ?></div>
+          </div>
+          <div class="pa-stat">
+            <div class="pa-stat-n">8</div>
+            <div class="pa-stat-l"><?php esc_html_e( 'Sənaye', 'ondigital' ); ?></div>
+          </div>
+          <div class="pa-stat">
+            <div class="pa-stat-n">€2M<em>+</em></div>
+            <div class="pa-stat-l"><?php esc_html_e( 'Gəlir', 'ondigital' ); ?></div>
+          </div>
         </div>
+      </div>
+
     </div>
-</section>
+  </div>
+
+  <!-- ── Filter bar ── -->
+  <?php if ( ! empty( $all_terms ) && ! is_wp_error( $all_terms ) ) : ?>
+  <div class="pa-filter">
+    <button class="pa-filter-btn active" data-filter="all">
+      <?php esc_html_e( 'Hamısı', 'ondigital' ); ?>
+    </button>
+    <?php foreach ( $all_terms as $term ) : ?>
+      <button class="pa-filter-btn" data-filter="<?php echo esc_attr( $term->slug ); ?>">
+        <?php echo esc_html( $term->name ); ?>
+      </button>
+    <?php endforeach; ?>
+  </div>
+  <?php endif; ?>
+
+  <!-- ── Magazine grid ── -->
+  <div class="pa-grid">
+
+    <?php
+    $card_index = 0;
+
+    if ( $project_query->have_posts() ) :
+      while ( $project_query->have_posts() ) :
+        $project_query->the_post();
+
+        $post_id     = get_the_ID();
+        $cats        = get_the_terms( $post_id, 'project_category' );
+        $cat_slugs   = $cats && ! is_wp_error( $cats ) ? implode( ' ', wp_list_pluck( $cats, 'slug' ) ) : '';
+        $cat_names   = $cats && ! is_wp_error( $cats ) ? wp_list_pluck( $cats, 'name' ) : array();
+
+        // ACF / post meta fields — fall back to empty
+        $result_num   = get_post_meta( $post_id, 'project_result_number',  true ) ?: '';
+        $result_label = get_post_meta( $post_id, 'project_result_label',   true ) ?: '';
+        $result_sub   = get_post_meta( $post_id, 'project_result_sub',     true ) ?: '';
+        $excerpt      = get_the_excerpt() ?: get_post_meta( $post_id, 'project_short_desc', true );
+
+        // Layout class based on position
+        $layout_class = '';
+        if ( $card_index === 0 ) $layout_class = 'pa-featured';
+        if ( $card_index === 1 ) $layout_class = 'pa-tall';
+        if ( $card_index === 4 ) $layout_class = 'pa-wide';
+
+        // Placeholder colour cycles if no thumbnail
+        $ph_colors = array( 'pa-ph-1', 'pa-ph-2', 'pa-ph-3', 'pa-ph-4', 'pa-ph-5' );
+        $ph_class  = $ph_colors[ $card_index % 5 ];
+
+        $delay_class = 'd' . ( ( $card_index % 4 ) + 1 );
+    ?>
+
+    <a href="<?php the_permalink(); ?>"
+       class="pa-card <?php echo esc_attr( $layout_class ); ?> has_fade_anim <?php echo esc_attr( $delay_class ); ?>"
+       data-cat="<?php echo esc_attr( $cat_slugs ); ?>">
+
+      <div class="pa-thumb">
+        <?php if ( has_post_thumbnail() ) : ?>
+          <?php the_post_thumbnail( 'large', array( 'loading' => 'lazy' ) ); ?>
+        <?php else : ?>
+          <div class="pa-thumb-ph <?php echo esc_attr( $ph_class ); ?>">
+            <span class="pa-ph-lbl"><?php the_title(); ?></span>
+          </div>
+        <?php endif; ?>
+      </div>
+
+      <div class="pa-body">
+
+        <?php if ( ! empty( $cat_names ) ) : ?>
+        <div class="pa-tags">
+          <span class="pa-tag pa-tag-lime"><?php echo esc_html( $cat_names[0] ); ?></span>
+          <?php for ( $i = 1; $i < count( $cat_names ); $i++ ) : ?>
+            <span class="pa-tag"><?php echo esc_html( $cat_names[ $i ] ); ?></span>
+          <?php endfor; ?>
+        </div>
+        <?php endif; ?>
+
+        <div class="pa-client"><?php the_title(); ?></div>
+
+        <?php if ( $excerpt ) : ?>
+          <p class="pa-desc"><?php echo esc_html( wp_trim_words( $excerpt, 20 ) ); ?></p>
+        <?php endif; ?>
+
+        <?php if ( $result_num ) : ?>
+        <div class="pa-result">
+          <div>
+            <div class="pa-result-n">
+              <?php echo esc_html( $result_num ); ?>
+              <?php if ( $result_label ) : ?>
+                <span><?php echo esc_html( $result_label ); ?></span>
+              <?php endif; ?>
+            </div>
+            <?php if ( $result_sub ) : ?>
+              <div class="pa-result-l"><?php echo esc_html( $result_sub ); ?></div>
+            <?php endif; ?>
+          </div>
+          <div class="pa-arrow">
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
+        <?php else : ?>
+        <div class="pa-result">
+          <div class="pa-result-l"><?php esc_html_e( 'Ətraflı bax →', 'ondigital' ); ?></div>
+          <div class="pa-arrow">
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
+        <?php endif; ?>
+
+      </div>
+    </a>
+
+    <?php
+        $card_index++;
+      endwhile;
+      wp_reset_postdata();
+
+    else : ?>
+
+      <!-- No projects yet — placeholder cards -->
+      <div class="pa-card pa-featured has_fade_anim">
+        <div class="pa-thumb"><div class="pa-thumb-ph pa-ph-1"><span class="pa-ph-lbl">Tezliklə</span></div></div>
+        <div class="pa-body">
+          <div class="pa-tags"><span class="pa-tag pa-tag-lime">Layihə</span></div>
+          <div class="pa-client"><?php esc_html_e( 'Layihələr yüklənir...', 'ondigital' ); ?></div>
+        </div>
+      </div>
+
+    <?php endif; ?>
+
+  </div><!-- .pa-grid -->
+
+</div><!-- .pa-section -->
+
+<script>
+(function(){
+  var btns  = document.querySelectorAll('.pa-filter-btn');
+  var cards = document.querySelectorAll('.pa-card');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.dataset.filter;
+      cards.forEach(function(card){
+        var cats = ' ' + (card.dataset.cat || '') + ' ';
+        var show = filter === 'all' || cats.indexOf(' ' + filter + ' ') !== -1;
+        card.style.opacity       = show ? '1' : '.15';
+        card.style.transform     = show ? '' : 'scale(.97)';
+        card.style.pointerEvents = show ? '' : 'none';
+        card.style.transition    = 'opacity .3s ease, transform .3s ease';
+      });
+    });
+  });
+})();
+</script>
