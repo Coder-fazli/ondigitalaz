@@ -62,7 +62,7 @@ html, body {
     --cs-muted:  rgba(0,0,0,.45);
     --cs-border: rgba(0,0,0,.08);
     --cs-ease:   cubic-bezier(.22,1,.36,1);
-    font-family: 'Inter', 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
