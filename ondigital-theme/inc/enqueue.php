@@ -122,16 +122,7 @@ function ondigital_enqueue_page_assets() {
         }
     }
 
-    if ( is_post_type_archive( 'project' ) ) {
-        $css = ONDIGITAL_DIR . '/assets/css/pages/projects.css';
-        if ( file_exists( $css ) ) {
-            wp_enqueue_style( 'ondigital-projects', ONDIGITAL_URI . '/assets/css/pages/projects.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-        }
-        $js = ONDIGITAL_DIR . '/assets/js/pages/projects.js';
-        if ( file_exists( $js ) ) {
-            wp_enqueue_script( 'ondigital-projects', ONDIGITAL_URI . '/assets/js/pages/projects.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
-        }
-    }
+    // Project archive CSS/JS is handled directly in archive-project.php
 
     // Single CPT posts
     if ( is_singular( 'post' ) ) {
