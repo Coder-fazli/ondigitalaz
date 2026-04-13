@@ -11,14 +11,23 @@ html, body {
     height: auto !important;
 }
 
-/* Fix header on project details page */
+/* Fix header on project details page — transparent so it merges with white hero */
 .header-area {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     z-index: 9999 !important;
-    background: var(--white, #fff) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+}
+/* Once user scrolls past hero, give header a solid white background */
+.header-area.sticky,
+.header-area.header-scrolled,
+.header-area.scrolled {
+    background: #fff !important;
+    box-shadow: 0 2px 20px rgba(0,0,0,.08) !important;
 }
 
 /* Hide desktop nav + CTA button on mobile, show burger instead */
@@ -86,15 +95,7 @@ html, body {
     background: #fff;
 }
 
-/* Dot-grid background */
-.cs-wrap .cs-hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(circle, rgba(0,0,0,.14) 1px, transparent 1px);
-    background-size: 24px 24px;
-    pointer-events: none;
-    z-index: 0;
-}
+/* Dot-grid removed */
 /* Centre glow */
 .cs-wrap .cs-hero::after {
     content: '';
@@ -498,9 +499,12 @@ html, body {
     .cs-wrap .cs-section { padding:64px 20px; }
     .cs-wrap .cs-img-sec { padding:0 20px 64px; }
     .cs-wrap .cs-quote-sec { padding:64px 20px; }
-    .cs-wrap .cs-step { grid-template-columns:44px 1px 40px 1fr; gap:12px; }
-    .cs-wrap .cs-step-n { font-size:40px; }
+    .cs-wrap .cs-step { grid-template-columns:36px 1px 36px 1fr; gap:10px; padding:22px 0; }
+    .cs-wrap .cs-step-n { font-size:34px; }
+    .cs-wrap .cs-step-icon { width:36px; height:36px; border-radius:10px; }
+    .cs-wrap .cs-step-icon svg { width:16px; height:16px; }
     .cs-wrap .cs-step-dur { display:none; }
+    .cs-wrap .cs-step-title { font-size:16px; }
     .cs-wrap .cs-step-desc { font-size:13px; }
     .cs-wrap .cs-gg { grid-template-columns:1fr; }
     .cs-wrap .cs-gi:first-child { height:260px; grid-row:auto; }
