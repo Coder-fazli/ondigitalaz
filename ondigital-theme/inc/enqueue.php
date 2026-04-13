@@ -17,8 +17,7 @@ add_action( 'wp_enqueue_scripts', 'ondigital_enqueue_assets' );
 function ondigital_enqueue_assets() {
 
     // --- Google Fonts ---
-    wp_enqueue_style( 'poppins', 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap', array(), null );
-    wp_enqueue_style( 'tasa-orbiter', 'https://fonts.googleapis.com/css2?family=TASA+Orbiter+Display:wght@400;500;600;700&display=swap', array(), null );
+    wp_enqueue_style( 'tasa-orbiter', 'https://fonts.googleapis.com/css2?family=TASA+Orbiter:wght@400;500;600;700;800;900&display=swap', array(), null );
 
     // --- Global Vendor CSS ---
     wp_enqueue_style( 'bootstrap',       ONDIGITAL_URI . '/assets/css/vendor/bootstrap.min.css',      array(),            '5.3.0' );
