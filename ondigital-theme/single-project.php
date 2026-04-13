@@ -5,118 +5,28 @@
  * @package OnDigital
  */
 
-get_header(); ?>
+add_action( 'wp_enqueue_scripts', function() {
+    wp_enqueue_style( 'ondigital-default', get_template_directory_uri() . '/assets/css/global.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+    wp_enqueue_style( 'ondigital-project-details-template', get_template_directory_uri() . '/assets/css/pages/project-details-template.css', array( 'ondigital-default' ), ONDIGITAL_VERSION );
+    wp_enqueue_script( 'ondigital-project-details-template', get_template_directory_uri() . '/assets/js/pages/project-details-template.js', array( 'jquery' ), ONDIGITAL_VERSION, true );
+    wp_dequeue_script( 'meanmenu' );
+}, 99 );
 
-<?php while ( have_posts() ) : the_post(); ?>
-
-    <section class="work-details-area">
-        <div class="hero-area">
-            <?php if ( has_post_thumbnail() ) : ?>
-                <div class="area-bg">
-                    <?php the_post_thumbnail( 'ondigital-hero' ); ?>
-                </div>
-            <?php endif; ?>
-            <div class="container">
-                <div class="hero-area-inner">
-                    <div class="section-content">
-                        <div class="section-title-wrapper">
-                            <div class="title-wrapper">
-                                <h1 class="section-title has_fade_anim"><?php the_title(); ?></h1>
-                            </div>
-                        </div>
-                        <ul class="work-meta has_fade_anim" data-on-scroll="0">
-                            <li>
-                                <span class="title"><?php esc_html_e( 'Tarix', 'ondigital' ); ?></span>
-                                <span class="text"><?php echo esc_html( get_the_date() ); ?></span>
-                            </li>
-                            <?php
-                            $client = get_post_meta( get_the_ID(), '_project_client', true );
-                            if ( $client ) :
-                            ?>
-                            <li>
-                                <span class="title"><?php esc_html_e( 'Müştəri', 'ondigital' ); ?></span>
-                                <span class="text"><?php echo esc_html( $client ); ?></span>
-                            </li>
-                            <?php endif; ?>
-                            <?php
-                            $project_url = get_post_meta( get_the_ID(), '_project_url', true );
-                            if ( $project_url ) :
-                            ?>
-                            <li>
-                                <a href="<?php echo esc_url( $project_url ); ?>" class="wc-btn wc-btn-normal btn-text-flip" target="_blank" rel="noopener noreferrer">
-                                    <span data-text="<?php esc_attr_e( '( Saytı gör )', 'ondigital' ); ?>"><?php esc_html_e( '( Saytı gör )', 'ondigital' ); ?></span>
-                                </a>
-                            </li>
-                            <?php endif; ?>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="problem-area">
-        <div class="container">
-            <div class="problem-area-inner section-spacing">
-                <div class="section-content">
-                    <div class="section-title-wrapper">
-                        <div class="title-wrapper">
-                            <div class="text-wrapper has_fade_anim">
-                                <?php the_content(); ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <?php
-    $gallery = get_post_meta( get_the_ID(), '_project_gallery', true );
-    if ( ! empty( $gallery ) ) :
-    ?>
-    <div class="gallery-area">
-        <div class="container">
-            <div class="gallery-area-inner section-spacing-top">
-                <div class="gallery-wrapper-box">
-                    <div class="gallery-wrapper">
-                        <?php foreach ( (array) $gallery as $image_id ) : ?>
-                            <div class="thumb has_fade_anim">
-                                <?php echo wp_get_attachment_image( $image_id, 'large' ); ?>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php endif; ?>
-
-    <div class="btn-area has_fade_anim">
-        <div class="container">
-            <div class="btn-area-inner section-spacing-bottom">
-                <div class="btn-wrapper">
-                    <?php
-                    $prev_post = get_previous_post();
-                    $next_post = get_next_post();
-                    ?>
-                    <?php if ( $prev_post ) : ?>
-                        <a class="wc-btn wc-btn-primary btn-text-flip bordered" href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>">
-                            <span data-text="<?php esc_attr_e( 'Əvvəlki', 'ondigital' ); ?>"><?php esc_html_e( 'Əvvəlki', 'ondigital' ); ?></span>
-                        </a>
-                    <?php endif; ?>
-                    <?php if ( $next_post ) : ?>
-                        <a class="wc-btn wc-btn-primary btn-text-flip bordered" href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>">
-                            <span data-text="<?php esc_attr_e( 'Növbəti', 'ondigital' ); ?>"><?php esc_html_e( 'Növbəti', 'ondigital' ); ?></span>
-                        </a>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <?php get_template_part( 'template-parts/shared/cta' ); ?>
-
-<?php endwhile; ?>
-
-<?php get_footer();
+get_header();
+?>
+<style>
+html { scroll-behavior: auto !important; overflow: auto !important; height: auto !important; }
+body { overflow: auto !important; height: auto !important; }
+#smooth-wrapper, #smooth-content { overflow: visible !important; position: static !important; height: auto !important; transform: none !important; will-change: auto !important; }
+</style>
+<div class="cs-wrap">
+    <?php get_template_part( 'template-parts/project-details/hero' ); ?>
+    <?php get_template_part( 'template-parts/project-details/image' ); ?>
+    <?php get_template_part( 'template-parts/project-details/results' ); ?>
+    <?php get_template_part( 'template-parts/project-details/testimonial' ); ?>
+    <?php get_template_part( 'template-parts/project-details/process' ); ?>
+    <?php get_template_part( 'template-parts/project-details/gallery' ); ?>
+    <?php get_template_part( 'template-parts/project-details/cta' ); ?>
+</div>
+<?php
+get_footer();
