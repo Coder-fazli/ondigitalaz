@@ -236,9 +236,22 @@ $langs = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
         echo '<div class="od-repeater-row">';
         echo '<div class="od-repeater-row-head"><span>' . sprintf( __( 'FAQ %d', 'ondigital' ), $i + 1 ) . '</span>';
         echo '<div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>';
-        echo '<div class="od-field"><label>' . esc_html__( 'Question', 'ondigital' ) . '</label><input type="text" name="ondigital_faq[' . $i . '][question]" value="' . esc_attr( $row['question'] ?? '' ) . '"></div>';
-        echo '<div class="od-field"><label>' . esc_html__( 'Answer', 'ondigital' ) . '</label><textarea name="ondigital_faq[' . $i . '][answer]" rows="2">' . esc_textarea( $row['answer'] ?? '' ) . '</textarea></div>';
-        echo '<label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" name="ondigital_faq[' . $i . '][open]" value="1" ' . checked( ! empty( $row['open'] ), true, false ) . '> ' . esc_html__( 'Open by default', 'ondigital' ) . '</label>';
+
+        echo '<div class="od-lang-wrap"><div class="od-lang-tabs">';
+        echo '<span class="od-lang-tab active" data-lang="az">🇦🇿 AZ</span>';
+        echo '<span class="od-lang-tab" data-lang="en">🇬🇧 EN</span>';
+        echo '</div>';
+
+        foreach ( array( 'az', 'en' ) as $lang ) :
+            $active = $lang === 'az' ? 'active' : '';
+            echo '<div class="od-lang-pane ' . esc_attr( $active ) . '" data-lang="' . esc_attr( $lang ) . '">';
+            echo '<div class="od-field"><label>' . esc_html__( 'Question', 'ondigital' ) . ' (' . strtoupper( $lang ) . ')</label><input type="text" name="ondigital_faq[' . $i . '][question_' . $lang . ']" value="' . esc_attr( $row[ 'question_' . $lang ] ?? $row['question'] ?? '' ) . '"></div>';
+            echo '<div class="od-field"><label>' . esc_html__( 'Answer', 'ondigital' ) . ' (' . strtoupper( $lang ) . ')</label><textarea name="ondigital_faq[' . $i . '][answer_' . $lang . ']" rows="2">' . esc_textarea( $row[ 'answer_' . $lang ] ?? $row['answer'] ?? '' ) . '</textarea></div>';
+            echo '</div>';
+        endforeach;
+
+        echo '</div>'; // od-lang-wrap
+        echo '<label style="display:flex;align-items:center;gap:6px;font-size:13px;margin-top:8px;"><input type="checkbox" name="ondigital_faq[' . $i . '][open]" value="1" ' . checked( ! empty( $row['open'] ), true, false ) . '> ' . esc_html__( 'Open by default', 'ondigital' ) . '</label>';
         echo '</div>';
     } );
     od_card_close();

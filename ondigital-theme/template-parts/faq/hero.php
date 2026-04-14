@@ -5,40 +5,23 @@
  * @package OnDigital
  */
 
-$faqs = array(
-    array(
-        'question' => __( 'OnDigital hansı xidmətləri təklif edir?', 'ondigital' ),
-        'answer'   => __( 'OnDigital veb-sayt dizaynı, inkişaf etdirmə, SEO optimallaşdırma, rəqəmsal marketinq, brendinq və sosial media idarəetməsi xidmətlərini təklif edir. Biz biznesinizin onlayn görünürlüyünü artırmaq üçün hərtərəfli həllər təmin edirik.', 'ondigital' ),
-    ),
-    array(
-        'question' => __( 'Layihənin tamamlanma müddəti nə qədərdir?', 'ondigital' ),
-        'answer'   => __( 'Layihənin mürəkkəbliyindən asılı olaraq, standart veb-sayt layihəsi 2-4 həftə, daha böyük miqyaslı layihələr isə 4-8 həftə çəkə bilər. Hər bir layihə üçün dəqiq müddət ilkin məsləhətləşmə zamanı müəyyən edilir.', 'ondigital' ),
-    ),
-    array(
-        'question' => __( 'Xidmətlərinizin qiyməti necə müəyyən edilir?', 'ondigital' ),
-        'answer'   => __( 'Qiymətlərimiz layihənin həcminə, tələblərə və müddətə görə fərqlənir. Hər bir müştəri üçün fərdi qiymət təklifi hazırlayırıq. Pulsuz ilkin məsləhətləşmə üçün bizimlə əlaqə saxlayın.', 'ondigital' ),
-    ),
-    array(
-        'question' => __( 'Layihə başa çatdıqdan sonra dəstək verirsinizmi?', 'ondigital' ),
-        'answer'   => __( 'Bəli, bütün layihələrimiz üçün layihə tamamlandıqdan sonra texniki dəstək təmin edirik. Bundan əlavə, aylıq texniki xidmət paketlərimiz mövcuddur ki, veb-saytınız həmişə yenilənmiş və təhlükəsiz olsun.', 'ondigital' ),
-    ),
-    array(
-        'question' => __( 'SEO optimallaşdırma niyə vacibdir?', 'ondigital' ),
-        'answer'   => __( 'SEO optimallaşdırma veb-saytınızın axtarış motorlarında daha yüksək sıralanmasına kömək edir. Bu, orqanik trafiki artırır, potensial müştərilərin sizi tapmasını asanlaşdırır və uzunmüddətli perspektivdə reklam xərclərini azaldır.', 'ondigital' ),
-    ),
-    array(
-        'question' => __( 'Mövcud veb-saytımı yeniləyə bilərsinizmi?', 'ondigital' ),
-        'answer'   => __( 'Bəli, mövcud veb-saytınızı müasir dizayn standartlarına uyğun yeniləyə, performansını artıra və yeni funksionallıqlar əlavə edə bilərik. Yenidən dizayn prosesi mövcud kontentinizi qoruyaraq həyata keçirilir.', 'ondigital' ),
-    ),
-    array(
-        'question' => __( 'Rəqəmsal marketinq strategiyası necə işləyir?', 'ondigital' ),
-        'answer'   => __( 'Rəqəmsal marketinq strategiyamız bazarınızın təhlili, hədəf auditoriyanın müəyyən edilməsi, kontent planlaması, sosial media idarəetməsi və performans izləmə mərhələlərini əhatə edir. Hər bir strategiya biznesinizin unikal ehtiyaclarına uyğunlaşdırılır.', 'ondigital' ),
-    ),
-    array(
-        'question' => __( 'Sizinlə necə əlaqə saxlaya bilərəm?', 'ondigital' ),
-        'answer'   => __( 'Bizimlə əlaqə səhifəmizdəki forma vasitəsilə, telefon və ya e-poçt ilə əlaqə saxlaya bilərsiniz. Komandamız iş günləri ərzində 24 saat ərzində cavab verir. Pulsuz məsləhətləşmə üçün bizimlə əlaqə saxlamaqdan çəkinməyin.', 'ondigital' ),
-    ),
+$default_faqs = array(
+    array( 'question' => __( 'OnDigital hansı xidmətləri təklif edir?', 'ondigital' ), 'answer' => __( 'OnDigital veb-sayt dizaynı, inkişaf etdirmə, SEO optimallaşdırma, rəqəmsal marketinq, brendinq və sosial media idarəetməsi xidmətlərini təklif edir.', 'ondigital' ), 'open' => 0 ),
+    array( 'question' => __( 'Layihənin tamamlanma müddəti nə qədərdir?', 'ondigital' ), 'answer' => __( 'Layihənin mürəkkəbliyindən asılı olaraq, standart veb-sayt layihəsi 2-4 həftə, daha böyük miqyaslı layihələr isə 4-8 həftə çəkə bilər.', 'ondigital' ), 'open' => 1 ),
+    array( 'question' => __( 'Xidmətlərinizin qiyməti necə müəyyən edilir?', 'ondigital' ), 'answer' => __( 'Qiymətlərimiz layihənin həcminə, tələblərə və müddətə görə fərqlənir. Hər bir müştəri üçün fərdi qiymət təklifi hazırlayırıq.', 'ondigital' ), 'open' => 0 ),
+    array( 'question' => __( 'Layihə başa çatdıqdan sonra dəstək verirsinizmi?', 'ondigital' ), 'answer' => __( 'Bəli, bütün layihələrimiz üçün layihə tamamlandıqdan sonra texniki dəstək təmin edirik.', 'ondigital' ), 'open' => 0 ),
+    array( 'question' => __( 'SEO optimallaşdırma niyə vacibdir?', 'ondigital' ), 'answer' => __( 'SEO optimallaşdırma veb-saytınızın axtarış motorlarında daha yüksək sıralanmasına kömək edir.', 'ondigital' ), 'open' => 0 ),
+    array( 'question' => __( 'Mövcud veb-saytımı yeniləyə bilərsinizmi?', 'ondigital' ), 'answer' => __( 'Bəli, mövcud veb-saytınızı müasir dizayn standartlarına uyğun yeniləyə, performansını artıra və yeni funksionallıqlar əlavə edə bilərik.', 'ondigital' ), 'open' => 0 ),
 );
+
+$faqs = ondigital_get_repeater( 'faq', $default_faqs );
+
+if ( empty( $faqs ) ) {
+    return;
+}
+
+$options = get_option( 'ondigital_options', array() );
+$lang    = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
 ?>
 <section class="faq-area">
     <div class="container large">
@@ -59,19 +42,23 @@ $faqs = array(
                         </p>
                     </div>
                     <div class="accordion-wrapper has_fade_anim" data-delay="0.45">
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion accordion-flush" id="faqPageAccordion">
                             <?php foreach ( $faqs as $index => $faq ) :
                                 $item_num   = $index + 1;
-                                $item_id    = 'flush-collapse' . $item_num;
-                                $heading_id = 'flush-heading' . $item_num;
-                                $is_open    = ( $index === 1 );
+                                $item_id    = 'faq-collapse-' . $item_num;
+                                $heading_id = 'faq-heading-' . $item_num;
+                                $is_open    = ! empty( $faq['open'] );
+                                $question   = $faq[ 'question_' . $lang ] ?? $faq['question'] ?? '';
+                                $answer     = $faq[ 'answer_' . $lang ]   ?? $faq['answer']   ?? '';
                             ?>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="<?php echo esc_attr( $heading_id ); ?>">
-                                        <button class="accordion-button<?php echo $is_open ? '' : ' collapsed'; ?>" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo esc_attr( $item_id ); ?>" aria-expanded="<?php echo $is_open ? 'true' : 'false'; ?>" aria-controls="<?php echo esc_attr( $item_id ); ?>"><?php echo esc_html( $faq['question'] ); ?></button>
+                                        <button class="accordion-button<?php echo $is_open ? '' : ' collapsed'; ?>" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo esc_attr( $item_id ); ?>" aria-expanded="<?php echo $is_open ? 'true' : 'false'; ?>" aria-controls="<?php echo esc_attr( $item_id ); ?>">
+                                            <?php echo esc_html( $question ); ?>
+                                        </button>
                                     </h2>
-                                    <div id="<?php echo esc_attr( $item_id ); ?>" class="accordion-collapse collapse<?php echo $is_open ? ' show' : ''; ?>" aria-labelledby="<?php echo esc_attr( $heading_id ); ?>" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body"><?php echo esc_html( $faq['answer'] ); ?></div>
+                                    <div id="<?php echo esc_attr( $item_id ); ?>" class="accordion-collapse collapse<?php echo $is_open ? ' show' : ''; ?>" aria-labelledby="<?php echo esc_attr( $heading_id ); ?>">
+                                        <div class="accordion-body"><?php echo esc_html( $answer ); ?></div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
