@@ -204,34 +204,10 @@ $langs = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
         <p style="color:#646970;font-size:12px;margin-top:12px;"><?php esc_html_e( 'Project items are managed from WordPress Admin → Projects (CPT).', 'ondigital' ); ?></p>
     <?php od_card_close(); ?>
 
-    <!-- ── 8. PRICING + 9. FAQ ── -->
+    <!-- ── 8. FAQ ── -->
     <?php
-    $pricing = ondigital_get_repeater( 'pricing', array() );
-    $faq     = ondigital_get_repeater( 'faq', array() );
-    od_card_open( __( '8. Pricing & FAQ', 'ondigital' ), 'dashicons-tag' );
-    od_lang_open();
-    foreach ( $langs as $lang => $label ) :
-        od_lang_pane( $lang );
-        od_text( 'pricing_title_' . $lang, __( 'Section Title', 'ondigital' ), $options );
-        od_lang_pane_close();
-    endforeach;
-    od_lang_close();
-    od_divider();
-    echo '<p style="font-weight:600;margin-bottom:8px;">' . esc_html__( 'Pricing Plans', 'ondigital' ) . '</p>';
-    od_repeater( $pricing, 'pricing', 'ondigital_pricing', function( $i, $row ) {
-        echo '<div class="od-repeater-row">';
-        echo '<div class="od-repeater-row-head"><span>' . sprintf( __( 'Plan %d', 'ondigital' ), $i + 1 ) . '</span>';
-        echo '<div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>';
-        echo '<div class="od-field-row">';
-        echo '<div class="od-field"><label>' . esc_html__( 'Plan Name', 'ondigital' ) . '</label><input type="text" name="ondigital_pricing[' . $i . '][name]" value="' . esc_attr( $row['name'] ?? '' ) . '"></div>';
-        echo '<div class="od-field"><label>' . esc_html__( 'Price', 'ondigital' ) . '</label><input type="text" name="ondigital_pricing[' . $i . '][price]" value="' . esc_attr( $row['price'] ?? '' ) . '"></div>';
-        echo '</div>';
-        echo '<div class="od-field"><label>' . esc_html__( 'Features (one per line)', 'ondigital' ) . '</label><textarea name="ondigital_pricing[' . $i . '][features]" rows="4">' . esc_textarea( $row['features'] ?? '' ) . '</textarea></div>';
-        echo '<div class="od-field"><label>' . esc_html__( 'CTA URL', 'ondigital' ) . '</label><input type="url" name="ondigital_pricing[' . $i . '][cta_url]" value="' . esc_url( $row['cta_url'] ?? '' ) . '"></div>';
-        echo '</div>';
-    } );
-    od_divider();
-    echo '<p style="font-weight:600;margin-bottom:8px;">' . esc_html__( 'FAQ Items', 'ondigital' ) . '</p>';
+    $faq = ondigital_get_repeater( 'faq', array() );
+    od_card_open( __( '8. FAQ', 'ondigital' ), 'dashicons-editor-help' );
     od_repeater( $faq, 'faq', 'ondigital_faq', function( $i, $row ) {
         echo '<div class="od-repeater-row">';
         echo '<div class="od-repeater-row-head"><span>' . sprintf( __( 'FAQ %d', 'ondigital' ), $i + 1 ) . '</span>';

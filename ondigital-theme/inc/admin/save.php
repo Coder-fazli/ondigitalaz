@@ -98,6 +98,14 @@ function ondigital_sanitize_repeater( string $key, array $raw ): array {
                 );
                 break;
             case 'faq':
+                $out[] = array(
+                    'question_az' => sanitize_text_field( $item['question_az'] ?? $item['question'] ?? '' ),
+                    'question_en' => sanitize_text_field( $item['question_en'] ?? '' ),
+                    'answer_az'   => sanitize_textarea_field( $item['answer_az'] ?? $item['answer'] ?? '' ),
+                    'answer_en'   => sanitize_textarea_field( $item['answer_en'] ?? '' ),
+                    'open'        => ! empty( $item['open'] ) ? 1 : 0,
+                );
+                break;
             case 'about_faq_items':
                 $out[] = array(
                     'question' => sanitize_text_field( $item['question'] ?? '' ),
