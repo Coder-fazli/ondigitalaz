@@ -208,6 +208,16 @@ $langs = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
     <?php
     $faq = ondigital_get_repeater( 'faq', array() );
     od_card_open( __( '8. FAQ', 'ondigital' ), 'dashicons-editor-help' );
+    od_lang_open();
+    foreach ( $langs as $lang => $label ) :
+        od_lang_pane( $lang );
+        od_text( 'faq_title_' . $lang, __( 'Section Title', 'ondigital' ), $options, __( 'e.g. Tez-tez verilən suallar', 'ondigital' ) );
+        od_text( 'faq_sidebar_text_' . $lang, __( 'Sidebar Link Text', 'ondigital' ), $options, __( 'e.g. Dizayn, inkişaf və strategiya...', 'ondigital' ) );
+        od_url( 'faq_sidebar_url_' . $lang, __( 'Sidebar Link URL', 'ondigital' ), $options );
+        od_lang_pane_close();
+    endforeach;
+    od_lang_close();
+    od_divider();
     od_repeater( $faq, 'faq', 'ondigital_faq', function( $i, $row ) {
         echo '<div class="od-repeater-row">';
         echo '<div class="od-repeater-row-head"><span>' . sprintf( __( 'FAQ %d', 'ondigital' ), $i + 1 ) . '</span>';

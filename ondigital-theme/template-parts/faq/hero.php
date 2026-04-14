@@ -20,26 +20,26 @@ if ( empty( $faqs ) ) {
     return;
 }
 
-$options = get_option( 'ondigital_options', array() );
-$lang    = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
+$options      = get_option( 'ondigital_options', array() );
+$lang         = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
+$title        = $options[ 'faq_title_' . $lang ] ?? $options['faq_title_az'] ?? __( 'Tez-tez verilən suallar', 'ondigital' );
+$sidebar_text = $options[ 'faq_sidebar_text_' . $lang ] ?? $options['faq_sidebar_text_az'] ?? __( 'Dizayn, inkişaf və strategiya sahəsində mükəmməl xidmət göstəririk', 'ondigital' );
+$sidebar_url  = $options[ 'faq_sidebar_url_' . $lang ] ?? $options['faq_sidebar_url_az'] ?? home_url( '/elaqe/' );
 ?>
 <section class="faq-area">
     <div class="container large">
         <div class="faq-area-inner section-spacing-bottom">
             <div class="section-content">
+                <?php if ( $sidebar_text ) : ?>
                 <div class="btn-wrapper has_fade_anim" data-fade-from="left">
-                    <a href="<?php echo esc_url( home_url( '/elaqe/' ) ); ?>" class="wc-btn wc-btn-underline"><?php esc_html_e( 'Dizayn, inkişaf və strategiya sahəsində mükəmməl xidmət göstəririk', 'ondigital' ); ?><i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="<?php echo esc_url( $sidebar_url ); ?>" class="wc-btn wc-btn-underline"><?php echo esc_html( $sidebar_text ); ?><i class="fa-solid fa-arrow-right"></i></a>
                 </div>
+                <?php endif; ?>
                 <div class="content-last">
                     <div class="section-title-wrapper">
                         <div class="title-wrapper">
-                            <h1 class="section-title large has_fade_anim"><?php esc_html_e( 'Tez-tez verilən suallar', 'ondigital' ); ?></h1>
+                            <h1 class="section-title large has_fade_anim"><?php echo esc_html( $title ); ?></h1>
                         </div>
-                    </div>
-                    <div class="text-wrapper">
-                        <p class="text has_fade_anim" data-delay="0.30">
-                            <?php esc_html_e( 'OnDigital innovasiya və rəqəmsal həllərin dinamik mərkəzidir. Biz müştərilərimizə ən yaxşı xidməti təmin edirik.', 'ondigital' ); ?>
-                        </p>
                     </div>
                     <div class="accordion-wrapper has_fade_anim" data-delay="0.45">
                         <div class="accordion accordion-flush" id="faqPageAccordion">
