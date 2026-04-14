@@ -158,5 +158,10 @@ function ondigital_panel_render(): void {
 
         </div>
     </div>
+
+    <!-- Floating Save Button -->
+    <button type="button" class="od-save-btn od-save-float" id="od-save-float">
+        <?php esc_html_e( 'Save Changes', 'ondigital' ); ?>
+    </button>
     <?php
 }

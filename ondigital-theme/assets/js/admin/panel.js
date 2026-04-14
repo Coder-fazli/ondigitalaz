@@ -96,9 +96,19 @@
         faq: function (i) {
             return '<div class="od-repeater-row">' +
                 '<div class="od-repeater-row-head"><span>FAQ ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
-                '<div class="od-field"><label>Question</label><input type="text" name="ondigital_faq[' + i + '][question]" value=""></div>' +
-                '<div class="od-field"><label>Answer</label><textarea name="ondigital_faq[' + i + '][answer]" rows="2"></textarea></div>' +
-                '<label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" name="ondigital_faq[' + i + '][open]" value="1"> Open by default</label>' +
+                '<div class="od-lang-wrap"><div class="od-lang-tabs">' +
+                '<span class="od-lang-tab active" data-lang="az">🇦🇿 AZ</span>' +
+                '<span class="od-lang-tab" data-lang="en">🇬🇧 EN</span>' +
+                '</div>' +
+                '<div class="od-lang-pane active" data-lang="az">' +
+                '<div class="od-field"><label>Question (AZ)</label><input type="text" name="ondigital_faq[' + i + '][question_az]" value=""></div>' +
+                '<div class="od-field"><label>Answer (AZ)</label><textarea name="ondigital_faq[' + i + '][answer_az]" rows="2"></textarea></div>' +
+                '</div>' +
+                '<div class="od-lang-pane" data-lang="en">' +
+                '<div class="od-field"><label>Question (EN)</label><input type="text" name="ondigital_faq[' + i + '][question_en]" value=""></div>' +
+                '<div class="od-field"><label>Answer (EN)</label><textarea name="ondigital_faq[' + i + '][answer_en]" rows="2"></textarea></div>' +
+                '</div></div>' +
+                '<label style="display:flex;align-items:center;gap:6px;font-size:13px;margin-top:8px;"><input type="checkbox" name="ondigital_faq[' + i + '][open]" value="1"> Open by default</label>' +
                 '</div>';
         },
         stats: function (i) {
@@ -175,6 +185,11 @@
         if (templates[type]) {
             container.append(templates[type](index));
         }
+    });
+
+    // ── Floating save button triggers main save ────────────────────
+    $('#od-save-float').on('click', function () {
+        $('#od-save-btn').trigger('click');
     });
 
     // ── AJAX Save ──────────────────────────────────────────────────
