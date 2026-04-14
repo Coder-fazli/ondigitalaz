@@ -1,0 +1,363 @@
+/* =============================================================================
+   Hero Chart SVG Animation
+   ============================================================================= */
+
+.hero-chart-anim {
+    display: inline-block;
+    vertical-align: middle;
+    width: 110px;
+    height: 48px;
+    margin: 0 6px -6px;
+    overflow: visible;
+}
+
+/* Reset theme's .section-title span background — target only container/wrapper spans, NOT bars */
+.hero-chart-card,
+.hero-chart-card .hcc-bars,
+.hero-chart-card .hcc-bw {
+    background-image: none !important;
+    background-repeat: initial !important;
+    background-size: initial !important;
+    background-position: initial !important;
+}
+
+/* ── Hero chart card ── */
+.hero-chart-card {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 24px rgba(160,190,0,.18), 0 1px 4px rgba(0,0,0,.08);
+    padding: 12px 14px 10px;
+    vertical-align: middle;
+    margin: 0 8px -4px;
+    position: relative;
+    animation: hccFloat 4s ease-in-out infinite;
+    border-top: 1px solid #D1F843;
+}
+
+@keyframes hccFloat {
+    0%, 100% { transform: translateY(0);    }
+    50%       { transform: translateY(-7px); }
+}
+
+/* Bars container */
+.hcc-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 46px;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid #f7ffcc;
+    position: relative;
+}
+
+/* Grow wrapper — handles the one-time grow-in via scaleY */
+.hcc-bw {
+    display: flex;
+    align-items: flex-end;
+    transform: scaleY(0);
+    transform-origin: bottom center;
+    animation: hccBarGrow 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+.hcc-bw1 { animation-delay: 1.05s; }
+.hcc-bw2 { animation-delay: 1.15s; }
+.hcc-bw3 { animation-delay: 1.25s; }
+.hcc-bw4 { animation-delay: 1.35s; }
+.hcc-bw5 { animation-delay: 1.45s; }
+
+/* Individual bars — thin pill shape, EQ bounce only */
+.hcc-bar {
+    width: 6px;
+    border-radius: 99px;
+    transform-origin: bottom center;
+    position: relative;
+}
+
+/* Shimmer sweep after grow */
+.hcc-bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(255,255,255,.5) 0%, transparent 60%);
+    animation: hccShimmer 2s ease-in-out infinite;
+}
+
+@keyframes hccShimmer {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 1;   }
+}
+
+/* Per-bar equalizer keyframes — unique bounce pattern per bar */
+@keyframes hccEQ1 {
+    0%, 100% { transform: scaleY(1);    }
+    50%       { transform: scaleY(0.4);  }
+}
+@keyframes hccEQ2 {
+    0%, 100% { transform: scaleY(1);    }
+    30%       { transform: scaleY(0.55); }
+    70%       { transform: scaleY(0.8);  }
+}
+@keyframes hccEQ3 {
+    0%, 100% { transform: scaleY(1);    }
+    40%       { transform: scaleY(0.45); }
+    80%       { transform: scaleY(0.9);  }
+}
+@keyframes hccEQ4 {
+    0%, 100% { transform: scaleY(1);    }
+    25%       { transform: scaleY(0.7);  }
+    60%       { transform: scaleY(0.5);  }
+    85%       { transform: scaleY(0.85); }
+}
+@keyframes hccEQ5 {
+    0%, 100% { transform: scaleY(1);    }
+    35%       { transform: scaleY(0.6);  }
+    65%       { transform: scaleY(0.85); }
+}
+
+/* Bars: prefixed with .hero-chart-card (0,3,0) to beat .section-title span (0,1,1) */
+.hero-chart-card .hcc-b1 { height: 16px; background: linear-gradient(180deg,#e8ff8a,#D1F843) !important; animation: hccEQ1 1.1s ease-in-out 1.65s infinite; }
+.hero-chart-card .hcc-b2 { height: 24px; background: linear-gradient(180deg,#D1F843,#a8c200) !important; animation: hccEQ2 1.5s ease-in-out 1.75s infinite; }
+.hero-chart-card .hcc-b3 { height: 32px; background: linear-gradient(180deg,#a8c200,#7a9000) !important; animation: hccEQ3 0.9s ease-in-out 1.85s infinite; }
+.hero-chart-card .hcc-b4 { height: 38px; background: linear-gradient(180deg,#7a9000,#5a7000) !important; animation: hccEQ4 1.3s ease-in-out 1.95s infinite; }
+.hero-chart-card .hcc-b5 { height: 46px; background: linear-gradient(180deg,#a8c200,#3a5000) !important; animation: hccEQ5 1.7s ease-in-out 2.05s infinite; }
+
+/* Pulsing dot on tallest bar — hidden until bar is fully grown */
+.hcc-b5::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: 50%;
+    transform: translateX(-50%);
+    width: 6px; height: 6px;
+    background: #D1F843;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(209,248,67,.6);
+    opacity: 0;
+    animation: hccDotAppear 0s forwards 2s, hccPulse 1.5s ease-out 2s infinite;
+}
+
+@keyframes hccDotAppear {
+    to { opacity: 1; }
+}
+
+@keyframes hccPulse {
+    0%   { box-shadow: 0 0 0 0   rgba(209,248,67,.6); }
+    70%  { box-shadow: 0 0 0 7px rgba(209,248,67,0);  }
+    100% { box-shadow: 0 0 0 0   rgba(209,248,67,0);  }
+}
+
+@keyframes hccBarGrow {
+    to { transform: scaleY(1); }
+}
+
+
+/* =============================================================================
+   Features Section — team image replacing description text
+   ============================================================================= */
+
+.features-area .features-team-img-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.features-area .features-team-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* =============================================================================
+   Home Hero — left card softening
+   Previous design backed up in git (revert this file to restore)
+   ============================================================================= */
+
+/* Hide the original bg image */
+.hero-area .section-content .bg img {
+    opacity: 0;
+}
+
+/* Light green gradient overlay on the card */
+.hero-area .section-content .bg {
+    background: linear-gradient(135deg, #efffb8 0%, #e5ff8a 40%, #f5ffcc 100%);
+}
+
+/* Hero card button — dark */
+.hero-area .section-content .wc-btn-primary {
+    background-color: #121212 !important;
+    border-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+.hero-area .section-content .wc-btn-primary:hover {
+    background-color: #121212 !important;
+    border-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+/* Google Partner badge */
+.hero-partner-badge {
+    margin-top: 24px;
+}
+
+.hero-partner-badge img {
+    display: block;
+    height: auto;
+}
+
+/* Move vertical subtitle away from content (compensate for reduced padding) */
+.hero-area .section-content .subtitle-wrapper {
+    inset-inline-start: 16px !important;
+}
+
+/* Body text full width — match title width */
+.hero-area .section-content .text {
+    max-width: 100% !important;
+    font-size: 20px !important;
+}
+
+/* Push hero section away from the navbar */
+.hero-area {
+    margin-top: 130px !important;
+}
+
+@media only screen and (max-width: 991px) {
+    .hero-area {
+        margin-top: 100px !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .hero-area {
+        margin-top: 70px !important;
+    }
+}
+
+/* Card padding */
+.hero-area .section-content {
+    padding-top: 140px !important;
+    padding-bottom: 140px !important;
+    padding-inline-start: 80px !important;
+    padding-inline-end: 60px !important;
+}
+
+@media only screen and (max-width: 1919px) {
+    .hero-area .section-content {
+        padding-top: 120px !important;
+        padding-bottom: 120px !important;
+        padding-inline-start: 70px !important;
+    }
+}
+
+@media only screen and (max-width: 1399px) {
+    .hero-area .section-content {
+        padding-top: 100px !important;
+        padding-bottom: 100px !important;
+        padding-inline-start: 60px !important;
+    }
+}
+
+/* Reduce H1 size — long Azerbaijani text needs smaller font */
+.hero-area .section-content .section-title {
+    font-size: 68px !important;
+}
+
+@media only screen and (max-width: 1919px) {
+    .hero-area .section-content .section-title {
+        font-size: 60px !important;
+    }
+}
+
+@media only screen and (max-width: 1399px) {
+    .hero-area .section-content .section-title {
+        font-size: 52px !important;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .hero-area .section-content .section-title {
+        font-size: 38px !important;
+    }
+}
+
+/* =========================================================================
+   Mobile overrides (≤767px)
+   ========================================================================= */
+@media only screen and (max-width: 767px) {
+
+    /* Content first, animation/motion below */
+    .hero-area-inner {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .hero-area .section-content {
+        order: -1 !important;
+        padding-top: 30px !important;
+        padding-bottom: 24px !important;
+        padding-inline-start: 22px !important;
+        padding-inline-end: 22px !important;
+    }
+
+    .hero-area .thumb {
+        order: 1 !important;
+        width: 100% !important;
+        min-height: 200px !important;
+        max-height: 220px !important;
+        overflow: hidden !important;
+    }
+
+    /* Compact H1 */
+    .hero-area .section-content .section-title {
+        font-size: 30px !important;
+        line-height: 1.1 !important;
+    }
+
+    /* Smaller body text */
+    .hero-area .section-content .text {
+        font-size: 14px !important;
+    }
+
+    /* Slightly stronger green on mobile */
+    .hero-area .section-content .bg {
+        background: linear-gradient(135deg, #e8ff9a 0%, #d8ff6a 40%, #f0ffb8 100%) !important;
+    }
+
+    /* Hide vertical subtitle on mobile — no room */
+    .hero-area .section-content .subtitle-wrapper {
+        display: none !important;
+    }
+
+    /* Smaller rating section */
+    .hero-area .section-content .review-wrapper .rating {
+        font-size: 24px !important;
+    }
+
+    /* Smaller CTA button */
+    .hero-area .section-content .wc-btn-primary {
+        font-size: 13px !important;
+        padding: 10px 20px !important;
+    }
+
+    /* Tighter spacing between elements */
+    .hero-area .section-content .text-wrapper {
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .hero-area .section-content .btn-wrapper {
+        margin-top: 14px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .hero-area .section-content .review-wrapper {
+        margin-top: 14px !important;
+    }
+
+    /* Hide chart card on mobile */
+    .hero-chart-card {
+        display: none !important;
+    }
+}

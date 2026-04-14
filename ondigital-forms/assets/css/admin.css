@@ -1,0 +1,366 @@
+/* OnDigital Forms — Admin Panel */
+
+/* Back button */
+.odf-back-btn {
+    font-size: 13px;
+    color: #666;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    transition: border-color 0.15s, color 0.15s;
+}
+.odf-back-btn:hover { color: #111; border-color: #aaa; }
+
+/* Template grid */
+.odf-template-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.odf-template-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: box-shadow 0.2s;
+}
+.odf-template-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+
+.odf-tpl-icon {
+    width: 44px;
+    height: 44px;
+    background: #f0fdf4;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.odf-tpl-icon .dashicons {
+    color: #3fd467;
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+}
+
+.odf-tpl-body h3 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #111;
+}
+.odf-tpl-body p {
+    margin: 0 0 10px;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+}
+.odf-tpl-trigger {
+    font-size: 11px;
+    background: #f4f4f4;
+    padding: 3px 8px;
+    border-radius: 5px;
+    color: #555;
+    font-family: monospace;
+}
+
+.odf-tpl-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.odf-tpl-status {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+.odf-tpl-status--active {
+    background: #e8f9ee;
+    color: #2e7d46;
+}
+.odf-tpl-status--draft {
+    background: #f5f5f5;
+    color: #888;
+}
+
+.odf-tpl-edit-btn {
+    background: #3fd467;
+    color: #0d0d0d;
+    text-decoration: none;
+    padding: 7px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+.odf-tpl-edit-btn:hover { background: #52e87b; color: #0d0d0d; }
+
+.odf-admin-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Topbar */
+.odf-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 28px;
+    position: sticky;
+    top: 32px;
+    background: #f0f0f1;
+    z-index: 100;
+}
+
+.odf-topbar h1 {
+    font-size: 20px;
+    margin: 0;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.odf-save-btn {
+    background: #3fd467;
+    color: #0d0d0d;
+    border: none;
+    padding: 10px 26px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: inherit;
+}
+
+.odf-save-btn:hover {
+    background: #4ee87a;
+}
+
+.odf-save-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#odf-save-notice {
+    font-size: 13px;
+    color: #3c9e52;
+    font-weight: 600;
+}
+
+/* Cards */
+.odf-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    overflow: hidden;
+}
+
+.odf-card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    cursor: pointer;
+    user-select: none;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+    transition: background 0.15s;
+}
+
+.odf-card-head:hover {
+    background: #f4f4f4;
+}
+
+.odf-card-head h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    flex: 1;
+    color: #222;
+}
+
+.odf-card-head .dashicons {
+    color: #666;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.odf-toggle-icon {
+    transition: transform 0.2s;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.odf-card.is-collapsed .odf-toggle-icon {
+    transform: rotate(-90deg);
+}
+
+.odf-card.is-collapsed .odf-card-body {
+    display: none;
+}
+
+.odf-card-body {
+    padding: 22px;
+}
+
+/* Fields */
+.odf-field {
+    margin-bottom: 16px;
+}
+
+.odf-field:last-child {
+    margin-bottom: 0;
+}
+
+.odf-field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #666;
+    margin-bottom: 7px;
+}
+
+.odf-field input[type="text"],
+.odf-field input[type="email"] {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    color: #222;
+}
+
+.odf-field input:focus {
+    border-color: #3fd467;
+    box-shadow: 0 0 0 2px rgba(63, 212, 103, 0.15);
+}
+
+.odf-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.odf-field-row .odf-field {
+    margin-bottom: 0;
+}
+
+.odf-desc {
+    font-size: 13px;
+    color: #777;
+    margin: 0 0 16px;
+}
+
+/* Lang tabs */
+.odf-lang-wrap {
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.odf-lang-tabs {
+    display: flex;
+    background: #f7f7f7;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.odf-lang-tab {
+    padding: 9px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    color: #999;
+    transition: color 0.15s;
+}
+
+.odf-lang-tab.active {
+    color: #1a1a1a;
+    border-bottom-color: #3fd467;
+}
+
+.odf-lang-pane {
+    display: none;
+    padding: 18px;
+}
+
+.odf-lang-pane.active {
+    display: block;
+}
+
+/* Toggle switches */
+.odf-toggles {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.odf-toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+    user-select: none;
+}
+
+.odf-toggle-row input[type="checkbox"] {
+    display: none;
+}
+
+.odf-toggle-slider {
+    width: 42px;
+    height: 24px;
+    background: #ddd;
+    border-radius: 12px;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+
+.odf-toggle-slider::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: left 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.odf-toggle-row input:checked ~ .odf-toggle-slider {
+    background: #3fd467;
+}
+
+.odf-toggle-row input:checked ~ .odf-toggle-slider::after {
+    left: 21px;
+}
