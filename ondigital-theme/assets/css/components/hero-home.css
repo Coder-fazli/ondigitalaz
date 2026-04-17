@@ -28,7 +28,7 @@
     align-items: center;
     background: #fff;
     border-radius: 1.5rem;
-    box-shadow: 0 4px 24px rgba(160,190,0,.18), 0 1px 4px rgba(0,0,0,.08);
+    box-shadow: 0 4px 24px rgba(0,255,163,.18), 0 1px 4px rgba(0,0,0,.08);
     padding: 12px 14px 10px;
     vertical-align: middle;
     margin: 0 8px -4px;
@@ -133,7 +133,7 @@
     width: 6px; height: 6px;
     background: #00FFA3;
     border-radius: 50%;
-    box-shadow: 0 0 0 0 rgba(209,248,67,.6);
+    box-shadow: 0 0 0 0 rgba(0,255,163,.6);
     opacity: 0;
     animation: hccDotAppear 0s forwards 2s, hccPulse 1.5s ease-out 2s infinite;
 }
@@ -143,9 +143,9 @@
 }
 
 @keyframes hccPulse {
-    0%   { box-shadow: 0 0 0 0   rgba(209,248,67,.6); }
-    70%  { box-shadow: 0 0 0 7px rgba(209,248,67,0);  }
-    100% { box-shadow: 0 0 0 0   rgba(209,248,67,0);  }
+    0%   { box-shadow: 0 0 0 0   rgba(0,255,163,.6); }
+    70%  { box-shadow: 0 0 0 7px rgba(0,255,163,0);  }
+    100% { box-shadow: 0 0 0 0   rgba(0,255,163,0);  }
 }
 
 @keyframes hccBarGrow {
