@@ -39,7 +39,7 @@
     transition: color .15s;
 }
 
-.glossary-breadcrumb__link:hover { color: #D1F843; }
+.glossary-breadcrumb__link:hover { color: #00FFA3; }
 
 .glossary-breadcrumb__sep {
     font-size: 9px;
@@ -61,7 +61,7 @@
     display: inline-block;
     font-size: 11px;
     font-weight: 700;
-    color: #D1F843;
+    color: #00FFA3;
     text-transform: uppercase;
     letter-spacing: .08em;
     text-decoration: none;
@@ -159,13 +159,13 @@
 .glossary-single-body li { margin-bottom: .4em; }
 
 .glossary-single-body a {
-    color: #D1F843;
+    color: #00FFA3;
     text-decoration: underline;
     text-underline-offset: 3px;
 }
 
 .glossary-single-body blockquote {
-    border-left: 4px solid #D1F843;
+    border-left: 4px solid #00FFA3;
     margin: 1.5em 0;
     padding: 12px 20px;
     background: #f8ffd9;
@@ -192,7 +192,7 @@
     transition: color .15s;
 }
 
-.glossary-single-back__link:hover { color: #D1F843; }
+.glossary-single-back__link:hover { color: #00FFA3; }
 
 /* ── Sidebar ── */
 .glossary-single-sidebar {
@@ -267,11 +267,11 @@
 
 .glossary-sidebar-related__link:hover {
     background: #f8ffd9;
-    color: #D1F843;
+    color: #00FFA3;
 }
 
 .glossary-sidebar-related__link i {
     font-size: 12px;
-    color: #D1F843;
+    color: #00FFA3;
     flex-shrink: 0;
 }

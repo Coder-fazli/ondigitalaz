@@ -4,8 +4,8 @@
 
 :root {
     --font-tasa: "TASA Orbiter", sans-serif;
-    --footer-green: #3fd467;
-    --accent: #D1F843;
+    --footer-green: #00FFA3;
+    --accent: #00FFA3;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select,
