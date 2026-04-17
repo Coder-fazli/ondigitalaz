@@ -87,9 +87,15 @@ function ondigital_enqueue_page_assets() {
             continue;
         }
 
+        // Contact page uses clean scoped CSS — load global base first
+        if ( 'contact' === $slug ) {
+            wp_enqueue_style( 'ondigital-global-base', ONDIGITAL_URI . '/assets/css/global.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+        }
+
         $css = ONDIGITAL_DIR . '/assets/css/pages/' . $slug . '.css';
         if ( file_exists( $css ) ) {
-            wp_enqueue_style( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/css/pages/' . $slug . '.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+            $deps = 'contact' === $slug ? array( 'bootstrap', 'ondigital-global-base' ) : array( 'bootstrap' );
+            wp_enqueue_style( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/css/pages/' . $slug . '.css', $deps, ONDIGITAL_VERSION );
         }
 
         $js = ONDIGITAL_DIR . '/assets/js/pages/' . $slug . '.js';
