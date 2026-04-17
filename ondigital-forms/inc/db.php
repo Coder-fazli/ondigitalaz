@@ -47,6 +47,46 @@ function odf_save_submission( array $data ): void {
     );
 }
 
+function odf_default_options(): array {
+    return array(
+        'form_title_az'       => 'Əlaqə formu',
+        'form_title_en'       => 'Contact Form',
+        'btn_text_az'         => 'Göndər',
+        'btn_text_en'         => 'Send',
+        'success_az'          => 'Mesajınız göndərildi!',
+        'success_en'          => 'Your message has been sent!',
+        'recipient_email'     => '',
+        'field_name'          => '1',
+        'field_email'         => '1',
+        'field_phone'         => '1',
+        'field_company'       => '1',
+        'field_radio'         => '1',
+        'field_source'        => '1',
+        'radio_question_az'   => 'E-ticarət saytınız varmı?',
+        'radio_question_en'   => 'Do you have an e-commerce site?',
+        'radio_opt1_az'       => 'Bəli',
+        'radio_opt1_en'       => 'Yes',
+        'radio_opt2_az'       => 'Xeyr',
+        'radio_opt2_en'       => 'No',
+        'radio_opt3_az'       => 'Başlayıram',
+        'radio_opt3_en'       => 'Starting Up',
+        'source_question_az'  => 'Bizi haradan tapdınız?',
+        'source_question_en'  => 'How did you hear about us?',
+        'src_instagram_az'    => 'Instagram',
+        'src_instagram_en'    => 'Instagram',
+        'src_tiktok_az'       => 'TikTok',
+        'src_tiktok_en'       => 'TikTok',
+        'src_facebook_az'     => 'Facebook',
+        'src_facebook_en'     => 'Facebook',
+        'src_linkedin_az'     => 'LinkedIn',
+        'src_linkedin_en'     => 'LinkedIn',
+        'src_youtube_az'      => 'YouTube',
+        'src_youtube_en'      => 'YouTube',
+        'src_other_az'        => 'Digər',
+        'src_other_en'        => 'Other',
+    );
+}
+
 function odf_default_contact_page_options(): array {
     return array(
         'form_title_az'  => 'Mesaj göndərin',
