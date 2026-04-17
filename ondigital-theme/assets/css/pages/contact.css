@@ -67,7 +67,7 @@
 
 .contact-section-inner {
     max-width: 1260px;
-    margin: -20px auto 0;
+    margin: 0 auto;
     padding: 0 40px;
 }
 
@@ -245,7 +245,7 @@
 }
 
 @media (max-width: 860px) {
-    .contact-section-inner { padding: 0 16px; margin-top: -10px; }
+    .contact-section-inner { padding: 0 16px;  }
     .contact-card { grid-template-columns: 1fr; border-radius: 18px; }
     .contact-form-panel { order: -1; padding: 28px 22px; }
     .odf-cp-row { grid-template-columns: 1fr; gap: 0; }
