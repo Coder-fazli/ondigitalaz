@@ -26,6 +26,7 @@ function odf_handle_submit(): void {
     $email   = sanitize_email( wp_unslash( $_POST['odf_email']          ?? '' ) );
     $phone   = sanitize_text_field( wp_unslash( $_POST['odf_phone']     ?? '' ) );
     $company = sanitize_text_field( wp_unslash( $_POST['odf_company']   ?? '' ) );
+    $message = sanitize_textarea_field( wp_unslash( $_POST['odf_message'] ?? '' ) );
     $ecomm   = sanitize_text_field( wp_unslash( $_POST['odf_ecommerce'] ?? '' ) );
     $sources = isset( $_POST['odf_source'] ) && is_array( $_POST['odf_source'] )
         ? array_map( 'sanitize_text_field', wp_unslash( $_POST['odf_source'] ) )
@@ -54,6 +55,7 @@ function odf_handle_submit(): void {
     if ( $company ) $lines[] = 'Company:     ' . $company;
     if ( $ecomm )   $lines[] = 'E-commerce:  ' . $ecomm;
     if ( $sources ) $lines[] = 'Source:      ' . implode( ', ', $sources );
+    if ( $message ) { $lines[] = ''; $lines[] = 'Message:'; $lines[] = $message; }
     $lines[] = '';
     $lines[] = '--- Sent from ' . home_url() . ' ---';
 

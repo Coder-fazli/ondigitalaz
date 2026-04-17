@@ -20,6 +20,7 @@
     $('#odf-save-btn').on('click', function () {
         var $btn    = $(this);
         var $notice = $('#odf-save-notice');
+        var action  = $btn.data('action') || 'odf_save_settings';
         var options = {};
 
         $('#odf-settings-form').find('[name]').each(function () {
@@ -39,7 +40,7 @@
         $notice.text('').css('color', '');
 
         $.post(odfAdmin.ajaxurl, {
-            action:  'odf_save_settings',
+            action:  action,
             nonce:   odfAdmin.nonce,
             options: JSON.stringify(options),
         })

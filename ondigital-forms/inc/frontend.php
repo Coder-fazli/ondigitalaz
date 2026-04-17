@@ -17,6 +17,71 @@ function odf_enqueue_frontend(): void {
     ) );
 }
 
+function odf_render_contact_page_inline(): void {
+    $opts = get_option( 'odf_contact_page_options', odf_default_contact_page_options() );
+    $lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
+    $lang = in_array( $lang, array( 'az', 'en' ), true ) ? $lang : 'az';
+
+    $o = function( string $key ) use ( $opts, $lang ): string {
+        return $opts[ $key . '_' . $lang ] ?? $opts[ $key . '_az' ] ?? '';
+    };
+
+    $title       = $o( 'form_title' );
+    $btn_text    = $o( 'btn_text' );
+    $success_msg = $o( 'success' );
+    $show_subject = ! isset( $opts['field_subject'] ) || ! empty( $opts['field_subject'] );
+
+    $ph = array(
+        'name'    => $o( 'ph_name' ),
+        'email'   => $o( 'ph_email' ),
+        'phone'   => $o( 'ph_phone' ),
+        'subject' => $o( 'ph_subject' ),
+        'message' => $o( 'ph_message' ),
+    );
+    ?>
+    <div class="odf-cp-wrap">
+        <h3 class="odf-cp-title"><?php echo esc_html( $title ); ?></h3>
+        <form id="odf-cp-form" class="odf-cp-form" novalidate>
+            <?php wp_nonce_field( 'odf_submit', 'odf_nonce' ); ?>
+            <input type="text" name="odf_hp" class="odf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <div class="odf-cp-row">
+                <div class="odf-cp-group">
+                    <input type="text" name="odf_name" placeholder="<?php echo esc_attr( $ph['name'] ); ?>">
+                </div>
+                <div class="odf-cp-group">
+                    <input type="email" name="odf_email" placeholder="<?php echo esc_attr( $ph['email'] ); ?>">
+                </div>
+            </div>
+            <div class="odf-cp-row">
+                <div class="odf-cp-group">
+                    <input type="tel" name="odf_phone" placeholder="<?php echo esc_attr( $ph['phone'] ); ?>">
+                </div>
+                <?php if ( $show_subject ) : ?>
+                <div class="odf-cp-group">
+                    <input type="text" name="odf_company" placeholder="<?php echo esc_attr( $ph['subject'] ); ?>">
+                </div>
+                <?php endif; ?>
+            </div>
+            <div class="odf-cp-group">
+                <textarea name="odf_message" placeholder="<?php echo esc_attr( $ph['message'] ); ?>"></textarea>
+            </div>
+            <div class="odf-cp-footer">
+                <button type="submit" class="odf-cp-submit">
+                    <?php echo esc_html( $btn_text ); ?>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+            </div>
+            <div class="odf-cp-error" style="display:none;"></div>
+        </form>
+        <div class="odf-cp-success" style="display:none;">
+            <div class="odf-cp-success-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <p><?php echo esc_html( $success_msg ); ?></p>
+        </div>
+    </div>
+    <?php
+}
+
 add_action( 'wp_footer', 'odf_render_modal', 100 );
 function odf_render_modal(): void {
     $opts = get_option( 'odf_options', odf_default_options() );

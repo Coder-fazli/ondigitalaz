@@ -47,6 +47,28 @@ function odf_save_submission( array $data ): void {
     );
 }
 
+function odf_default_contact_page_options(): array {
+    return array(
+        'form_title_az'  => 'Mesaj göndərin',
+        'form_title_en'  => 'Send a Message',
+        'btn_text_az'    => 'Göndər',
+        'btn_text_en'    => 'Send',
+        'success_az'     => 'Mesajınız göndərildi! Tezliklə sizinlə əlaqə saxlayacağıq.',
+        'success_en'     => 'Your message has been sent! We will contact you shortly.',
+        'ph_name_az'     => 'Əli Həsənov',
+        'ph_name_en'     => 'John Smith',
+        'ph_email_az'    => 'ali@example.com',
+        'ph_email_en'    => 'john@example.com',
+        'ph_phone_az'    => '+994 50 000 00 00',
+        'ph_phone_en'    => '+44 7000 000000',
+        'ph_subject_az'  => 'Veb sayt hazırlanması',
+        'ph_subject_en'  => 'Website development',
+        'ph_message_az'  => 'Layihəniz haqqında ətraflı məlumat verin...',
+        'ph_message_en'  => 'Tell us more about your project...',
+        'field_subject'  => '1',
+    );
+}
+
 function odf_get_unread_count(): int {
     global $wpdb;
     return (int) $wpdb->get_var(

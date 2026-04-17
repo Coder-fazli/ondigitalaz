@@ -95,6 +95,14 @@ function odf_get_templates(): array {
             'icon'        => 'dashicons-format-chat',
             'status'      => 'active',
         ),
+        'contact-page' => array(
+            'id'          => 'contact-page',
+            'name'        => 'Contact Page',
+            'description' => 'Inline form rendered on the contact page. Includes name, email, phone, subject and message fields. Managed via odf_render_contact_page_inline().',
+            'trigger'     => 'odf_render_contact_page_inline()',
+            'icon'        => 'dashicons-email-alt',
+            'status'      => 'active',
+        ),
     );
 }
 
@@ -112,7 +120,11 @@ function odf_render_templates(): void {
     $templates = odf_get_templates();
 
     if ( $edit && isset( $templates[ $edit ] ) ) {
-        odf_render_template_edit( $templates[ $edit ] );
+        if ( $edit === 'contact-page' ) {
+            odf_render_contact_page_edit( $templates[ $edit ] );
+        } else {
+            odf_render_template_edit( $templates[ $edit ] );
+        }
         return;
     }
     ?>
@@ -310,6 +322,168 @@ function odf_render_template_edit( array $tpl ): void {
                             </div>
                         </div>
                         <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <?php
+}
+
+// Save contact page settings AJAX
+add_action( 'wp_ajax_odf_save_cp_settings', 'odf_save_cp_settings_handler' );
+function odf_save_cp_settings_handler(): void {
+    check_ajax_referer( 'odf_save_settings', 'nonce' );
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_send_json_error( 'Unauthorized' );
+    }
+
+    $raw  = isset( $_POST['options'] ) ? wp_unslash( $_POST['options'] ) : '{}';
+    $data = json_decode( $raw, true );
+    if ( ! is_array( $data ) ) {
+        wp_send_json_error( 'Invalid data' );
+    }
+
+    $existing = get_option( 'odf_contact_page_options', array() );
+    $updated  = $existing;
+
+    foreach ( $data as $key => $value ) {
+        $key = sanitize_key( $key );
+        if ( is_array( $value ) ) {
+            continue;
+        }
+        $updated[ $key ] = sanitize_text_field( $value );
+    }
+
+    update_option( 'odf_contact_page_options', $updated );
+    wp_send_json_success( array( 'message' => 'Saved!' ) );
+}
+
+// =============================================================================
+// Contact Page template edit page
+// =============================================================================
+
+function odf_render_contact_page_edit( array $tpl ): void {
+    $opts = get_option( 'odf_contact_page_options', odf_default_contact_page_options() );
+    $back = admin_url( 'admin.php?page=odf-templates' );
+
+    $o = function( string $key ) use ( $opts ): string {
+        return esc_attr( $opts[ $key ] ?? '' );
+    };
+    $checked = function( string $key ) use ( $opts ): string {
+        return ! isset( $opts[ $key ] ) || ! empty( $opts[ $key ] ) ? 'checked' : '';
+    };
+    ?>
+    <div class="odf-admin-wrap">
+        <div class="odf-topbar">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <a href="<?php echo esc_url( $back ); ?>" class="odf-back-btn">← Templates</a>
+                <h1><?php echo esc_html( $tpl['name'] ); ?></h1>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;">
+                <span id="odf-save-notice"></span>
+                <button id="odf-save-btn" class="odf-save-btn" data-action="odf_save_cp_settings">Save Changes</button>
+            </div>
+        </div>
+
+        <form id="odf-settings-form">
+
+            <!-- Form Content -->
+            <div class="odf-card">
+                <div class="odf-card-head">
+                    <span class="dashicons dashicons-edit"></span>
+                    <h3>Form Content</h3>
+                    <span class="dashicons dashicons-arrow-down odf-toggle-icon"></span>
+                </div>
+                <div class="odf-card-body">
+                    <div class="odf-lang-wrap">
+                        <div class="odf-lang-tabs">
+                            <span class="odf-lang-tab active" data-lang="az">🇦🇿 AZ</span>
+                            <span class="odf-lang-tab" data-lang="en">🇬🇧 EN</span>
+                        </div>
+                        <?php foreach ( array( 'az', 'en' ) as $lang ) : ?>
+                        <div class="odf-lang-pane <?php echo $lang === 'az' ? 'active' : ''; ?>" data-lang="<?php echo $lang; ?>">
+                            <div class="odf-field-row">
+                                <div class="odf-field">
+                                    <label>Form Title</label>
+                                    <input type="text" name="options[form_title_<?php echo $lang; ?>]" value="<?php echo $o( 'form_title_' . $lang ); ?>">
+                                </div>
+                                <div class="odf-field">
+                                    <label>Submit Button Text</label>
+                                    <input type="text" name="options[btn_text_<?php echo $lang; ?>]" value="<?php echo $o( 'btn_text_' . $lang ); ?>">
+                                </div>
+                            </div>
+                            <div class="odf-field">
+                                <label>Success Message</label>
+                                <input type="text" name="options[success_<?php echo $lang; ?>]" value="<?php echo $o( 'success_' . $lang ); ?>">
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Field Placeholders -->
+            <div class="odf-card">
+                <div class="odf-card-head">
+                    <span class="dashicons dashicons-list-view"></span>
+                    <h3>Field Placeholders</h3>
+                    <span class="dashicons dashicons-arrow-down odf-toggle-icon"></span>
+                </div>
+                <div class="odf-card-body">
+                    <div class="odf-lang-wrap">
+                        <div class="odf-lang-tabs">
+                            <span class="odf-lang-tab active" data-lang="az">🇦🇿 AZ</span>
+                            <span class="odf-lang-tab" data-lang="en">🇬🇧 EN</span>
+                        </div>
+                        <?php foreach ( array( 'az', 'en' ) as $lang ) : ?>
+                        <div class="odf-lang-pane <?php echo $lang === 'az' ? 'active' : ''; ?>" data-lang="<?php echo $lang; ?>">
+                            <div class="odf-field-row">
+                                <div class="odf-field">
+                                    <label>Name Placeholder</label>
+                                    <input type="text" name="options[ph_name_<?php echo $lang; ?>]" value="<?php echo $o( 'ph_name_' . $lang ); ?>">
+                                </div>
+                                <div class="odf-field">
+                                    <label>Email Placeholder</label>
+                                    <input type="text" name="options[ph_email_<?php echo $lang; ?>]" value="<?php echo $o( 'ph_email_' . $lang ); ?>">
+                                </div>
+                            </div>
+                            <div class="odf-field-row">
+                                <div class="odf-field">
+                                    <label>Phone Placeholder</label>
+                                    <input type="text" name="options[ph_phone_<?php echo $lang; ?>]" value="<?php echo $o( 'ph_phone_' . $lang ); ?>">
+                                </div>
+                                <div class="odf-field">
+                                    <label>Subject Placeholder</label>
+                                    <input type="text" name="options[ph_subject_<?php echo $lang; ?>]" value="<?php echo $o( 'ph_subject_' . $lang ); ?>">
+                                </div>
+                            </div>
+                            <div class="odf-field">
+                                <label>Message Placeholder</label>
+                                <input type="text" name="options[ph_message_<?php echo $lang; ?>]" value="<?php echo $o( 'ph_message_' . $lang ); ?>">
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Field Toggles -->
+            <div class="odf-card">
+                <div class="odf-card-head">
+                    <span class="dashicons dashicons-visibility"></span>
+                    <h3>Field Visibility</h3>
+                    <span class="dashicons dashicons-arrow-down odf-toggle-icon"></span>
+                </div>
+                <div class="odf-card-body">
+                    <p class="odf-desc">Name, Email, Phone and Message are always shown.</p>
+                    <div class="odf-toggles">
+                        <label class="odf-toggle-row">
+                            <input type="checkbox" name="options[field_subject]" value="1" <?php echo $checked( 'field_subject' ); ?>>
+                            <span class="odf-toggle-slider"></span>
+                            Subject Field
+                        </label>
                     </div>
                 </div>
             </div>
