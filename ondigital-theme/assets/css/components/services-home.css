@@ -290,109 +290,77 @@
 }
 
 
-/* Swiper slide: full height so all cards in a row align */
-.service-area .swiper-slide {
+/* ── Service Cards (clean isolated classes, no conflict with home.css) ── */
+
+.od-srv-slide {
     height: auto;
 }
 
-/* Force left-align on every element inside card — overrides any inherited/injected centering */
-.service-area .service-box,
-.service-area .service-box *,
-.service-area .service-box a,
-.service-area .service-box .content,
-.service-area .service-box .title,
-.service-area .service-box .text,
-.service-area .service-box .btn-wrapper,
-.service-area .service-box .wc-btn-normal {
-    text-align: left !important;
+/* Cycling pastel backgrounds */
+.od-srv-slide:nth-child(5n+1) .od-srv-card { background-color: #fefce8; }
+.od-srv-slide:nth-child(5n+2) .od-srv-card { background-color: #f0f5ff; }
+.od-srv-slide:nth-child(5n+3) .od-srv-card { background-color: #fff4f0; }
+.od-srv-slide:nth-child(5n+4) .od-srv-card { background-color: #f5f0ff; }
+.od-srv-slide:nth-child(5n+5) .od-srv-card { background-color: #f0fff8; }
+
+.od-srv-card {
+    height: 100%;
+    min-height: 320px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(18, 18, 18, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
 }
 
-/* Card */
-.service-area .service-box {
+.od-srv-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 36px rgba(18, 18, 18, 0.13);
+}
+
+.od-srv-card > a {
     display: flex;
     flex-direction: column;
     height: 100%;
     min-height: 320px;
     padding: 36px 28px 28px;
-    border-radius: 16px;
-    border: none;
-    box-shadow: 0 4px 20px rgba(18, 18, 18, 0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
-    text-align: left !important;
+    text-decoration: none;
+    text-align: left;
 }
 
-.service-area .service-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 32px rgba(18, 18, 18, 0.13);
-}
-
-/* Cycling pastel backgrounds — soft tones that complement #f3ffe0 */
-.service-area .swiper-slide:nth-child(5n+1) .service-box { background-color: #fefce8; }
-.service-area .swiper-slide:nth-child(5n+2) .service-box { background-color: #f0f5ff; }
-.service-area .swiper-slide:nth-child(5n+3) .service-box { background-color: #fff4f0; }
-.service-area .swiper-slide:nth-child(5n+4) .service-box { background-color: #f5f0ff; }
-.service-area .swiper-slide:nth-child(5n+5) .service-box { background-color: #f0fff8; }
-
-.dark .service-area .service-box {
-    background-color: #222 !important;
-}
-
-/* Card inner link: flex column to fill full height */
-.service-area .service-box > a {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    height: 100%;
-    text-align: left !important;
-}
-
-/* Hide thumb/icon */
-.service-area .service-box .thumb {
-    display: none;
-}
-
-.service-area .service-box .content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    grid-template-columns: unset;
-    margin-top: 0;
-}
-
-.service-area .service-box .title {
-    font-size: 24px;
+.od-srv-title {
+    font-size: 22px;
     font-weight: 700;
     color: var(--primary);
     line-height: 1.3;
-    text-align: left !important;
+    margin: 0;
+    text-align: left;
 }
 
-.service-area .service-box .text {
+.od-srv-text {
     flex: 1;
-    margin-top: 14px;
-    color: var(--secondary);
+    margin-top: 16px;
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 1.65;
+    color: var(--secondary);
+    text-align: left;
 }
 
-.service-area .service-box .btn-wrapper {
+.od-srv-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     margin-top: 32px;
-    text-align: left !important;
-}
-
-.service-area .service-box .wc-btn-normal {
     font-size: 14px;
     font-weight: 600;
     color: var(--primary);
     text-decoration: underline;
     text-underline-offset: 4px;
     text-decoration-thickness: 1px;
-    gap: 0;
-    display: inline-flex !important;
+    text-align: left;
+    align-self: flex-start;
+    transition: text-decoration-color 0.2s;
 }
 
-.service-area .service-box:hover .wc-btn-normal {
-    color: var(--primary);
+.od-srv-card:hover .od-srv-link {
     text-decoration-color: #c2f971;
-    text-decoration-thickness: 2px;
 }

@@ -94,32 +94,24 @@ $services_query = new WP_Query( array(
                             $icon_id  = get_post_meta( get_the_ID(), '_service_icon', true );
                             $icon_url = $icon_id ? wp_get_attachment_image_url( $icon_id, 'thumbnail' ) : '';
                         ?>
-                            <div class="swiper-slide">
-                                <div class="service-box has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $i % 4 ] ); ?>">
-                                    <a href="<?php the_permalink(); ?>" style="text-align:left">
-                                        <div class="content" style="text-align:left">
-                                            <h2 class="title" style="text-align:left"><?php the_title(); ?></h2>
-                                            <p class="text" style="text-align:left"><?php echo esc_html( get_the_excerpt() ); ?></p>
-                                            <div class="btn-wrapper" style="text-align:left">
-                                                <span class="wc-btn-normal"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
-                                            </div>
-                                        </div>
+                            <div class="swiper-slide od-srv-slide">
+                                <div class="od-srv-card">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <h3 class="od-srv-title"><?php the_title(); ?></h3>
+                                        <p class="od-srv-text"><?php echo esc_html( get_the_excerpt() ); ?></p>
+                                        <span class="od-srv-link"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
                                     </a>
                                 </div>
                             </div>
                         <?php $i++; endwhile; wp_reset_postdata(); ?>
                     <?php else : ?>
                         <?php foreach ( $static_services as $i => $service ) : ?>
-                            <div class="swiper-slide">
-                                <div class="service-box has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $i ] ); ?>">
-                                    <a href="<?php echo esc_url( $service['url'] ); ?>" style="text-align:left">
-                                        <div class="content" style="text-align:left">
-                                            <h2 class="title" style="text-align:left"><?php echo esc_html( $service['title'] ); ?></h2>
-                                            <p class="text" style="text-align:left"><?php echo esc_html( $service['text'] ); ?></p>
-                                            <div class="btn-wrapper" style="text-align:left">
-                                                <span class="wc-btn-normal"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
-                                            </div>
-                                        </div>
+                            <div class="swiper-slide od-srv-slide">
+                                <div class="od-srv-card">
+                                    <a href="<?php echo esc_url( $service['url'] ); ?>">
+                                        <h3 class="od-srv-title"><?php echo esc_html( $service['title'] ); ?></h3>
+                                        <p class="od-srv-text"><?php echo esc_html( $service['text'] ); ?></p>
+                                        <span class="od-srv-link"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
                                     </a>
                                 </div>
                             </div>
