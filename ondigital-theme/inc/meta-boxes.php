@@ -161,6 +161,10 @@ function ondigital_service_meta_callback( $post ) {
     ?>
     <table class="form-table">
         <?php od_mb_image( '_service_icon', __( 'Service Icon', 'ondigital' ), $icon_id ); ?>
+        <?php
+        od_mb_text( '_service_stat_number', __( 'Hero Stat Number', 'ondigital' ), get_post_meta( $post->ID, '_service_stat_number', true ), __( 'e.g. +240%', 'ondigital' ) );
+        od_mb_text( '_service_stat_label',  __( 'Hero Stat Label',  'ondigital' ), get_post_meta( $post->ID, '_service_stat_label',  true ), __( 'e.g. Üzvi trafik artımı', 'ondigital' ) );
+        ?>
         <tr>
             <th><label for="_service_features"><?php esc_html_e( 'Feature List', 'ondigital' ); ?></label></th>
             <td>
@@ -366,6 +370,12 @@ function ondigital_save_meta_boxes( $post_id ) {
     if ( isset( $_POST['ondigital_service_meta_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_meta_nonce'], 'ondigital_service_meta' ) ) {
         if ( isset( $_POST['_service_icon'] ) ) {
             update_post_meta( $post_id, '_service_icon', absint( $_POST['_service_icon'] ) );
+        }
+        if ( isset( $_POST['_service_stat_number'] ) ) {
+            update_post_meta( $post_id, '_service_stat_number', sanitize_text_field( $_POST['_service_stat_number'] ) );
+        }
+        if ( isset( $_POST['_service_stat_label'] ) ) {
+            update_post_meta( $post_id, '_service_stat_label', sanitize_text_field( $_POST['_service_stat_label'] ) );
         }
         if ( isset( $_POST['_service_features'] ) ) {
             update_post_meta( $post_id, '_service_features', sanitize_textarea_field( $_POST['_service_features'] ) );
