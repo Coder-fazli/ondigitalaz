@@ -295,6 +295,18 @@
     height: auto;
 }
 
+/* Force left-align on every element inside card — overrides any inherited/injected centering */
+.service-area .service-box,
+.service-area .service-box *,
+.service-area .service-box a,
+.service-area .service-box .content,
+.service-area .service-box .title,
+.service-area .service-box .text,
+.service-area .service-box .btn-wrapper,
+.service-area .service-box .wc-btn-normal {
+    text-align: left !important;
+}
+
 /* Card */
 .service-area .service-box {
     display: flex;
