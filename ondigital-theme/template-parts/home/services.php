@@ -96,16 +96,11 @@ $services_query = new WP_Query( array(
                         ?>
                             <div class="swiper-slide">
                                 <div class="service-box has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $i % 4 ] ); ?>">
-                                    <a href="<?php the_permalink(); ?>">
-                                        <?php if ( $icon_url ) : ?>
-                                            <div class="thumb">
-                                                <img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php the_title_attribute(); ?>">
-                                            </div>
-                                        <?php endif; ?>
-                                        <div class="content">
-                                            <h2 class="title"><?php the_title(); ?></h2>
-                                            <p class="text"><?php echo esc_html( get_the_excerpt() ); ?></p>
-                                            <div class="btn-wrapper">
+                                    <a href="<?php the_permalink(); ?>" style="text-align:left">
+                                        <div class="content" style="text-align:left">
+                                            <h2 class="title" style="text-align:left"><?php the_title(); ?></h2>
+                                            <p class="text" style="text-align:left"><?php echo esc_html( get_the_excerpt() ); ?></p>
+                                            <div class="btn-wrapper" style="text-align:left">
                                                 <span class="wc-btn-normal"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
                                             </div>
                                         </div>
@@ -117,14 +112,11 @@ $services_query = new WP_Query( array(
                         <?php foreach ( $static_services as $i => $service ) : ?>
                             <div class="swiper-slide">
                                 <div class="service-box has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $i ] ); ?>">
-                                    <a href="<?php echo esc_url( $service['url'] ); ?>">
-                                        <div class="thumb">
-                                            <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/' . $service['icon'] ); ?>" alt="<?php echo esc_attr( $service['title'] ); ?>">
-                                        </div>
-                                        <div class="content">
-                                            <h2 class="title"><?php echo esc_html( $service['title'] ); ?></h2>
-                                            <p class="text"><?php echo esc_html( $service['text'] ); ?></p>
-                                            <div class="btn-wrapper">
+                                    <a href="<?php echo esc_url( $service['url'] ); ?>" style="text-align:left">
+                                        <div class="content" style="text-align:left">
+                                            <h2 class="title" style="text-align:left"><?php echo esc_html( $service['title'] ); ?></h2>
+                                            <p class="text" style="text-align:left"><?php echo esc_html( $service['text'] ); ?></p>
+                                            <div class="btn-wrapper" style="text-align:left">
                                                 <span class="wc-btn-normal"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
                                             </div>
                                         </div>
