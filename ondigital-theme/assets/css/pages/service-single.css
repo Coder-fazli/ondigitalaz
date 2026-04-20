@@ -123,57 +123,66 @@ html, body { overflow: auto !important; height: auto !important; }
 .ss-hero-right { position: relative; }
 
 .ss-hero-img {
-    width: 100%; height: 460px;
-    object-fit: cover; border-radius: 20px; display: block;
-    box-shadow: 0 20px 60px rgba(0,0,0,.12);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 24px;
+    display: block;
+    box-shadow: 0 24px 64px rgba(0,0,0,.15);
 }
 
 .ss-hero-img-placeholder {
-    width: 100%; height: 460px; border-radius: 20px;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 24px;
     background: linear-gradient(135deg, var(--ss-tint) 0%, #e8f8c8 100%);
     border: 1px solid rgba(194,249,113,.3);
 }
 
-@media (max-width: 991px) {
-    .ss-hero-img, .ss-hero-img-placeholder { height: 300px; }
-}
-
-/* Floating stat card */
+/* Floating stat card — matches reference: icon circle + label + value */
 .ss-hero-stat-card {
-    position: absolute; bottom: -28px; left: -28px;
-    background: #fff; border-radius: 16px;
+    position: absolute;
+    bottom: -24px;
+    left: -24px;
+    background: #fff;
+    border-radius: 18px;
     padding: 20px 24px;
-    box-shadow: 0 16px 48px rgba(0,0,0,.14);
-    min-width: 190px;
-    border: 1px solid rgba(0,0,0,.06);
+    box-shadow: 0 12px 40px rgba(0,0,0,.14);
+    border: 1px solid rgba(0,0,0,.07);
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 @media (max-width: 991px) {
     .ss-hero-stat-card { bottom: 16px; left: 16px; }
 }
 
-.ss-stat-num {
-    font-size: 28px; font-weight: 900;
-    color: #121212; line-height: 1;
+.ss-stat-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--ss-accent);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
 }
+
+.ss-stat-icon i {
+    font-size: 18px;
+    color: #121212;
+}
+
+.ss-stat-text { display: flex; flex-direction: column; gap: 2px; }
 
 .ss-stat-lbl {
     font-size: 11px; font-weight: 700;
-    color: #888; margin-top: 4px;
-    letter-spacing: .04em; text-transform: uppercase;
+    color: #888; letter-spacing: .08em; text-transform: uppercase;
 }
 
-.ss-stat-bars {
-    display: flex; align-items: flex-end;
-    gap: 4px; height: 32px; margin-top: 12px;
+.ss-stat-num {
+    font-size: 22px; font-weight: 900;
+    color: #121212; line-height: 1.1;
+    white-space: nowrap;
 }
-
-.ss-stat-bars span {
-    flex: 1; background: rgba(194,249,113,.3);
-    border-radius: 3px;
-}
-
-.ss-stat-bars span.ss-bar-hi { background: var(--ss-accent); }
 
 /* =============================================================================
    2. Overview

@@ -94,16 +94,12 @@ body { overflow: auto !important; height: auto !important; }
                         <div class="ss-hero-img-placeholder"></div>
                     <?php endif; ?>
                     <div class="ss-hero-stat-card">
-                        <div class="ss-stat-num"><?php echo esc_html( $stat_number ); ?></div>
-                        <div class="ss-stat-lbl"><?php echo esc_html( $stat_label ); ?></div>
-                        <div class="ss-stat-bars" aria-hidden="true">
-                            <span style="height:30%"></span>
-                            <span style="height:50%"></span>
-                            <span style="height:40%"></span>
-                            <span style="height:70%"></span>
-                            <span style="height:60%"></span>
-                            <span style="height:85%"></span>
-                            <span class="ss-bar-hi" style="height:100%"></span>
+                        <div class="ss-stat-icon">
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+                        </div>
+                        <div class="ss-stat-text">
+                            <div class="ss-stat-lbl"><?php echo esc_html( $stat_label ); ?></div>
+                            <div class="ss-stat-num"><?php echo esc_html( $stat_number ); ?></div>
                         </div>
                     </div>
                 </div>
