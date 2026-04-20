@@ -290,7 +290,7 @@
 }
 
 
-/* Swiper slide: full height so cards can stretch */
+/* Swiper slide: full height so all cards in a row align */
 .service-area .swiper-slide {
     height: auto;
 }
@@ -300,33 +300,39 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    background-color: #ffffff;
-    padding: 32px 28px 28px;
+    min-height: 320px;
+    padding: 36px 28px 28px;
     border-radius: 16px;
-    border: 1px solid rgba(18, 18, 18, 0.1);
+    border: none;
     box-shadow: none;
-    transition: border-color 0.3s, transform 0.3s;
+    transition: transform 0.3s;
+    text-align: left;
 }
 
 .service-area .service-box:hover {
-    border-color: rgba(18, 18, 18, 0.22);
     transform: translateY(-4px);
-    box-shadow: none;
 }
+
+/* Cycling pastel backgrounds — soft tones that complement #f3ffe0 */
+.service-area .swiper-slide:nth-child(5n+1) .service-box { background-color: #fefce8; }
+.service-area .swiper-slide:nth-child(5n+2) .service-box { background-color: #f0f5ff; }
+.service-area .swiper-slide:nth-child(5n+3) .service-box { background-color: #fff4f0; }
+.service-area .swiper-slide:nth-child(5n+4) .service-box { background-color: #f5f0ff; }
+.service-area .swiper-slide:nth-child(5n+5) .service-box { background-color: #f0fff8; }
 
 .dark .service-area .service-box {
-    background-color: #222;
-    border-color: rgba(255, 255, 255, 0.08);
+    background-color: #222 !important;
 }
 
-/* Card inner link: flex column to stretch full height */
+/* Card inner link: flex column to fill full height */
 .service-area .service-box > a {
     display: flex;
     flex-direction: column;
     flex: 1;
+    height: 100%;
 }
 
-/* Hide thumb */
+/* Hide thumb/icon */
 .service-area .service-box .thumb {
     display: none;
 }
@@ -340,10 +346,10 @@
 }
 
 .service-area .service-box .title {
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: 700;
     color: var(--primary);
-    line-height: 1.35;
+    line-height: 1.3;
 }
 
 .service-area .service-box .text {
@@ -359,15 +365,17 @@
 }
 
 .service-area .service-box .wc-btn-normal {
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
     color: var(--primary);
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
     gap: 0;
 }
 
 .service-area .service-box:hover .wc-btn-normal {
     color: var(--primary);
     text-decoration-color: #c2f971;
+    text-decoration-thickness: 2px;
 }
