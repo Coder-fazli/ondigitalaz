@@ -167,9 +167,26 @@ $langs = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
         <?php foreach ( $langs as $lang => $label ) : ?>
             <?php od_lang_pane( $lang ); ?>
                 <?php od_text( 'services_title_' . $lang, __( 'Section Title', 'ondigital' ), $options ); ?>
+                <?php od_text( 'services_subtitle_' . $lang, __( 'Subtitle Badge', 'ondigital' ), $options ); ?>
+                <?php od_textarea( 'services_body_' . $lang, __( 'Description Text', 'ondigital' ), $options ); ?>
             <?php od_lang_pane_close(); ?>
         <?php endforeach; ?>
         <?php od_lang_close(); ?>
+        <?php od_divider(); ?>
+
+        <p style="font-weight:600;margin-bottom:12px;"><?php esc_html_e( 'Section Background Color', 'ondigital' ); ?></p>
+        <?php od_color( 'services_bg', __( 'Background', 'ondigital' ), $options, '#f3ffe0' ); ?>
+
+        <?php od_divider(); ?>
+        <p style="font-weight:600;margin-bottom:12px;"><?php esc_html_e( 'Card Colors (cycles through 1→5)', 'ondigital' ); ?></p>
+        <?php od_row_open(); ?>
+            <?php od_color( 'services_card_1', __( 'Card 1', 'ondigital' ), $options, '#fefce8' ); ?>
+            <?php od_color( 'services_card_2', __( 'Card 2', 'ondigital' ), $options, '#f0f5ff' ); ?>
+            <?php od_color( 'services_card_3', __( 'Card 3', 'ondigital' ), $options, '#fff4f0' ); ?>
+            <?php od_color( 'services_card_4', __( 'Card 4', 'ondigital' ), $options, '#f5f0ff' ); ?>
+            <?php od_color( 'services_card_5', __( 'Card 5', 'ondigital' ), $options, '#f0fff8' ); ?>
+        <?php od_row_close(); ?>
+
         <p style="color:#646970;font-size:12px;margin-top:12px;"><?php esc_html_e( 'Service items are managed from WordPress Admin → Services (CPT).', 'ondigital' ); ?></p>
     <?php od_card_close(); ?>
 

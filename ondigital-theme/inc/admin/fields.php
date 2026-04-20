@@ -163,6 +163,21 @@ function od_select( string $key, string $label, array $options, array $choices )
 }
 
 /**
+ * Color picker field (native browser input[type=color]).
+ */
+function od_color( string $key, string $label, array $options, string $default = '#ffffff' ): void {
+    $val = ! empty( $options[ $key ] ) ? $options[ $key ] : $default;
+    echo '<div class="od-field od-field-color">';
+    echo '<label>' . esc_html( $label ) . '</label>';
+    echo '<div style="display:flex;align-items:center;gap:10px;">';
+    echo '<input type="color" name="options[' . esc_attr( $key ) . ']" value="' . esc_attr( $val ) . '" style="width:48px;height:36px;padding:2px;border:1px solid #ddd;border-radius:6px;cursor:pointer;">';
+    echo '<input type="text" name="options[' . esc_attr( $key ) . '_hex]" value="' . esc_attr( $val ) . '" placeholder="' . esc_attr( $default ) . '" style="width:110px;font-family:monospace;" oninput="this.previousElementSibling.value=this.value">';
+    echo '</div>';
+    echo '</div>';
+    echo '<script>document.querySelector(\'input[name="options[' . esc_js( $key ) . ']\"][type="color"]\').addEventListener("input",function(){this.nextElementSibling.value=this.value});</script>';
+}
+
+/**
  * Horizontal divider.
  */
 function od_divider(): void {

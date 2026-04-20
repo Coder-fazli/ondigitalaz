@@ -103,6 +103,25 @@ function ondigital_enqueue_page_assets() {
             wp_enqueue_script( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/js/pages/' . $slug . '.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
         }
 
+        // Home page: output admin-controlled service section colors
+        if ( 'home' === $slug ) {
+            $opts      = get_option( 'ondigital_options', array() );
+            $srv_bg    = sanitize_hex_color( $opts['services_bg']     ?? '' ) ?: '#f3ffe0';
+            $card_1    = sanitize_hex_color( $opts['services_card_1'] ?? '' ) ?: '#fefce8';
+            $card_2    = sanitize_hex_color( $opts['services_card_2'] ?? '' ) ?: '#f0f5ff';
+            $card_3    = sanitize_hex_color( $opts['services_card_3'] ?? '' ) ?: '#fff4f0';
+            $card_4    = sanitize_hex_color( $opts['services_card_4'] ?? '' ) ?: '#f5f0ff';
+            $card_5    = sanitize_hex_color( $opts['services_card_5'] ?? '' ) ?: '#f0fff8';
+            wp_add_inline_style( 'ondigital-services-home', "
+                .service-area { background-color: {$srv_bg} !important; }
+                .od-srv-slide:nth-child(5n+1) .od-srv-card { background-color: {$card_1} !important; }
+                .od-srv-slide:nth-child(5n+2) .od-srv-card { background-color: {$card_2} !important; }
+                .od-srv-slide:nth-child(5n+3) .od-srv-card { background-color: {$card_3} !important; }
+                .od-srv-slide:nth-child(5n+4) .od-srv-card { background-color: {$card_4} !important; }
+                .od-srv-slide:nth-child(5n+5) .od-srv-card { background-color: {$card_5} !important; }
+            " );
+        }
+
         // About page: load FAQ styles + override compiled dark styles
         if ( 'about' === $slug ) {
             wp_enqueue_style( 'ondigital-faq-about', ONDIGITAL_URI . '/assets/css/pages/faq.css', array( 'ondigital-about' ), ONDIGITAL_VERSION );
