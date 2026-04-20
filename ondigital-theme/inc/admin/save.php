@@ -52,7 +52,7 @@ function ondigital_panel_save(): void {
     update_option( 'ondigital_options', $updated );
 
     // Handle repeaters
-    $repeater_keys = array( 'partners', 'features', 'pricing', 'faq', 'stats', 'testimonials', 'text_slider', 'about_clients', 'about_faq_items', 'footer_quick_links', 'footer_services_links', 'project_steps' );
+    $repeater_keys = array( 'partners', 'features', 'pricing', 'faq', 'about_faq', 'stats', 'testimonials', 'text_slider', 'about_clients', 'about_faq_items', 'footer_quick_links', 'footer_services_links', 'project_steps' );
 
     foreach ( $repeater_keys as $rkey ) {
         if ( ! isset( $_POST[ 'ondigital_' . $rkey ] ) ) {
@@ -98,6 +98,15 @@ function ondigital_sanitize_repeater( string $key, array $raw ): array {
                 );
                 break;
             case 'faq':
+                $out[] = array(
+                    'question_az' => sanitize_text_field( $item['question_az'] ?? $item['question'] ?? '' ),
+                    'question_en' => sanitize_text_field( $item['question_en'] ?? '' ),
+                    'answer_az'   => sanitize_textarea_field( $item['answer_az'] ?? $item['answer'] ?? '' ),
+                    'answer_en'   => sanitize_textarea_field( $item['answer_en'] ?? '' ),
+                    'open'        => ! empty( $item['open'] ) ? 1 : 0,
+                );
+                break;
+            case 'about_faq':
                 $out[] = array(
                     'question_az' => sanitize_text_field( $item['question_az'] ?? $item['question'] ?? '' ),
                     'question_en' => sanitize_text_field( $item['question_en'] ?? '' ),
