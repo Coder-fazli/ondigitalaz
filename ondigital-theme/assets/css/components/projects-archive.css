@@ -39,7 +39,7 @@
 .pa-hero-line {
   position: absolute; top: 0; left: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--pa-dark), transparent);
+  background: linear-gradient(90deg, var(--pa-lime), transparent);
   width: 0;
   animation: paGrow 1.6s ease-out .3s forwards;
 }
@@ -56,7 +56,7 @@
   margin-bottom: 28px;
 }
 .pa-eyebrow span {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--pa-dark);
+  width: 6px; height: 6px; border-radius: 50%; background: var(--pa-lime);
 }
 
 .pa-title {
@@ -79,7 +79,7 @@
   font-size: 36px; font-weight: 900; letter-spacing: -.04em;
   color: var(--pa-dark); line-height: 1;
 }
-.pa-stat-n em { font-style: normal; color: var(--pa-dark); font-size: .6em; vertical-align: super; }
+.pa-stat-n em { font-style: normal; color: var(--pa-lime); font-size: .6em; vertical-align: super; }
 .pa-stat-l { font-size: 11px; font-weight: 600; color: var(--pa-muted); margin-top: 4px; }
 
 /* ── Filter bar ── */
@@ -195,9 +195,9 @@
   flex-shrink: 0;
   transition: background .25s, transform .25s;
 }
-.pa-card:hover .pa-arrow { background: var(--pa-dark); transform: rotate(45deg); }
+.pa-card:hover .pa-arrow { background: var(--pa-lime); transform: rotate(45deg); }
 .pa-arrow svg { width: 16px; height: 16px; stroke: rgba(0,0,0,.5); fill: none; stroke-width: 2.5; }
-.pa-card:hover .pa-arrow svg { stroke: #fff; }
+.pa-card:hover .pa-arrow svg { stroke: #121212; }
 
 /* ── Layout variants ── */
 .pa-featured { grid-column: 1/3; grid-row: 1; }
