@@ -6,8 +6,8 @@
  */
 
 add_action( 'wp_enqueue_scripts', function() {
-    wp_enqueue_style( 'ondigital-default',        get_template_directory_uri() . '/assets/css/global.css',               array( 'bootstrap' ),            ONDIGITAL_VERSION );
-    wp_enqueue_style( 'ondigital-service-single', get_template_directory_uri() . '/assets/css/pages/service-single.css', array( 'ondigital-default' ),     ONDIGITAL_VERSION );
+    wp_enqueue_style( 'ondigital-default',        get_template_directory_uri() . '/assets/css/global.css',               array( 'bootstrap' ),        ONDIGITAL_VERSION );
+    wp_enqueue_style( 'ondigital-service-single', get_template_directory_uri() . '/assets/css/pages/service-single.css', array( 'ondigital-default' ), ONDIGITAL_VERSION );
     wp_dequeue_style( 'ondigital-service-details' );
 }, 99 );
 
@@ -37,7 +37,7 @@ $demo_excerpt = __( 'Biz rəqəmsal ekosisteminizi məlumatlarla idarə olunan s
 $demo_content = '<p>' . __( 'Ondigital olaraq hər xidməti müştərinin konkret biznes məqsədlərinə uyğun olaraq hazırlayırıq. Biz yalnız nəticəyə fokuslanırıq — görünürlük, trafik və gəlir artımı.', 'ondigital' ) . '</p>'
     . '<p>' . __( 'Hər bir layihəmizdə dərin data analitikasından istifadə edərək rəqiblərinizin zəif nöqtələrini aşkar edir və sizin üstünlüklərinizi maksimuma çatdırırıq. Bakıdan dünyaya açılan rəqəmsal qapınız bizik.', 'ondigital' ) . '</p>'
     . '<h2>' . __( 'Niyə Ondigital?', 'ondigital' ) . '</h2>'
-    . '<p>' . __( 'Müasir rəqəmsal marketinq texniki infrastrukturun, məzmun keyfiyyətinin və istifadəçi təcrübəsinin harmonik vəhdətidir. Bizim yanaşmamız Google-un ən son alqoritmlərinə uyğun, davamlı və ölçülə bilən nəticələr üzərinde qurulub.', 'ondigital' ) . '</p>'
+    . '<p>' . __( 'Müasir rəqəmsal marketinq texniki infrastrukturun, məzmun keyfiyyətinin və istifadəçi təcrübəsinin harmonik vəhdətidir. Bizim yanaşmamız Google-un ən son alqoritmlərinə uyğun, davamlı və ölçülə bilən nəticələr üzərində qurulub.', 'ondigital' ) . '</p>'
     . '<h3>' . __( 'Əsas üstünlüklər', 'ondigital' ) . '</h3>'
     . '<p>' . __( 'Şəffaf hesabat, aylıq KPI izləməsi və həsr edilmiş menecer — bütün bunlar standart xidmət paketimizə daxildir. Siz biznesinizə fokuslanın, qalanı bizə həvalə edin.', 'ondigital' ) . '</p>';
 
@@ -46,40 +46,23 @@ $steps = is_array( $steps ) ? array_values( array_filter( $steps, function( $s )
     return ! empty( $s['title_az'] ) || ! empty( $s['title_en'] );
 } ) ) : array();
 
-$demo_steps = array(
-    array( 'title_az' => 'Kəşfiyyat və Audit',       'title_en' => 'Discovery & Audit',       'desc_az' => 'Saytınızın mövcud vəziyyətini 200+ meyar üzrə yoxlayır, texniki maneələri müəyyən edirik.',              'desc_en' => 'We audit your site across 200+ criteria and identify all technical blockers.', 'duration' => 'Həftə 1–2' ),
-    array( 'title_az' => 'Strategiya və Planlaşdırma', 'title_en' => 'Strategy & Planning',    'desc_az' => 'Rəqib analizi, semantik açar söz xəritəsi və 6 aylıq böyümə yol xəritəsi hazırlayırıq.',               'desc_en' => 'Competitor analysis, semantic keyword map, and 6-month growth roadmap.', 'duration' => 'Həftə 2–3' ),
-    array( 'title_az' => 'İcra və Optimallaşdırma',   'title_en' => 'Execution & Optimisation', 'desc_az' => 'Texniki düzəlişlər, məzmun strategiyası, backlink kampaniyası — hamısı paralel həyata keçirilir.',        'desc_en' => 'Technical fixes, content strategy and backlink campaign — all running in parallel.', 'duration' => 'Həftə 3–8' ),
-    array( 'title_az' => 'Ölçmə və Hesabat',          'title_en' => 'Measurement & Reporting',  'desc_az' => 'Aylıq KPI hesabatı, hər dəyişikliyin təsirini real zamanda izləyir, strategiyanı tənzimləyirik.',        'desc_en' => 'Monthly KPI reporting, tracking every change in real time, iterating strategy.', 'duration' => 'Davamlı' ),
-);
-
 if ( empty( $steps ) ) {
-    $steps = $demo_steps;
+    $steps = array(
+        array( 'title_az' => 'Kəşfiyyat və Audit',        'title_en' => 'Discovery & Audit',        'desc_az' => 'Saytınızın mövcud vəziyyətini 200+ meyar üzrə yoxlayır, texniki maneələri müəyyən edirik.',                     'desc_en' => 'We audit your site across 200+ criteria and identify all technical blockers.',              'duration' => 'Həftə 1–2' ),
+        array( 'title_az' => 'Strategiya və Planlaşdırma', 'title_en' => 'Strategy & Planning',       'desc_az' => 'Rəqib analizi, semantik açar söz xəritəsi və 6 aylıq böyümə yol xəritəsi hazırlayırıq.',                     'desc_en' => 'Competitor analysis, semantic keyword map, and a 6-month growth roadmap.',                  'duration' => 'Həftə 2–3' ),
+        array( 'title_az' => 'İcra və Optimallaşdırma',   'title_en' => 'Execution & Optimisation',  'desc_az' => 'Texniki düzəlişlər, məzmun strategiyası, backlink kampaniyası — hamısı paralel həyata keçirilir.',             'desc_en' => 'Technical fixes, content strategy and backlink campaign — all running in parallel.',        'duration' => 'Həftə 3–8' ),
+        array( 'title_az' => 'Ölçmə və Hesabat',          'title_en' => 'Measurement & Reporting',   'desc_az' => 'Aylıq KPI hesabatı, hər dəyişikliyin təsirini real zamanda izləyir, strategiyanı tənzimləyirik.',             'desc_en' => 'Monthly KPI reporting, tracking every change in real time and iterating the strategy.',    'duration' => 'Davamlı'   ),
+    );
 }
 
 $lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
 
-$default_pricing = array(
-    array(
-        'name'     => __( 'Başlanğıc', 'ondigital' ),
-        'price'    => '299 ₼',
-        'features' => "Rəqiblərin analizi\nAylıq hesabat\n10 açar söz izləməsi\nOn-page optimallaşdırma\nGoogle My Business",
-        'cta_url'  => '',
-    ),
-    array(
-        'name'     => __( 'Biznes', 'ondigital' ),
-        'price'    => '599 ₼',
-        'features' => "Rəqiblərin analizi\nAylıq hesabat\n30 açar söz izləməsi\nOn-page optimallaşdırma\nAylıq 4 bloq məqaləsi\nBacklink strategiyası",
-        'cta_url'  => '',
-    ),
-    array(
-        'name'     => __( 'Korporativ', 'ondigital' ),
-        'price'    => 'Fərdi',
-        'features' => "Limitsiz açar sözlər\nDedikasiya edilmiş menecer\nHəftəlik brifinqlər\nBeynəlxalq SEO dəstəyi\nDedikasiya edilmiş hesabat paneli",
-        'cta_url'  => '',
-    ),
+$icons = array(
+    '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+    '<svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+    '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>',
+    '<svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
 );
-$pricing_plans = ondigital_get_repeater( 'pricing', $default_pricing );
 ?>
 <style>
 html { scroll-behavior: auto !important; overflow: auto !important; height: auto !important; }
@@ -100,9 +83,7 @@ body { overflow: auto !important; height: auto !important; }
                     <p class="ss-hero-desc"><?php echo esc_html( get_the_excerpt() ?: $demo_excerpt ); ?></p>
                     <div class="ss-hero-btns">
                         <a href="<?php echo esc_url( home_url( '/elaqe/' ) ); ?>" class="ss-btn-primary">Başlayaq</a>
-                        <?php if ( ! empty( $steps ) ) : ?>
-                            <a href="#ss-process" class="ss-btn-ghost">Prosesi gör</a>
-                        <?php endif; ?>
+                        <a href="#ss-process" class="ss-btn-ghost">Prosesi gör</a>
                     </div>
                 </div>
 
@@ -147,7 +128,6 @@ body { overflow: auto !important; height: auto !important; }
                     ?>
                 </div>
 
-                <?php if ( ! empty( $features ) ) : ?>
                 <div class="ss-overview-aside">
                     <div class="ss-features-card">
                         <h3 class="ss-features-title"><?php esc_html_e( 'Nə əldə edirsiniz', 'ondigital' ); ?></h3>
@@ -162,45 +142,44 @@ body { overflow: auto !important; height: auto !important; }
                         </a>
                     </div>
                 </div>
-                <?php endif; ?>
 
             </div>
         </div>
     </section>
 
     <!-- ── 3. Process ── -->
-    <?php if ( ! empty( $steps ) ) : ?>
     <section class="ss-process" id="ss-process">
         <div class="container">
             <div class="ss-process-header">
                 <span class="ss-eyebrow"><?php esc_html_e( 'İş Prosesi', 'ondigital' ); ?></span>
-                <h2 class="ss-section-title"><?php esc_html_e( 'Necə işləyirik', 'ondigital' ); ?></h2>
+                <h2 class="ss-process-heading"><?php esc_html_e( 'Necə işləyirik', 'ondigital' ); ?></h2>
             </div>
-            <div class="ss-steps">
+            <div class="cs-steps">
                 <?php foreach ( $steps as $i => $step ) :
                     $num   = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                    $icon  = $icons[ $i % count( $icons ) ];
                     $title = $step[ 'title_' . $lang ] ?? $step['title_az'] ?? '';
                     $desc  = $step[ 'desc_' . $lang ]  ?? $step['desc_az']  ?? '';
                     $dur   = $step['duration'] ?? '';
                 ?>
-                    <div class="ss-step">
-                        <div class="ss-step-num"><?php echo esc_html( $num ); ?></div>
-                        <div class="ss-step-line" aria-hidden="true"></div>
-                        <div class="ss-step-body">
-                            <h3 class="ss-step-title"><?php echo esc_html( $title ); ?></h3>
+                    <div class="cs-step">
+                        <div class="cs-step-n"><?php echo esc_html( $num ); ?></div>
+                        <div class="cs-step-connector"></div>
+                        <div class="cs-step-icon"><?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+                        <div class="cs-step-body">
+                            <div class="cs-step-title"><?php echo esc_html( $title ); ?></div>
                             <?php if ( $desc ) : ?>
-                                <p class="ss-step-desc"><?php echo esc_html( $desc ); ?></p>
+                                <div class="cs-step-desc"><?php echo esc_html( $desc ); ?></div>
                             <?php endif; ?>
                         </div>
                         <?php if ( $dur ) : ?>
-                            <div class="ss-step-dur"><?php echo esc_html( $dur ); ?></div>
+                            <div class="cs-step-dur"><?php echo esc_html( $dur ); ?></div>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
         </div>
     </section>
-    <?php endif; ?>
 
     <!-- ── 4. Mid CTA ── -->
     <section class="ss-mid-cta">
@@ -214,45 +193,7 @@ body { overflow: auto !important; height: auto !important; }
         </div>
     </section>
 
-    <!-- ── 5. Pricing ── -->
-    <?php if ( ! empty( $pricing_plans ) ) : ?>
-    <section class="ss-pricing">
-        <div class="container">
-            <div class="ss-pricing-header">
-                <span class="ss-eyebrow"><?php esc_html_e( 'Qiymətlər', 'ondigital' ); ?></span>
-                <h2 class="ss-section-title"><?php esc_html_e( 'Sizin üçün doğru plan', 'ondigital' ); ?></h2>
-            </div>
-            <div class="ss-pricing-grid">
-                <?php foreach ( $pricing_plans as $pi => $plan ) :
-                    $feat_text = $plan['features'] ?? '';
-                    $feat_list = array_filter( array_map( 'trim', explode( "\n", $feat_text ) ) );
-                    $plan_url  = ! empty( $plan['cta_url'] ) ? $plan['cta_url'] : home_url( '/elaqe/' );
-                    $featured  = ( 1 === $pi );
-                ?>
-                    <div class="ss-plan<?php echo $featured ? ' ss-plan--featured' : ''; ?>">
-                        <?php if ( $featured ) : ?>
-                            <div class="ss-plan-badge"><?php esc_html_e( 'Ən Populyar', 'ondigital' ); ?></div>
-                        <?php endif; ?>
-                        <h3 class="ss-plan-name"><?php echo esc_html( $plan['name'] ?? '' ); ?></h3>
-                        <div class="ss-plan-price"><?php echo esc_html( $plan['price'] ?? '' ); ?></div>
-                        <?php if ( ! empty( $feat_list ) ) : ?>
-                            <ul class="ss-plan-features">
-                                <?php foreach ( $feat_list as $feat ) : ?>
-                                    <li><?php echo esc_html( $feat ); ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        <?php endif; ?>
-                        <a href="<?php echo esc_url( $plan_url ); ?>" class="ss-plan-btn">
-                            <?php esc_html_e( 'Seç', 'ondigital' ); ?>
-                        </a>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </section>
-    <?php endif; ?>
-
-    <!-- ── 6. Footer CTA ── -->
+    <!-- ── 5. Footer CTA ── -->
     <section class="ss-footer-cta">
         <div class="container">
             <div class="ss-footer-cta-card">

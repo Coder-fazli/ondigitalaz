@@ -1,10 +1,10 @@
 /* ============================================================
    PROJECTS ARCHIVE — Magazine Portfolio Layout (Light)
-   Ondigital Theme · Brand colors: #00FFA3 lime, #0a0a0a dark
+   Ondigital Theme · Brand colors: #c2f971 lime, #0a0a0a dark
    ============================================================ */
 
 :root {
-  --pa-lime:    #00FFA3;
+  --pa-lime:    #c2f971;
   --pa-dark:    #0a0a0a;
   --pa-border:  rgba(0,0,0,.08);
   --pa-muted:   rgba(0,0,0,.45);
