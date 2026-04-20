@@ -25,10 +25,7 @@ get_template_part( 'template-parts/about/testimonials' );
 // Section 6: Clients
 get_template_part( 'template-parts/about/clients' );
 
-// Section 7: CTA (shared)
-get_template_part( 'template-parts/shared/cta' );
-
-// Section 8: FAQ — last section before footer
+// Section 7: FAQ — last section before footer
 get_template_part( 'template-parts/about/faq' );
 
 get_footer();
