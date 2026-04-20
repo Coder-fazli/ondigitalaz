@@ -107,11 +107,12 @@ function ondigital_enqueue_page_assets() {
         if ( 'about' === $slug ) {
             wp_enqueue_style( 'ondigital-faq-about', ONDIGITAL_URI . '/assets/css/pages/faq.css', array( 'ondigital-about' ), ONDIGITAL_VERSION );
             wp_add_inline_style( 'ondigital-faq-about', '
-                .faq-area .section-content { background-color: transparent !important; grid-template-columns: 1fr 2fr !important; }
-                .faq-area .section-title { color: var(--primary) !important; }
+                .faq-area .section-content { background-color: transparent !important; display: grid !important; grid-template-columns: 300px 1fr !important; align-items: start !important; gap: 30px 60px !important; }
+                .faq-area .section-title { color: var(--primary) !important; font-size: 48px !important; line-height: 1.1 !important; }
+                @media (max-width: 991px) { .faq-area .section-title { font-size: 36px !important; } }
                 .faq-area .accordion .accordion-button { color: var(--primary) !important; background-color: transparent !important; }
                 .faq-area .accordion-button::after { filter: none !important; }
-                .faq-area .btn-wrapper a { color: inherit !important; }
+                .faq-area .btn-wrapper a { color: var(--primary) !important; }
             ' );
         }
 
