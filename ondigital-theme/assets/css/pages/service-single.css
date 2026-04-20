@@ -260,7 +260,110 @@ html, body { overflow: auto !important; height: auto !important; }
 .ss-features-cta:hover { text-decoration-color: var(--ss-accent); color: #121212; }
 
 /* =============================================================================
-   3. Process — reuses cs-step classes + hover effects
+   3. Highlights — 3-card grid with scroll-in animation
+   ============================================================================= */
+
+.ss-highlights {
+    padding: 100px 0;
+    background: #f3ffe0;
+}
+
+.ss-hl-header {
+    margin-bottom: 64px;
+}
+
+.ss-hl-title {
+    font-size: clamp(28px, 3.5vw, 46px);
+    font-weight: 900;
+    letter-spacing: -.03em;
+    line-height: 1.05;
+    color: #121212;
+    margin: 0 0 16px;
+}
+
+.ss-hl-line {
+    width: 56px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--ss-accent);
+}
+
+/* Grid */
+.ss-hl-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+@media (max-width: 991px) {
+    .ss-hl-grid { grid-template-columns: 1fr; max-width: 480px; }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .ss-hl-grid { gap: 16px; }
+}
+
+/* Card — starts hidden, slides up on scroll */
+.ss-hl-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 40px;
+    border: 1px solid rgba(0,0,0,.06);
+    box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    transition: box-shadow .35s ease, transform .35s ease;
+    /* Scroll animation initial state */
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity .6s ease, transform .6s ease, box-shadow .35s ease;
+}
+
+.ss-hl-card.ss-in {
+    opacity: 1;
+    transform: none;
+}
+
+.ss-hl-card:hover {
+    box-shadow: 0 20px 50px rgba(0,0,0,.1);
+    transform: translateY(-4px);
+}
+
+/* Icon */
+.ss-hl-icon-wrap {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: rgba(194,249,113,.2);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+    transition: transform .3s ease;
+}
+
+.ss-hl-card:hover .ss-hl-icon-wrap {
+    transform: scale(1.12);
+}
+
+.ss-hl-icon-wrap i {
+    font-size: 22px;
+    color: #5a7a00;
+}
+
+/* Text */
+.ss-hl-card-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #121212;
+    margin: 0 0 14px;
+    letter-spacing: -.02em;
+}
+
+.ss-hl-card-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #666;
+    margin: 0;
+}
+
+/* =============================================================================
+   4. Process — reuses cs-step classes + hover effects
    ============================================================================= */
 
 .ss-process {

@@ -143,7 +143,86 @@ body { overflow: auto !important; height: auto !important; }
         </div>
     </section>
 
-    <!-- ── 3. Process ── -->
+    <!-- ── 3. Highlights / Feature Cards ── -->
+    <?php
+    $hl_title = get_post_meta( $id, '_service_highlights_title', true )
+        ?: __( 'Dərin Audit və Strategiya', 'ondigital' );
+
+    $default_cards = array(
+        array(
+            'icon'  => 'fa-chart-line',
+            'title' => __( 'Texniki Audit', 'ondigital' ),
+            'desc'  => __( 'Veb saytınızın kod strukturundan, server cavab müddətinə qədər hər bir detalı 200+ faktor üzrə yoxlayırıq.', 'ondigital' ),
+        ),
+        array(
+            'icon'  => 'fa-magnifying-glass-chart',
+            'title' => __( 'Semantik Analiz', 'ondigital' ),
+            'desc'  => __( 'Yalnız həcmə deyil, istifadəçi niyyətinə (Intent) fokuslanan semantik açar söz xəritəsi hazırlayırıq.', 'ondigital' ),
+        ),
+        array(
+            'icon'  => 'fa-route',
+            'title' => __( 'Böyümə Xəritəsi', 'ondigital' ),
+            'desc'  => __( 'Növbəti 6–12 ay üçün aylıq hədəfləri və KPI-ları müəyyən edən strateji yol xəritəsi təqdim edirik.', 'ondigital' ),
+        ),
+    );
+
+    $hl_cards = array();
+    for ( $ci = 1; $ci <= 3; $ci++ ) {
+        $t = get_post_meta( $id, "_service_card_{$ci}_title", true );
+        $d = get_post_meta( $id, "_service_card_{$ci}_desc",  true );
+        $ic = get_post_meta( $id, "_service_card_{$ci}_icon", true );
+        if ( $t || $d ) {
+            $hl_cards[] = array(
+                'icon'  => $ic ?: $default_cards[ $ci - 1 ]['icon'],
+                'title' => $t  ?: $default_cards[ $ci - 1 ]['title'],
+                'desc'  => $d  ?: $default_cards[ $ci - 1 ]['desc'],
+            );
+        }
+    }
+    if ( empty( $hl_cards ) ) {
+        $hl_cards = $default_cards;
+    }
+    ?>
+    <section class="ss-highlights">
+        <div class="container">
+            <div class="ss-hl-header">
+                <h2 class="ss-hl-title"><?php echo esc_html( $hl_title ); ?></h2>
+                <div class="ss-hl-line"></div>
+            </div>
+            <div class="ss-hl-grid">
+                <?php foreach ( $hl_cards as $ci => $card ) : ?>
+                    <div class="ss-hl-card" style="--ss-delay:<?php echo esc_attr( $ci * 120 ); ?>ms">
+                        <div class="ss-hl-icon-wrap">
+                            <i class="fa-solid <?php echo esc_attr( $card['icon'] ); ?>"></i>
+                        </div>
+                        <h3 class="ss-hl-card-title"><?php echo esc_html( $card['title'] ); ?></h3>
+                        <p class="ss-hl-card-desc"><?php echo esc_html( $card['desc'] ); ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+    <script>
+    (function(){
+        var cards = document.querySelectorAll('.ss-hl-card');
+        if (!cards.length || !('IntersectionObserver' in window)) {
+            cards.forEach(function(c){ c.classList.add('ss-in'); });
+            return;
+        }
+        var obs = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){
+                if (e.isIntersecting) {
+                    var delay = e.target.style.getPropertyValue('--ss-delay') || '0ms';
+                    setTimeout(function(){ e.target.classList.add('ss-in'); }, parseInt(delay));
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        cards.forEach(function(c){ obs.observe(c); });
+    })();
+    </script>
+
+    <!-- ── 5. Process ── -->
     <section class="ss-process" id="ss-process">
         <div class="container">
             <div class="ss-process-header">
