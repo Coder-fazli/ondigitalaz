@@ -108,9 +108,9 @@ function ondigital_enqueue_page_assets() {
             wp_enqueue_style( 'ondigital-faq-about', ONDIGITAL_URI . '/assets/css/pages/faq.css', array( 'ondigital-about' ), ONDIGITAL_VERSION );
             wp_add_inline_style( 'ondigital-faq-about', '
                 .faq-area .section-content { background-color: transparent !important; display: grid !important; gap: 30px 60px !important; grid-template-columns: 485px 960px !important; justify-content: unset !important; }
-                @media only screen and (max-width: 1399px) { .faq-area .section-content { grid-template-columns: 400px 1fr !important; } }
+                @media only screen and (max-width: 1919px) { .faq-area .section-content { grid-template-columns: 400px 1fr !important; } }
                 @media only screen and (max-width: 1199px) { .faq-area .section-content { grid-template-columns: 300px 1fr !important; } }
-                @media only screen and (max-width: 767px)  { .faq-area .section-content { grid-template-columns: auto !important; } }
+                @media only screen and (max-width: 991px)  { .faq-area .section-content { grid-template-columns: auto !important; } }
                 .faq-area .content-last { padding: 0 !important; }
                 .faq-area .section-title { color: var(--primary) !important; }
                 .faq-area .accordion .accordion-button { color: var(--primary) !important; background-color: rgba(0,0,0,0) !important; }
