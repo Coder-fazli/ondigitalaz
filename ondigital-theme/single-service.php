@@ -25,28 +25,7 @@ $hero_badge       = $od_opts[ 'service_hero_badge_' . $lang ]       ?? ( $lang =
 $hero_btn_primary = $od_opts[ 'service_hero_btn_primary_' . $lang ]  ?? ( $lang === 'en' ? 'Get Started' : 'Başlayaq' );
 $hero_btn_ghost   = $od_opts[ 'service_hero_btn_ghost_' . $lang ]    ?? ( $lang === 'en' ? 'See the process' : 'Prosesi gör' );
 
-$features_raw = get_post_meta( $id, '_service_features', true );
-$features     = $features_raw
-    ? array_filter( array_map( 'trim', explode( "\n", $features_raw ) ) )
-    : array(
-        'Rəqib analizi və bazar araşdırması',
-        'Texniki audit (200+ yoxlama meyarı)',
-        'Semantik açar söz xəritəsi',
-        'Aylıq performans hesabatı',
-        'On-page optimallaşdırma',
-        'Backlink strategiyası',
-        'Google My Business idarəetməsi',
-        'Aylıq 2 görüntülü brifinq',
-    );
-
 $demo_excerpt = __( 'Biz rəqəmsal ekosisteminizi məlumatlarla idarə olunan strategiyalarla yenidən qururuq. Standart şablonlar deyil — sizin üçün xüsusi hazırlanmış texniki mükəmməllik.', 'ondigital' );
-
-$demo_content = '<p>' . __( 'Ondigital olaraq hər xidməti müştərinin konkret biznes məqsədlərinə uyğun olaraq hazırlayırıq. Biz yalnız nəticəyə fokuslanırıq — görünürlük, trafik və gəlir artımı.', 'ondigital' ) . '</p>'
-    . '<p>' . __( 'Hər bir layihəmizdə dərin data analitikasından istifadə edərək rəqiblərinizin zəif nöqtələrini aşkar edir və sizin üstünlüklərinizi maksimuma çatdırırıq. Bakıdan dünyaya açılan rəqəmsal qapınız bizik.', 'ondigital' ) . '</p>'
-    . '<h2>' . __( 'Niyə Ondigital?', 'ondigital' ) . '</h2>'
-    . '<p>' . __( 'Müasir rəqəmsal marketinq texniki infrastrukturun, məzmun keyfiyyətinin və istifadəçi təcrübəsinin harmonik vəhdətidir. Bizim yanaşmamız Google-un ən son alqoritmlərinə uyğun, davamlı və ölçülə bilən nəticələr üzərində qurulub.', 'ondigital' ) . '</p>'
-    . '<h3>' . __( 'Əsas üstünlüklər', 'ondigital' ) . '</h3>'
-    . '<p>' . __( 'Şəffaf hesabat, aylıq KPI izləməsi və həsr edilmiş menecer — bütün bunlar standart xidmət paketimizə daxildir. Siz biznesinizə fokuslanın, qalanı bizə həvalə edin.', 'ondigital' ) . '</p>';
 
 // Process: prefer _service_steps (own meta), fall back to _od_steps (shared)
 $steps = get_post_meta( $id, '_service_steps', true );
@@ -122,40 +101,6 @@ body { overflow: auto !important; height: auto !important; }
         </div>
     </section>
 
-    <!-- ── 2. Overview ── -->
-    <section class="ss-overview">
-        <div class="container">
-            <div class="ss-overview-inner">
-
-                <div class="ss-overview-content">
-                    <?php
-                    $raw = get_the_content();
-                    if ( $raw ) {
-                        the_content();
-                    } else {
-                        echo wp_kses_post( $demo_content );
-                    }
-                    ?>
-                </div>
-
-                <div class="ss-overview-aside">
-                    <div class="ss-features-card">
-                        <h3 class="ss-features-title"><?php esc_html_e( 'Nə əldə edirsiniz', 'ondigital' ); ?></h3>
-                        <ul class="ss-features-list">
-                            <?php foreach ( $features as $feature ) : ?>
-                                <li><?php echo esc_html( $feature ); ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                        <a href="<?php echo esc_url( home_url( '/elaqe/' ) ); ?>" class="ss-features-cta">
-                            <?php esc_html_e( 'Pulsuz məsləhət al', 'ondigital' ); ?>
-                            <i class="fa-solid fa-arrow-right-long"></i>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
 
     <!-- ── 3. Highlights / Feature Cards ── -->
     <?php
@@ -237,30 +182,33 @@ body { overflow: auto !important; height: auto !important; }
     </script>
 
     <!-- ── 4. What's Included + Monthly Roadmap ── -->
-    <section class="ss-wi">
+    <section class="wi-section">
         <div class="container">
             <?php
             $wi_title       = get_post_meta( $id, '_service_wi_title',       true ) ?: __( 'Nə daxildir', 'ondigital' );
             $wi_header_desc = get_post_meta( $id, '_service_wi_header_desc', true ) ?: __( 'Hər paketdə nələrin olduğunu və aylıq yol xəritəsini aşağıda görə bilərsiniz.', 'ondigital' );
             ?>
-            <div class="ss-wi-header">
-                <h2 class="ss-wi-title"><?php echo esc_html( $wi_title ); ?></h2>
-                <p class="ss-wi-header-desc"><?php echo esc_html( $wi_header_desc ); ?></p>
+            <div class="wi-header">
+                <div>
+                    <span class="cs-eyebrow"><?php esc_html_e( 'Xidmət paketi', 'ondigital' ); ?></span>
+                    <h2 class="wi-title"><?php echo esc_html( $wi_title ); ?></h2>
+                </div>
+                <p class="wi-header-desc"><?php echo esc_html( $wi_header_desc ); ?></p>
             </div>
-            <div class="ss-wi-tabs">
-                <button class="ss-wi-tab active" data-tab="included">
+            <div class="wi-tabs">
+                <button class="wi-tab active" data-tab="included">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
                     <?php esc_html_e( 'Nə daxildir', 'ondigital' ); ?>
                 </button>
-                <button class="ss-wi-tab" data-tab="roadmap">
+                <button class="wi-tab" data-tab="roadmap">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                     <?php esc_html_e( 'Aylıq yol xəritəsi', 'ondigital' ); ?>
                 </button>
             </div>
 
             <!-- Pane: Nə daxildir -->
-            <div class="ss-wi-pane active" data-tab="included">
-                <div class="ss-wi-accord">
+            <div class="wi-pane active" data-tab="included">
+                <div class="wi-accord">
                     <?php
                     $wi_items_raw = get_post_meta( $id, '_service_wi_items', true );
                     $wi_items = ( is_array( $wi_items_raw ) && ! empty( $wi_items_raw[0]['title'] ) )
@@ -273,18 +221,19 @@ body { overflow: auto !important; height: auto !important; }
                             array( 'title' => 'Backlink Kampaniyası',       'desc' => 'Keyfiyyətli, tematik uyğun saytlardan natural backlink profili quraraq domeninizin avtoritetini artırırıq.' ),
                             array( 'title' => 'Aylıq Performans Hesabatı', 'desc' => 'KPI-lar, trafik dinamikası, sıralama dəyişiklikləri — hər şey şəffaf şəkildə aylıq hesabat formatında təqdim edilir.' ),
                         );
+                    $wi_items = array_values( $wi_items );
                     foreach ( $wi_items as $wi_i => $wi_item ) : ?>
-                        <div class="ss-wi-row">
-                            <button class="ss-wi-btn" type="button">
-                                <span class="ss-wi-num"><?php echo str_pad( $wi_i + 1, 2, '0', STR_PAD_LEFT ); ?></span>
-                                <span class="ss-wi-row-title"><?php echo esc_html( $wi_item['title'] ); ?></span>
-                                <span class="ss-wi-chevron">
+                        <div class="wi-row<?php echo $wi_i === 0 ? ' open' : ''; ?>">
+                            <button class="wi-row-btn" type="button">
+                                <span class="wi-row-num"><?php echo str_pad( $wi_i + 1, 2, '0', STR_PAD_LEFT ); ?></span>
+                                <span class="wi-row-title"><?php echo esc_html( $wi_item['title'] ); ?></span>
+                                <span class="wi-row-chevron">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
                                 </span>
                             </button>
-                            <div class="ss-wi-body">
-                                <div class="ss-wi-body-inner">
-                                    <p class="ss-wi-desc"><?php echo esc_html( $wi_item['desc'] ); ?></p>
+                            <div class="wi-row-body"<?php echo $wi_i === 0 ? ' style="max-height:500px"' : ''; ?>>
+                                <div class="wi-row-body-inner">
+                                    <p class="wi-body-desc"><?php echo esc_html( $wi_item['desc'] ); ?></p>
                                 </div>
                             </div>
                         </div>
@@ -293,8 +242,8 @@ body { overflow: auto !important; height: auto !important; }
             </div>
 
             <!-- Pane: Aylıq yol xəritəsi -->
-            <div class="ss-wi-pane" data-tab="roadmap">
-                <div class="ss-wi-accord">
+            <div class="wi-pane" data-tab="roadmap">
+                <div class="wi-accord">
                     <?php
                     $rm_items_raw = get_post_meta( $id, '_service_rm_items', true );
                     $rm_items = ( is_array( $rm_items_raw ) && ! empty( $rm_items_raw[0]['title'] ) )
@@ -306,24 +255,25 @@ body { overflow: auto !important; height: auto !important; }
                             array( 'title' => '4–5-ci Ay — Güclənmə',                   'desc' => 'Backlink kampaniyasının tam sürətlə işə salınması, məzmun həcminin artırılması, texniki optimallaşdırmanın davam etdirilməsi.',                                                          'prog' => '75%'  ),
                             array( 'title' => '6-cı Ay — Ölçmə və Miqyaslandırma',      'desc' => 'KPI-ların qiymətləndirilməsi, uğurlu strategiyaların miqyaslandırılması, növbəti 6 ay üçün yenilənmiş yol xəritəsinin hazırlanması.',                                                  'prog' => '100%' ),
                         );
+                    $rm_items = array_values( $rm_items );
                     foreach ( $rm_items as $rm_i => $rm_item ) : ?>
-                        <div class="ss-wi-row" style="--wi-prog:<?php echo esc_attr( $rm_item['prog'] ); ?>">
-                            <button class="ss-wi-btn" type="button">
-                                <span class="ss-wi-num"><?php echo str_pad( $rm_i + 1, 2, '0', STR_PAD_LEFT ); ?></span>
-                                <span class="ss-wi-row-title"><?php echo esc_html( $rm_item['title'] ); ?></span>
-                                <span class="ss-wi-chevron">
+                        <div class="wi-row<?php echo $rm_i === 0 ? ' open' : ''; ?>">
+                            <button class="wi-row-btn" type="button">
+                                <span class="wi-row-num"><?php echo str_pad( $rm_i + 1, 2, '0', STR_PAD_LEFT ); ?></span>
+                                <span class="wi-row-title"><?php echo esc_html( $rm_item['title'] ); ?></span>
+                                <span class="wi-row-chevron">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
                                 </span>
                             </button>
-                            <div class="ss-wi-body">
-                                <div class="ss-wi-body-inner roadmap">
-                                    <p class="ss-wi-desc"><?php echo esc_html( $rm_item['desc'] ); ?></p>
-                                    <div class="ss-wi-prog">
-                                        <span class="ss-wi-prog-label"><?php echo esc_html( $rm_item['prog'] ); ?></span>
-                                        <div class="ss-wi-prog-bar">
-                                            <div class="ss-wi-prog-fill"></div>
+                            <div class="wi-row-body"<?php echo $rm_i === 0 ? ' style="max-height:500px"' : ''; ?>>
+                                <div class="wi-row-body-inner roadmap">
+                                    <p class="wi-body-desc"><?php echo esc_html( $rm_item['desc'] ); ?></p>
+                                    <div class="wi-prog-wrap">
+                                        <span class="wi-prog-label"><?php esc_html_e( 'Tamamlanma hədəfi', 'ondigital' ); ?></span>
+                                        <span class="wi-prog-pct"><?php echo esc_html( $rm_item['prog'] ); ?></span>
+                                        <div class="wi-prog-bar">
+                                            <div class="wi-prog-fill" style="--prog:<?php echo esc_attr( $rm_item['prog'] ); ?>"></div>
                                         </div>
-                                        <span class="ss-wi-prog-pct"><?php esc_html_e( 'Ümumi irəliləyiş', 'ondigital' ); ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -336,28 +286,32 @@ body { overflow: auto !important; height: auto !important; }
     <script>
     (function(){
         // Tab switcher
-        var tabs = document.querySelectorAll('.ss-wi-tab');
-        var panes = document.querySelectorAll('.ss-wi-pane');
+        var tabs = document.querySelectorAll('.wi-tab');
+        var panes = document.querySelectorAll('.wi-pane');
         tabs.forEach(function(tab){
             tab.addEventListener('click', function(){
                 var t = this.dataset.tab;
                 tabs.forEach(function(x){ x.classList.remove('active'); });
                 panes.forEach(function(x){ x.classList.remove('active'); });
                 this.classList.add('active');
-                document.querySelector('.ss-wi-pane[data-tab="'+t+'"]').classList.add('active');
+                document.querySelector('.wi-pane[data-tab="'+t+'"]').classList.add('active');
             });
         });
-        // Accordion
-        document.querySelectorAll('.ss-wi-btn').forEach(function(btn){
+        // Accordion — open first row bodies on init
+        document.querySelectorAll('.wi-row.open').forEach(function(row){
+            var body = row.querySelector('.wi-row-body');
+            if (body && !body.style.maxHeight) body.style.maxHeight = body.scrollHeight + 'px';
+        });
+        // Accordion click
+        document.querySelectorAll('.wi-row-btn').forEach(function(btn){
             btn.addEventListener('click', function(){
-                var row = this.closest('.ss-wi-row');
-                var body = row.querySelector('.ss-wi-body');
+                var row = this.closest('.wi-row');
+                var body = row.querySelector('.wi-row-body');
                 var isOpen = row.classList.contains('open');
-                // close all in same pane
-                var pane = this.closest('.ss-wi-pane');
-                pane.querySelectorAll('.ss-wi-row.open').forEach(function(r){
+                var pane = this.closest('.wi-pane');
+                pane.querySelectorAll('.wi-row.open').forEach(function(r){
                     r.classList.remove('open');
-                    r.querySelector('.ss-wi-body').style.maxHeight = '0';
+                    r.querySelector('.wi-row-body').style.maxHeight = '0';
                 });
                 if (!isOpen) {
                     row.classList.add('open');
@@ -430,31 +384,34 @@ body { overflow: auto !important; height: auto !important; }
             array( 'title' => 'Saytını heç vaxt yeniləmək istəməyənlər','desc' => 'Texniki tövsiyələri tətbiq etməyə hazır olmayan bizneslər SEO-dan lazımi nəticəni ala bilmir.' ),
         );
     ?>
-    <section class="ss-wif">
+    <section class="wif-section">
         <div class="container">
-            <div class="ss-wif-header">
-                <h2 class="ss-wif-title"><?php echo esc_html( $wif_title ); ?></h2>
-                <p class="ss-wif-header-sub"><?php echo esc_html( $wif_sub ); ?></p>
+            <div class="wif-header">
+                <div>
+                    <span class="cs-eyebrow"><?php esc_html_e( 'Hədəf auditoriya', 'ondigital' ); ?></span>
+                    <h2 class="wif-title"><?php echo esc_html( $wif_title ); ?></h2>
+                </div>
+                <p class="wif-header-sub"><?php echo esc_html( $wif_sub ); ?></p>
             </div>
-            <div class="ss-wif-cols">
-                <div class="ss-wif-col ss-wif-col--for">
-                    <div class="ss-wif-col-inner">
-                        <div class="ss-wif-col-header">
-                            <span class="ss-wif-col-icon">
+            <div class="wif-cols">
+                <div class="wif-col wif-col--for">
+                    <div class="wif-col-inner">
+                        <div class="wif-col-header">
+                            <span class="wif-col-icon">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
                             </span>
-                            <span class="ss-wif-col-label"><?php esc_html_e( 'Bu xidmət sizin üçündür', 'ondigital' ); ?></span>
+                            <span class="wif-col-label"><?php esc_html_e( 'Bu xidmət sizin üçündür', 'ondigital' ); ?></span>
                         </div>
-                        <ul class="ss-wif-list">
+                        <ul class="wif-list">
                             <?php foreach ( $wif_for as $item ) : ?>
-                            <li class="ss-wif-item">
-                                <span class="ss-wif-item-icon">
+                            <li class="wif-item">
+                                <span class="wif-item-icon">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                                 </span>
                                 <div>
-                                    <div class="ss-wif-item-title"><?php echo esc_html( $item['title'] ); ?></div>
+                                    <div class="wif-item-title"><?php echo esc_html( $item['title'] ); ?></div>
                                     <?php if ( ! empty( $item['desc'] ) ) : ?>
-                                    <div class="ss-wif-item-desc"><?php echo esc_html( $item['desc'] ); ?></div>
+                                    <div class="wif-item-desc"><?php echo esc_html( $item['desc'] ); ?></div>
                                     <?php endif; ?>
                                 </div>
                             </li>
@@ -462,24 +419,24 @@ body { overflow: auto !important; height: auto !important; }
                         </ul>
                     </div>
                 </div>
-                <div class="ss-wif-col ss-wif-col--not">
-                    <div class="ss-wif-col-inner">
-                        <div class="ss-wif-col-header">
-                            <span class="ss-wif-col-icon">
+                <div class="wif-col wif-col--not">
+                    <div class="wif-col-inner">
+                        <div class="wif-col-header">
+                            <span class="wif-col-icon">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                             </span>
-                            <span class="ss-wif-col-label"><?php esc_html_e( 'Bu xidmət sizin üçün deyil', 'ondigital' ); ?></span>
+                            <span class="wif-col-label"><?php esc_html_e( 'Bu xidmət sizin üçün deyil', 'ondigital' ); ?></span>
                         </div>
-                        <ul class="ss-wif-list">
+                        <ul class="wif-list">
                             <?php foreach ( $wif_not as $item ) : ?>
-                            <li class="ss-wif-item">
-                                <span class="ss-wif-item-icon">
+                            <li class="wif-item">
+                                <span class="wif-item-icon">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                                 </span>
                                 <div>
-                                    <div class="ss-wif-item-title"><?php echo esc_html( $item['title'] ); ?></div>
+                                    <div class="wif-item-title"><?php echo esc_html( $item['title'] ); ?></div>
                                     <?php if ( ! empty( $item['desc'] ) ) : ?>
-                                    <div class="ss-wif-item-desc"><?php echo esc_html( $item['desc'] ); ?></div>
+                                    <div class="wif-item-desc"><?php echo esc_html( $item['desc'] ); ?></div>
                                     <?php endif; ?>
                                 </div>
                             </li>
@@ -488,7 +445,7 @@ body { overflow: auto !important; height: auto !important; }
                     </div>
                 </div>
             </div>
-            <p class="ss-wif-note"><?php esc_html_e( 'Əmin deyilsiniz?', 'ondigital' ); ?> <a href="<?php echo esc_url( home_url( '/elaqe/' ) ); ?>"><?php esc_html_e( 'Pulsuz məsləhət alın', 'ondigital' ); ?></a> <?php esc_html_e( '— vəziyyətinizi birlikdə qiymətləndirək.', 'ondigital' ); ?></p>
+            <p class="wif-note"><?php esc_html_e( 'Əmin deyilsiniz?', 'ondigital' ); ?> <a href="<?php echo esc_url( home_url( '/elaqe/' ) ); ?>"><?php esc_html_e( 'Pulsuz məsləhət alın', 'ondigital' ); ?></a> <?php esc_html_e( '— vəziyyətinizi birlikdə qiymətləndirək.', 'ondigital' ); ?></p>
         </div>
     </section>
 
@@ -511,17 +468,20 @@ body { overflow: auto !important; height: auto !important; }
             array( 'word' => 'Core Web Vitals',      'def' => 'Google-un sayt sürəti və istifadəçi təcrübəsini ölçmək üçün istifadə etdiyi texniki metriklər toplusu.' ),
         );
     ?>
-    <section class="ss-gl">
+    <section class="gl-section">
         <div class="container">
-            <div class="ss-gl-header">
-                <h2 class="ss-gl-title"><?php echo esc_html( $gl_title ); ?></h2>
-                <p class="ss-gl-header-desc"><?php echo esc_html( $gl_header_desc ); ?></p>
+            <div class="gl-header">
+                <div>
+                    <span class="cs-eyebrow"><?php esc_html_e( 'Terminlər', 'ondigital' ); ?></span>
+                    <h2 class="gl-title"><?php echo esc_html( $gl_title ); ?></h2>
+                </div>
+                <p class="gl-header-desc"><?php echo esc_html( $gl_header_desc ); ?></p>
             </div>
-            <div class="ss-gl-grid">
+            <div class="gl-grid">
                 <?php foreach ( $gl_terms as $term ) : ?>
-                <div class="ss-gl-term">
-                    <div class="ss-gl-word"><?php echo esc_html( $term['word'] ); ?></div>
-                    <p class="ss-gl-def"><?php echo esc_html( $term['def'] ); ?></p>
+                <div class="gl-term">
+                    <div class="gl-term-word"><?php echo esc_html( $term['word'] ); ?></div>
+                    <p class="gl-term-def"><?php echo esc_html( $term['def'] ); ?></p>
                 </div>
                 <?php endforeach; ?>
             </div>
@@ -575,27 +535,28 @@ body { overflow: auto !important; height: auto !important; }
             array( 'q' => 'Mövcud saytım varsa nə etməliyəm?',                'a' => 'Heç bir şey. Biz saytınızı audit edib mövcud vəziyyəti qiymətləndirir, sonra prioritet siyahısı hazırlayırıq. Yeni sayt tələb olunmur.' ),
         );
     ?>
-    <section class="ss-faq">
+    <section class="faq-section">
         <div class="container">
-            <div class="ss-faq-panel">
-                <h2 class="ss-faq-panel-title"><?php echo esc_html( $faq_panel_title ); ?></h2>
-                <p class="ss-faq-panel-desc"><?php echo esc_html( $faq_panel_desc ); ?></p>
-                <a href="<?php echo esc_url( home_url( '/elaqe/' ) ); ?>" class="ss-faq-cta">
+            <div class="faq-panel">
+                <span class="cs-eyebrow"><?php esc_html_e( 'FAQ', 'ondigital' ); ?></span>
+                <h2 class="faq-panel-title"><?php echo esc_html( $faq_panel_title ); ?></h2>
+                <p class="faq-panel-desc"><?php echo esc_html( $faq_panel_desc ); ?></p>
+                <a href="<?php echo esc_url( home_url( '/elaqe/' ) ); ?>" class="faq-panel-cta">
                     <?php esc_html_e( 'Sualınız var?', 'ondigital' ); ?>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
             </div>
-            <div class="ss-faq-list">
+            <div class="faq-list">
                 <?php foreach ( $faq_items as $fi => $item ) : ?>
-                <div class="ss-faq-item<?php echo $fi === 0 ? ' open' : ''; ?>">
-                    <button class="ss-faq-q" type="button">
-                        <span class="ss-faq-q-text"><?php echo esc_html( $item['q'] ); ?></span>
-                        <span class="ss-faq-icon">
+                <div class="faq-item<?php echo $fi === 0 ? ' open' : ''; ?>">
+                    <button class="faq-q" type="button">
+                        <span class="faq-q-text"><?php echo esc_html( $item['q'] ); ?></span>
+                        <span class="faq-icon">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                         </span>
                     </button>
-                    <div class="ss-faq-a"<?php echo $fi === 0 ? ' style="max-height:500px"' : ''; ?>>
-                        <div class="ss-faq-a-inner"><?php echo esc_html( $item['a'] ); ?></div>
+                    <div class="faq-a"<?php echo $fi === 0 ? ' style="max-height:500px"' : ''; ?>>
+                        <div class="faq-a-inner"><?php echo esc_html( $item['a'] ); ?></div>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -604,14 +565,14 @@ body { overflow: auto !important; height: auto !important; }
     </section>
     <script>
     (function(){
-        document.querySelectorAll('.ss-faq-q').forEach(function(btn){
+        document.querySelectorAll('.faq-q').forEach(function(btn){
             btn.addEventListener('click', function(){
-                var item = this.closest('.ss-faq-item');
-                var ans  = item.querySelector('.ss-faq-a');
+                var item = this.closest('.faq-item');
+                var ans  = item.querySelector('.faq-a');
                 var isOpen = item.classList.contains('open');
-                document.querySelectorAll('.ss-faq-item.open').forEach(function(el){
+                document.querySelectorAll('.faq-item.open').forEach(function(el){
                     el.classList.remove('open');
-                    el.querySelector('.ss-faq-a').style.maxHeight = '0';
+                    el.querySelector('.faq-a').style.maxHeight = '0';
                 });
                 if (!isOpen) {
                     item.classList.add('open');
