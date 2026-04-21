@@ -16,10 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action( 'add_meta_boxes', 'ondigital_register_meta_boxes' );
 function ondigital_register_meta_boxes() {
 
-    // Service: icon image
+    // Service: hero image, icon, stat, features
     add_meta_box(
         'ondigital_service_meta',
-        __( 'Service Options', 'ondigital' ),
+        __( '1. Hero & Options', 'ondigital' ),
         'ondigital_service_meta_callback',
         'service',
         'normal',
@@ -80,6 +80,76 @@ function ondigital_register_meta_boxes() {
         __( '7. Archive Card (shown on projects grid)', 'ondigital' ),
         'ondigital_project_archive_card_callback',
         'project',
+        'normal',
+        'high'
+    );
+
+    // Service: highlights cards
+    add_meta_box(
+        'ondigital_service_highlights',
+        __( '2. Highlights Cards', 'ondigital' ),
+        'ondigital_service_highlights_callback',
+        'service',
+        'normal',
+        'high'
+    );
+
+    // Service: process steps
+    add_meta_box(
+        'ondigital_service_process',
+        __( '3. Process Steps', 'ondigital' ),
+        'ondigital_service_process_callback',
+        'service',
+        'normal',
+        'high'
+    );
+
+    // Service: CTA sections
+    add_meta_box(
+        'ondigital_service_cta',
+        __( '4. CTA Sections', 'ondigital' ),
+        'ondigital_service_cta_callback',
+        'service',
+        'normal',
+        'high'
+    );
+
+    // Service: What's Included & Roadmap
+    add_meta_box(
+        'ondigital_service_included',
+        __( '5. What\'s Included & Roadmap', 'ondigital' ),
+        'ondigital_service_included_callback',
+        'service',
+        'normal',
+        'high'
+    );
+
+    // Service: Who Is This For
+    add_meta_box(
+        'ondigital_service_wif',
+        __( '6. Who Is This For', 'ondigital' ),
+        'ondigital_service_wif_callback',
+        'service',
+        'normal',
+        'high'
+    );
+
+    // Service: Glossary
+    add_meta_box(
+        'ondigital_service_glossary',
+        __( '7. Glossary / Key Terms', 'ondigital' ),
+        'ondigital_service_glossary_callback',
+        'service',
+        'normal',
+        'high'
+    );
+
+    // Service: FAQ
+    add_meta_box(
+        'ondigital_service_faq',
+        __( '8. FAQ', 'ondigital' ),
+        'ondigital_service_faq_callback',
+        'service',
         'normal',
         'high'
     );
@@ -156,11 +226,13 @@ function od_mb_image( $name, $label, $image_id ) {
 
 function ondigital_service_meta_callback( $post ) {
     wp_nonce_field( 'ondigital_service_meta', 'ondigital_service_meta_nonce' );
-    $icon_id  = get_post_meta( $post->ID, '_service_icon', true );
-    $features = get_post_meta( $post->ID, '_service_features', true );
+    $icon_id     = get_post_meta( $post->ID, '_service_icon', true );
+    $hero_img_id = get_post_meta( $post->ID, '_service_hero_image', true );
+    $features    = get_post_meta( $post->ID, '_service_features', true );
     ?>
     <table class="form-table">
-        <?php od_mb_image( '_service_icon', __( 'Service Icon', 'ondigital' ), $icon_id ); ?>
+        <?php od_mb_image( '_service_hero_image', __( 'Hero Image', 'ondigital' ), $hero_img_id ); ?>
+        <?php od_mb_image( '_service_icon', __( 'Service Icon (small)', 'ondigital' ), $icon_id ); ?>
         <?php
         od_mb_text( '_service_stat_number', __( 'Hero Stat Number', 'ondigital' ), get_post_meta( $post->ID, '_service_stat_number', true ), __( 'e.g. +240%', 'ondigital' ) );
         od_mb_text( '_service_stat_label',  __( 'Hero Stat Label',  'ondigital' ), get_post_meta( $post->ID, '_service_stat_label',  true ), __( 'e.g. Üzvi trafik artımı', 'ondigital' ) );
@@ -174,6 +246,277 @@ function ondigital_service_meta_callback( $post ) {
         </tr>
     </table>
     <?php
+}
+
+// =============================================================================
+// Service — Highlights Cards
+// =============================================================================
+
+function ondigital_service_highlights_callback( $post ) {
+    wp_nonce_field( 'ondigital_service_highlights', 'ondigital_service_highlights_nonce' );
+    $id = $post->ID;
+    ?>
+    <table class="form-table">
+        <?php od_mb_text( '_service_highlights_title', __( 'Section Title', 'ondigital' ), get_post_meta( $id, '_service_highlights_title', true ), __( 'e.g. Dərin Audit və Strategiya', 'ondigital' ) ); ?>
+    </table>
+    <?php for ( $ci = 1; $ci <= 3; $ci++ ) : ?>
+    <h4 style="padding:12px 12px 0;margin:0;"><?php printf( esc_html__( 'Card %d', 'ondigital' ), $ci ); ?></h4>
+    <table class="form-table">
+        <?php
+        od_mb_text( "_service_card_{$ci}_title", __( 'Title', 'ondigital' ), get_post_meta( $id, "_service_card_{$ci}_title", true ), __( 'e.g. Texniki Audit', 'ondigital' ) );
+        od_mb_textarea( "_service_card_{$ci}_desc", __( 'Description', 'ondigital' ), get_post_meta( $id, "_service_card_{$ci}_desc", true ), __( 'Short description…', 'ondigital' ) );
+        od_mb_text( "_service_card_{$ci}_icon", __( 'Font Awesome Icon Class', 'ondigital' ), get_post_meta( $id, "_service_card_{$ci}_icon", true ), __( 'e.g. fa-chart-line', 'ondigital' ) );
+        ?>
+    </table>
+    <?php endfor;
+}
+
+// =============================================================================
+// Service — Process Steps
+// =============================================================================
+
+function ondigital_service_process_callback( $post ) {
+    wp_nonce_field( 'ondigital_service_process', 'ondigital_service_process_nonce' );
+    $id    = $post->ID;
+    $steps = get_post_meta( $id, '_service_steps', true );
+    if ( ! is_array( $steps ) ) {
+        $steps = array_fill( 0, 4, array( 'title_az' => '', 'title_en' => '', 'desc_az' => '', 'desc_en' => '', 'duration' => '' ) );
+    }
+    while ( count( $steps ) < 4 ) {
+        $steps[] = array( 'title_az' => '', 'title_en' => '', 'desc_az' => '', 'desc_en' => '', 'duration' => '' );
+    }
+    ?>
+    <table class="form-table">
+        <?php
+        od_mb_text( '_service_process_eyebrow', __( 'Eyebrow Label', 'ondigital' ), get_post_meta( $id, '_service_process_eyebrow', true ), __( 'e.g. İş Prosesi', 'ondigital' ) );
+        od_mb_text( '_service_process_heading', __( 'Heading', 'ondigital' ),       get_post_meta( $id, '_service_process_heading', true ), __( 'e.g. Necə işləyirik', 'ondigital' ) );
+        ?>
+    </table>
+    <?php foreach ( $steps as $i => $step ) : $n = $i + 1; ?>
+    <h4 style="padding:12px 12px 0;margin:0;"><?php printf( esc_html__( 'Step %d', 'ondigital' ), $n ); ?></h4>
+    <table class="form-table">
+        <tr>
+            <th style="width:200px"><?php esc_html_e( 'Title (AZ)', 'ondigital' ); ?></th>
+            <td><input type="text" name="_service_steps[<?php echo $i; ?>][title_az]" value="<?php echo esc_attr( $step['title_az'] ?? '' ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Kəşfiyyat', 'ondigital' ); ?>"></td>
+        </tr>
+        <tr>
+            <th><?php esc_html_e( 'Title (EN)', 'ondigital' ); ?></th>
+            <td><input type="text" name="_service_steps[<?php echo $i; ?>][title_en]" value="<?php echo esc_attr( $step['title_en'] ?? '' ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Discovery', 'ondigital' ); ?>"></td>
+        </tr>
+        <tr>
+            <th><?php esc_html_e( 'Description (AZ)', 'ondigital' ); ?></th>
+            <td><textarea name="_service_steps[<?php echo $i; ?>][desc_az]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in Azerbaijani', 'ondigital' ); ?>"><?php echo esc_textarea( $step['desc_az'] ?? '' ); ?></textarea></td>
+        </tr>
+        <tr>
+            <th><?php esc_html_e( 'Description (EN)', 'ondigital' ); ?></th>
+            <td><textarea name="_service_steps[<?php echo $i; ?>][desc_en]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in English', 'ondigital' ); ?>"><?php echo esc_textarea( $step['desc_en'] ?? '' ); ?></textarea></td>
+        </tr>
+        <tr>
+            <th><?php esc_html_e( 'Duration', 'ondigital' ); ?></th>
+            <td><input type="text" name="_service_steps[<?php echo $i; ?>][duration]" value="<?php echo esc_attr( $step['duration'] ?? '' ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. 2 weeks', 'ondigital' ); ?>"></td>
+        </tr>
+    </table>
+    <?php endforeach;
+}
+
+// =============================================================================
+// Service — CTA Sections
+// =============================================================================
+
+function ondigital_service_cta_callback( $post ) {
+    wp_nonce_field( 'ondigital_service_cta', 'ondigital_service_cta_nonce' );
+    $id = $post->ID;
+    ?>
+    <table class="form-table">
+        <tr><td colspan="2"><strong><?php esc_html_e( 'Mid-page CTA Strip', 'ondigital' ); ?></strong></td></tr>
+        <?php od_mb_text( '_service_mid_cta_title', __( 'Title', 'ondigital' ), get_post_meta( $id, '_service_mid_cta_title', true ), __( 'e.g. Saytınızın potensialını öyrənməyə hazırsınız?', 'ondigital' ) ); ?>
+        <tr><td colspan="2"><hr style="margin:4px 0"><strong><?php esc_html_e( 'Footer CTA Card', 'ondigital' ); ?></strong></td></tr>
+        <?php
+        od_mb_text( '_service_footer_cta_title', __( 'Title', 'ondigital' ),    get_post_meta( $id, '_service_footer_cta_title', true ), __( 'e.g. Layihənizi birlikdə qurmağa hazırıq', 'ondigital' ) );
+        od_mb_text( '_service_footer_cta_sub',   __( 'Subtitle', 'ondigital' ), get_post_meta( $id, '_service_footer_cta_sub',   true ), __( 'e.g. Bizimlə əlaqə saxlayın, pulsuz məsləhət alın.', 'ondigital' ) );
+        ?>
+    </table>
+    <?php
+}
+
+// =============================================================================
+// Service — What's Included & Roadmap
+// =============================================================================
+
+function ondigital_service_included_callback( $post ) {
+    wp_nonce_field( 'ondigital_service_included', 'ondigital_service_included_nonce' );
+    $id = $post->ID;
+
+    $wi_items = get_post_meta( $id, '_service_wi_items', true );
+    if ( ! is_array( $wi_items ) ) $wi_items = array();
+    while ( count( $wi_items ) < 6 ) $wi_items[] = array( 'title' => '', 'desc' => '' );
+
+    $rm_items = get_post_meta( $id, '_service_rm_items', true );
+    if ( ! is_array( $rm_items ) ) $rm_items = array();
+    while ( count( $rm_items ) < 5 ) $rm_items[] = array( 'title' => '', 'desc' => '', 'prog' => '' );
+    ?>
+    <table class="form-table">
+        <?php
+        od_mb_text( '_service_wi_title',       __( 'Section Title', 'ondigital' ),       get_post_meta( $id, '_service_wi_title', true ),       __( 'e.g. Nə daxildir', 'ondigital' ) );
+        od_mb_text( '_service_wi_header_desc', __( 'Header Description', 'ondigital' ),  get_post_meta( $id, '_service_wi_header_desc', true ),  __( 'Short intro below the title', 'ondigital' ) );
+        ?>
+    </table>
+
+    <h4 style="padding:14px 12px 4px;margin:0;border-top:1px solid #ddd;"><?php esc_html_e( '— Tab 1: Nə daxildir (up to 6 items)', 'ondigital' ); ?></h4>
+    <?php foreach ( $wi_items as $i => $item ) : ?>
+    <h4 style="padding:10px 12px 0;margin:0;"><?php printf( esc_html__( 'Item %d', 'ondigital' ), $i + 1 ); ?></h4>
+    <table class="form-table">
+        <tr>
+            <th style="width:200px"><?php esc_html_e( 'Title', 'ondigital' ); ?></th>
+            <td><input type="text" name="_service_wi_items[<?php echo $i; ?>][title]" value="<?php echo esc_attr( $item['title'] ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Texniki SEO Auditi', 'ondigital' ); ?>"></td>
+        </tr>
+        <tr>
+            <th><?php esc_html_e( 'Description', 'ondigital' ); ?></th>
+            <td><textarea name="_service_wi_items[<?php echo $i; ?>][desc]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Short description…', 'ondigital' ); ?>"><?php echo esc_textarea( $item['desc'] ); ?></textarea></td>
+        </tr>
+    </table>
+    <?php endforeach; ?>
+
+    <h4 style="padding:14px 12px 4px;margin:0;border-top:1px solid #ddd;"><?php esc_html_e( '— Tab 2: Aylıq yol xəritəsi (up to 5 phases)', 'ondigital' ); ?></h4>
+    <?php foreach ( $rm_items as $i => $item ) : ?>
+    <h4 style="padding:10px 12px 0;margin:0;"><?php printf( esc_html__( 'Phase %d', 'ondigital' ), $i + 1 ); ?></h4>
+    <table class="form-table">
+        <tr>
+            <th style="width:200px"><?php esc_html_e( 'Title', 'ondigital' ); ?></th>
+            <td><input type="text" name="_service_rm_items[<?php echo $i; ?>][title]" value="<?php echo esc_attr( $item['title'] ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. 1–2-ci Həftə — Audit', 'ondigital' ); ?>"></td>
+        </tr>
+        <tr>
+            <th><?php esc_html_e( 'Description', 'ondigital' ); ?></th>
+            <td><textarea name="_service_rm_items[<?php echo $i; ?>][desc]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Phase description…', 'ondigital' ); ?>"><?php echo esc_textarea( $item['desc'] ); ?></textarea></td>
+        </tr>
+        <tr>
+            <th><?php esc_html_e( 'Progress %', 'ondigital' ); ?></th>
+            <td><input type="text" name="_service_rm_items[<?php echo $i; ?>][prog]" value="<?php echo esc_attr( $item['prog'] ); ?>" class="small-text" placeholder="<?php esc_attr_e( 'e.g. 55%', 'ondigital' ); ?>"></td>
+        </tr>
+    </table>
+    <?php endforeach;
+}
+
+// =============================================================================
+// Service — Who Is This For
+// =============================================================================
+
+function ondigital_service_wif_callback( $post ) {
+    wp_nonce_field( 'ondigital_service_wif', 'ondigital_service_wif_nonce' );
+    $id = $post->ID;
+
+    $for_items = get_post_meta( $id, '_service_wif_for_items', true );
+    if ( ! is_array( $for_items ) ) $for_items = array();
+    while ( count( $for_items ) < 5 ) $for_items[] = array( 'title' => '', 'desc' => '' );
+
+    $not_items = get_post_meta( $id, '_service_wif_not_items', true );
+    if ( ! is_array( $not_items ) ) $not_items = array();
+    while ( count( $not_items ) < 5 ) $not_items[] = array( 'title' => '', 'desc' => '' );
+    ?>
+    <table class="form-table">
+        <?php
+        od_mb_text( '_service_wif_title', __( 'Section Title', 'ondigital' ),   get_post_meta( $id, '_service_wif_title', true ), __( 'e.g. Bu xidmət kimə uyğundur?', 'ondigital' ) );
+        od_mb_text( '_service_wif_sub',   __( 'Section Subtitle', 'ondigital' ), get_post_meta( $id, '_service_wif_sub', true ),   __( 'Short sentence below the title', 'ondigital' ) );
+        ?>
+    </table>
+
+    <h4 style="padding:14px 12px 4px;margin:0;border-top:1px solid #ddd;color:#2e7d32;"><?php esc_html_e( '— Bu xidmət sizin üçündür (up to 5)', 'ondigital' ); ?></h4>
+    <?php foreach ( $for_items as $i => $item ) : ?>
+    <h4 style="padding:10px 12px 0;margin:0;"><?php printf( esc_html__( 'Item %d', 'ondigital' ), $i + 1 ); ?></h4>
+    <table class="form-table">
+        <tr>
+            <th style="width:200px"><?php esc_html_e( 'Title', 'ondigital' ); ?></th>
+            <td><input type="text" name="_service_wif_for_items[<?php echo $i; ?>][title]" value="<?php echo esc_attr( $item['title'] ); ?>" class="regular-text"></td>
+        </tr>
+        <tr>
+            <th><?php esc_html_e( 'Description', 'ondigital' ); ?></th>
+            <td><textarea name="_service_wif_for_items[<?php echo $i; ?>][desc]" rows="2" class="large-text"><?php echo esc_textarea( $item['desc'] ); ?></textarea></td>
+        </tr>
+    </table>
+    <?php endforeach; ?>
+
+    <h4 style="padding:14px 12px 4px;margin:0;border-top:1px solid #ddd;color:#c62828;"><?php esc_html_e( '— Bu xidmət sizin üçün deyil (up to 5)', 'ondigital' ); ?></h4>
+    <?php foreach ( $not_items as $i => $item ) : ?>
+    <h4 style="padding:10px 12px 0;margin:0;"><?php printf( esc_html__( 'Item %d', 'ondigital' ), $i + 1 ); ?></h4>
+    <table class="form-table">
+        <tr>
+            <th style="width:200px"><?php esc_html_e( 'Title', 'ondigital' ); ?></th>
+            <td><input type="text" name="_service_wif_not_items[<?php echo $i; ?>][title]" value="<?php echo esc_attr( $item['title'] ); ?>" class="regular-text"></td>
+        </tr>
+        <tr>
+            <th><?php esc_html_e( 'Description', 'ondigital' ); ?></th>
+            <td><textarea name="_service_wif_not_items[<?php echo $i; ?>][desc]" rows="2" class="large-text"><?php echo esc_textarea( $item['desc'] ); ?></textarea></td>
+        </tr>
+    </table>
+    <?php endforeach;
+}
+
+// =============================================================================
+// Service — Glossary
+// =============================================================================
+
+function ondigital_service_glossary_callback( $post ) {
+    wp_nonce_field( 'ondigital_service_glossary', 'ondigital_service_glossary_nonce' );
+    $id = $post->ID;
+
+    $terms = get_post_meta( $id, '_service_gl_terms', true );
+    if ( ! is_array( $terms ) ) $terms = array();
+    while ( count( $terms ) < 8 ) $terms[] = array( 'word' => '', 'def' => '' );
+    ?>
+    <table class="form-table">
+        <?php
+        od_mb_text( '_service_gl_title',       __( 'Section Title', 'ondigital' ),       get_post_meta( $id, '_service_gl_title', true ),       __( 'e.g. Lüğət', 'ondigital' ) );
+        od_mb_text( '_service_gl_header_desc', __( 'Header Description', 'ondigital' ),  get_post_meta( $id, '_service_gl_header_desc', true ),  __( 'Short intro below the title', 'ondigital' ) );
+        ?>
+    </table>
+    <h4 style="padding:14px 12px 4px;margin:0;border-top:1px solid #ddd;"><?php esc_html_e( '— Terms (up to 8)', 'ondigital' ); ?></h4>
+    <?php foreach ( $terms as $i => $term ) : ?>
+    <h4 style="padding:10px 12px 0;margin:0;"><?php printf( esc_html__( 'Term %d', 'ondigital' ), $i + 1 ); ?></h4>
+    <table class="form-table">
+        <tr>
+            <th style="width:200px"><?php esc_html_e( 'Term / Word', 'ondigital' ); ?></th>
+            <td><input type="text" name="_service_gl_terms[<?php echo $i; ?>][word]" value="<?php echo esc_attr( $term['word'] ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Backlink', 'ondigital' ); ?>"></td>
+        </tr>
+        <tr>
+            <th><?php esc_html_e( 'Definition', 'ondigital' ); ?></th>
+            <td><textarea name="_service_gl_terms[<?php echo $i; ?>][def]" rows="2" class="large-text" placeholder="<?php esc_attr_e( 'Short definition…', 'ondigital' ); ?>"><?php echo esc_textarea( $term['def'] ); ?></textarea></td>
+        </tr>
+    </table>
+    <?php endforeach;
+}
+
+// =============================================================================
+// Service — FAQ
+// =============================================================================
+
+function ondigital_service_faq_callback( $post ) {
+    wp_nonce_field( 'ondigital_service_faq', 'ondigital_service_faq_nonce' );
+    $id = $post->ID;
+
+    $faq_items = get_post_meta( $id, '_service_faq_items', true );
+    if ( ! is_array( $faq_items ) ) $faq_items = array();
+    while ( count( $faq_items ) < 8 ) $faq_items[] = array( 'q' => '', 'a' => '' );
+    ?>
+    <table class="form-table">
+        <?php
+        od_mb_text( '_service_faq_panel_title', __( 'Left Panel Title', 'ondigital' ),       get_post_meta( $id, '_service_faq_panel_title', true ), __( 'e.g. Tez-tez soruşulan suallar', 'ondigital' ) );
+        od_mb_text( '_service_faq_panel_desc',  __( 'Left Panel Description', 'ondigital' ), get_post_meta( $id, '_service_faq_panel_desc', true ),  __( 'Short text under the title', 'ondigital' ) );
+        ?>
+    </table>
+    <h4 style="padding:14px 12px 4px;margin:0;border-top:1px solid #ddd;"><?php esc_html_e( '— Questions & Answers (up to 8)', 'ondigital' ); ?></h4>
+    <?php foreach ( $faq_items as $i => $item ) : ?>
+    <h4 style="padding:10px 12px 0;margin:0;"><?php printf( esc_html__( 'Q&A %d', 'ondigital' ), $i + 1 ); ?></h4>
+    <table class="form-table">
+        <tr>
+            <th style="width:200px"><?php esc_html_e( 'Question', 'ondigital' ); ?></th>
+            <td><input type="text" name="_service_faq_items[<?php echo $i; ?>][q]" value="<?php echo esc_attr( $item['q'] ); ?>" class="large-text" placeholder="<?php esc_attr_e( 'e.g. Nə qədər müddətdə nəticə görəcəm?', 'ondigital' ); ?>"></td>
+        </tr>
+        <tr>
+            <th><?php esc_html_e( 'Answer', 'ondigital' ); ?></th>
+            <td><textarea name="_service_faq_items[<?php echo $i; ?>][a]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Answer…', 'ondigital' ); ?>"><?php echo esc_textarea( $item['a'] ); ?></textarea></td>
+        </tr>
+    </table>
+    <?php endforeach;
 }
 
 // =============================================================================
@@ -365,20 +708,161 @@ function ondigital_save_meta_boxes( $post_id ) {
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
     if ( wp_is_post_revision( $post_id ) ) return;
     if ( ! current_user_can( 'edit_post', $post_id ) ) return;
+    if ( ! in_array( get_post_type( $post_id ), array( 'service', 'project', 'team_member' ), true ) ) return;
 
-    // ── Service ──
+    // ── Service: base fields ──
     if ( isset( $_POST['ondigital_service_meta_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_meta_nonce'], 'ondigital_service_meta' ) ) {
-        if ( isset( $_POST['_service_icon'] ) ) {
-            update_post_meta( $post_id, '_service_icon', absint( $_POST['_service_icon'] ) );
+        foreach ( array( '_service_icon', '_service_hero_image' ) as $field ) {
+            if ( isset( $_POST[ $field ] ) ) {
+                update_post_meta( $post_id, $field, absint( $_POST[ $field ] ) );
+            }
         }
-        if ( isset( $_POST['_service_stat_number'] ) ) {
-            update_post_meta( $post_id, '_service_stat_number', sanitize_text_field( $_POST['_service_stat_number'] ) );
-        }
-        if ( isset( $_POST['_service_stat_label'] ) ) {
-            update_post_meta( $post_id, '_service_stat_label', sanitize_text_field( $_POST['_service_stat_label'] ) );
+        foreach ( array( '_service_stat_number', '_service_stat_label' ) as $field ) {
+            if ( isset( $_POST[ $field ] ) ) {
+                update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
+            }
         }
         if ( isset( $_POST['_service_features'] ) ) {
             update_post_meta( $post_id, '_service_features', sanitize_textarea_field( $_POST['_service_features'] ) );
+        }
+    }
+
+    // ── Service: highlights ──
+    if ( isset( $_POST['ondigital_service_highlights_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_highlights_nonce'], 'ondigital_service_highlights' ) ) {
+        if ( isset( $_POST['_service_highlights_title'] ) ) {
+            update_post_meta( $post_id, '_service_highlights_title', sanitize_text_field( $_POST['_service_highlights_title'] ) );
+        }
+        for ( $ci = 1; $ci <= 3; $ci++ ) {
+            foreach ( array( 'title', 'icon' ) as $part ) {
+                $key = "_service_card_{$ci}_{$part}";
+                if ( isset( $_POST[ $key ] ) ) {
+                    update_post_meta( $post_id, $key, sanitize_text_field( $_POST[ $key ] ) );
+                }
+            }
+            $desc_key = "_service_card_{$ci}_desc";
+            if ( isset( $_POST[ $desc_key ] ) ) {
+                update_post_meta( $post_id, $desc_key, sanitize_textarea_field( $_POST[ $desc_key ] ) );
+            }
+        }
+    }
+
+    // ── Service: process steps ──
+    if ( isset( $_POST['ondigital_service_process_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_process_nonce'], 'ondigital_service_process' ) ) {
+        foreach ( array( '_service_process_eyebrow', '_service_process_heading' ) as $field ) {
+            if ( isset( $_POST[ $field ] ) ) {
+                update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
+            }
+        }
+        if ( isset( $_POST['_service_steps'] ) && is_array( $_POST['_service_steps'] ) ) {
+            $steps = array();
+            foreach ( $_POST['_service_steps'] as $step ) {
+                $steps[] = array(
+                    'title_az' => sanitize_text_field( $step['title_az'] ?? '' ),
+                    'title_en' => sanitize_text_field( $step['title_en'] ?? '' ),
+                    'desc_az'  => sanitize_textarea_field( $step['desc_az'] ?? '' ),
+                    'desc_en'  => sanitize_textarea_field( $step['desc_en'] ?? '' ),
+                    'duration' => sanitize_text_field( $step['duration'] ?? '' ),
+                );
+            }
+            update_post_meta( $post_id, '_service_steps', $steps );
+        }
+    }
+
+    // ── Service: CTA sections ──
+    if ( isset( $_POST['ondigital_service_cta_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_cta_nonce'], 'ondigital_service_cta' ) ) {
+        foreach ( array( '_service_mid_cta_title', '_service_footer_cta_title', '_service_footer_cta_sub' ) as $field ) {
+            if ( isset( $_POST[ $field ] ) ) {
+                update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
+            }
+        }
+    }
+
+    // ── Service: What's Included & Roadmap ──
+    if ( isset( $_POST['ondigital_service_included_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_included_nonce'], 'ondigital_service_included' ) ) {
+        foreach ( array( '_service_wi_title', '_service_wi_header_desc' ) as $field ) {
+            if ( isset( $_POST[ $field ] ) ) {
+                update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
+            }
+        }
+        if ( isset( $_POST['_service_wi_items'] ) && is_array( $_POST['_service_wi_items'] ) ) {
+            $items = array();
+            foreach ( $_POST['_service_wi_items'] as $item ) {
+                $items[] = array(
+                    'title' => sanitize_text_field( $item['title'] ?? '' ),
+                    'desc'  => sanitize_textarea_field( $item['desc'] ?? '' ),
+                );
+            }
+            update_post_meta( $post_id, '_service_wi_items', $items );
+        }
+        if ( isset( $_POST['_service_rm_items'] ) && is_array( $_POST['_service_rm_items'] ) ) {
+            $items = array();
+            foreach ( $_POST['_service_rm_items'] as $item ) {
+                $items[] = array(
+                    'title' => sanitize_text_field( $item['title'] ?? '' ),
+                    'desc'  => sanitize_textarea_field( $item['desc'] ?? '' ),
+                    'prog'  => sanitize_text_field( $item['prog'] ?? '' ),
+                );
+            }
+            update_post_meta( $post_id, '_service_rm_items', $items );
+        }
+    }
+
+    // ── Service: Who Is This For ──
+    if ( isset( $_POST['ondigital_service_wif_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_wif_nonce'], 'ondigital_service_wif' ) ) {
+        foreach ( array( '_service_wif_title', '_service_wif_sub' ) as $field ) {
+            if ( isset( $_POST[ $field ] ) ) {
+                update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
+            }
+        }
+        foreach ( array( '_service_wif_for_items', '_service_wif_not_items' ) as $key ) {
+            if ( isset( $_POST[ $key ] ) && is_array( $_POST[ $key ] ) ) {
+                $items = array();
+                foreach ( $_POST[ $key ] as $item ) {
+                    $items[] = array(
+                        'title' => sanitize_text_field( $item['title'] ?? '' ),
+                        'desc'  => sanitize_textarea_field( $item['desc'] ?? '' ),
+                    );
+                }
+                update_post_meta( $post_id, $key, $items );
+            }
+        }
+    }
+
+    // ── Service: Glossary ──
+    if ( isset( $_POST['ondigital_service_glossary_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_glossary_nonce'], 'ondigital_service_glossary' ) ) {
+        foreach ( array( '_service_gl_title', '_service_gl_header_desc' ) as $field ) {
+            if ( isset( $_POST[ $field ] ) ) {
+                update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
+            }
+        }
+        if ( isset( $_POST['_service_gl_terms'] ) && is_array( $_POST['_service_gl_terms'] ) ) {
+            $terms = array();
+            foreach ( $_POST['_service_gl_terms'] as $term ) {
+                $terms[] = array(
+                    'word' => sanitize_text_field( $term['word'] ?? '' ),
+                    'def'  => sanitize_textarea_field( $term['def'] ?? '' ),
+                );
+            }
+            update_post_meta( $post_id, '_service_gl_terms', $terms );
+        }
+    }
+
+    // ── Service: FAQ ──
+    if ( isset( $_POST['ondigital_service_faq_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_faq_nonce'], 'ondigital_service_faq' ) ) {
+        foreach ( array( '_service_faq_panel_title', '_service_faq_panel_desc' ) as $field ) {
+            if ( isset( $_POST[ $field ] ) ) {
+                update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
+            }
+        }
+        if ( isset( $_POST['_service_faq_items'] ) && is_array( $_POST['_service_faq_items'] ) ) {
+            $items = array();
+            foreach ( $_POST['_service_faq_items'] as $item ) {
+                $items[] = array(
+                    'q' => sanitize_text_field( $item['q'] ?? '' ),
+                    'a' => sanitize_textarea_field( $item['a'] ?? '' ),
+                );
+            }
+            update_post_meta( $post_id, '_service_faq_items', $items );
         }
     }
 

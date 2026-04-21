@@ -697,6 +697,17 @@ function ondigital_register_taxonomies() {
 
 
 // =============================================================================
+// 6b. POLYLANG — register CPTs as translatable
+// =============================================================================
+
+add_filter( 'pll_get_post_types', 'ondigital_pll_post_types' );
+function ondigital_pll_post_types( array $types ): array {
+    $types['service'] = 'service';
+    $types['project'] = 'project';
+    return $types;
+}
+
+// =============================================================================
 // 7. THEME CUSTOMIZER — moved to inc/customizer.php
 // =============================================================================
 
