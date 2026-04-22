@@ -494,8 +494,9 @@ function ondigital_service_faq_callback( $post ) {
     $id = $post->ID;
 
     $faq_items = get_post_meta( $id, '_service_faq_items', true );
-    if ( ! is_array( $faq_items ) ) $faq_items = array();
-    while ( count( $faq_items ) < 8 ) $faq_items[] = array( 'q' => '', 'a' => '' );
+    if ( ! is_array( $faq_items ) ) {
+        $faq_items = array();
+    }
     ?>
     <table class="form-table">
         <?php
@@ -503,20 +504,134 @@ function ondigital_service_faq_callback( $post ) {
         od_mb_text( '_service_faq_panel_desc',  __( 'Left Panel Description', 'ondigital' ), get_post_meta( $id, '_service_faq_panel_desc', true ),  __( 'Short text under the title', 'ondigital' ) );
         ?>
     </table>
-    <h4 style="padding:14px 12px 4px;margin:0;border-top:1px solid #ddd;"><?php esc_html_e( '— Questions & Answers (up to 8)', 'ondigital' ); ?></h4>
-    <?php foreach ( $faq_items as $i => $item ) : ?>
-    <h4 style="padding:10px 12px 0;margin:0;"><?php printf( esc_html__( 'Q&A %d', 'ondigital' ), $i + 1 ); ?></h4>
-    <table class="form-table">
-        <tr>
-            <th style="width:200px"><?php esc_html_e( 'Question', 'ondigital' ); ?></th>
-            <td><input type="text" name="_service_faq_items[<?php echo $i; ?>][q]" value="<?php echo esc_attr( $item['q'] ); ?>" class="large-text" placeholder="<?php esc_attr_e( 'e.g. Nə qədər müddətdə nəticə görəcəm?', 'ondigital' ); ?>"></td>
-        </tr>
-        <tr>
-            <th><?php esc_html_e( 'Answer', 'ondigital' ); ?></th>
-            <td><textarea name="_service_faq_items[<?php echo $i; ?>][a]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Answer…', 'ondigital' ); ?>"><?php echo esc_textarea( $item['a'] ); ?></textarea></td>
-        </tr>
-    </table>
-    <?php endforeach;
+
+    <style>
+    .faq-mb-wrap { padding: 0 12px 12px; }
+    .faq-mb-row { border: 1px solid #ddd; border-radius: 4px; margin: 6px 0; overflow: hidden; }
+    .faq-mb-head {
+        display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+        background: #f9f9f9; cursor: pointer; user-select: none;
+        border-bottom: 1px solid transparent; transition: border-color .15s;
+    }
+    .faq-mb-row.open .faq-mb-head { border-bottom-color: #ddd; background: #f0f7ff; }
+    .faq-mb-num { font-size: 11px; font-weight: 700; color: #999; min-width: 32px; }
+    .faq-mb-q-preview { flex: 1; font-size: 13px; color: #3c3c3c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .faq-mb-toggle { font-size: 16px; color: #999; margin-left: 4px; transition: transform .2s; }
+    .faq-mb-row.open .faq-mb-toggle { transform: rotate(180deg); }
+    .faq-mb-remove { background: none; border: none; color: #aaa; cursor: pointer; font-size: 18px; line-height: 1; padding: 0 4px; }
+    .faq-mb-remove:hover { color: #c00; }
+    .faq-mb-body { display: none; padding: 12px 14px 14px; }
+    .faq-mb-row.open .faq-mb-body { display: block; }
+    .faq-mb-body table { margin: 0; }
+    .faq-mb-body .form-table th { width: 100px; }
+    .faq-mb-add { margin: 10px 12px 0; }
+    </style>
+
+    <div class="faq-mb-wrap">
+        <div id="faq-mb-rows">
+            <?php foreach ( $faq_items as $i => $item ) : ?>
+            <div class="faq-mb-row">
+                <div class="faq-mb-head">
+                    <span class="faq-mb-num"><?php printf( '#%d', $i + 1 ); ?></span>
+                    <span class="faq-mb-q-preview"><?php echo esc_html( $item['q'] ?: __( '(sual daxil edilməyib)', 'ondigital' ) ); ?></span>
+                    <span class="faq-mb-toggle">&#8964;</span>
+                    <button type="button" class="faq-mb-remove" title="Remove">&times;</button>
+                </div>
+                <div class="faq-mb-body">
+                    <table class="form-table">
+                        <tr>
+                            <th><?php esc_html_e( 'Question', 'ondigital' ); ?></th>
+                            <td><input type="text" name="_service_faq_items[<?php echo $i; ?>][q]" value="<?php echo esc_attr( $item['q'] ); ?>" class="large-text faq-mb-q-input" placeholder="<?php esc_attr_e( 'e.g. Nə qədər müddətdə nəticə görəcəm?', 'ondigital' ); ?>"></td>
+                        </tr>
+                        <tr>
+                            <th><?php esc_html_e( 'Answer', 'ondigital' ); ?></th>
+                            <td><textarea name="_service_faq_items[<?php echo $i; ?>][a]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Answer…', 'ondigital' ); ?>"><?php echo esc_textarea( $item['a'] ); ?></textarea></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <button type="button" class="button faq-mb-add" id="faq-mb-add">
+            + <?php esc_html_e( 'Add Q&amp;A', 'ondigital' ); ?>
+        </button>
+    </div>
+
+    <script>
+    (function(){
+        var wrap  = document.getElementById('faq-mb-rows');
+        var addBtn = document.getElementById('faq-mb-add');
+        var empty = <?php echo json_encode( __( '(sual daxil edilməyib)', 'ondigital' ) ); ?>;
+
+        function getIndex( row ) {
+            return Array.prototype.indexOf.call( wrap.children, row );
+        }
+
+        function reindex() {
+            Array.prototype.forEach.call( wrap.children, function( row, idx ) {
+                row.querySelector('.faq-mb-num').textContent = '#' + ( idx + 1 );
+                row.querySelectorAll('[name]').forEach(function(el){
+                    el.name = el.name.replace( /_service_faq_items\[\d+\]/, '_service_faq_items[' + idx + ']' );
+                });
+            });
+        }
+
+        function bindRow( row ) {
+            var head    = row.querySelector('.faq-mb-head');
+            var removeBtn = row.querySelector('.faq-mb-remove');
+            var qInput  = row.querySelector('.faq-mb-q-input');
+            var preview = row.querySelector('.faq-mb-q-preview');
+
+            head.addEventListener('click', function(e){
+                if ( e.target === removeBtn ) return;
+                row.classList.toggle('open');
+            });
+
+            removeBtn.addEventListener('click', function(e){
+                e.stopPropagation();
+                if ( wrap.children.length === 1 || confirm( 'Remove this Q&A?' ) ) {
+                    row.remove();
+                    reindex();
+                }
+            });
+
+            if ( qInput ) {
+                qInput.addEventListener('input', function(){
+                    preview.textContent = this.value || empty;
+                });
+            }
+        }
+
+        // Bind existing rows
+        Array.prototype.forEach.call( wrap.children, bindRow );
+
+        // Add new row
+        addBtn.addEventListener('click', function(){
+            var idx = wrap.children.length;
+            var row = document.createElement('div');
+            row.className = 'faq-mb-row open';
+            row.innerHTML = '<div class="faq-mb-head">'
+                + '<span class="faq-mb-num">#' + ( idx + 1 ) + '</span>'
+                + '<span class="faq-mb-q-preview">' + empty + '</span>'
+                + '<span class="faq-mb-toggle">&#8964;</span>'
+                + '<button type="button" class="faq-mb-remove" title="Remove">&times;</button>'
+                + '</div>'
+                + '<div class="faq-mb-body">'
+                + '<table class="form-table"><tr>'
+                + '<th><?php esc_html_e( 'Question', 'ondigital' ); ?></th>'
+                + '<td><input type="text" name="_service_faq_items[' + idx + '][q]" class="large-text faq-mb-q-input" placeholder="<?php esc_attr_e( 'e.g. Nə qədər müddətdə nəticə görəcəm?', 'ondigital' ); ?>"></td>'
+                + '</tr><tr>'
+                + '<th><?php esc_html_e( 'Answer', 'ondigital' ); ?></th>'
+                + '<td><textarea name="_service_faq_items[' + idx + '][a]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Answer…', 'ondigital' ); ?>"></textarea></td>'
+                + '</tr></table>'
+                + '</div>';
+            wrap.appendChild( row );
+            bindRow( row );
+            row.querySelector('.faq-mb-q-input').focus();
+        });
+    })();
+    </script>
+    <?php
 }
 
 // =============================================================================
