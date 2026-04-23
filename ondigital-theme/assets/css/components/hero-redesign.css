@@ -439,11 +439,11 @@
     .ond-hero__stat-label { font-size: 10px; }
 
     .ond-hero__title { font-size: 40px; }
-    .ond-hero__desc { font-size: 15px; }
-    .ond-hero__actions { gap: 10px; }
+    .ond-hero__desc { font-size: 15px; margin-bottom: 20px; }
+    .ond-hero__actions { gap: 10px; flex-wrap: wrap; }
     .ond-hero__btn-primary,
     .ond-hero__btn-secondary { font-size: 14px; padding: 13px 20px; }
-    .ond-hero__partner { height: 48px; margin-left: 0; }
+    .ond-hero__partner { height: 48px; margin-left: 0; margin-top: 10px; }
 
     .ond-hero__visual { padding: 12px 0; }
     .ond-hero__bars { height: 90px; gap: 8px; }
