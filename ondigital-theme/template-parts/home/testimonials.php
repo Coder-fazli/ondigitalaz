@@ -6,6 +6,7 @@
  */
 
 $t_subtitle     = ondigital_get_option( 'testi_subtitle', "Client's Feedback" );
+$t_avatars      = ondigital_img( 'testi_avatars', '/assets/imgs/client/img-s-2.webp' );
 $t_title        = ondigital_get_option( 'testi_title', 'What our happy client <span>say</span>' );
 $t_body         = ondigital_get_option( 'testi_body', 'Optimize your impact this holiday season with an AI-driven, multichannel marketing strategy.' );
 $t_rating       = ondigital_get_option( 'testi_rating', '4.9' );
@@ -38,8 +39,7 @@ $testimonials = ondigital_get_repeater( 'testimonials', $default_testimonials );
             <div class="section-content">
                 <div class="section-title-wrapper">
                     <div class="subtitle-wrapper has_fade_anim" data-fade-from="left">
-                        <img class="show-light" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/client/img-s-2.webp' ); ?>" alt="<?php esc_attr_e( 'clients', 'ondigital' ); ?>">
-                        <img class="show-dark" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/client/img-s-2-dark.webp' ); ?>" alt="<?php esc_attr_e( 'clients', 'ondigital' ); ?>">
+                        <img src="<?php echo esc_url( $t_avatars ); ?>" alt="<?php esc_attr_e( 'clients', 'ondigital' ); ?>">
                         <span class="section-subtitle"><?php echo esc_html( $t_subtitle ); ?></span>
                     </div>
                     <div class="title-wrapper">

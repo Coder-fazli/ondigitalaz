@@ -305,6 +305,8 @@ $langs = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
     endforeach;
     od_lang_close();
     od_divider();
+    od_image( 'testi_avatars', __( 'Client Avatars Image (decorative group photo shown next to subtitle)', 'ondigital' ), $options );
+    od_divider();
     od_repeater( $testimonials, 'testimonial', 'ondigital_testimonials', function( $i, $row ) {
         echo '<div class="od-repeater-row">';
         echo '<div class="od-repeater-row-head"><span>' . ( ! empty( $row['name'] ) ? esc_html( $row['name'] ) : sprintf( __( 'Testimonial %d', 'ondigital' ), $i + 1 ) ) . '</span>';
