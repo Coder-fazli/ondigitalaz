@@ -45,7 +45,7 @@ function ondigital_panel_save(): void {
         } elseif ( in_array( $key, $password_keys, true ) ) {
             $updated[ $key ] = $value; // store as-is, no kses stripping
         } else {
-            $updated[ $key ] = wp_kses( $value, array( 'span' => array( 'class' => array() ) ) );
+            $updated[ $key ] = wp_kses( $value, array( 'span' => array( 'class' => array() ), 'br' => array() ) );
         }
     }
 
