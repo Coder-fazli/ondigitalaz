@@ -25,10 +25,7 @@ $report_counter_label = ondigital_get_option( 'report_counter_label', 'Customer 
             </div>
             <div class="section-content-box has_fade_anim">
                 <div class="section-content">
-                    <div class="report-graph">
-                        <img class="show-light" src="<?php echo esc_url( $report_graph_light ); ?>" alt="<?php esc_attr_e( 'Conversion graph', 'ondigital' ); ?>">
-                        <img class="show-dark" src="<?php echo esc_url( $report_graph_dark ); ?>" alt="<?php esc_attr_e( 'Conversion graph', 'ondigital' ); ?>">
-                    </div>
+                    <div class="report-graph" id="od-seo-chart-wrap"></div>
                     <div class="satisfaction-box">
                         <h3 class="number wc-counter"><?php echo esc_html( $report_counter_num ); ?> <span class="icon">%</span></h3>
                         <h3 class="info">

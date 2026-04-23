@@ -129,6 +129,8 @@ function ondigital_enqueue_page_assets() {
             wp_enqueue_style( 'ondigital-blog-home',     ONDIGITAL_URI . '/assets/css/components/blog-home.css',     array( 'ondigital-home' ), ONDIGITAL_VERSION );
             wp_enqueue_style( 'ondigital-projects-home', ONDIGITAL_URI . '/assets/css/components/projects-home.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
             wp_enqueue_script( 'ondigital-hero-redesign', ONDIGITAL_URI . '/assets/js/components/hero-redesign.js', array(), ONDIGITAL_VERSION, true );
+            wp_enqueue_style(  'ondigital-seo-chart', ONDIGITAL_URI . '/assets/css/components/seo-chart.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
+            wp_enqueue_script( 'ondigital-seo-chart', ONDIGITAL_URI . '/assets/js/components/seo-chart.js',   array(), ONDIGITAL_VERSION, true );
             wp_enqueue_style( 'ondigital-faq', ONDIGITAL_URI . '/assets/css/pages/faq.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
 
             // Admin-controlled service card colors — must come after handle is enqueued
