@@ -164,17 +164,19 @@
         svg.appendChild(tip);
 
         /* Points + hit areas */
+        var dotPairs = []; // [{oc, pc, ox, oy, px, py}] — stored for RAF animation
+
         data.dates.forEach(function(date, i) {
             var op = organicPts[i], pp = paidPts[i];
-            var delay = animate ? (1.2 + i * 0.08) + 's' : '0s';
 
-            var oc = el('circle', { cx: op.x, cy: op.y, r: '4', fill: '#c2f971', stroke: '#fff', 'stroke-width': '1.5' },
-                animate ? { opacity: '0', transform: 'translateX(-15px) scale(0)', transformBox: 'fill-box', transformOrigin: 'center', transition: 'opacity 0.4s ease ' + delay + ', transform 0.5s cubic-bezier(0.34,1.56,0.64,1) ' + delay } : { opacity: '1' });
+            var oc = el('circle', { cx: op.x, cy: op.y, r: animate ? '0' : '4', fill: '#c2f971', stroke: '#fff', 'stroke-width': '1.5' },
+                animate ? { opacity: '0' } : { opacity: '1' });
 
-            var pc = el('circle', { cx: pp.x, cy: pp.y, r: '4', fill: '#555555', stroke: '#fff', 'stroke-width': '1.5' },
-                animate ? { opacity: '0', transform: 'translateX(-15px) scale(0)', transformBox: 'fill-box', transformOrigin: 'center', transition: 'opacity 0.4s ease ' + (parseFloat(delay) + 0.08) + 's, transform 0.5s cubic-bezier(0.34,1.56,0.64,1) ' + (parseFloat(delay) + 0.08) + 's' } : { opacity: '1' });
+            var pc = el('circle', { cx: pp.x, cy: pp.y, r: animate ? '0' : '4', fill: '#555555', stroke: '#fff', 'stroke-width': '1.5' },
+                animate ? { opacity: '0' } : { opacity: '1' });
 
             svg.appendChild(oc); svg.appendChild(pc);
+            dotPairs.push({ oc: oc, pc: pc, ox: op.x, oy: op.y, px: pp.x, py: pp.y });
 
             /* Hit zone */
             var hit = el('rect', { x: op.x - 20, y: PAD, width: '40', height: H - PAD * 2, fill: 'transparent' });
@@ -196,7 +198,7 @@
 
             /* X label */
             var lbl = el('text', { x: op.x, y: H - PAD + 18, 'text-anchor': 'middle', fill: '#999', 'font-size': '11' },
-                animate ? { opacity: '0', transition: 'opacity 0.5s ease ' + (1.5 + i * 0.05) + 's' } : { opacity: '1' });
+                animate ? { opacity: '0', transition: 'opacity 0.4s ease ' + (1.5 + i * 0.08) + 's' } : { opacity: '1' });
             lbl.textContent = date;
             svg.appendChild(lbl);
         });
@@ -206,14 +208,50 @@
         /* Fire animation */
         if (animate) {
             requestAnimationFrame(function() { requestAnimationFrame(function() {
+                /* Lines + areas via CSS transition */
                 paidArea.style.opacity  = '1';
                 orgArea.style.opacity   = '1';
                 paidLine.style.opacity  = '1'; paidLine.style.strokeDashoffset = '0';
                 orgLine.style.opacity   = '1'; orgLine.style.strokeDashoffset  = '0';
-                svg.querySelectorAll('circle').forEach(function(c) {
-                    c.style.opacity = '1'; c.style.transform = 'translateX(0) scale(1)';
-                });
+
+                /* X labels */
                 svg.querySelectorAll('text').forEach(function(t) { t.style.opacity = '1'; });
+
+                /* Dots — RAF-driven: fly from left, grow r 0→4 */
+                var FLY_OFFSET = 40;   // px to the left of final position
+                var DOT_DUR    = 450;  // ms per dot animation
+                var STAGGER    = 100;  // ms between each dot
+                var BASE_DELAY = 1200; // ms after animation fires
+
+                function easeOutBack(t) {
+                    var c1 = 1.70158, c3 = c1 + 1;
+                    return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+                }
+
+                dotPairs.forEach(function(pair, i) {
+                    var startDelay = BASE_DELAY + i * STAGGER;
+
+                    function animatePair(circle, finalCx, finalCy) {
+                        setTimeout(function() {
+                            circle.style.opacity = '1';
+                            var startTs = null;
+                            function step(ts) {
+                                if (!startTs) startTs = ts;
+                                var prog = Math.min((ts - startTs) / DOT_DUR, 1);
+                                var ease = easeOutBack(prog);
+                                circle.setAttribute('cx', finalCx - FLY_OFFSET + FLY_OFFSET * ease);
+                                circle.setAttribute('cy', finalCy);
+                                circle.setAttribute('r',  4 * Math.min(prog * 2, 1)); // r grows in first half
+                                if (prog < 1) requestAnimationFrame(step);
+                                else { circle.setAttribute('cx', finalCx); circle.setAttribute('r', '4'); }
+                            }
+                            requestAnimationFrame(step);
+                        }, startDelay);
+                    }
+
+                    animatePair(pair.oc, pair.ox, pair.oy);
+                    animatePair(pair.pc, pair.px, pair.py);
+                });
             }); });
         }
     }
