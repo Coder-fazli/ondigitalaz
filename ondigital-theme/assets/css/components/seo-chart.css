@@ -5,6 +5,7 @@
 #od-seo-chart-wrap {
     position: relative;
     width: 100%;
+    min-height: 420px;
 }
 
 /* Legend */

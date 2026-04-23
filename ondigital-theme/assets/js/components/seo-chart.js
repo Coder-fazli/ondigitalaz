@@ -29,7 +29,7 @@
 
     /* ── SVG helpers ──────────────────────────────────────── */
     var NS  = 'http://www.w3.org/2000/svg';
-    var W   = 800, H = 340, PAD = 60;
+    var W   = 800, H = 420, PAD = 55;
 
     function el(tag, attrs, styles) {
         var e = document.createElementNS(NS, tag);
@@ -39,7 +39,7 @@
     }
 
     function maxOf(data) {
-        return Math.max.apply(null, data.organic.concat(data.paid)) * 1.15;
+        return Math.max.apply(null, data.organic.concat(data.paid)) * 1.08;
     }
 
     function pointsFor(values, maxVal) {
