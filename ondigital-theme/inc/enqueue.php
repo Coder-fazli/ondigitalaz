@@ -149,6 +149,11 @@ function ondigital_enqueue_page_assets() {
                 .od-srv-slide:nth-child(5n+4) .od-srv-card { background-color: {$card_4} !important; }
                 .od-srv-slide:nth-child(5n+5) .od-srv-card { background-color: {$card_5} !important; }
             " );
+            wp_add_inline_style( 'ondigital-home', '
+                @media only screen and (max-width: 767px) {
+                    .about-area .thumbs { max-width: 300px; margin: 0 auto; }
+                }
+            ' );
         }
 
         break;
