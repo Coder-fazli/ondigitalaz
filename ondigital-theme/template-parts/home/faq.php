@@ -49,7 +49,7 @@ $sidebar_url  = $options[ 'faq_sidebar_url_' . $lang ] ?? $options['faq_sidebar_
                                             <?php echo esc_html( $question ); ?>
                                         </button>
                                     </h2>
-                                    <div id="<?php echo esc_attr( $item_id ); ?>" class="accordion-collapse collapse<?php echo $is_open ? ' show' : ''; ?>" aria-labelledby="<?php echo esc_attr( $heading_id ); ?>">
+                                    <div id="<?php echo esc_attr( $item_id ); ?>" class="accordion-collapse collapse<?php echo $is_open ? ' show' : ''; ?>" aria-labelledby="<?php echo esc_attr( $heading_id ); ?>" data-bs-parent="#homeFaqAccordion">
                                         <div class="accordion-body"><?php echo esc_html( $answer ); ?></div>
                                     </div>
                                 </div>
