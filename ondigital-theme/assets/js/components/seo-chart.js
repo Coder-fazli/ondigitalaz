@@ -4,20 +4,20 @@
 
     /* ── Data ─────────────────────────────────────────────── */
     var periods = {
-        '3 ay': {
-            dates:   ['Yan 1','Yan 15','Fev 1','Fev 15','Mar 1','Mar 15','Apr 1','Apr 15','May 1','May 15','İyn 1','İyn 15'],
+        '3 Months': {
+            dates:   ['Jan 1','Jan 15','Feb 1','Feb 15','Mar 1','Mar 15','Apr 1','Apr 15','May 1','May 15','Jun 1','Jun 15'],
             organic: [420, 480, 510, 560, 620, 700, 780, 870, 960, 1080, 1230, 1420],
             paid:    [180, 200, 215, 235, 255, 280, 300, 325, 345, 380, 415, 455],
             badge:   '+15%'
         },
-        '30 gün': {
-            dates:   ['İyn 1','İyn 3','İyn 5','İyn 7','İyn 9','İyn 12','İyn 15','İyn 18','İyn 21','İyn 24','İyn 27','İyn 30'],
+        '30 Days': {
+            dates:   ['Jun 1','Jun 3','Jun 5','Jun 7','Jun 9','Jun 12','Jun 15','Jun 18','Jun 21','Jun 24','Jun 27','Jun 30'],
             organic: [290, 270, 310, 280, 260, 350, 320, 340, 400, 370, 420, 480],
             paid:    [130, 120, 145, 135, 125, 165, 155, 160, 185, 175, 195, 225],
             badge:   '+12%'
         },
-        '7 gün': {
-            dates:   ['İyn 24','İyn 25','İyn 26','İyn 27','İyn 28','İyn 29','İyn 30'],
+        '7 Days': {
+            dates:   ['Jun 24','Jun 25','Jun 26','Jun 27','Jun 28','Jun 29','Jun 30'],
             organic: [370, 420, 380, 450, 480, 520, 550],
             paid:    [175, 200, 185, 210, 225, 245, 260],
             badge:   '+18%'
@@ -71,8 +71,8 @@
     var legend = document.createElement('div');
     legend.className = 'od-chart-legend';
     legend.innerHTML =
-        '<span><em class="od-dot od-dot-green"></em>Üzvi</span>' +
-        '<span><em class="od-dot od-dot-dark"></em>Ödənişli</span>';
+        '<span><em class="od-dot od-dot-green"></em>Organic Traffic</span>' +
+        '<span><em class="od-dot od-dot-dark"></em>Paid Traffic</span>';
     legend.style.cssText = 'display:flex;gap:24px;margin-bottom:12px;opacity:0;transition:opacity 0.8s ease 0.4s;';
     wrap.appendChild(legend);
 
@@ -189,8 +189,8 @@
                 var tx = Math.min(Math.max(op.x - 60, PAD), W - PAD - 120);
                 tip.setAttribute('transform', 'translate(' + tx + ',16)');
                 tipDate.textContent = date;
-                tipOrg.textContent  = 'Üzvi: ' + data.organic[i];
-                tipPaid.textContent = 'Ödənişli: ' + data.paid[i];
+                tipOrg.textContent  = 'Organic: ' + data.organic[i];
+                tipPaid.textContent = 'Paid: ' + data.paid[i];
                 tip.style.display = '';
             });
             hit.addEventListener('mouseleave', function() {
