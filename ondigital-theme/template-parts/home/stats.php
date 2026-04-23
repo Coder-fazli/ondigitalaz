@@ -31,7 +31,7 @@ $delays = array( '0.15', '0.30', '0.45', '0.60' );
                     $suffix = $counter['suffix'] ?? '';
                 ?>
                     <div class="counter-item has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $i % 4 ] ); ?>">
-                        <h3 class="number wc-counter"><?php echo esc_html( $counter['number'] . $suffix ); ?></h3>
+                        <h3 class="number"><?php echo esc_html( $counter['number'] . $suffix ); ?></h3>
                         <p class="text"><?php echo wp_kses_post( nl2br( esc_html( $counter['label'] ) ) ); ?></p>
                     </div>
                 <?php endforeach; ?>
