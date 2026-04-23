@@ -5,6 +5,7 @@
  * @package OnDigital
  */
 
+$hero_badge    = ondigital_get_option( 'hero_subtitle', 'Official Google Partner Agency' );
 $hero_h1_line1 = ondigital_get_option( 'hero_h1_line1', 'Performance' );
 $hero_h1_line2 = ondigital_get_option( 'hero_h1_line2', 'Marketing' );
 $hero_h1_line3 = ondigital_get_option( 'hero_h1_line3', 'Agency' );
@@ -34,7 +35,7 @@ $stat4_label  = ondigital_get_option( 'hero_stat4_label', 'Müştəri Məmnuniyy
 
         <div class="ond-hero__badge">
             <span class="ond-hero__badge-dot"></span>
-            <?php esc_html_e( 'Official Google Partner Agency', 'ondigital' ); ?>
+            <?php echo esc_html( $hero_badge ); ?>
         </div>
 
         <h1 class="ond-hero__title">
