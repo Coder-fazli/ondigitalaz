@@ -5,8 +5,14 @@
  * @package OnDigital
  */
 
-$t_subtitle     = ondigital_get_option( 'testi_subtitle', "Client's Feedback" );
-$t_avatars      = ondigital_img( 'testi_avatars', '/assets/imgs/client/img-s-2.webp' );
+$t_subtitle  = ondigital_get_option( 'testi_subtitle', "Client's Feedback" );
+$t_avatars   = array();
+for ( $n = 1; $n <= 5; $n++ ) {
+    $url = ondigital_img( 'testi_avatar_' . $n, '' );
+    if ( $url ) $t_avatars[] = $url;
+}
+// Fallback: default stacked image if none uploaded
+$t_avatar_fallback = ONDIGITAL_URI . '/assets/imgs/client/img-s-2.webp';
 $t_title        = ondigital_get_option( 'testi_title', 'What our happy client <span>say</span>' );
 $t_body         = ondigital_get_option( 'testi_body', 'Optimize your impact this holiday season with an AI-driven, multichannel marketing strategy.' );
 $t_rating       = ondigital_get_option( 'testi_rating', '4.9' );
@@ -39,7 +45,15 @@ $testimonials = ondigital_get_repeater( 'testimonials', $default_testimonials );
             <div class="section-content">
                 <div class="section-title-wrapper">
                     <div class="subtitle-wrapper has_fade_anim" data-fade-from="left">
-                        <img src="<?php echo esc_url( $t_avatars ); ?>" alt="<?php esc_attr_e( 'clients', 'ondigital' ); ?>">
+                        <?php if ( ! empty( $t_avatars ) ) : ?>
+                            <div class="testi-avatars">
+                                <?php foreach ( $t_avatars as $avatar_url ) : ?>
+                                    <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php esc_attr_e( 'client', 'ondigital' ); ?>">
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else : ?>
+                            <img src="<?php echo esc_url( $t_avatar_fallback ); ?>" alt="" style="height:44px;width:auto;">
+                        <?php endif; ?>
                         <span class="section-subtitle"><?php echo esc_html( $t_subtitle ); ?></span>
                     </div>
                     <div class="title-wrapper">

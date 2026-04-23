@@ -305,7 +305,13 @@ $langs = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
     endforeach;
     od_lang_close();
     od_divider();
-    od_image( 'testi_avatars', __( 'Client Avatars Image (decorative group photo shown next to subtitle)', 'ondigital' ), $options );
+    od_row_open();
+    od_image( 'testi_avatar_1', __( 'Avatar 1', 'ondigital' ), $options );
+    od_image( 'testi_avatar_2', __( 'Avatar 2', 'ondigital' ), $options );
+    od_image( 'testi_avatar_3', __( 'Avatar 3', 'ondigital' ), $options );
+    od_image( 'testi_avatar_4', __( 'Avatar 4', 'ondigital' ), $options );
+    od_image( 'testi_avatar_5', __( 'Avatar 5', 'ondigital' ), $options );
+    od_row_close();
     od_divider();
     od_repeater( $testimonials, 'testimonial', 'ondigital_testimonials', function( $i, $row ) {
         echo '<div class="od-repeater-row">';

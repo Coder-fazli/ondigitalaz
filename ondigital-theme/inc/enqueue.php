@@ -153,11 +153,21 @@ function ondigital_enqueue_page_assets() {
                 @media only screen and (max-width: 767px) {
                     .about-area .thumbs { max-width: 300px; margin: 0 auto; }
                 }
-                .testimonial-area .section-content .subtitle-wrapper img {
-                    height: 44px;
-                    width: auto;
-                    border-radius: 0;
+                .testi-avatars {
+                    display: flex;
+                    flex-direction: row;
                     flex-shrink: 0;
+                }
+                .testi-avatars img {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    border: 2px solid #fff;
+                    object-fit: cover;
+                    margin-left: -12px;
+                }
+                .testi-avatars img:first-child {
+                    margin-left: 0;
                 }
             ' );
         }
