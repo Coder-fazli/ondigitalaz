@@ -24,15 +24,7 @@ $report_counter_label = ondigital_get_option( 'report_counter_label', 'Customer 
                 </div>
             </div>
             <div class="section-content-box has_fade_anim">
-                <div class="section-content">
-                    <div class="report-graph" id="od-seo-chart-wrap"></div>
-                    <div class="satisfaction-box">
-                        <h3 class="number wc-counter"><?php echo esc_html( $report_counter_num ); ?> <span class="icon">%</span></h3>
-                        <h3 class="info">
-                            <?php echo wp_kses_post( $report_counter_label ); ?>
-                        </h3>
-                    </div>
-                </div>
+                <div id="od-seo-chart-wrap"></div>
             </div>
         </div>
     </div>
