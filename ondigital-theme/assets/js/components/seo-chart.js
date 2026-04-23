@@ -169,10 +169,10 @@
             var delay = animate ? (1.2 + i * 0.08) + 's' : '0s';
 
             var oc = el('circle', { cx: op.x, cy: op.y, r: '4', fill: '#c2f971', stroke: '#fff', 'stroke-width': '1.5' },
-                animate ? { opacity: '0', transform: 'scale(0)', transformOrigin: op.x + 'px ' + op.y + 'px', transition: 'opacity 0.4s ease ' + delay + ', transform 0.4s ease ' + delay } : { opacity: '1' });
+                animate ? { opacity: '0', transform: 'translateX(-15px) scale(0)', transformBox: 'fill-box', transformOrigin: 'center', transition: 'opacity 0.4s ease ' + delay + ', transform 0.5s cubic-bezier(0.34,1.56,0.64,1) ' + delay } : { opacity: '1' });
 
             var pc = el('circle', { cx: pp.x, cy: pp.y, r: '4', fill: '#555555', stroke: '#fff', 'stroke-width': '1.5' },
-                animate ? { opacity: '0', transform: 'scale(0)', transformOrigin: pp.x + 'px ' + pp.y + 'px', transition: 'opacity 0.4s ease ' + (parseFloat(delay) + 0.08) + 's, transform 0.4s ease ' + (parseFloat(delay) + 0.08) + 's' } : { opacity: '1' });
+                animate ? { opacity: '0', transform: 'translateX(-15px) scale(0)', transformBox: 'fill-box', transformOrigin: 'center', transition: 'opacity 0.4s ease ' + (parseFloat(delay) + 0.08) + 's, transform 0.5s cubic-bezier(0.34,1.56,0.64,1) ' + (parseFloat(delay) + 0.08) + 's' } : { opacity: '1' });
 
             svg.appendChild(oc); svg.appendChild(pc);
 
@@ -211,7 +211,7 @@
                 paidLine.style.opacity  = '1'; paidLine.style.strokeDashoffset = '0';
                 orgLine.style.opacity   = '1'; orgLine.style.strokeDashoffset  = '0';
                 svg.querySelectorAll('circle').forEach(function(c) {
-                    c.style.opacity = '1'; c.style.transform = 'scale(1)';
+                    c.style.opacity = '1'; c.style.transform = 'translateX(0) scale(1)';
                 });
                 svg.querySelectorAll('text').forEach(function(t) { t.style.opacity = '1'; });
             }); });
