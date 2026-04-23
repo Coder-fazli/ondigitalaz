@@ -86,7 +86,10 @@
         btn.type = 'button';
         btn.className = 'od-period-btn' + (key === activePeriod ? ' active' : '');
         btn.dataset.period = key;
-        btn.innerHTML = '<strong>' + periods[key].badge + '</strong><span>' + key + '</span>';
+        var colors = ['#22c55e','#3b82f6','#f97316'];
+        btn.innerHTML =
+            '<div class="od-btn-top"><em style="background:' + colors[idx] + '"></em><span class="od-btn-badge">' + periods[key].badge + '</span></div>' +
+            '<div class="od-btn-label">' + key + '</div>';
         btn.style.cssText = 'opacity:0;transform:translateX(20px);transition:opacity 0.7s ease ' + (0.5 + idx * 0.15) + 's, transform 0.7s ease ' + (0.5 + idx * 0.15) + 's;';
         btnBar.appendChild(btn);
     });
