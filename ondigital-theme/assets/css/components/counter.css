@@ -57,7 +57,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 6px;
+    bottom: -9px;
     width: 110%;
     height: 30px;
     background-image: url('../../imgs/shape/brush-green.png');
