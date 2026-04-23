@@ -15,9 +15,9 @@ $about_btn2_url   = ondigital_get_option( 'about_btn2_url' );
 $about_btn2_url   = $about_btn2_url ? $about_btn2_url : home_url( '/xidmetler/' );
 $about_exp_number = ondigital_get_option( 'about_exp_number', '7' );
 $about_exp_label  = ondigital_get_option( 'about_exp_label', 'Years of hall of fame & experience' );
-$about_img1       = ondigital_img( 'about_image_1', '/assets/imgs/gallery/img-s-36.webp' );
-$about_img2       = ondigital_img( 'about_image_2', '/assets/imgs/gallery/img-s-37.webp' );
-$about_img3       = ondigital_img( 'about_image_3', '/assets/imgs/gallery/img-s-38.webp' );
+$about_img1       = ondigital_img( 'about_img1', '/assets/imgs/gallery/img-s-36.webp' );
+$about_img2       = ondigital_img( 'about_img2', '/assets/imgs/gallery/img-s-37.webp' );
+$about_img3       = ondigital_img( 'about_img3', '/assets/imgs/gallery/img-s-38.webp' );
 ?>
 <section class="about-area">
     <div class="container">
