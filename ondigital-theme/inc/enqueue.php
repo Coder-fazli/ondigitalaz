@@ -153,6 +153,12 @@ function ondigital_enqueue_page_assets() {
                 @media only screen and (max-width: 767px) {
                     .about-area .thumbs { max-width: 300px; margin: 0 auto; }
                 }
+                .testimonial-area .section-content .subtitle-wrapper img {
+                    height: 44px;
+                    width: auto;
+                    border-radius: 0;
+                    flex-shrink: 0;
+                }
             ' );
         }
 
