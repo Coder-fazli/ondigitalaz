@@ -36,16 +36,16 @@
 .od-chart-periods {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 60px;
 }
 
 .od-period-btn {
     display: block;
-    width: 130px;
+    width: 155px;
     background: #fff;
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 14px;
+    border-radius: 10px;
+    padding: 14px 18px;
     text-align: left;
     cursor: pointer;
     transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.15s;
@@ -58,15 +58,15 @@
 
 .od-period-btn strong {
     display: block;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--primary);
     line-height: 1;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
 .od-period-btn span {
-    font-size: 11px;
+    font-size: 13px;
     color: var(--secondary);
     line-height: 1;
 }
