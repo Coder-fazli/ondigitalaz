@@ -364,3 +364,54 @@
 .od-srv-card:hover .od-srv-link {
     text-decoration-color: #c2f971;
 }
+
+/* ── Mobile optimizations ── */
+@media only screen and (max-width: 767px) {
+    .service-area .service-area-inner {
+        padding-top: 30px;
+    }
+
+    .service-area .section-title {
+        font-size: 28px;
+    }
+
+    .service-area .section-subtitle {
+        font-size: 13px;
+    }
+
+    .service-area .section-header .text {
+        font-size: 14px;
+    }
+
+    .service-area .services-wrapper-box {
+        margin-top: 20px;
+    }
+
+    .service-area .services-prev,
+    .service-area .services-next {
+        display: none;
+    }
+
+    .od-srv-card {
+        min-height: 260px;
+    }
+
+    .od-srv-card > a {
+        min-height: 260px;
+        padding: 24px 20px 20px;
+    }
+
+    .od-srv-title {
+        font-size: 18px;
+    }
+
+    .od-srv-text {
+        font-size: 13px;
+        margin-top: 10px;
+    }
+
+    .od-srv-link {
+        margin-top: 16px;
+        font-size: 13px;
+    }
+}
