@@ -48,10 +48,6 @@ $about_img3       = ondigital_img( 'about_img3', '/assets/imgs/gallery/img-s-38.
                         <span data-text="<?php echo esc_attr( $about_btn2_text ); ?>"><?php echo esc_html( $about_btn2_text ); ?></span>
                     </a>
                 </div>
-                <div class="experience-box has_fade_anim">
-                    <h3 class="number wc-counter"><?php echo esc_html( $about_exp_number ); ?><i class="fa-solid fa-plus"></i></h3>
-                    <h3 class="info"><?php echo esc_html( $about_exp_label ); ?></h3>
-                </div>
             </div>
         </div>
     </div>
