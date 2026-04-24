@@ -10,6 +10,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // =============================================================================
+// Default meta boxes to closed for service CPT
+// =============================================================================
+
+add_action( 'load-post.php',     'ondigital_default_closed_metaboxes' );
+add_action( 'load-post-new.php', 'ondigital_default_closed_metaboxes' );
+function ondigital_default_closed_metaboxes(): void {
+    $screen = get_current_screen();
+    if ( ! $screen || $screen->id !== 'service' ) {
+        return;
+    }
+    $user_id = get_current_user_id();
+    if ( get_user_option( 'closedpostboxes_service', $user_id ) !== false ) {
+        return; // user has already set their own preference
+    }
+    update_user_option( $user_id, 'closedpostboxes_service', array(
+        'ondigital_service_meta',
+        'ondigital_service_highlights',
+        'ondigital_service_process',
+        'ondigital_service_cta',
+        'ondigital_service_included',
+        'ondigital_service_wif',
+        'ondigital_service_glossary',
+        'ondigital_service_faq',
+    ) );
+}
+
+// =============================================================================
 // Register Meta Boxes
 // =============================================================================
 
