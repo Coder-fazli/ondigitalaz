@@ -328,9 +328,6 @@ function ondigital_service_cta_callback( $post ) {
     $id = $post->ID;
     ?>
     <table class="form-table">
-        <tr><td colspan="2"><strong><?php esc_html_e( 'Mid-page CTA Strip', 'ondigital' ); ?></strong></td></tr>
-        <?php od_mb_text( '_service_mid_cta_title', __( 'Title', 'ondigital' ), get_post_meta( $id, '_service_mid_cta_title', true ), __( 'e.g. Saytınızın potensialını öyrənməyə hazırsınız?', 'ondigital' ) ); ?>
-        <tr><td colspan="2"><hr style="margin:4px 0"><strong><?php esc_html_e( 'Footer CTA Card', 'ondigital' ); ?></strong></td></tr>
         <?php
         od_mb_text( '_service_footer_cta_title', __( 'Title', 'ondigital' ),    get_post_meta( $id, '_service_footer_cta_title', true ), __( 'e.g. Layihənizi birlikdə qurmağa hazırıq', 'ondigital' ) );
         od_mb_text( '_service_footer_cta_sub',   __( 'Subtitle', 'ondigital' ), get_post_meta( $id, '_service_footer_cta_sub',   true ), __( 'e.g. Bizimlə əlaqə saxlayın, pulsuz məsləhət alın.', 'ondigital' ) );
@@ -885,7 +882,7 @@ function ondigital_save_meta_boxes( $post_id ) {
 
     // ── Service: CTA sections ──
     if ( isset( $_POST['ondigital_service_cta_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_cta_nonce'], 'ondigital_service_cta' ) ) {
-        foreach ( array( '_service_mid_cta_title', '_service_footer_cta_title', '_service_footer_cta_sub' ) as $field ) {
+        foreach ( array( '_service_footer_cta_title', '_service_footer_cta_sub' ) as $field ) {
             if ( isset( $_POST[ $field ] ) ) {
                 update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
             }
