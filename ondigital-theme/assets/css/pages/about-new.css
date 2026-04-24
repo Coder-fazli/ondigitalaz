@@ -75,9 +75,8 @@
 /* ══ HERO ══ */
 .ab-hero {
     background: var(--white);
-    padding: 136px 0 96px;
+    padding: 136px 0 120px;
     position: relative; overflow: hidden;
-    border-bottom: 1px solid var(--border);
 }
 .ab-hero::before {
     content: ''; position: absolute; inset: 0;
@@ -135,7 +134,7 @@
 .funnel-footer-divider { width:1px; height:28px; background:var(--border); margin: 0 18px; }
 
 /* ══ TICKER ══ */
-.ab-ticker { background: var(--accent); padding: 14px 0; overflow: hidden; white-space: nowrap; margin-top: 40px; }
+.ab-ticker { background: var(--accent); padding: 14px 0; overflow: hidden; white-space: nowrap; }
 .ab-ticker-track { display: inline-flex; animation: ticker-scroll 32s linear infinite; }
 .ab-ticker-item {
     display: inline-flex; align-items: center; gap: 10px;
