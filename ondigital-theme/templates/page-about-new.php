@@ -105,26 +105,32 @@ $funnel_stages = array(
 </section>
 
 <!-- ══ TICKER ══ -->
+<?php
+$ticker_services = get_posts( array(
+    'post_type'      => 'service',
+    'post_status'    => 'publish',
+    'posts_per_page' => -1,
+    'orderby'        => 'menu_order',
+    'order'          => 'ASC',
+) );
+?>
+<?php if ( $ticker_services ) : ?>
 <div class="ab-ticker">
-    <div class="ab-ticker-track">
-        <span class="ab-ticker-item">SEO Strategy</span>
-        <span class="ab-ticker-item">Digital Marketing</span>
-        <span class="ab-ticker-item">Content Strategy</span>
-        <span class="ab-ticker-item">Social Media</span>
-        <span class="ab-ticker-item">Google Ads</span>
-        <span class="ab-ticker-item">Web Design</span>
-        <span class="ab-ticker-item">Branding</span>
-        <span class="ab-ticker-item">Analytics</span>
-        <span class="ab-ticker-item">SEO Strategy</span>
-        <span class="ab-ticker-item">Digital Marketing</span>
-        <span class="ab-ticker-item">Content Strategy</span>
-        <span class="ab-ticker-item">Social Media</span>
-        <span class="ab-ticker-item">Google Ads</span>
-        <span class="ab-ticker-item">Web Design</span>
-        <span class="ab-ticker-item">Branding</span>
-        <span class="ab-ticker-item">Analytics</span>
+    <div class="ab-ticker-track" aria-label="Our services">
+        <?php foreach ( $ticker_services as $svc ) : ?>
+        <a class="ab-ticker-item" href="<?php echo esc_url( get_permalink( $svc ) ); ?>" target="_blank" rel="noopener">
+            <?php echo esc_html( $svc->post_title ); ?>
+        </a>
+        <?php endforeach; ?>
+        <?php /* Duplicate for seamless infinite scroll */ ?>
+        <?php foreach ( $ticker_services as $svc ) : ?>
+        <a class="ab-ticker-item" href="<?php echo esc_url( get_permalink( $svc ) ); ?>" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+            <?php echo esc_html( $svc->post_title ); ?>
+        </a>
+        <?php endforeach; ?>
     </div>
 </div>
+<?php endif; ?>
 
 <!-- ══ STORY ══ -->
 <section class="ab-story" id="ab-story">

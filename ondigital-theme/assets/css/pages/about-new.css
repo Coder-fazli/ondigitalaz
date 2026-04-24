@@ -141,7 +141,9 @@
     display: inline-flex; align-items: center; gap: 10px;
     font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
     color: rgba(0,0,0,.7); padding: 0 36px;
+    text-decoration: none; cursor: pointer; transition: color .2s;
 }
+.ab-ticker-item:hover { color: rgba(0,0,0,1); }
 .ab-ticker-item::after { content:'✦'; font-size: 9px; color: rgba(0,0,0,.3); }
 @keyframes ticker-scroll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
 
