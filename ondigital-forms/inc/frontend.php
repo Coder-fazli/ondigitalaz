@@ -12,8 +12,8 @@ function odf_enqueue_frontend(): void {
     // Contact Popup — loaded on every page (modal renders in footer globally)
     wp_enqueue_style( 'odf-contact-popup', ODF_URI . 'assets/css/forms-contact-popup.css', array(), ODF_VERSION );
 
-    // Contact Page — only on the contact page template
-    if ( is_page_template( 'templates/page-contact.php' ) ) {
+    // Contact Page form CSS — contact page template and about-new template (both use inline form)
+    if ( is_page_template( 'templates/page-contact.php' ) || is_page_template( 'templates/page-about-new.php' ) ) {
         wp_enqueue_style( 'odf-contact-page', ODF_URI . 'assets/css/forms-contact-page.css', array(), ODF_VERSION );
     }
 

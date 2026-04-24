@@ -380,23 +380,25 @@ $funnel_stages = array(
                 $right = ( $side === 'right' );
             ?>
             <div class="ab-tl-item<?php echo $right ? ' ab-tl-item--right' : ''; ?>">
-                <?php if ( ! $right ) : ?>
-                <div class="ab-tl-content">
-                    <div class="ab-tl-year"><?php echo esc_html( $year ); ?></div>
-                    <div class="ab-tl-title"><?php echo esc_html( $title ); ?></div>
-                    <p class="ab-tl-desc"><?php echo esc_html( $desc ); ?></p>
-                </div>
-                <?php endif; ?>
+                <?php if ( $right ) : ?>
+                <div class="ab-tl-empty"></div>
                 <div class="ab-tl-center">
                     <div class="ab-tl-dot"><i class="fa-solid <?php echo esc_attr( $icon ); ?>"></i></div>
                 </div>
-                <?php if ( $right ) : ?>
                 <div class="ab-tl-content">
                     <div class="ab-tl-year"><?php echo esc_html( $year ); ?></div>
                     <div class="ab-tl-title"><?php echo esc_html( $title ); ?></div>
                     <p class="ab-tl-desc"><?php echo esc_html( $desc ); ?></p>
                 </div>
                 <?php else : ?>
+                <div class="ab-tl-content">
+                    <div class="ab-tl-year"><?php echo esc_html( $year ); ?></div>
+                    <div class="ab-tl-title"><?php echo esc_html( $title ); ?></div>
+                    <p class="ab-tl-desc"><?php echo esc_html( $desc ); ?></p>
+                </div>
+                <div class="ab-tl-center">
+                    <div class="ab-tl-dot"><i class="fa-solid <?php echo esc_attr( $icon ); ?>"></i></div>
+                </div>
                 <div class="ab-tl-empty"></div>
                 <?php endif; ?>
             </div>
