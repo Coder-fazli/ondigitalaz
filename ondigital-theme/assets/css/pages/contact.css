@@ -172,73 +172,6 @@
 /* ── Form Panel ──────────────────────────────────────────────────────────── */
 .contact-form-panel { background: #fff; padding: 40px 44px; }
 
-/* ── ODF Contact Page Inline Form ───────────────────────────────────────── */
-.odf-cp-wrap { height: 100%; }
-
-.odf-cp-title {
-    font-size: 22px; font-weight: 800;
-    letter-spacing: -.03em; margin: 0 0 28px; color: #121212;
-}
-
-.odf-cp-title em { font-style: normal; color: #c2f971; }
-
-.odf-cp-form { display: flex; flex-direction: column; }
-
-.odf-cp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-.odf-cp-group { margin-bottom: 20px; }
-
-.odf-cp-group input,
-.odf-cp-group textarea {
-    font-family: inherit; font-size: 14px; font-weight: 400;
-    color: #121212; border: none;
-    border-bottom: 1px solid #e8e8e8;
-    padding: 12px 0; background: transparent;
-    outline: none; transition: border-color .2s;
-    width: 100%; resize: none;
-}
-
-.odf-cp-group input:focus,
-.odf-cp-group textarea:focus { border-bottom-color: #c2f971; }
-
-.odf-cp-group input::placeholder,
-.odf-cp-group textarea::placeholder { color: #bbb; font-weight: 400; }
-
-.odf-cp-group textarea { min-height: 90px; }
-
-.odf-cp-footer { display: flex; justify-content: flex-end; margin-top: 8px; }
-
-.odf-cp-submit {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: #c2f971; color: #0a0a0a;
-    font-family: inherit; font-size: 15px; font-weight: 700;
-    padding: 14px 30px; border: none; border-radius: 100px;
-    cursor: pointer; transition: transform .15s, box-shadow .15s;
-}
-
-.odf-cp-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(194,249,113,.4);
-}
-
-.odf-cp-error { margin-top: 12px; font-size: 13px; color: #c00; }
-
-.odf-cp-success {
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 16px; min-height: 200px; text-align: center;
-}
-
-.odf-cp-success-icon { font-size: 48px; color: #c2f971; }
-
-.odf-cp-success p {
-    font-size: 16px; font-weight: 500; color: #333;
-    max-width: 320px; line-height: 1.5;
-}
-
-/* honeypot */
-.odf-hp { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
-
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
     .contact-section-inner { padding: 0 24px; }
@@ -248,7 +181,6 @@
     .contact-section-inner { padding: 0 16px;  }
     .contact-card { grid-template-columns: 1fr; border-radius: 18px; }
     .contact-form-panel { order: -1; padding: 28px 22px; }
-    .odf-cp-row { grid-template-columns: 1fr; gap: 0; }
     .contact-section { padding-bottom: 60px; }
 }
 

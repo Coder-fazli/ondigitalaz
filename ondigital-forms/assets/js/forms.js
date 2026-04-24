@@ -100,6 +100,41 @@
             });
     });
 
+    // ── Service page inline form submit ───────────────────────────────────────
+    document.addEventListener('submit', function (e) {
+        if (!e.target.matches('#odf-sp-form')) return;
+        e.preventDefault();
+
+        var form        = e.target;
+        var wrap        = form.closest('.odf-sp-wrap');
+        var successWrap = wrap ? wrap.querySelector('.odf-sp-success') : null;
+        var errorMsg    = form.querySelector('.odf-sp-error');
+        var submitBtn   = form.querySelector('.odf-sp-submit');
+
+        var data = new FormData(form);
+        data.append('action', 'odf_submit');
+
+        if (errorMsg) errorMsg.style.display = 'none';
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.6'; }
+
+        fetch(odfVars.ajaxurl, { method: 'POST', body: data })
+            .then(function (r) { return r.json(); })
+            .then(function (res) {
+                if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = ''; }
+                if (res.success) {
+                    form.style.display = 'none';
+                    if (successWrap) successWrap.style.display = 'flex';
+                } else {
+                    var msg = (res.data && res.data.message) ? res.data.message : 'An error occurred.';
+                    if (errorMsg) { errorMsg.textContent = msg; errorMsg.style.display = 'block'; }
+                }
+            })
+            .catch(function () {
+                if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = ''; }
+                if (errorMsg) { errorMsg.textContent = 'Network error. Please try again.'; errorMsg.style.display = 'block'; }
+            });
+    });
+
     // ── Form submit ────────────────────────────────────────────────────────────
     document.addEventListener('submit', function (e) {
         if (!e.target.matches('#odf-form')) return;

@@ -109,6 +109,23 @@ function odf_default_contact_page_options(): array {
     );
 }
 
+function odf_default_service_page_options(): array {
+    return array(
+        'btn_text_az'    => 'Göndər',
+        'btn_text_en'    => 'Send',
+        'success_az'     => 'Mesajınız göndərildi! Tezliklə sizinlə əlaqə saxlayacağıq.',
+        'success_en'     => 'Your message has been sent! We will contact you shortly.',
+        'ph_name_az'     => 'Ad Soyadınız',
+        'ph_name_en'     => 'Your full name',
+        'ph_email_az'    => 'E-mail ünvanınız',
+        'ph_email_en'    => 'Your email address',
+        'ph_phone_az'    => 'Telefon nömrəniz',
+        'ph_phone_en'    => 'Your phone number',
+        'ph_message_az'  => 'Layihəniz haqqında məlumat verin...',
+        'ph_message_en'  => 'Tell us about your project...',
+    );
+}
+
 function odf_get_unread_count(): int {
     global $wpdb;
     return (int) $wpdb->get_var(

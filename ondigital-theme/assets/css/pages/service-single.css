@@ -549,45 +549,91 @@ html, body { overflow: auto !important; height: auto !important; }
 }
 
 /* =============================================================================
-   5. Footer CTA
+   5. Footer CTA + Form
    ============================================================================= */
 
-.ss-footer-cta { padding: 80px 0 100px; background: #f9f9f9; }
-
-.ss-footer-cta-card {
-    background: #121212; border-radius: 24px;
-    padding: 72px 80px; text-align: center;
-    max-width: 860px; margin: 0 auto;
-    position: relative; overflow: hidden;
+.ss-cta-form {
+    background: #0d0d0d;
+    padding: 90px 0 100px;
+    position: relative;
+    overflow: hidden;
 }
 
-.ss-footer-cta-card::before {
-    content: ''; position: absolute;
-    top: -80px; right: -80px;
-    width: 320px; height: 320px; border-radius: 50%;
-    background: rgba(194,249,113,.08); pointer-events: none;
+.ss-cta-form::before {
+    content: '';
+    position: absolute;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(194,249,113,.07) 0%, transparent 65%);
+    top: 50%; left: -10%;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
-@media (max-width: 767px) {
-    .ss-footer-cta-card { padding: 48px 32px; }
+.ss-cta-form-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
-.ss-footer-cta-eyebrow {
-    display: inline-block; font-size: 11px; font-weight: 700;
+.ss-cta-form-eyebrow {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
     letter-spacing: .12em; text-transform: uppercase;
-    color: var(--ss-accent); margin-bottom: 20px;
+    color: var(--ss-accent);
+    margin-bottom: 20px;
 }
 
-.ss-footer-cta-title {
-    font-size: clamp(26px, 3vw, 44px); font-weight: 900;
-    color: #fff; line-height: 1.1; margin: 0 0 16px;
+.ss-cta-form-title {
+    font-size: clamp(26px, 3.2vw, 44px); font-weight: 900;
+    letter-spacing: -.03em; line-height: 1.1;
+    color: #fff; margin: 0 0 18px;
 }
 
-.ss-footer-cta-sub {
-    font-size: 17px; color: rgba(255,255,255,.5); margin: 0 0 36px;
+.ss-cta-form-sub {
+    font-size: 16px; line-height: 1.65;
+    color: rgba(255,255,255,.45);
+    margin: 0 0 36px;
 }
 
-.ss-footer-cta-card .ss-btn-primary { font-size: 16px; padding: 16px 40px; }
+.ss-cta-form-perks {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 16px;
+}
+
+.ss-cta-form-perks li {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 15px; font-weight: 500;
+    color: rgba(255,255,255,.7);
+}
+
+.ss-cta-perk-icon {
+    width: 26px; height: 26px; flex-shrink: 0;
+    background: rgba(194,249,113,.1);
+    border: 1px solid rgba(194,249,113,.22);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ss-accent); font-size: 11px;
+}
+
+.ss-cta-form-right {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px 44px;
+    box-shadow: 0 24px 80px rgba(0,0,0,.35);
+}
+
+@media (max-width: 960px) {
+    .ss-cta-form-inner { grid-template-columns: 1fr; gap: 48px; }
+    .ss-cta-form { padding: 70px 0 80px; }
+}
+
+@media (max-width: 600px) {
+    .ss-cta-form { padding: 60px 0 70px; }
+    .ss-cta-form-right { padding: 28px 24px; }
+}
 
 /* =============================================================================
    6–9. New content sections — scoped under .ss-wrap to avoid conflicts

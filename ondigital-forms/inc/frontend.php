@@ -9,7 +9,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'wp_enqueue_scripts', 'odf_enqueue_frontend' );
 function odf_enqueue_frontend(): void {
-    wp_enqueue_style( 'odf-forms', ODF_URI . 'assets/css/forms.css', array(), ODF_VERSION );
+    // Contact Popup — loaded on every page (modal renders in footer globally)
+    wp_enqueue_style( 'odf-contact-popup', ODF_URI . 'assets/css/forms-contact-popup.css', array(), ODF_VERSION );
+
+    // Contact Page — only on the contact page template
+    if ( is_page_template( 'templates/page-contact.php' ) ) {
+        wp_enqueue_style( 'odf-contact-page', ODF_URI . 'assets/css/forms-contact-page.css', array(), ODF_VERSION );
+    }
+
+    // Service Page — only on service single pages
+    if ( is_singular( 'service' ) ) {
+        wp_enqueue_style( 'odf-service-page', ODF_URI . 'assets/css/forms-service-page.css', array(), ODF_VERSION );
+    }
+
     wp_enqueue_script( 'odf-forms', ODF_URI . 'assets/js/forms.js', array(), ODF_VERSION, true );
     wp_localize_script( 'odf-forms', 'odfVars', array(
         'ajaxurl' => admin_url( 'admin-ajax.php' ),
@@ -76,6 +88,58 @@ function odf_render_contact_page_inline(): void {
         </form>
         <div class="odf-cp-success" style="display:none;">
             <div class="odf-cp-success-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <p><?php echo esc_html( $success_msg ); ?></p>
+        </div>
+    </div>
+    <?php
+}
+
+function odf_render_service_page_inline(): void {
+    $opts = get_option( 'odf_service_page_options', odf_default_service_page_options() );
+    $lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
+    $lang = in_array( $lang, array( 'az', 'en' ), true ) ? $lang : 'az';
+
+    $o = function( string $key ) use ( $opts, $lang ): string {
+        return $opts[ $key . '_' . $lang ] ?? $opts[ $key . '_az' ] ?? '';
+    };
+
+    $btn_text    = $o( 'btn_text' );
+    $success_msg = $o( 'success' );
+
+    $ph = array(
+        'name'    => $o( 'ph_name' ),
+        'email'   => $o( 'ph_email' ),
+        'phone'   => $o( 'ph_phone' ),
+        'message' => $o( 'ph_message' ),
+    );
+    ?>
+    <div class="odf-sp-wrap">
+        <form id="odf-sp-form" class="odf-sp-form" novalidate>
+            <?php wp_nonce_field( 'odf_submit', 'odf_nonce' ); ?>
+            <input type="text" name="odf_hp" class="odf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <div class="odf-sp-row">
+                <div class="odf-sp-group">
+                    <input type="text" name="odf_name" placeholder="<?php echo esc_attr( $ph['name'] ); ?>">
+                </div>
+                <div class="odf-sp-group">
+                    <input type="email" name="odf_email" placeholder="<?php echo esc_attr( $ph['email'] ); ?>">
+                </div>
+            </div>
+            <div class="odf-sp-group">
+                <input type="tel" name="odf_phone" placeholder="<?php echo esc_attr( $ph['phone'] ); ?>">
+            </div>
+            <div class="odf-sp-group">
+                <textarea name="odf_message" placeholder="<?php echo esc_attr( $ph['message'] ); ?>"></textarea>
+            </div>
+            <button type="submit" class="odf-sp-submit">
+                <?php echo esc_html( $btn_text ); ?>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+            <div class="odf-sp-error" style="display:none;"></div>
+        </form>
+        <div class="odf-sp-success" style="display:none;">
+            <div class="odf-sp-success-icon"><i class="fa-solid fa-circle-check"></i></div>
             <p><?php echo esc_html( $success_msg ); ?></p>
         </div>
     </div>

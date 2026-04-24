@@ -1,0 +1,110 @@
+/* =============================================================================
+   OD Forms — Template: Service Page
+   Inline form embedded at the bottom of service single pages via odf_render_service_page_inline().
+   ============================================================================= */
+
+.odf-hp { display: none !important; }
+
+.odf-sp-wrap { position: relative; }
+
+.odf-sp-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 0;
+}
+
+.odf-sp-group { margin-bottom: 20px; }
+
+.odf-sp-group input[type="text"],
+.odf-sp-group input[type="email"],
+.odf-sp-group input[type="tel"],
+.odf-sp-group textarea {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    color: #121212;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 0;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.odf-sp-group input:focus,
+.odf-sp-group textarea:focus { border-bottom-color: #c2f971; }
+
+.odf-sp-group input::placeholder,
+.odf-sp-group textarea::placeholder { color: #bbb; font-weight: 400; }
+
+.odf-sp-group textarea { min-height: 100px; }
+
+.odf-sp-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #c2f971;
+    color: #0a0a0a;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px 32px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.odf-sp-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(194, 249, 113, 0.4);
+}
+
+.odf-sp-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.odf-sp-error {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #e53935;
+}
+
+.odf-sp-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 220px;
+    text-align: center;
+}
+
+.odf-sp-success-icon {
+    font-size: 52px;
+    color: #c2f971;
+    line-height: 1;
+}
+
+.odf-sp-success p {
+    font-size: 16px;
+    font-weight: 500;
+    color: #444;
+    max-width: 320px;
+    line-height: 1.55;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .odf-sp-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
