@@ -17,6 +17,39 @@ add_action( 'wp_enqueue_scripts', function() {
 }, 99 );
 
 get_header();
+
+$options = get_option( 'ondigital_options', array() );
+$o = function( string $key, string $default = '' ) use ( $options ): string {
+    return ! empty( $options[ $key ] ) ? $options[ $key ] : $default;
+};
+
+/* ── Funnel stages from options (with hardcoded fallbacks) ── */
+$funnel_stages = array(
+    array(
+        'label'   => $o( 'an_stage1_label',   'Traffic' ),
+        'display' => $o( 'an_stage1_display',  '50K' ),
+        'cvr'     => $o( 'an_stage1_cvr',      '' ) ?: null,
+        'value'   => (int) $o( 'an_stage1_value', '50000' ),
+    ),
+    array(
+        'label'   => $o( 'an_stage2_label',   'Leads' ),
+        'display' => $o( 'an_stage2_display',  '8.5K' ),
+        'cvr'     => $o( 'an_stage2_cvr',      '17%' ) ?: null,
+        'value'   => (int) $o( 'an_stage2_value', '8500' ),
+    ),
+    array(
+        'label'   => $o( 'an_stage3_label',   'Proposals' ),
+        'display' => $o( 'an_stage3_display',  '1.7K' ),
+        'cvr'     => $o( 'an_stage3_cvr',      '20%' ) ?: null,
+        'value'   => (int) $o( 'an_stage3_value', '1700' ),
+    ),
+    array(
+        'label'   => $o( 'an_stage4_label',   'Clients' ),
+        'display' => $o( 'an_stage4_display',  '425' ),
+        'cvr'     => $o( 'an_stage4_cvr',      '25%' ) ?: null,
+        'value'   => (int) $o( 'an_stage4_value', '425' ),
+    ),
+);
 ?>
 
 <div class="ab-page">
@@ -27,17 +60,21 @@ get_header();
         <div class="ab-hero-inner">
             <div>
                 <h1 class="ab-hero-title">
-                    We build the<br><em>digital future</em><br>together
+                    <?php echo esc_html( $o( 'an_hero_title_line1', 'We build the' ) ); ?><br>
+                    <em><?php echo esc_html( $o( 'an_hero_title_em', 'digital future' ) ); ?></em><br>
+                    <?php echo esc_html( $o( 'an_hero_title_line3', 'together' ) ); ?>
                 </h1>
                 <p class="ab-hero-desc">
-                    We don't just deliver services — we rebuild your entire digital ecosystem on a foundation of data, strategy, and technical excellence.
+                    <?php echo esc_html( $o( 'an_hero_desc', "We don't just deliver services — we rebuild your entire digital ecosystem on a foundation of data, strategy, and technical excellence." ) ); ?>
                 </p>
                 <div class="ab-hero-btns">
-                    <a href="#ab-story" class="btn-accent">
-                        Our Story
+                    <a href="<?php echo esc_url( $o( 'an_hero_btn1_url', '#ab-story' ) ); ?>" class="btn-accent">
+                        <?php echo esc_html( $o( 'an_hero_btn1_text', 'Our Story' ) ); ?>
                         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
-                    <a href="#ab-cta" class="btn-primary">Get in Touch</a>
+                    <a href="<?php echo esc_url( $o( 'an_hero_btn2_url', '#ab-cta' ) ); ?>" class="btn-primary">
+                        <?php echo esc_html( $o( 'an_hero_btn2_text', 'Get in Touch' ) ); ?>
+                    </a>
                 </div>
             </div>
 
@@ -45,20 +82,20 @@ get_header();
                 <div class="funnel-card">
                     <div class="funnel-card-header">
                         <div class="funnel-card-eyebrow">
-                            <span class="funnel-dot"></span>Client Growth Funnel
+                            <span class="funnel-dot"></span><?php echo esc_html( $o( 'an_funnel_eyebrow', 'Client Growth Funnel' ) ); ?>
                         </div>
-                        <div class="funnel-card-sub">How we turn traffic into paying clients</div>
+                        <div class="funnel-card-sub"><?php echo esc_html( $o( 'an_funnel_sub', 'How we turn traffic into paying clients' ) ); ?></div>
                     </div>
                     <svg id="funnel-svg" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;overflow:visible;"></svg>
                     <div class="funnel-footer">
                         <div class="funnel-footer-stat">
-                            <span class="funnel-footer-num">4.2×</span>
-                            <span class="funnel-footer-lbl">Average ROAS</span>
+                            <span class="funnel-footer-num"><?php echo esc_html( $o( 'an_funnel_stat1_num', '4.2×' ) ); ?></span>
+                            <span class="funnel-footer-lbl"><?php echo esc_html( $o( 'an_funnel_stat1_lbl', 'Average ROAS' ) ); ?></span>
                         </div>
                         <div class="funnel-footer-divider"></div>
                         <div class="funnel-footer-stat">
-                            <span class="funnel-footer-num">90 days</span>
-                            <span class="funnel-footer-lbl">To first results</span>
+                            <span class="funnel-footer-num"><?php echo esc_html( $o( 'an_funnel_stat2_num', '90 days' ) ); ?></span>
+                            <span class="funnel-footer-lbl"><?php echo esc_html( $o( 'an_funnel_stat2_lbl', 'To first results' ) ); ?></span>
                         </div>
                     </div>
                 </div>
@@ -94,37 +131,31 @@ get_header();
     <div class="container">
         <div class="ab-story-inner">
             <div class="ab-story-left">
-                <span class="eyebrow">Our Story</span>
+                <span class="eyebrow"><?php echo esc_html( $o( 'an_story_eyebrow', 'Our Story' ) ); ?></span>
                 <h2 class="ab-story-heading">
-                    Started in 2020<br>with one <em>vision</em>
+                    <?php echo esc_html( $o( 'an_story_heading', 'Started in 2020 with one' ) ); ?> <em><?php echo esc_html( $o( 'an_story_heading_em', 'vision' ) ); ?></em>
                 </h2>
-                <p class="ab-story-desc">
-                    OnDigital was born from a gap in the market — there was no agency in Azerbaijan genuinely delivering measurable digital value. We believe in bespoke, data-driven strategies, not off-the-shelf templates.
-                </p>
-                <p class="ab-story-desc">
-                    We started as a small team with a big mission: to arm Azerbaijani businesses with world-class digital tools and expertise.
-                </p>
+                <p class="ab-story-desc"><?php echo esc_html( $o( 'an_story_desc1', "OnDigital was born from a gap in the market — there was no agency in Azerbaijan genuinely delivering measurable digital value. We believe in bespoke, data-driven strategies, not off-the-shelf templates." ) ); ?></p>
+                <p class="ab-story-desc"><?php echo esc_html( $o( 'an_story_desc2', "We started as a small team with a big mission: to arm Azerbaijani businesses with world-class digital tools and expertise." ) ); ?></p>
                 <div class="ab-story-quote">
-                    <p>"Digital strategy is not a service — it's the core infrastructure of your business."</p>
-                    <cite>— Zamin Namazov, Founder & CEO</cite>
+                    <p>"<?php echo esc_html( $o( 'an_story_quote', "Digital strategy is not a service — it's the core infrastructure of your business." ) ); ?>"</p>
+                    <cite><?php echo esc_html( $o( 'an_story_cite', '— Zamin Namazov, Founder & CEO' ) ); ?></cite>
                 </div>
             </div>
             <div class="ab-story-right">
+                <?php
+                $pillar_defaults = array(
+                    1 => array( '01 — Mission',  'Drive every business to digital leadership',          'We help our clients stay ahead of the market with data-driven strategies focused on measurable, scalable results.' ),
+                    2 => array( '02 — Vision',   'The leading digital agency in the South Caucasus',    'By 2027, to be the most recognised results-oriented digital partner across Azerbaijan, Georgia, and beyond.' ),
+                    3 => array( '03 — Approach', 'Transparency, data, accountability',                  'Every step tracked, every result reported. No hidden agendas — we operate as partners, not vendors.' ),
+                );
+                for ( $n = 1; $n <= 3; $n++ ) : ?>
                 <div class="ab-pillar">
-                    <div class="ab-pillar-num">01 — Mission</div>
-                    <h3>Drive every business to digital leadership</h3>
-                    <p>We help our clients stay ahead of the market with data-driven strategies focused on measurable, scalable results.</p>
+                    <div class="ab-pillar-num"><?php echo esc_html( $o( 'an_pillar' . $n . '_num', $pillar_defaults[$n][0] ) ); ?></div>
+                    <h3><?php echo esc_html( $o( 'an_pillar' . $n . '_title', $pillar_defaults[$n][1] ) ); ?></h3>
+                    <p><?php echo esc_html( $o( 'an_pillar' . $n . '_body', $pillar_defaults[$n][2] ) ); ?></p>
                 </div>
-                <div class="ab-pillar">
-                    <div class="ab-pillar-num">02 — Vision</div>
-                    <h3>The leading digital agency in the South Caucasus</h3>
-                    <p>By 2027, to be the most recognised results-oriented digital partner across Azerbaijan, Georgia, and beyond.</p>
-                </div>
-                <div class="ab-pillar">
-                    <div class="ab-pillar-num">03 — Approach</div>
-                    <h3>Transparency, data, accountability</h3>
-                    <p>Every step tracked, every result reported. No hidden agendas — we operate as partners, not vendors.</p>
-                </div>
+                <?php endfor; ?>
             </div>
         </div>
     </div>
@@ -134,30 +165,26 @@ get_header();
 <section class="ab-stats">
     <div class="container">
         <div class="ab-stats-inner">
+            <?php
+            $stat_icons    = array( 1 => 'fa-calendar-check', 2 => 'fa-handshake', 3 => 'fa-people-group', 4 => 'fa-star' );
+            $stat_defaults = array(
+                1 => array( '4',  '+', 'Years of experience' ),
+                2 => array( '120','+', 'Projects delivered'  ),
+                3 => array( '15', '+', 'Team members'        ),
+                4 => array( '98', '%', 'Client satisfaction' ),
+            );
+            for ( $n = 1; $n <= 4; $n++ ) :
+                $num    = $o( 'an_stat' . $n . '_num',    $stat_defaults[$n][0] );
+                $suffix = $o( 'an_stat' . $n . '_suffix', $stat_defaults[$n][1] );
+                $lbl    = $o( 'an_stat' . $n . '_lbl',    $stat_defaults[$n][2] );
+            ?>
             <div class="ab-stat">
-                <div class="ab-stat-bg">4+</div>
-                <div class="ab-stat-icon"><i class="fa-solid fa-calendar-check"></i></div>
-                <div class="ab-stat-num">4<span>+</span></div>
-                <div class="ab-stat-lbl">Years of experience</div>
+                <div class="ab-stat-bg"><?php echo esc_html( $num . $suffix ); ?></div>
+                <div class="ab-stat-icon"><i class="fa-solid <?php echo esc_attr( $stat_icons[$n] ); ?>"></i></div>
+                <div class="ab-stat-num"><?php echo esc_html( $num ); ?><span><?php echo esc_html( $suffix ); ?></span></div>
+                <div class="ab-stat-lbl"><?php echo esc_html( $lbl ); ?></div>
             </div>
-            <div class="ab-stat">
-                <div class="ab-stat-bg">120</div>
-                <div class="ab-stat-icon"><i class="fa-solid fa-handshake"></i></div>
-                <div class="ab-stat-num">120<span>+</span></div>
-                <div class="ab-stat-lbl">Projects delivered</div>
-            </div>
-            <div class="ab-stat">
-                <div class="ab-stat-bg">15</div>
-                <div class="ab-stat-icon"><i class="fa-solid fa-people-group"></i></div>
-                <div class="ab-stat-num">15<span>+</span></div>
-                <div class="ab-stat-lbl">Team members</div>
-            </div>
-            <div class="ab-stat">
-                <div class="ab-stat-bg">98</div>
-                <div class="ab-stat-icon"><i class="fa-solid fa-star"></i></div>
-                <div class="ab-stat-num">98<span>%</span></div>
-                <div class="ab-stat-lbl">Client satisfaction</div>
-            </div>
+            <?php endfor; ?>
         </div>
     </div>
 </section>
@@ -167,48 +194,39 @@ get_header();
     <div class="container">
         <div class="ab-values-header">
             <div>
-                <span class="eyebrow">Our Values</span>
-                <h2 class="section-title">The <em>foundation</em> of our work</h2>
+                <span class="eyebrow"><?php echo esc_html( $o( 'an_values_eyebrow', 'Our Values' ) ); ?></span>
+                <h2 class="section-title">
+                    <?php echo esc_html( $o( 'an_values_heading', 'The' ) ); ?>
+                    <em><?php echo esc_html( $o( 'an_values_heading_em', 'foundation' ) ); ?></em>
+                    <?php echo esc_html( $o( 'an_values_heading_end', 'of our work' ) ); ?>
+                </h2>
             </div>
-            <p class="section-sub">The principles behind every decision we make and every strategy we build.</p>
+            <p class="section-sub"><?php echo esc_html( $o( 'an_values_sub', 'The principles behind every decision we make and every strategy we build.' ) ); ?></p>
         </div>
         <div class="ab-values-grid">
-            <div class="ab-value-card">
-                <div class="ab-value-num">01</div>
-                <div class="ab-value-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
-                <div class="ab-value-title">Data-Driven Decisions</div>
-                <p class="ab-value-desc">Every recommendation, every strategy is grounded in real data and analytics — we trust numbers, not gut feelings.</p>
+            <?php
+            $val_defaults = array(
+                1 => array( '01', 'fa-chart-line',       'Data-Driven Decisions', 'Every recommendation, every strategy is grounded in real data and analytics — we trust numbers, not gut feelings.',                                                          false ),
+                2 => array( '02', 'fa-shield-halved',    'Full Transparency',     "We operate with complete openness. What we do, why we do it, and what it achieves — all shared clearly with every client.",                                                    false ),
+                3 => array( '03', 'fa-rocket',           'Continuous Innovation', "The digital world never stops changing. We're always learning, testing new tools, and applying the most effective methodologies.",                                              true  ),
+                4 => array( '04', 'fa-handshake-simple', 'Partnership Mindset',   "We see clients as partners, not accounts. Your growth is our growth — that's not a tagline, it's how we operate every day.",                                                    false ),
+                5 => array( '05', 'fa-bullseye',         'Results First',         "We don't produce pretty reports — we deliver real outcomes. Every KPI is measured, tracked, and reported with full accountability.",                                             false ),
+                6 => array( '06', 'fa-users-gear',       'Team Power',            'SEO, content, ads, design — we have in-house experts for every discipline. Not freelancers, but a cohesive, full-stack ecosystem.',                                            false ),
+            );
+            for ( $n = 1; $n <= 6; $n++ ) :
+                $num   = $o( 'an_val' . $n . '_num',   $val_defaults[$n][0] );
+                $icon  = $o( 'an_val' . $n . '_icon',  $val_defaults[$n][1] );
+                $title = $o( 'an_val' . $n . '_title', $val_defaults[$n][2] );
+                $desc  = $o( 'an_val' . $n . '_desc',  $val_defaults[$n][3] );
+                $dark  = $val_defaults[$n][4];
+            ?>
+            <div class="ab-value-card<?php echo $dark ? ' ab-value-card--accent' : ''; ?>">
+                <div class="ab-value-num"><?php echo esc_html( $num ); ?></div>
+                <div class="ab-value-icon-wrap"><i class="fa-solid <?php echo esc_attr( $icon ); ?>"></i></div>
+                <div class="ab-value-title"><?php echo esc_html( $title ); ?></div>
+                <p class="ab-value-desc"><?php echo esc_html( $desc ); ?></p>
             </div>
-            <div class="ab-value-card">
-                <div class="ab-value-num">02</div>
-                <div class="ab-value-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
-                <div class="ab-value-title">Full Transparency</div>
-                <p class="ab-value-desc">We operate with complete openness. What we do, why we do it, and what it achieves — all shared clearly with every client.</p>
-            </div>
-            <div class="ab-value-card ab-value-card--accent">
-                <div class="ab-value-num">03</div>
-                <div class="ab-value-icon-wrap"><i class="fa-solid fa-rocket"></i></div>
-                <div class="ab-value-title">Continuous Innovation</div>
-                <p class="ab-value-desc">The digital world never stops changing. We're always learning, testing new tools, and applying the most effective methodologies.</p>
-            </div>
-            <div class="ab-value-card">
-                <div class="ab-value-num">04</div>
-                <div class="ab-value-icon-wrap"><i class="fa-solid fa-handshake-simple"></i></div>
-                <div class="ab-value-title">Partnership Mindset</div>
-                <p class="ab-value-desc">We see clients as partners, not accounts. Your growth is our growth — that's not a tagline, it's how we operate every day.</p>
-            </div>
-            <div class="ab-value-card">
-                <div class="ab-value-num">05</div>
-                <div class="ab-value-icon-wrap"><i class="fa-solid fa-bullseye"></i></div>
-                <div class="ab-value-title">Results First</div>
-                <p class="ab-value-desc">We don't produce pretty reports — we deliver real outcomes. Every KPI is measured, tracked, and reported with full accountability.</p>
-            </div>
-            <div class="ab-value-card">
-                <div class="ab-value-num">06</div>
-                <div class="ab-value-icon-wrap"><i class="fa-solid fa-users-gear"></i></div>
-                <div class="ab-value-title">Team Power</div>
-                <p class="ab-value-desc">SEO, content, ads, design — we have in-house experts for every discipline. Not freelancers, but a cohesive, full-stack ecosystem.</p>
-            </div>
+            <?php endfor; ?>
         </div>
     </div>
 </section>
@@ -218,49 +236,42 @@ get_header();
     <div class="container">
         <div class="ab-approach-inner">
             <div>
-                <span class="eyebrow">How We Work</span>
-                <h2 class="section-title" style="margin-bottom:36px">Every step of<br>the process is <em>clear</em></h2>
+                <span class="eyebrow"><?php echo esc_html( $o( 'an_approach_eyebrow', 'How We Work' ) ); ?></span>
+                <h2 class="section-title" style="margin-bottom:36px">
+                    <?php echo esc_html( $o( 'an_approach_heading', 'Every step of the process is' ) ); ?>
+                    <em><?php echo esc_html( $o( 'an_approach_heading_em', 'clear' ) ); ?></em>
+                </h2>
                 <div class="ab-approach-steps">
+                    <?php
+                    $step_defaults = array(
+                        1 => array( '01', 'Discovery & Audit',          'We run a deep analysis of your current position, competitors, and market. No guesswork, no assumptions.' ),
+                        2 => array( '02', 'Strategy Development',       'A bespoke growth roadmap built on data — with measurable targets and clear timelines from day one.' ),
+                        3 => array( '03', 'Execution & Optimisation',   'We implement the strategy, monitor results in real time, and iterate continuously for maximum impact.' ),
+                        4 => array( '04', 'Reporting & Growth',         'Monthly detailed KPI reports. Every result tracked, every next step decided together with you.' ),
+                    );
+                    for ( $n = 1; $n <= 4; $n++ ) : ?>
                     <div class="ab-approach-step">
-                        <div class="ab-approach-step-num">01</div>
+                        <div class="ab-approach-step-num"><?php echo esc_html( $o( 'an_step' . $n . '_num', $step_defaults[$n][0] ) ); ?></div>
                         <div class="ab-approach-step-body">
-                            <h3>Discovery & Audit</h3>
-                            <p>We run a deep analysis of your current position, competitors, and market. No guesswork, no assumptions.</p>
+                            <h3><?php echo esc_html( $o( 'an_step' . $n . '_title', $step_defaults[$n][1] ) ); ?></h3>
+                            <p><?php echo esc_html( $o( 'an_step' . $n . '_body', $step_defaults[$n][2] ) ); ?></p>
                         </div>
                     </div>
-                    <div class="ab-approach-step">
-                        <div class="ab-approach-step-num">02</div>
-                        <div class="ab-approach-step-body">
-                            <h3>Strategy Development</h3>
-                            <p>A bespoke growth roadmap built on data — with measurable targets and clear timelines from day one.</p>
-                        </div>
-                    </div>
-                    <div class="ab-approach-step">
-                        <div class="ab-approach-step-num">03</div>
-                        <div class="ab-approach-step-body">
-                            <h3>Execution & Optimisation</h3>
-                            <p>We implement the strategy, monitor results in real time, and iterate continuously for maximum impact.</p>
-                        </div>
-                    </div>
-                    <div class="ab-approach-step">
-                        <div class="ab-approach-step-num">04</div>
-                        <div class="ab-approach-step-body">
-                            <h3>Reporting & Growth</h3>
-                            <p>Monthly detailed KPI reports. Every result tracked, every next step decided together with you.</p>
-                        </div>
-                    </div>
+                    <?php endfor; ?>
                 </div>
             </div>
             <div class="ab-approach-visual">
-                <div class="ab-av-label">Why OnDigital</div>
-                <div class="ab-av-big">100<span>%</span><br>Bespoke</div>
-                <p class="ab-av-desc">No two clients receive the same strategy. Every business has its own market position, competitors, and target audience.</p>
+                <div class="ab-av-label"><?php echo esc_html( $o( 'an_av_label', 'Why OnDigital' ) ); ?></div>
+                <div class="ab-av-big"><?php echo esc_html( $o( 'an_av_big_num', '100' ) ); ?><span>%</span><br><?php echo esc_html( $o( 'an_av_big_word', 'Bespoke' ) ); ?></div>
+                <p class="ab-av-desc"><?php echo esc_html( $o( 'an_av_desc', 'No two clients receive the same strategy. Every business has its own market position, competitors, and target audience.' ) ); ?></p>
                 <div class="ab-av-tags">
-                    <span class="ab-av-tag">Custom strategy</span>
-                    <span class="ab-av-tag">Real-time tracking</span>
-                    <span class="ab-av-tag">Monthly reports</span>
-                    <span class="ab-av-tag">Transparent pricing</span>
-                    <span class="ab-av-tag">24h response</span>
+                    <?php
+                    $tag_defaults = array( 'Custom strategy', 'Real-time tracking', 'Monthly reports', 'Transparent pricing', '24h response' );
+                    for ( $n = 1; $n <= 5; $n++ ) :
+                        $tag = $o( 'an_av_tag' . $n, $tag_defaults[ $n - 1 ] );
+                        if ( $tag ) : ?>
+                    <span class="ab-av-tag"><?php echo esc_html( $tag ); ?></span>
+                    <?php endif; endfor; ?>
                 </div>
             </div>
         </div>
@@ -271,9 +282,13 @@ get_header();
 <section class="ab-team">
     <div class="container">
         <div class="ab-team-header">
-            <span class="eyebrow">The Team</span>
-            <h2 class="section-title" style="margin-bottom:14px">The <em>people</em> behind your results</h2>
-            <p class="section-sub">Real in-house experts behind every project — not freelancers, but a dedicated, specialised team.</p>
+            <span class="eyebrow"><?php echo esc_html( $o( 'an_team_eyebrow', 'The Team' ) ); ?></span>
+            <h2 class="section-title" style="margin-bottom:14px">
+                <?php echo esc_html( $o( 'an_team_heading', 'The' ) ); ?>
+                <em><?php echo esc_html( $o( 'an_team_heading_em', 'people' ) ); ?></em>
+                <?php echo esc_html( $o( 'an_team_heading_end', 'behind your results' ) ); ?>
+            </h2>
+            <p class="section-sub"><?php echo esc_html( $o( 'an_team_sub', 'Real in-house experts behind every project — not freelancers, but a dedicated, specialised team.' ) ); ?></p>
         </div>
         <div class="ab-team-grid">
             <?php
@@ -287,9 +302,9 @@ get_header();
             if ( $team ) :
                 foreach ( $team as $member ) :
                     $name  = get_the_title( $member );
-                    $role  = get_post_meta( $member->ID, '_team_role',  true );
-                    $bio   = get_post_meta( $member->ID, '_team_bio',   true ) ?: get_the_excerpt( $member );
-                    $li    = get_post_meta( $member->ID, '_team_linkedin', true );
+                    $role  = get_post_meta( $member->ID, '_team_role', true );
+                    $bio   = get_post_meta( $member->ID, '_team_bio',  true ) ?: get_the_excerpt( $member );
+                    $li    = get_post_meta( $member->ID, '_team_linkedin',  true );
                     $ig    = get_post_meta( $member->ID, '_team_instagram', true );
                     $thumb = get_the_post_thumbnail_url( $member->ID, 'medium' );
             ?>
@@ -303,75 +318,37 @@ get_header();
                 </div>
                 <div class="ab-team-body">
                     <div class="ab-team-name"><?php echo esc_html( $name ); ?></div>
-                    <?php if ( $role ) : ?>
-                        <div class="ab-team-role"><?php echo esc_html( $role ); ?></div>
-                    <?php endif; ?>
-                    <?php if ( $bio ) : ?>
-                        <p class="ab-team-bio"><?php echo esc_html( $bio ); ?></p>
-                    <?php endif; ?>
+                    <?php if ( $role ) : ?><div class="ab-team-role"><?php echo esc_html( $role ); ?></div><?php endif; ?>
+                    <?php if ( $bio  ) : ?><p class="ab-team-bio"><?php echo esc_html( $bio ); ?></p><?php endif; ?>
                     <div class="ab-team-socials">
-                        <?php if ( $li ) : ?>
-                            <a href="<?php echo esc_url( $li ); ?>" class="ab-team-social" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <?php endif; ?>
-                        <?php if ( $ig ) : ?>
-                            <a href="<?php echo esc_url( $ig ); ?>" class="ab-team-social" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
-                        <?php endif; ?>
+                        <?php if ( $li ) : ?><a href="<?php echo esc_url($li); ?>" class="ab-team-social" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a><?php endif; ?>
+                        <?php if ( $ig ) : ?><a href="<?php echo esc_url($ig); ?>" class="ab-team-social" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a><?php endif; ?>
                     </div>
                 </div>
             </div>
             <?php
                 endforeach;
             else :
-            ?>
+                $fallback = array(
+                    array( 'Zamin Namazov',  'Founder & CEO',           '8+ years in digital marketing. One of Azerbaijan\'s leading SEO strategists.',              'fa-linkedin-in', 'fa-instagram' ),
+                    array( 'Ayten Huseynova','Content Director',         '6+ years in strategic content creation and SEO writing across AZ, RU, and EN markets.',    'fa-linkedin-in', 'fa-instagram' ),
+                    array( 'Rauf Aliyev',    'Technical SEO Lead',       'Core Web Vitals, technical audits, crawl optimisation. Deep expertise in Google systems.',  'fa-linkedin-in', 'fa-github'    ),
+                    array( 'Nigar Guliyeva', 'Paid Media Strategist',    'Google Ads, Meta Ads, TikTok Ads. Maximum ROAS from minimum budget. $2M+ managed spend.',   'fa-linkedin-in', 'fa-instagram' ),
+                );
+                foreach ( $fallback as $m ) : ?>
             <div class="ab-team-card">
                 <div class="ab-team-img"><div class="ab-team-img-placeholder"><i class="fa-solid fa-user"></i></div></div>
                 <div class="ab-team-body">
-                    <div class="ab-team-name">Zamin Namazov</div>
-                    <div class="ab-team-role">Founder & CEO</div>
-                    <p class="ab-team-bio">8+ years in digital marketing. One of Azerbaijan's leading SEO strategists and growth consultants.</p>
+                    <div class="ab-team-name"><?php echo esc_html( $m[0] ); ?></div>
+                    <div class="ab-team-role"><?php echo esc_html( $m[1] ); ?></div>
+                    <p class="ab-team-bio"><?php echo esc_html( $m[2] ); ?></p>
                     <div class="ab-team-socials">
-                        <a href="#" class="ab-team-social"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" class="ab-team-social"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="ab-team-social"><i class="fa-brands <?php echo esc_attr($m[3]); ?>"></i></a>
+                        <a href="#" class="ab-team-social"><i class="fa-brands <?php echo esc_attr($m[4]); ?>"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="ab-team-card">
-                <div class="ab-team-img"><div class="ab-team-img-placeholder"><i class="fa-solid fa-user"></i></div></div>
-                <div class="ab-team-body">
-                    <div class="ab-team-name">Ayten Huseynova</div>
-                    <div class="ab-team-role">Content Director</div>
-                    <p class="ab-team-bio">6+ years in strategic content creation and SEO writing across Azerbaijani, Russian, and English markets.</p>
-                    <div class="ab-team-socials">
-                        <a href="#" class="ab-team-social"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" class="ab-team-social"><i class="fa-brands fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="ab-team-card">
-                <div class="ab-team-img"><div class="ab-team-img-placeholder"><i class="fa-solid fa-user"></i></div></div>
-                <div class="ab-team-body">
-                    <div class="ab-team-name">Rauf Aliyev</div>
-                    <div class="ab-team-role">Technical SEO Lead</div>
-                    <p class="ab-team-bio">Core Web Vitals, technical audits, crawl optimisation. Deep expertise in Google's technical ranking systems.</p>
-                    <div class="ab-team-socials">
-                        <a href="#" class="ab-team-social"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" class="ab-team-social"><i class="fa-brands fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="ab-team-card">
-                <div class="ab-team-img"><div class="ab-team-img-placeholder"><i class="fa-solid fa-user"></i></div></div>
-                <div class="ab-team-body">
-                    <div class="ab-team-name">Nigar Guliyeva</div>
-                    <div class="ab-team-role">Paid Media Strategist</div>
-                    <p class="ab-team-bio">Google Ads, Meta Ads, TikTok Ads. Maximum ROAS from minimum budget. $2M+ in managed ad spend.</p>
-                    <div class="ab-team-socials">
-                        <a href="#" class="ab-team-social"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" class="ab-team-social"><i class="fa-brands fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <?php endif; ?>
+            <?php endforeach; endif; ?>
         </div>
     </div>
 </section>
@@ -380,51 +357,50 @@ get_header();
 <section class="ab-timeline">
     <div class="container">
         <div class="ab-timeline-header">
-            <span class="eyebrow">Our Journey</span>
-            <h2 class="section-title" style="margin-bottom:14px">Growth <em>milestones</em></h2>
+            <span class="eyebrow"><?php echo esc_html( $o( 'an_tl_eyebrow', 'Our Journey' ) ); ?></span>
+            <h2 class="section-title" style="margin-bottom:14px">
+                <?php echo esc_html( $o( 'an_tl_heading', 'Growth' ) ); ?>
+                <em><?php echo esc_html( $o( 'an_tl_heading_em', 'milestones' ) ); ?></em>
+            </h2>
         </div>
         <div class="ab-timeline-inner">
-
-            <div class="ab-tl-item">
+            <?php
+            $tl_defaults = array(
+                1 => array( '2020', 'Foundation',        'OnDigital launched in Baku with a 2-person team. Within 6 months, our first 3 clients reached page 1 on Google.',                 'fa-flag',   'left'  ),
+                2 => array( '2021', 'Team Expansion',    'Grew to 8 specialists. Launched dedicated Paid Media and Social Media departments. Client base exceeded 30.',                      'fa-users',  'right' ),
+                3 => array( '2022', 'First Regional Win','Expanded into the Georgian market. One of our e-commerce clients achieved a record +380% organic traffic growth.',                 'fa-trophy', 'left'  ),
+                4 => array( '2024', 'AI Integration',    'Integrated AI-powered SEO tools into our core workflow. Now serving 120+ active clients with a 15+ person team.',                 'fa-rocket', 'right' ),
+            );
+            for ( $n = 1; $n <= 4; $n++ ) :
+                $year  = $o( 'an_tl' . $n . '_year',  $tl_defaults[$n][0] );
+                $title = $o( 'an_tl' . $n . '_title', $tl_defaults[$n][1] );
+                $desc  = $o( 'an_tl' . $n . '_desc',  $tl_defaults[$n][2] );
+                $icon  = $o( 'an_tl' . $n . '_icon',  $tl_defaults[$n][3] );
+                $side  = $tl_defaults[$n][4];
+                $right = ( $side === 'right' );
+            ?>
+            <div class="ab-tl-item<?php echo $right ? ' ab-tl-item--right' : ''; ?>">
+                <?php if ( ! $right ) : ?>
                 <div class="ab-tl-content">
-                    <div class="ab-tl-year">2020</div>
-                    <div class="ab-tl-title">Foundation</div>
-                    <p class="ab-tl-desc">OnDigital launched in Baku with a 2-person team. Within 6 months, our first 3 clients reached page 1 on Google.</p>
+                    <div class="ab-tl-year"><?php echo esc_html( $year ); ?></div>
+                    <div class="ab-tl-title"><?php echo esc_html( $title ); ?></div>
+                    <p class="ab-tl-desc"><?php echo esc_html( $desc ); ?></p>
                 </div>
-                <div class="ab-tl-center"><div class="ab-tl-dot"><i class="fa-solid fa-flag"></i></div></div>
-                <div class="ab-tl-empty"></div>
-            </div>
-
-            <div class="ab-tl-item ab-tl-item--right">
-                <div class="ab-tl-empty"></div>
-                <div class="ab-tl-center"><div class="ab-tl-dot"><i class="fa-solid fa-users"></i></div></div>
+                <?php endif; ?>
+                <div class="ab-tl-center">
+                    <div class="ab-tl-dot"><i class="fa-solid <?php echo esc_attr( $icon ); ?>"></i></div>
+                </div>
+                <?php if ( $right ) : ?>
                 <div class="ab-tl-content">
-                    <div class="ab-tl-year">2021</div>
-                    <div class="ab-tl-title">Team Expansion</div>
-                    <p class="ab-tl-desc">Grew to 8 specialists. Launched dedicated Paid Media and Social Media departments. Client base exceeded 30.</p>
+                    <div class="ab-tl-year"><?php echo esc_html( $year ); ?></div>
+                    <div class="ab-tl-title"><?php echo esc_html( $title ); ?></div>
+                    <p class="ab-tl-desc"><?php echo esc_html( $desc ); ?></p>
                 </div>
-            </div>
-
-            <div class="ab-tl-item">
-                <div class="ab-tl-content">
-                    <div class="ab-tl-year">2022</div>
-                    <div class="ab-tl-title">First Regional Win</div>
-                    <p class="ab-tl-desc">Expanded into the Georgian market. One of our e-commerce clients achieved a record +380% organic traffic growth.</p>
-                </div>
-                <div class="ab-tl-center"><div class="ab-tl-dot"><i class="fa-solid fa-trophy"></i></div></div>
+                <?php else : ?>
                 <div class="ab-tl-empty"></div>
+                <?php endif; ?>
             </div>
-
-            <div class="ab-tl-item ab-tl-item--right">
-                <div class="ab-tl-empty"></div>
-                <div class="ab-tl-center"><div class="ab-tl-dot"><i class="fa-solid fa-rocket"></i></div></div>
-                <div class="ab-tl-content">
-                    <div class="ab-tl-year">2024</div>
-                    <div class="ab-tl-title">AI Integration</div>
-                    <p class="ab-tl-desc">Integrated AI-powered SEO tools into our core workflow. Now serving 120+ active clients with a 15+ person team.</p>
-                </div>
-            </div>
-
+            <?php endfor; ?>
         </div>
     </div>
 </section>
@@ -434,18 +410,24 @@ get_header();
     <div class="container">
         <div class="ab-cta-inner">
             <div>
-                <span class="ab-cta-eyebrow">Next Step</span>
-                <h2 class="ab-cta-title">Let's grow your<br>business <em>together</em></h2>
-                <p class="ab-cta-sub">Book a free consultation. We respond within 24 hours.</p>
+                <span class="ab-cta-eyebrow"><?php echo esc_html( $o( 'an_cta_eyebrow', 'Next Step' ) ); ?></span>
+                <h2 class="ab-cta-title">
+                    <?php echo esc_html( $o( 'an_cta_title', "Let's grow your business" ) ); ?>
+                    <em><?php echo esc_html( $o( 'an_cta_title_em', 'together' ) ); ?></em>
+                </h2>
+                <p class="ab-cta-sub"><?php echo esc_html( $o( 'an_cta_sub', 'Book a free consultation. We respond within 24 hours.' ) ); ?></p>
                 <ul class="ab-cta-perks">
-                    <li>Free initial consultation</li>
-                    <li>Response within 24 hours</li>
-                    <li>Bespoke approach for every business</li>
-                    <li>Long-term partnership focus</li>
+                    <?php
+                    $perk_defaults = array( 'Free initial consultation', 'Response within 24 hours', 'Bespoke approach for every business', 'Long-term partnership focus' );
+                    for ( $n = 1; $n <= 4; $n++ ) :
+                        $perk = $o( 'an_cta_perk' . $n, $perk_defaults[ $n - 1 ] );
+                        if ( $perk ) : ?>
+                    <li><?php echo esc_html( $perk ); ?></li>
+                    <?php endif; endfor; ?>
                 </ul>
             </div>
             <div class="ab-cta-form-card">
-                <div class="ab-cta-form-title">Get in Touch</div>
+                <div class="ab-cta-form-title"><?php echo esc_html( $o( 'an_cta_form_title', 'Get in Touch' ) ); ?></div>
                 <?php if ( function_exists( 'odf_render_contact_page_inline' ) ) : ?>
                     <?php odf_render_contact_page_inline(); ?>
                 <?php else : ?>
@@ -455,9 +437,7 @@ get_header();
                 </div>
                 <div class="ab-form-group"><input type="tel" placeholder="Phone number"></div>
                 <div class="ab-form-group"><textarea placeholder="Tell us about your project..."></textarea></div>
-                <button class="ab-form-submit">
-                    <i class="fa-solid fa-paper-plane"></i> Send Message
-                </button>
+                <button class="ab-form-submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
                 <?php endif; ?>
             </div>
         </div>
@@ -468,12 +448,7 @@ get_header();
 
 <script>
 (function () {
-    var stages = [
-        { label: 'Traffic',   value: 50000, display: '50K',   cvr: null   },
-        { label: 'Leads',     value: 8500,  display: '8.5K',  cvr: '17%'  },
-        { label: 'Proposals', value: 1700,  display: '1.7K',  cvr: '20%'  },
-        { label: 'Clients',   value: 425,   display: '425',   cvr: '25%'  },
-    ];
+    var stages = <?php echo wp_json_encode( $funnel_stages ); ?>;
 
     var N = stages.length, total = stages[0].value, STAGGER = 0.1, GAP = 7;
     var TOP_TXT = 38, BOT_TXT = 28, FUNNEL_H = 152, SVG_H = TOP_TXT + FUNNEL_H + BOT_TXT;
@@ -534,10 +509,8 @@ get_header();
             fill: isLast ? 'rgba(194,249,113,0.14)' : '#f2f2f2',
             style:'animation:funnel-fade .25s ease '+delay+'s both;'
         }));
-
         segG.appendChild(e('path', { d:segPath(x0,x1,Math.max(4,hL-10),Math.max(4,hR-10)),
             fill:'url(#fg2)', opacity:'0.35', transform:'translate(0,5)' }));
-
         segG.appendChild(e('path', { d:segPath(x0,x1,hL,hR), fill:'url(#fg)', filter:'url(#fs)',
             style:'transform-origin:'+midX+'px '+midFY+'px;animation:funnel-rise .5s cubic-bezier(.22,1,.36,1) '+delay+'s both;'
         }));
@@ -550,14 +523,12 @@ get_header();
                 style:'animation:funnel-fade .35s ease '+(delay+.2)+'s both;pointer-events:none;'
             }), {textContent:s.cvr}));
         }
-
         segG.appendChild(Object.assign(e('text', {
             x:midX, y:TOP_TXT/2+2, 'text-anchor':'middle', 'dominant-baseline':'middle',
             fill:'#111111', 'font-size':'15', 'font-weight':'800', 'letter-spacing':'-0.03em',
             'font-family':'Plus Jakarta Sans, sans-serif',
             style:'animation:funnel-fade .35s ease '+delay+'s both;'
         }), {textContent:s.display}));
-
         segG.appendChild(Object.assign(e('text', {
             x:midX, y:TOP_TXT+FUNNEL_H+BOT_TXT/2+3,
             'text-anchor':'middle', 'dominant-baseline':'middle',
