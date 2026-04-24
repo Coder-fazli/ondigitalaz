@@ -322,6 +322,42 @@ body { overflow: auto !important; height: auto !important; }
     })();
     </script>
 
+    <!-- ── CTA + Contact Form ── -->
+    <?php
+    $footer_cta_title = get_post_meta( $id, '_service_footer_cta_title', true ) ?: __( 'Layihənizi birlikdə qurmağa hazırıq', 'ondigital' );
+    $footer_cta_sub   = get_post_meta( $id, '_service_footer_cta_sub',   true ) ?: __( 'Bizimlə əlaqə saxlayın, pulsuz məsləhət alın.', 'ondigital' );
+    $perks = $lang === 'en'
+        ? array( 'Free initial consultation', 'Reply within 24 hours', 'Tailored approach for every business' )
+        : array( 'Pulsuz ilkin məsləhət', '24 saat ərzində cavab', 'Hər biznesə fərdi yanaşma' );
+    ?>
+    <section class="ss-cta-form">
+        <div class="container">
+            <div class="ss-cta-form-inner">
+
+                <div class="ss-cta-form-left">
+                    <span class="ss-cta-form-eyebrow"><?php esc_html_e( 'Növbəti addım', 'ondigital' ); ?></span>
+                    <h2 class="ss-cta-form-title"><?php echo esc_html( $footer_cta_title ); ?></h2>
+                    <p class="ss-cta-form-sub"><?php echo esc_html( $footer_cta_sub ); ?></p>
+                    <ul class="ss-cta-form-perks">
+                        <?php foreach ( $perks as $perk ) : ?>
+                        <li>
+                            <span class="ss-cta-perk-icon"><i class="fa-solid fa-check"></i></span>
+                            <?php echo esc_html( $perk ); ?>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+
+                <div class="ss-cta-form-right">
+                    <?php if ( function_exists( 'odf_render_service_page_inline' ) ) {
+                        odf_render_service_page_inline();
+                    } ?>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- ── 5. Process ── -->
     <section class="ss-process" id="ss-process">
         <div class="container">
@@ -484,55 +520,6 @@ body { overflow: auto !important; height: auto !important; }
                     <p class="gl-term-def"><?php echo esc_html( $term['def'] ); ?></p>
                 </div>
                 <?php endforeach; ?>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── 4. Mid CTA ── -->
-    <?php $mid_cta_title = get_post_meta( $id, '_service_mid_cta_title', true ) ?: __( 'Saytınızın potensialını öyrənməyə hazırsınız?', 'ondigital' ); ?>
-    <section class="ss-mid-cta">
-        <div class="container">
-            <div class="ss-mid-cta-inner">
-                <h2 class="ss-mid-cta-title"><?php echo esc_html( $mid_cta_title ); ?></h2>
-                <a href="<?php echo esc_url( home_url( '/elaqe/' ) ); ?>" class="ss-mid-cta-btn">
-                    <?php esc_html_e( 'Pulsuz Konsultasiya Al', 'ondigital' ); ?>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── 5. Footer CTA + Contact Form ── -->
-    <?php
-    $footer_cta_title = get_post_meta( $id, '_service_footer_cta_title', true ) ?: __( 'Layihənizi birlikdə qurmağa hazırıq', 'ondigital' );
-    $footer_cta_sub   = get_post_meta( $id, '_service_footer_cta_sub',   true ) ?: __( 'Bizimlə əlaqə saxlayın, pulsuz məsləhət alın.', 'ondigital' );
-    $perks = $lang === 'en'
-        ? array( 'Free initial consultation', 'Reply within 24 hours', 'Tailored approach for every business' )
-        : array( 'Pulsuz ilkin məsləhət', '24 saat ərzində cavab', 'Hər biznesə fərdi yanaşma' );
-    ?>
-    <section class="ss-cta-form">
-        <div class="container">
-            <div class="ss-cta-form-inner">
-
-                <div class="ss-cta-form-left">
-                    <span class="ss-cta-form-eyebrow"><?php esc_html_e( 'Növbəti addım', 'ondigital' ); ?></span>
-                    <h2 class="ss-cta-form-title"><?php echo esc_html( $footer_cta_title ); ?></h2>
-                    <p class="ss-cta-form-sub"><?php echo esc_html( $footer_cta_sub ); ?></p>
-                    <ul class="ss-cta-form-perks">
-                        <?php foreach ( $perks as $perk ) : ?>
-                        <li>
-                            <span class="ss-cta-perk-icon"><i class="fa-solid fa-check"></i></span>
-                            <?php echo esc_html( $perk ); ?>
-                        </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-
-                <div class="ss-cta-form-right">
-                    <?php if ( function_exists( 'odf_render_service_page_inline' ) ) {
-                        odf_render_service_page_inline();
-                    } ?>
-                </div>
-
             </div>
         </div>
     </section>
