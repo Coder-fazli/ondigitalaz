@@ -14,6 +14,10 @@ add_action( 'wp_enqueue_scripts', function() {
         array( 'ondigital-default' ),
         @filemtime( get_template_directory() . '/assets/css/pages/about-new.css' ) ?: ONDIGITAL_VERSION
     );
+    // Od Forms contact page CSS — needed for the inline CTA form
+    if ( defined( 'ODF_URI' ) ) {
+        wp_enqueue_style( 'odf-contact-page', ODF_URI . 'assets/css/forms-contact-page.css', array(), defined( 'ODF_VERSION' ) ? ODF_VERSION : '1.0' );
+    }
 }, 99 );
 
 get_header();
