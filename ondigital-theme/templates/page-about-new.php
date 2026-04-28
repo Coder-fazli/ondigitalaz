@@ -14,9 +14,9 @@ add_action( 'wp_enqueue_scripts', function() {
         array( 'ondigital-default' ),
         @filemtime( get_template_directory() . '/assets/css/pages/about-new.css' ) ?: ONDIGITAL_VERSION
     );
-    // Od Forms contact page CSS — needed for the inline CTA form
+    // Od Forms about page CSS — needed for the inline CTA form
     if ( defined( 'ODF_URI' ) ) {
-        wp_enqueue_style( 'odf-contact-page', ODF_URI . 'assets/css/forms-contact-page.css', array(), defined( 'ODF_VERSION' ) ? ODF_VERSION : '1.0' );
+        wp_enqueue_style( 'odf-about-page', ODF_URI . 'assets/css/forms-about-page.css', array(), defined( 'ODF_VERSION' ) ? ODF_VERSION : '1.0' );
     }
 }, 99 );
 
@@ -440,8 +440,8 @@ $ticker_services = get_posts( array(
             </div>
             <div class="ab-cta-form-card">
                 <div class="ab-cta-form-title"><?php echo esc_html( $o( 'an_cta_form_title', 'Get in Touch' ) ); ?></div>
-                <?php if ( function_exists( 'odf_render_contact_page_inline' ) ) : ?>
-                    <?php odf_render_contact_page_inline(); ?>
+                <?php if ( function_exists( 'odf_render_about_page_inline' ) ) : ?>
+                    <?php odf_render_about_page_inline(); ?>
                 <?php else : ?>
                 <div class="ab-form-row">
                     <div class="ab-form-group"><input type="text" placeholder="Your full name"></div>

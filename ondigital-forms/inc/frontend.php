@@ -12,9 +12,14 @@ function odf_enqueue_frontend(): void {
     // Contact Popup — loaded on every page (modal renders in footer globally)
     wp_enqueue_style( 'odf-contact-popup', ODF_URI . 'assets/css/forms-contact-popup.css', array(), ODF_VERSION );
 
-    // Contact Page form CSS — contact page template and about-new template (both use inline form)
-    if ( is_page_template( 'templates/page-contact.php' ) || is_page_template( 'templates/page-about-new.php' ) ) {
+    // Contact Page form CSS
+    if ( is_page_template( 'templates/page-contact.php' ) ) {
         wp_enqueue_style( 'odf-contact-page', ODF_URI . 'assets/css/forms-contact-page.css', array(), ODF_VERSION );
+    }
+
+    // About Page form CSS
+    if ( is_page_template( 'templates/page-about-new.php' ) ) {
+        wp_enqueue_style( 'odf-about-page', ODF_URI . 'assets/css/forms-about-page.css', array(), ODF_VERSION );
     }
 
     // Service Page — only on service single pages
@@ -140,6 +145,61 @@ function odf_render_service_page_inline(): void {
         </form>
         <div class="odf-sp-success" style="display:none;">
             <div class="odf-sp-success-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <p><?php echo esc_html( $success_msg ); ?></p>
+        </div>
+    </div>
+    <?php
+}
+
+function odf_render_about_page_inline(): void {
+    $opts = get_option( 'odf_about_page_options', odf_default_about_page_options() );
+    $lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
+    $lang = in_array( $lang, array( 'az', 'en' ), true ) ? $lang : 'az';
+
+    $o = function( string $key ) use ( $opts, $lang ): string {
+        return $opts[ $key . '_' . $lang ] ?? $opts[ $key . '_az' ] ?? '';
+    };
+
+    $title       = $o( 'form_title' );
+    $btn_text    = $o( 'btn_text' );
+    $success_msg = $o( 'success' );
+
+    $ph = array(
+        'name'    => $o( 'ph_name' ),
+        'email'   => $o( 'ph_email' ),
+        'phone'   => $o( 'ph_phone' ),
+        'message' => $o( 'ph_message' ),
+    );
+    ?>
+    <div class="odf-ap-wrap">
+        <h3 class="odf-ap-title"><?php echo esc_html( $title ); ?></h3>
+        <form id="odf-ap-form" class="odf-ap-form" novalidate>
+            <?php wp_nonce_field( 'odf_submit', 'odf_nonce' ); ?>
+            <input type="text" name="odf_hp" class="odf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="odf-ap-row">
+                <div class="odf-ap-group">
+                    <input type="text" name="odf_name" placeholder="<?php echo esc_attr( $ph['name'] ); ?>">
+                </div>
+                <div class="odf-ap-group">
+                    <input type="email" name="odf_email" placeholder="<?php echo esc_attr( $ph['email'] ); ?>">
+                </div>
+            </div>
+            <div class="odf-ap-group">
+                <input type="tel" name="odf_phone" placeholder="<?php echo esc_attr( $ph['phone'] ); ?>">
+            </div>
+            <div class="odf-ap-group">
+                <textarea name="odf_message" placeholder="<?php echo esc_attr( $ph['message'] ); ?>"></textarea>
+            </div>
+            <div class="odf-ap-footer">
+                <button type="submit" class="odf-ap-submit">
+                    <?php echo esc_html( $btn_text ); ?>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+            </div>
+            <div class="odf-ap-error" style="display:none;"></div>
+        </form>
+        <div class="odf-ap-success" style="display:none;">
+            <div class="odf-ap-success-icon"><i class="fa-solid fa-circle-check"></i></div>
             <p><?php echo esc_html( $success_msg ); ?></p>
         </div>
     </div>
