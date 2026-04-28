@@ -30,29 +30,18 @@
         if (typeof gsap === 'undefined') return;
 
         try {
-            // Text Move Animation
+            // Text Move Animation — simplified to subtle fade-up (no 3D flip)
             var text_animation = gsap.utils.toArray(".has_text_move_anim");
-            if (text_animation.length && typeof SplitText !== 'undefined') {
-                text_animation.forEach(function (splitTextLine) {
-                    var delay_value = splitTextLine.getAttribute("data-delay") || 0.1;
-                    var tl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: splitTextLine,
-                            start: 'top 85%',
-                            toggleActions: 'play none none none'
-                        }
-                    });
-                    var itemSplitted = new SplitText(splitTextLine, { type: "lines" });
-                    gsap.set(splitTextLine, { perspective: 400 });
-                    itemSplitted.split({ type: "lines" });
-                    tl.from(itemSplitted.lines, {
-                        duration: 1,
-                        delay: delay_value,
+            if (text_animation.length) {
+                text_animation.forEach(function (el) {
+                    var delay_value = parseFloat(el.getAttribute("data-delay") || 0.1);
+                    gsap.from(el, {
                         opacity: 0,
-                        rotationX: -80,
-                        force3D: true,
-                        transformOrigin: "top center -50",
-                        stagger: 0.1
+                        y: 24,
+                        duration: 0.65,
+                        delay: delay_value,
+                        ease: "power2.out",
+                        scrollTrigger: { trigger: el, start: 'top 88%' }
                     });
                 });
             }
@@ -116,9 +105,9 @@
                 gsap.utils.toArray(".has_fade_anim").forEach(function (item) {
                     var fade_direction = item.getAttribute("data-fade-from") || "bottom";
                     var onscroll_value = item.getAttribute("data-on-scroll") !== null ? item.getAttribute("data-on-scroll") : 1;
-                    var duration_value = item.getAttribute("data-duration") || 1.15;
-                    var fade_offset = item.getAttribute("data-fade-offset") || 50;
-                    var delay_value = item.getAttribute("data-delay") || 0.15;
+                    var duration_value = item.getAttribute("data-duration") || 0.6;
+                    var fade_offset = item.getAttribute("data-fade-offset") || 20;
+                    var delay_value = item.getAttribute("data-delay") || 0.1;
                     var ease_value = item.getAttribute("data-ease") || "power2.out";
 
                     var animation_settings = {
