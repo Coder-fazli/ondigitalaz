@@ -99,7 +99,7 @@ $services_query = new WP_Query( array(
                                     <a href="<?php the_permalink(); ?>">
                                         <h3 class="od-srv-title"><?php the_title(); ?></h3>
                                         <p class="od-srv-text"><?php echo esc_html( get_the_excerpt() ); ?></p>
-                                        <span class="od-srv-link"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
+                                        <span class="od-srv-link">More <i class="fa-solid fa-arrow-right-long"></i></span>
                                     </a>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@ $services_query = new WP_Query( array(
                                     <a href="<?php echo esc_url( $service['url'] ); ?>">
                                         <h3 class="od-srv-title"><?php echo esc_html( $service['title'] ); ?></h3>
                                         <p class="od-srv-text"><?php echo esc_html( $service['text'] ); ?></p>
-                                        <span class="od-srv-link"><?php esc_html_e( 'Ətraflı', 'ondigital' ); ?> <i class="fa-solid fa-arrow-right-long"></i></span>
+                                        <span class="od-srv-link">More <i class="fa-solid fa-arrow-right-long"></i></span>
                                     </a>
                                 </div>
                             </div>
