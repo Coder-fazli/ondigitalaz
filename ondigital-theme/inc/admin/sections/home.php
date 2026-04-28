@@ -38,6 +38,29 @@ $langs = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
         <?php od_lang_close(); ?>
         <?php od_divider(); ?>
         <?php od_image( 'hero_image', __( 'Hero Image', 'ondigital' ), $options ); ?>
+        <?php od_divider(); ?>
+        <p style="font-weight:600;margin:0 0 12px;font-size:13px;"><?php esc_html_e( 'Hero Stats Bar', 'ondigital' ); ?></p>
+        <?php
+        $stat_defaults = array(
+            1 => array( '150', '+', 'Müştəri',           'Client' ),
+            2 => array( '8',   'x', 'Ortalama ROI',       'Average ROI' ),
+            3 => array( '5',   '+', 'İl Təcrübə',         'Years Experience' ),
+            4 => array( '98',  '%', 'Müştəri Məmnuniyyəti', 'Client Satisfaction' ),
+        );
+        foreach ( $stat_defaults as $n => $d ) :
+        ?>
+        <div style="background:#f9f9f9;border:1px solid #e5e5e5;border-radius:6px;padding:14px 16px;margin-bottom:12px;">
+            <p style="font-weight:600;font-size:12px;color:#666;margin:0 0 10px;text-transform:uppercase;letter-spacing:.05em;"><?php printf( esc_html__( 'Stat %d', 'ondigital' ), $n ); ?></p>
+            <?php od_row_open(); ?>
+                <?php od_text( 'hero_stat' . $n . '_num', __( 'Number', 'ondigital' ), $options, $d[0] ); ?>
+                <?php od_text( 'hero_stat' . $n . '_suffix', __( 'Suffix', 'ondigital' ), $options, $d[1] ); ?>
+            <?php od_row_close(); ?>
+            <?php od_row_open(); ?>
+                <?php od_text( 'hero_stat' . $n . '_label_az', '🇦🇿 ' . __( 'Label', 'ondigital' ), $options, $d[2] ); ?>
+                <?php od_text( 'hero_stat' . $n . '_label_en', '🇬🇧 ' . __( 'Label', 'ondigital' ), $options, $d[3] ); ?>
+            <?php od_row_close(); ?>
+        </div>
+        <?php endforeach; ?>
     <?php od_card_close(); ?>
 
     <!-- ── 2. PARTNERS ── -->
