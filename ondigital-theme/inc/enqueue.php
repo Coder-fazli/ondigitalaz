@@ -139,6 +139,7 @@ function ondigital_enqueue_page_assets() {
                 .faq-area .accordion .accordion-body { font-size: 14px !important; padding-bottom: 16px !important; }
                 .faq-area-inner { padding-top: 100px !important; }
                 @media only screen and (max-width: 1919px) { .faq-area-inner { padding-top: 80px !important; } }
+                @media only screen and (max-width: 1919px) { .faq-area .accordion-wrapper { margin-top: 23px !important; } }
                 @media only screen and (max-width: 1199px) { .faq-area .accordion-wrapper { margin-top: 15px !important; } }
             ' );
 
