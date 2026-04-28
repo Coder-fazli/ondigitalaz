@@ -132,6 +132,14 @@ function ondigital_enqueue_page_assets() {
             wp_enqueue_style(  'ondigital-seo-chart', ONDIGITAL_URI . '/assets/css/components/seo-chart.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
             wp_enqueue_script( 'ondigital-seo-chart', ONDIGITAL_URI . '/assets/js/components/seo-chart.js',   array(), ONDIGITAL_VERSION, true );
             wp_enqueue_style( 'ondigital-faq', ONDIGITAL_URI . '/assets/css/pages/faq.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
+            wp_add_inline_style( 'ondigital-faq', '
+                .faq-area .section-title.large { font-size: 36px !important; font-weight: 600 !important; line-height: 1.3 !important; margin-top: 0 !important; letter-spacing: -.02em; }
+                @media only screen and (max-width: 991px) { .faq-area .section-title.large { font-size: 28px !important; } }
+                .faq-area .accordion .accordion-button { font-size: 15px !important; font-weight: 500 !important; padding-top: 16px !important; padding-bottom: 16px !important; }
+                .faq-area .accordion .accordion-body { font-size: 14px !important; padding-bottom: 16px !important; }
+                .faq-area-inner { padding-top: 100px !important; }
+                @media only screen and (max-width: 1919px) { .faq-area-inner { padding-top: 80px !important; } }
+            ' );
 
             // Admin-controlled service card colors — must come after handle is enqueued
             $opts   = get_option( 'ondigital_options', array() );
