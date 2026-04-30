@@ -541,6 +541,7 @@
 .cl-footer-sep { color: var(--line-strong); }
 
 /* ─── RESPONSIVE ─── */
+/* ≤ 1100px — hero stacks, chapters go 2-col */
 @media (max-width: 1100px) {
     .cl-hero { grid-template-columns: 1fr; padding: 136px 40px 72px; gap: 52px; }
     .cl-form-sticky { position: static; }
@@ -553,8 +554,9 @@
     .cl-bottom { padding: 72px 40px; }
     .cl-inside { padding: 72px 40px 88px; }
     .cl-divider, .cl-footer { padding-left: 40px; padding-right: 40px; }
-    .cl-nav { padding: 0 40px; }
 }
+
+/* ≤ 768px — fully mobile: chapters 1-col, testi stacks, bottom CTA stacks */
 @media (max-width: 768px) {
     .cl-hero { padding: 120px 24px 64px; gap: 44px; }
     .cl-stats { max-width: 100%; }
@@ -572,14 +574,19 @@
     .cl-bottom { grid-template-columns: 1fr; gap: 28px; padding: 64px 24px; }
     .cl-inside { padding: 60px 24px 80px; }
     .cl-divider { padding: 0 24px; }
-    .cl-nav { padding: 0 24px; }
-    .cl-nav-link { display: none; }
     .cl-footer { padding: 20px 24px; flex-direction: column; gap: 10px; }
-    .cl-topbar { padding: 0 40px 0 16px; font-size: 11px; }
 }
+
+/* ≤ 480px — stat numbers shrink, tighten form padding */
+@media (max-width: 480px) {
+    .cl-stats { flex-direction: column; border-radius: 10px; }
+    .cl-stat { border-right: none; border-bottom: 1px solid var(--line); padding: 14px 18px; }
+    .cl-stat:last-child { border-bottom: none; }
+    .cl-stat-num { font-size: 24px; }
+}
+
+/* ≤ 420px — smallest phones */
 @media (max-width: 420px) {
     .cl-hero { padding: 110px 16px 56px; }
-    .cl-stat-num { font-size: 22px; }
     .cl-form-header, .cl-form-body { padding: 20px 18px; }
-    .cl-nav { padding: 0 16px; }
 }
