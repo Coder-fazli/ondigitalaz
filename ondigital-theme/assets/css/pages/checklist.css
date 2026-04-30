@@ -1,7 +1,7 @@
 /* =============================================================================
    Checklist Landing  (page-checklist.php)
-   Self-contained — no Bootstrap / global.css loaded on this template.
-   All tokens scoped to .cl-page (added to <body>).
+   Uses global header/footer. CSS tokens scoped to .cl-page (body class).
+   All component classes prefixed cl- to avoid conflicts with Bootstrap/global.
    ============================================================================= */
 
 /* ─── TOKENS ─── */
@@ -26,24 +26,34 @@
     --sh-form: 0 8px 32px rgba(0,0,0,.09), 0 2px 8px rgba(0,0,0,.05);
     --ease-out:  cubic-bezier(.22,1,.36,1);
     --ease-snap: cubic-bezier(.34,1.56,.64,1);
+}
+
+/* Apply checklist font/color only to our sections, not global header/footer */
+.cl-hero, .cl-inside, .cl-testi-wrap, .cl-bottom-wrap, .cl-divider {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 16px;
     line-height: 1.65;
     color: var(--ink);
-    background: var(--bg);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
 }
 
-/* ─── RESET (scoped) ─── */
-.cl-page *, .cl-page *::before, .cl-page *::after { box-sizing: border-box; margin: 0; padding: 0; }
-.cl-page img, .cl-page svg { display: block; max-width: 100%; }
-.cl-page a { text-decoration: none; }
+/* ─── RESET (template sections only — never touch global header/footer) ─── */
+.cl-hero *, .cl-hero *::before, .cl-hero *::after,
+.cl-inside *, .cl-inside *::before, .cl-inside *::after,
+.cl-testi-wrap *, .cl-testi-wrap *::before, .cl-testi-wrap *::after,
+.cl-bottom-wrap *, .cl-bottom-wrap *::before, .cl-bottom-wrap *::after,
+.cl-divider *, .cl-divider *::before, .cl-divider *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 /* ─── REDUCED MOTION ─── */
 @media (prefers-reduced-motion: reduce) {
-    .cl-page *, .cl-page *::before, .cl-page *::after {
+    .cl-hero *, .cl-hero *::before, .cl-hero *::after,
+    .cl-inside *, .cl-inside *::before, .cl-inside *::after,
+    .cl-testi-wrap *, .cl-testi-wrap *::before, .cl-testi-wrap *::after,
+    .cl-bottom-wrap *, .cl-bottom-wrap *::before, .cl-bottom-wrap *::after {
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
