@@ -13,7 +13,9 @@ $hero_body     = ondigital_get_option( 'hero_body', 'Bizneslərin böyüməsi ü
 $hero_cta_text = ondigital_get_option( 'hero_cta_text', 'Teklif Al !' );
 $hero_cta_url  = ondigital_get_option( 'hero_cta_url' );
 $hero_cta_url  = $hero_cta_url ? $hero_cta_url : home_url( '/elaqe/' );
-$hero_services_url = home_url( '/xidmetler/' );
+$hero_btn2_text = ondigital_get_option( 'hero_btn2_text', 'Xidmətlər' );
+$hero_btn2_url  = ondigital_get_option( 'hero_btn2_url' );
+$hero_btn2_url  = $hero_btn2_url ? $hero_btn2_url : home_url( '/xidmetler/' );
 
 $stat1_num    = ondigital_get_option( 'hero_stat1_num', '150' );
 $stat1_suffix = ondigital_get_option( 'hero_stat1_suffix', '+' );
@@ -52,8 +54,8 @@ $stat4_label  = ondigital_get_option( 'hero_stat4_label', 'Müştəri Məmnuniyy
             <a href="<?php echo esc_url( $hero_cta_url ); ?>" class="ond-hero__btn-primary">
                 <?php echo esc_html( $hero_cta_text ); ?> &nbsp;→
             </a>
-            <a href="<?php echo esc_url( $hero_services_url ); ?>" class="ond-hero__btn-secondary">
-                <?php esc_html_e( 'Xidmətlər', 'ondigital' ); ?>
+            <a href="<?php echo esc_url( $hero_btn2_url ); ?>" class="ond-hero__btn-secondary">
+                <?php echo esc_html( $hero_btn2_text ); ?>
             </a>
             <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/google-partner.webp' ); ?>"
                  alt="<?php esc_attr_e( 'Google Partner', 'ondigital' ); ?>"

@@ -29,8 +29,8 @@ $langs = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
                     <?php od_url( 'hero_cta_url_' . $lang, __( 'CTA Button URL', 'ondigital' ), $options ); ?>
                 <?php od_row_close(); ?>
                 <?php od_row_open(); ?>
-                    <?php od_text( 'hero_rating_' . $lang, __( 'Rating Number', 'ondigital' ), $options ); ?>
-                    <?php od_text( 'hero_review_count_' . $lang, __( 'Review Count', 'ondigital' ), $options ); ?>
+                    <?php od_text( 'hero_btn2_text_' . $lang, __( 'Secondary Button Text', 'ondigital' ), $options ); ?>
+                    <?php od_url( 'hero_btn2_url_' . $lang, __( 'Secondary Button URL', 'ondigital' ), $options ); ?>
                 <?php od_row_close(); ?>
             <?php od_lang_pane_close(); ?>
         <?php endforeach; ?>
