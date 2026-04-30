@@ -27,10 +27,7 @@ function ondigital_enqueue_assets() {
     wp_enqueue_style( 'meanmenu',        ONDIGITAL_URI . '/assets/css/vendor/meanmenu.min.css',        array(),            '2.0.8' );
     wp_enqueue_style( 'magnific-popup',  ONDIGITAL_URI . '/assets/css/vendor/magnific-popup.css',      array(),            '1.1.0' );
 
-    // --- Shared footer styles ---
-    wp_enqueue_style( 'ondigital-footer', ONDIGITAL_URI . '/assets/css/footer.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-
-    // --- Nav overrides (global, loaded last so it overrides compiled page CSS) ---
+    // --- Nav overrides (global) ---
     wp_enqueue_style( 'ondigital-nav', ONDIGITAL_URI . '/assets/css/components/nav.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
 
     // --- Page-specific CSS / JS ---
@@ -60,6 +57,20 @@ function ondigital_enqueue_assets() {
         'site_url' => home_url( '/' ),
     ) );
 }
+
+// =============================================================================
+// Footer CSS — priority 20 so it ALWAYS loads after global.css and all
+// compiled page CSS files, which may contain old theme footer overrides.
+// =============================================================================
+
+add_action( 'wp_enqueue_scripts', function () {
+    wp_enqueue_style(
+        'ondigital-footer',
+        ONDIGITAL_URI . '/assets/css/footer.css',
+        array( 'bootstrap' ),
+        ONDIGITAL_VERSION
+    );
+}, 20 );
 
 // =============================================================================
 // Per-page assets
