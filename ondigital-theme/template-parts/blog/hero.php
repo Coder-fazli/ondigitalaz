@@ -21,7 +21,7 @@
                     <?php
                     $total_posts = wp_count_posts();
                     $published   = $total_posts->publish;
-                    $author_count = count( get_users( array( 'who' => 'authors' ) ) );
+                    $author_count = count( get_users( array( 'role__in' => array( 'author', 'editor', 'administrator' ) ) ) );
                     ?>
                     <div class="counter-box has_fade_anim">
                         <div class="counter-item">
