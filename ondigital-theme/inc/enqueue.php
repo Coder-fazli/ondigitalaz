@@ -114,6 +114,11 @@ function ondigital_enqueue_page_assets() {
             wp_enqueue_script( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/js/pages/' . $slug . '.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
         }
 
+        // Blog page: load component CSS (featured posts + blog grid)
+        if ( 'blog' === $slug ) {
+            wp_enqueue_style( 'ondigital-blog-page', ONDIGITAL_URI . '/assets/css/components/blog-page.css', array( 'ondigital-blog' ), ONDIGITAL_VERSION );
+        }
+
         // About page: load FAQ styles + override compiled dark styles
         if ( 'about' === $slug ) {
             wp_enqueue_style( 'ondigital-faq-about', ONDIGITAL_URI . '/assets/css/pages/faq.css', array( 'ondigital-about' ), ONDIGITAL_VERSION );

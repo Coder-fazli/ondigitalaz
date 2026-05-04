@@ -55,8 +55,8 @@ $static_featured = array(
         <div class="featured-post-box">
             <div class="featured-posts">
                 <?php if ( $featured_query->have_posts() ) : ?>
-                    <?php $delay = 0; while ( $featured_query->have_posts() ) : $featured_query->the_post(); ?>
-                        <article class="blog-box has_fade_anim" <?php echo $delay ? 'data-delay="' . esc_attr( $delay ) . '"' : ''; ?>>
+                    <?php $i = 0; while ( $featured_query->have_posts() ) : $featured_query->the_post(); $delay = $i * 0.30; ?>
+                        <article class="blog-box has_fade_anim" <?php echo $i > 0 ? 'data-delay="' . esc_attr( $delay ) . '"' : ''; ?>>
                             <a href="<?php the_permalink(); ?>">
                                 <div class="thumb">
                                     <?php if ( has_post_thumbnail() ) : ?>
@@ -81,7 +81,7 @@ $static_featured = array(
                                 </div>
                             </a>
                         </article>
-                    <?php $delay += 0.30; endwhile; ?>
+                    <?php $i++; endwhile; ?>
                     <?php wp_reset_postdata(); ?>
                 <?php else : ?>
                     <?php foreach ( $static_featured as $i => $post_item ) : ?>
