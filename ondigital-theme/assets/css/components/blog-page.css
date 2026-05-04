@@ -20,6 +20,28 @@
     }
 }
 
+.featured-area .container {
+    max-width: 1400px;
+    padding-left: 60px;
+    padding-right: 60px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media only screen and (max-width: 991px) {
+    .featured-area .container {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .featured-area .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
 .featured-area-inner {
     display: flex;
     flex-direction: column;
