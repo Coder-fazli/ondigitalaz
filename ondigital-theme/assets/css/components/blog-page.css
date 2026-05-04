@@ -3,7 +3,7 @@
    Matches Arolax blog.html design
    ============================================================================= */
 
-/* FEATURED AREA (Hero) */
+/* FEATURED AREA (Hero) - 2 Column Layout */
 .featured-area {
     padding: 80px 0;
 }
@@ -11,6 +11,43 @@
 @media only screen and (max-width: 767px) {
     .featured-area {
         padding: 60px 0;
+    }
+}
+
+.featured-area-inner {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 80px;
+    align-items: flex-start;
+}
+
+@media only screen and (max-width: 991px) {
+    .featured-area-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+.featured-image {
+    order: -1;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 991px) {
+    .featured-image {
+        order: 0;
+    }
+
+    .featured-content {
+        order: 0;
     }
 }
 
@@ -33,28 +70,15 @@
     }
 }
 
-.featured-area .text-box {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: flex-start;
-}
-
-@media only screen and (max-width: 991px) {
-    .featured-area .text-box {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-}
-
 .featured-area .text-wrapper {
-    max-width: 400px;
+    margin-bottom: 40px;
 }
 
 .featured-area .text {
     font-size: 18px;
     line-height: 1.7;
     color: rgba(18, 18, 18, 0.7);
+    max-width: 400px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -67,13 +91,11 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
-    margin-top: 40px;
 }
 
 @media only screen and (max-width: 767px) {
     .featured-area .counter-box {
         gap: 30px;
-        margin-top: 30px;
     }
 }
 

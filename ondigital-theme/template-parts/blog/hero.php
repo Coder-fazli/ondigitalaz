@@ -1,6 +1,6 @@
 <?php
 /**
- * Blog - Hero / Featured Section
+ * Blog - Hero / Featured Section (2-column layout matching Arolax)
  *
  * @package OnDigital
  */
@@ -8,7 +8,7 @@
 <section class="featured-area">
     <div class="container">
         <div class="featured-area-inner">
-            <div class="section-content">
+            <div class="featured-content">
                 <div class="section-title-wrapper">
                     <div class="title-wrapper">
                         <h1 class="section-title large has_fade_anim"><?php esc_html_e( 'Həmişə düşünürük', 'ondigital' ); ?></h1>
@@ -23,6 +23,7 @@
                     <?php
                     $total_posts = wp_count_posts();
                     $published   = $total_posts->publish;
+                    $author_count = count( get_users( array( 'who' => 'authors' ) ) );
                     ?>
                     <div class="counter-box has_fade_anim">
                         <div class="counter-item">
@@ -30,14 +31,14 @@
                             <p class="text"><?php esc_html_e( 'Ümumi məqalə', 'ondigital' ); ?></p>
                         </div>
                         <div class="counter-item">
-                            <span class="number wc-counter"><?php
-                                $author_count = count( get_users( array( 'who' => 'authors' ) ) );
-                                echo esc_html( $author_count );
-                            ?> +</span>
+                            <span class="number wc-counter"><?php echo esc_html( $author_count ); ?> +</span>
                             <p class="text"><?php esc_html_e( 'Blog yazarı', 'ondigital' ); ?></p>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="featured-image">
+                <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/blog/img-s-17.webp' ); ?>" alt="<?php esc_attr_e( 'Blog Hero', 'ondigital' ); ?>" class="has_fade_anim" data-fade-from="right">
             </div>
         </div>
     </div>
