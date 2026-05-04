@@ -1,6 +1,6 @@
 <?php
 /**
- * Blog - Hero / Featured Section (matching Arolax blog.html exactly)
+ * Blog - Hero / Featured Section (EXACT Arolax blog.html structure)
  *
  * @package OnDigital
  */
@@ -16,9 +16,7 @@
                 </div>
                 <div class="text-box">
                     <div class="text-wrapper">
-                        <p class="text has_fade_anim">
-                            <?php esc_html_e( 'Rəqəmsal marketinq, dizayn və texnologiya haqqında ən son məqalələr', 'ondigital' ); ?>
-                        </p>
+                        <p class="text has_fade_anim"><?php esc_html_e( 'Rəqəmsal marketinq, dizayn və texnologiya haqqında ən son məqalələr', 'ondigital' ); ?></p>
                     </div>
                     <?php
                     $total_posts = wp_count_posts();
