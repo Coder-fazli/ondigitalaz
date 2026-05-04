@@ -441,8 +441,8 @@
     border-color: var(--primary);
 }
 
-.pagination li.active a,
-.pagination li a.current {
+.pagination li a.active,
+.pagination li.active a {
     background: var(--primary);
     color: #ffffff;
     border-color: var(--primary);

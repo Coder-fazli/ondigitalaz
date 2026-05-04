@@ -116,7 +116,7 @@ function ondigital_enqueue_page_assets() {
 
         // Blog page: load component CSS (featured posts + blog grid)
         if ( 'blog' === $slug ) {
-            wp_enqueue_style( 'ondigital-blog-page', ONDIGITAL_URI . '/assets/css/components/blog-page.css', array( 'ondigital-blog' ), ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-blog-page', ONDIGITAL_URI . '/assets/css/components/blog-page.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
         }
 
         // About page: load FAQ styles + override compiled dark styles

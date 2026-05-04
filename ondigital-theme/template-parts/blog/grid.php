@@ -96,13 +96,18 @@ $static_blogs = array(
                 </div>
                 <?php if ( $blog_query->max_num_pages > 1 ) : ?>
                     <div class="pagination-box has_fade_anim">
-                        <?php
-                        echo paginate_links( array(
-                            'total'   => $blog_query->max_num_pages,
-                            'current' => $paged,
-                            'type'    => 'list',
-                        ) );
-                        ?>
+                        <ul class="pagination">
+                            <?php
+                            for ( $i = 1; $i <= $blog_query->max_num_pages; $i++ ) {
+                                $class = ( $i === $paged ) ? 'active' : '';
+                                $url = add_query_arg( 'paged', $i );
+                                if ( $i === 1 ) {
+                                    $url = remove_query_arg( 'paged' );
+                                }
+                                echo '<li><a href="' . esc_url( $url ) . '" class="' . esc_attr( $class ) . '">' . str_pad( $i, 2, '0', STR_PAD_LEFT ) . '</a></li>';
+                            }
+                            ?>
+                        </ul>
                     </div>
                 <?php endif; ?>
             </div>
