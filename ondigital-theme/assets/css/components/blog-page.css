@@ -3,7 +3,7 @@
    Matches Arolax blog.html design
    ============================================================================= */
 
-/* FEATURED AREA (Hero) - 2 Column Layout */
+/* FEATURED AREA (Hero) - Left image + Right content */
 .featured-area {
     padding: 80px 0;
 }
@@ -16,9 +16,16 @@
 
 .featured-area-inner {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 80px;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
     align-items: flex-start;
+}
+
+@media only screen and (max-width: 1199px) {
+    .featured-area-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
 }
 
 @media only screen and (max-width: 991px) {
@@ -28,27 +35,36 @@
     }
 }
 
-.featured-image {
-    order: -1;
+.featured-hero-image {
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
-.featured-image img {
+.featured-hero-image img {
     width: 100%;
     height: auto;
     display: block;
     object-fit: cover;
 }
 
-@media only screen and (max-width: 991px) {
-    .featured-image {
-        order: 0;
-    }
+.featured-content-side {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
 
-    .featured-content {
-        order: 0;
-    }
+.featured-small-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.featured-small-images img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 4px;
 }
 
 .featured-area .section-title {
