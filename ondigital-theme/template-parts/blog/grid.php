@@ -45,18 +45,6 @@ $static_blogs = array(
 <section class="blog-area">
     <div class="container">
         <div class="blog-area-inner section-spacing">
-            <div class="section-content">
-                <div class="section-title-wrapper">
-                    <div class="title-wrapper">
-                        <h2 class="section-title has_fade_anim"><?php esc_html_e( 'Son yazılar', 'ondigital' ); ?></h2>
-                    </div>
-                </div>
-                <div class="text-wrapper">
-                    <p class="text has_fade_anim">
-                        <?php esc_html_e( 'Rəqəmsal marketinq və texnologiya sahəsindəki yeniliklərdən xəbərdar olun', 'ondigital' ); ?>
-                    </p>
-                </div>
-            </div>
             <div class="blogs-wrapper-box">
                 <div class="blogs-wrapper has_fade_anim">
                     <?php if ( $blog_query->have_posts() ) : ?>
