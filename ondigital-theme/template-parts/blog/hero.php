@@ -1,6 +1,6 @@
 <?php
 /**
- * Blog - Hero / Featured Section (2-column layout matching Arolax)
+ * Blog - Hero / Featured Section (matching Arolax blog.html exactly)
  *
  * @package OnDigital
  */
@@ -8,7 +8,7 @@
 <section class="featured-area">
     <div class="container">
         <div class="featured-area-inner">
-            <div class="featured-content">
+            <div class="section-content">
                 <div class="section-title-wrapper">
                     <div class="title-wrapper">
                         <h1 class="section-title large has_fade_anim"><?php esc_html_e( 'Həmişə düşünürük', 'ondigital' ); ?></h1>
@@ -36,9 +36,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="featured-image">
-                <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/blog/img-s-17.webp' ); ?>" alt="<?php esc_attr_e( 'Blog Hero', 'ondigital' ); ?>" class="has_fade_anim" data-fade-from="right">
             </div>
         </div>
     </div>
