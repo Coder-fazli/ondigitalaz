@@ -35,7 +35,7 @@
 /* TOP ROW: Title (left) + Info (right) */
 .featured-top-row {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1.7fr 1fr;
     gap: 80px;
     align-items: flex-start;
     margin-bottom: 20px;
@@ -114,6 +114,7 @@
     display: grid;
     grid-template-columns: 1.7fr 1fr;
     gap: 25px;
+    align-items: stretch;
 }
 
 @media only screen and (max-width: 991px) {
@@ -127,8 +128,9 @@
     display: block;
     overflow: hidden;
     border-radius: 4px;
-    aspect-ratio: 1.55;
+    aspect-ratio: 1.4;
     position: relative;
+    height: 100%;
 }
 
 .featured-hero-image img {
@@ -162,8 +164,8 @@
     display: block;
     overflow: hidden;
     border-radius: 4px;
-    aspect-ratio: 1.7;
     position: relative;
+    height: 100%;
 }
 
 .hero-small-card img {
@@ -172,6 +174,7 @@
     display: block;
     object-fit: cover;
     transition: transform 0.5s ease;
+    min-height: 100%;
 }
 
 .hero-small-card:hover img {
