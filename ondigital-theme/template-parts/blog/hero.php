@@ -29,6 +29,13 @@
                             <span class="number wc-counter"><?php echo esc_html( $published ); ?> +</span>
                             <p class="text"><?php esc_html_e( 'Ümumi məqalə', 'ondigital' ); ?></p>
                         </div>
+                        <div class="counter-item">
+                            <span class="number wc-counter"><?php
+                                $author_count = count( get_users( array( 'who' => 'authors' ) ) );
+                                echo esc_html( $author_count );
+                            ?> +</span>
+                            <p class="text"><?php esc_html_e( 'Blog yazarı', 'ondigital' ); ?></p>
+                        </div>
                     </div>
                 </div>
             </div>
