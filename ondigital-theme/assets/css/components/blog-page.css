@@ -3,7 +3,13 @@
    Matches Arolax blog.html design
    ============================================================================= */
 
-/* FEATURED AREA (Hero) - Left image + Right content */
+/* FEATURED AREA (Hero) - Title row top + Posts row bottom */
+.featured-area,
+.featured-post-area,
+.blog-area {
+    overflow: hidden;
+}
+
 .featured-area {
     padding: 80px 0;
 }
@@ -15,56 +21,157 @@
 }
 
 .featured-area-inner {
-    display: grid;
-    grid-template-columns: 1.8fr 1fr;
-    gap: 40px;
-    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
 }
 
-@media only screen and (max-width: 1199px) {
+@media only screen and (max-width: 767px) {
     .featured-area-inner {
-        grid-template-columns: 1.5fr 1fr;
-        gap: 30px;
-    }
-}
-
-@media only screen and (max-width: 991px) {
-    .featured-area-inner {
-        grid-template-columns: 1fr;
         gap: 40px;
     }
 }
 
+/* TOP ROW: Title (left) + Info (right) */
+.featured-top-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+@media only screen and (max-width: 991px) {
+    .featured-top-row {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+.featured-title-col .section-title {
+    font-size: 80px;
+    line-height: 1.05;
+    margin: 0;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+@media only screen and (max-width: 1399px) {
+    .featured-title-col .section-title {
+        font-size: 64px;
+    }
+}
+
+@media only screen and (max-width: 1199px) {
+    .featured-title-col .section-title {
+        font-size: 52px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .featured-title-col .section-title {
+        font-size: 40px;
+    }
+}
+
+.featured-info-col {
+    padding-top: 20px;
+}
+
+.featured-info-col .featured-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(18, 18, 18, 0.7);
+    margin-bottom: 30px;
+    max-width: 320px;
+}
+
+.featured-info-col .counter-box {
+    display: flex;
+    gap: 50px;
+}
+
+.featured-info-col .counter-item .number {
+    font-size: 32px;
+    font-weight: 600;
+    display: block;
+    line-height: 1;
+    margin-bottom: 8px;
+    color: var(--primary);
+}
+
+.featured-info-col .counter-item .text {
+    font-size: 13px;
+    color: rgba(18, 18, 18, 0.6);
+    margin: 0;
+}
+
+/* BOTTOM ROW: Big image (left) + Small stack (right) */
+.featured-bottom-row {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 30px;
+}
+
+@media only screen and (max-width: 991px) {
+    .featured-bottom-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
 .featured-hero-image {
+    display: block;
     overflow: hidden;
     border-radius: 4px;
+    aspect-ratio: 1.4;
+    position: relative;
 }
 
 .featured-hero-image img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
-.featured-content-side {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+.featured-hero-image:hover img {
+    transform: scale(1.03);
 }
 
-.featured-small-images {
+/* Small stacked images */
+.featured-small-stack {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     gap: 20px;
 }
 
-.featured-small-images img {
+@media only screen and (max-width: 991px) {
+    .featured-small-stack {
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+}
+
+.hero-small-card {
+    display: block;
+    overflow: hidden;
+    border-radius: 4px;
+    aspect-ratio: 1.6;
+    position: relative;
+}
+
+.hero-small-card img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     object-fit: cover;
-    border-radius: 4px;
+    transition: transform 0.5s ease;
+}
+
+.hero-small-card:hover img {
+    transform: scale(1.05);
 }
 
 .featured-area .section-title {
@@ -171,13 +278,13 @@
     position: relative;
     overflow: hidden;
     display: block;
-    height: 100%;
-    min-height: 400px;
+    aspect-ratio: 1;
 }
 
 .featured-post-area .blog-box a {
     display: block;
     height: 100%;
+    width: 100%;
 }
 
 .featured-post-area .blog-box .thumb {
@@ -344,7 +451,6 @@
     overflow: hidden;
     display: block;
     aspect-ratio: 1.5;
-    min-height: 350px;
 }
 
 .blog-area .blog-box a {
