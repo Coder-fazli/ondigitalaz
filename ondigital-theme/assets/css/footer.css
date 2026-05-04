@@ -64,6 +64,21 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select,
 
 .footer-area .footer-area-inner > * {
     min-width: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Contact info: allow text to wrap on all screen sizes */
+.footer-area .footer-contact-info li {
+    white-space: normal !important;
+}
+
+.footer-area .footer-contact-info li a,
+.footer-area .footer-contact-info li span {
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100%;
 }
 
 /* Desktop: social lives inside contact column, standalone hidden */
