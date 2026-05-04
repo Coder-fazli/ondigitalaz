@@ -16,15 +16,15 @@
 
 .featured-area-inner {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 60px;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 40px;
     align-items: flex-start;
 }
 
 @media only screen and (max-width: 1199px) {
     .featured-area-inner {
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 30px;
     }
 }
 
