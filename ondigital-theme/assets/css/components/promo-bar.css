@@ -15,6 +15,9 @@
     justify-content: space-between;
     align-items: center;
     gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .promo-bar-left {
@@ -70,6 +73,21 @@
 
 .promo-btn:active {
     opacity: 0.8;
+}
+
+.promo-btn i {
+    margin-right: 6px;
+    font-size: 11px;
+}
+
+.promo-btn span {
+    display: inline;
+}
+
+.promo-separator {
+    color: rgba(194, 249, 113, 0.4);
+    font-size: 12px;
+    margin: 0 5px;
 }
 
 @media only screen and (max-width: 767px) {

@@ -117,19 +117,20 @@ $promo_enabled = ondigital_get_option( 'promo_bar_enabled' );
 if ( $promo_enabled !== '0' && $promo_enabled !== 0 && false !== $promo_enabled ) :
 ?>
 <div class="promo-bar">
-    <div class="container-fluid">
-        <div class="promo-bar-inner">
-            <div class="promo-bar-left">
-                <p class="promo-message"><?php echo esc_html( ondigital_get_option( 'promo_bar_text_az', 'Bizimlə əlaqə saxlamağa hazırsınız?' ) ); ?></p>
-            </div>
-            <div class="promo-bar-right">
-                <button class="promo-btn promo-btn-meet" data-od-form="contact">
-                    <?php esc_html_e( 'Görüş', 'ondigital' ); ?>
-                </button>
-                <button class="promo-btn promo-btn-call" data-od-form="contact">
-                    <?php esc_html_e( 'Mesaj Göndər', 'ondigital' ); ?>
-                </button>
-            </div>
+    <div class="promo-bar-inner">
+        <div class="promo-bar-left">
+            <p class="promo-message"><?php echo esc_html( ondigital_get_option( 'promo_bar_text_en', 'Are you ready to meet E-adam?' ) ); ?></p>
+        </div>
+        <div class="promo-bar-right">
+            <button class="promo-btn promo-btn-meet" data-od-form="contact">
+                <i class="fa-solid fa-video"></i>
+                <span>Meet</span>
+            </button>
+            <span class="promo-separator">/</span>
+            <button class="promo-btn promo-btn-call" data-od-form="contact">
+                <i class="fa-solid fa-phone"></i>
+                <span>Call</span>
+            </button>
         </div>
     </div>
 </div>
