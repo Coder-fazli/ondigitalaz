@@ -48,9 +48,12 @@ $langs = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
 
     <?php od_card_open( __( 'Promo Bar', 'ondigital' ), 'dashicons-megaphone' ); ?>
 
+        <?php
+        $promo_disabled = isset( $options['promo_bar_enabled'] ) && ( $options['promo_bar_enabled'] === '0' || $options['promo_bar_enabled'] === 0 );
+        ?>
         <div class="od-field" style="margin-bottom:20px;">
             <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:500;">
-                <input type="checkbox" name="options[promo_bar_enabled]" value="1" <?php checked( ! empty( $options['promo_bar_enabled'] ), true ); ?>>
+                <input type="checkbox" name="options[promo_bar_enabled]" value="1" <?php checked( ! $promo_disabled, true ); ?>>
                 <?php esc_html_e( 'Enable Promo Bar', 'ondigital' ); ?>
             </label>
         </div>

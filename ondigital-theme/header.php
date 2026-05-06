@@ -111,7 +111,11 @@
 </div>
 
 <!-- Promo Bar -->
-<?php if ( ondigital_get_option( 'promo_bar_enabled', true ) ) : ?>
+<?php
+$promo_enabled = ondigital_get_option( 'promo_bar_enabled' );
+// Show by default (true) unless explicitly disabled (0 or false)
+if ( $promo_enabled !== '0' && $promo_enabled !== 0 && false !== $promo_enabled ) :
+?>
 <div class="promo-bar">
     <div class="container-fluid">
         <div class="promo-bar-inner">
