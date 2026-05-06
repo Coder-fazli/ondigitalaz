@@ -6,7 +6,7 @@
     background: linear-gradient(90deg, #1a1a1a 0%, #2a3a1a 100%);
     padding: 12px 0;
     position: relative;
-    z-index: 101;
+    z-index: 50;
     border-bottom: 1px solid rgba(194, 249, 113, 0.15);
 }
 
