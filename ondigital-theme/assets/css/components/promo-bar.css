@@ -3,11 +3,11 @@
    ============================================================================= */
 
 .promo-bar {
-    background-color: #242424;
+    background: linear-gradient(90deg, #1a1a1a 0%, #242424 50%, rgba(194, 249, 113, 0.08) 100%);
     padding: 12px 0;
     position: relative;
     z-index: 101;
-    border-bottom: 1px solid rgba(194, 249, 113, 0.08);
+    border-bottom: 1px solid rgba(194, 249, 113, 0.15);
 }
 
 .promo-bar-inner {
