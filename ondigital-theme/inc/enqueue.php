@@ -30,6 +30,9 @@ function ondigital_enqueue_assets() {
     // --- Nav overrides (global) ---
     wp_enqueue_style( 'ondigital-nav', ONDIGITAL_URI . '/assets/css/components/nav.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
 
+    // --- Promo bar (global) ---
+    wp_enqueue_style( 'ondigital-promo-bar', ONDIGITAL_URI . '/assets/css/components/promo-bar.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+
     // --- Page-specific CSS / JS ---
     ondigital_enqueue_page_assets();
 

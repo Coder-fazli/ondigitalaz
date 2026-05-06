@@ -135,7 +135,7 @@
 .featured-bottom-row {
     display: grid;
     grid-template-columns: 1.7fr 1fr;
-    gap: 25px;
+    gap: 121px;
     align-items: stretch;
 }
 

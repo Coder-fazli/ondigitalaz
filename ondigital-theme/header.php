@@ -110,6 +110,27 @@
     </div>
 </div>
 
+<!-- Promo Bar -->
+<?php if ( ondigital_get_option( 'promo_bar_enabled', true ) ) : ?>
+<div class="promo-bar">
+    <div class="container-fluid">
+        <div class="promo-bar-inner">
+            <div class="promo-bar-left">
+                <p class="promo-message"><?php echo esc_html( ondigital_get_option( 'promo_bar_text_az', 'Bizimlə əlaqə saxlamağa hazırsınız?' ) ); ?></p>
+            </div>
+            <div class="promo-bar-right">
+                <button class="promo-btn promo-btn-meet" data-od-form="contact">
+                    <?php esc_html_e( 'Görüş', 'ondigital' ); ?>
+                </button>
+                <button class="promo-btn promo-btn-call" data-od-form="contact">
+                    <?php esc_html_e( 'Mesaj Göndər', 'ondigital' ); ?>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
 <!-- Header -->
 <header class="header-area">
     <div class="container large">
