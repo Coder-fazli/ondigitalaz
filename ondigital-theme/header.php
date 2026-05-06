@@ -123,7 +123,7 @@ if ( $promo_enabled !== '0' && $promo_enabled !== 0 && false !== $promo_enabled 
         </div>
         <div class="promo-bar-right">
             <button class="promo-btn promo-btn-meet" data-od-form="contact">
-                <i class="fa-solid fa-video"></i>
+                <i class="fa-solid fa-calendar"></i>
                 <span>Meet</span>
             </button>
             <span class="promo-separator">/</span>
