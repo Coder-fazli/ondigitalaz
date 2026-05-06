@@ -69,10 +69,11 @@
 }
 
 /* =============================================================================
-   Header — Ensure it stays above promo bar
+   Header — Position below promo bar with margin
    ============================================================================= */
 
 .header-area {
     position: relative;
     z-index: 100;
+    margin-top: 36px;
 }
