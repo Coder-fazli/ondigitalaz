@@ -903,7 +903,7 @@ html, body { overflow: auto !important; height: auto !important; }
 }
 .ss-wrap .gl-header {
     display: grid; grid-template-columns: 1fr 1.6fr; gap: 60px;
-    align-items: start; margin-bottom: 56px;
+    align-items: center; margin-bottom: 32px;
 }
 .ss-wrap .gl-title {
     font-size: clamp(26px, 3vw, 38px); font-weight: 900;
@@ -911,7 +911,7 @@ html, body { overflow: auto !important; height: auto !important; }
 }
 .ss-wrap .gl-title em { font-style: normal; color: #5a7a00; }
 .ss-wrap .gl-header-desc {
-    font-size: 16px; line-height: 1.75; color: rgba(0,0,0,.45); padding-top: 56px;
+    font-size: 16px; line-height: 1.75; color: rgba(0,0,0,.45); padding-top: 0;
 }
 .ss-wrap .gl-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
