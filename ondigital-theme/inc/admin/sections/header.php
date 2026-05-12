@@ -73,6 +73,18 @@ $langs = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
         <?php endforeach; ?>
         <?php od_lang_close(); ?>
 
+        <div style="display:flex;gap:16px;margin-top:20px;">
+            <div class="od-field" style="flex:1;">
+                <label><?php esc_html_e( 'Meet Button Label', 'ondigital' ); ?></label>
+                <input type="text" name="options[promo_btn_meet]" value="<?php echo esc_attr( $options['promo_btn_meet'] ?? 'Meet' ); ?>" placeholder="Meet" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;">
+            </div>
+            <div class="od-field" style="flex:1;">
+                <label><?php esc_html_e( 'Call Button Label', 'ondigital' ); ?></label>
+                <input type="text" name="options[promo_btn_call]" value="<?php echo esc_attr( $options['promo_btn_call'] ?? 'Call' ); ?>" placeholder="Call" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;">
+            </div>
+        </div>
+        <p style="margin-top:8px;font-size:12px;color:#888;"><?php esc_html_e( 'Call button dials the phone number set in General → Contact Info.', 'ondigital' ); ?></p>
+
     <?php od_card_close(); ?>
 
 </div>

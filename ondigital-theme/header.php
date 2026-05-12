@@ -124,13 +124,13 @@ if ( $promo_enabled !== '0' && $promo_enabled !== 0 && false !== $promo_enabled 
         <div class="promo-bar-right">
             <button class="promo-btn promo-btn-meet" data-od-form="contact">
                 <i class="fa-solid fa-calendar"></i>
-                <span>Meet</span>
+                <span><?php echo esc_html( ondigital_get_option( 'promo_btn_meet', 'Meet' ) ); ?></span>
             </button>
             <span class="promo-separator">/</span>
-            <button class="promo-btn promo-btn-call" data-od-form="contact">
+            <a class="promo-btn promo-btn-call" href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', ondigital_get_option( 'phone', '+994554314750' ) ) ); ?>">
                 <i class="fa-solid fa-phone"></i>
-                <span>Call</span>
-            </button>
+                <span><?php echo esc_html( ondigital_get_option( 'promo_btn_call', 'Call' ) ); ?></span>
+            </a>
         </div>
     </div>
 </div>
