@@ -273,11 +273,11 @@ html, body { overflow: auto !important; height: auto !important; }
 .ss-highlights {
     padding: 100px 0;
     background: #f3ffe0;
-    border-radius: 40px 40px 0 0;
-    margin-top: -40px;
+    border-radius: 40px;
+    margin: -40px 20px 0;
     position: relative;
     z-index: 2;
-    box-shadow: 0 -12px 48px rgba(0,0,0,.06);
+    box-shadow: 0 -12px 48px rgba(0,0,0,.07), 0 8px 48px rgba(0,0,0,.05);
 }
 
 .ss-hl-header {
