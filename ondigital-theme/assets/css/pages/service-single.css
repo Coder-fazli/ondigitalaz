@@ -887,6 +887,8 @@ html, body { overflow: auto !important; height: auto !important; }
 .ss-wrap .gl-section {
     background: var(--ss-tint); padding: 96px 0 104px;
     position: relative; overflow: hidden;
+    border-radius: 40px;
+    margin: 24px 20px 0;
 }
 .ss-wrap .gl-section::after {
     content: 'A–Z'; position: absolute; right: -20px; bottom: -40px;
