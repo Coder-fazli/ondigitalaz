@@ -889,11 +889,13 @@ html, body { overflow: auto !important; height: auto !important; }
 
 /* ── Glossary ── */
 .ss-wrap .gl-section {
-    background: var(--ss-tint); padding: 96px 0 104px;
+    background: var(--ss-tint); padding: 56px 0 64px;
     position: relative; overflow: hidden;
     border-radius: 40px;
     margin: 24px 20px 0;
 }
+
+.ss-wrap .gl-section .cs-eyebrow { display: none; }
 .ss-wrap .gl-section::after {
     content: 'A–Z'; position: absolute; right: -20px; bottom: -40px;
     font-size: 220px; font-weight: 900; letter-spacing: -.06em; line-height: 1;
