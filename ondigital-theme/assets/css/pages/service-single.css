@@ -892,7 +892,7 @@ html, body { overflow: auto !important; height: auto !important; }
     background: var(--ss-tint); padding: 56px 0 64px;
     position: relative; overflow: hidden;
     border-radius: 40px;
-    margin: 24px 20px 48px;
+    margin: 86px 20px 48px;
 }
 
 .ss-wrap .gl-section .cs-eyebrow { display: none; }
