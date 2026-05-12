@@ -945,9 +945,41 @@ html, body { overflow: auto !important; height: auto !important; }
 
 /* ── Who Is This For ── */
 .ss-wrap .wif-section {
-    background: #fff; padding: 96px 0 104px;
+    background: #121212; padding: 56px 0 72px;
     position: relative; overflow: hidden;
+    border-radius: 40px;
+    margin: 24px 20px 0;
+    box-shadow: 0 16px 64px rgba(0,0,0,.2);
 }
+
+/* ── Dark overrides scoped to wif-section ── */
+.ss-wrap .wif-section .cs-eyebrow { display: none; }
+.ss-wrap .wif-section .wif-title { color: #fff; }
+.ss-wrap .wif-section .wif-title em { color: var(--ss-accent); }
+.ss-wrap .wif-section .wif-header-sub { color: rgba(255,255,255,.5); }
+
+/* Columns */
+.ss-wrap .wif-section .wif-col {
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.1);
+}
+.ss-wrap .wif-section .wif-col:hover { box-shadow: 0 16px 48px rgba(0,0,0,.3); }
+.ss-wrap .wif-section .wif-col-header { border-bottom-color: rgba(255,255,255,.08); }
+.ss-wrap .wif-section .wif-col-label { color: #fff; }
+
+/* For column icon */
+.ss-wrap .wif-section .wif-col--for .wif-col-icon { background: rgba(194,249,113,.2); }
+.ss-wrap .wif-section .wif-col--not .wif-col-icon { background: rgba(255,80,60,.12); }
+
+/* Items */
+.ss-wrap .wif-section .wif-item { border-bottom-color: rgba(255,255,255,.06); }
+.ss-wrap .wif-section .wif-item-title { color: rgba(255,255,255,.9); }
+.ss-wrap .wif-section .wif-item-desc { color: rgba(255,255,255,.5); }
+
+/* Note */
+.ss-wrap .wif-section .wif-note { color: rgba(255,255,255,.4); }
+.ss-wrap .wif-section .wif-note a { color: #fff; border-bottom-color: var(--ss-accent); }
+.ss-wrap .wif-section .wif-note a:hover { color: var(--ss-accent); }
 .ss-wrap .wif-header {
     display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px;
     align-items: end; margin-bottom: 48px;
