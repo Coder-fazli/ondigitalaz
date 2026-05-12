@@ -960,21 +960,37 @@ html, body { overflow: auto !important; height: auto !important; }
 
 /* Columns */
 .ss-wrap .wif-section .wif-col {
-    background: rgba(255,255,255,.06);
-    border-color: rgba(255,255,255,.1);
+    background: #1e1e1e;
+    border-color: rgba(255,255,255,.08);
 }
-.ss-wrap .wif-section .wif-col:hover { box-shadow: 0 16px 48px rgba(0,0,0,.3); }
+.ss-wrap .wif-section .wif-col:hover { box-shadow: 0 16px 48px rgba(0,0,0,.4); }
 .ss-wrap .wif-section .wif-col-header { border-bottom-color: rgba(255,255,255,.08); }
-.ss-wrap .wif-section .wif-col-label { color: #fff; }
+.ss-wrap .wif-section .wif-col-label { color: #fff; font-size: 16px; }
 
-/* For column icon */
-.ss-wrap .wif-section .wif-col--for .wif-col-icon { background: rgba(194,249,113,.2); }
-.ss-wrap .wif-section .wif-col--not .wif-col-icon { background: rgba(255,80,60,.12); }
+/* Column header icons — vivid so they're visible on dark */
+.ss-wrap .wif-section .wif-col--for .wif-col-icon {
+    background: rgba(194,249,113,.2);
+}
+.ss-wrap .wif-section .wif-col--for .wif-col-icon svg { stroke: var(--ss-accent); }
+.ss-wrap .wif-section .wif-col--not .wif-col-icon {
+    background: rgba(255,80,60,.15);
+}
+.ss-wrap .wif-section .wif-col--not .wif-col-icon svg { stroke: #ff6b5b; }
 
-/* Items */
+/* Item rows */
 .ss-wrap .wif-section .wif-item { border-bottom-color: rgba(255,255,255,.06); }
-.ss-wrap .wif-section .wif-item-title { color: rgba(255,255,255,.9); }
-.ss-wrap .wif-section .wif-item-desc { color: rgba(255,255,255,.5); }
+.ss-wrap .wif-section .wif-item-title { color: #fff; }
+.ss-wrap .wif-section .wif-item-desc { color: rgba(255,255,255,.55); }
+
+/* Item check/cross icons — vivid circles */
+.ss-wrap .wif-section .wif-col--for .wif-item-icon {
+    background: var(--ss-accent);
+}
+.ss-wrap .wif-section .wif-col--for .wif-item-icon svg { stroke: #121212; }
+.ss-wrap .wif-section .wif-col--not .wif-item-icon {
+    background: rgba(255,80,60,.2);
+}
+.ss-wrap .wif-section .wif-col--not .wif-item-icon svg { stroke: #ff6b5b; }
 
 /* Note */
 .ss-wrap .wif-section .wif-note { color: rgba(255,255,255,.4); }
