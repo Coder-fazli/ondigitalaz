@@ -723,14 +723,64 @@ html, body { overflow: auto !important; height: auto !important; }
 
 /* ── What's Included + Roadmap ── */
 .ss-wrap .wi-section {
-    background: #f3ffe0;
+    background: #121212;
     padding: 96px 0 104px;
     border-radius: 40px;
-    margin: 0 20px;
+    margin: 24px 20px 0;
     position: relative;
     z-index: 2;
-    box-shadow: 0 8px 48px rgba(0,0,0,.06);
+    box-shadow: 0 16px 64px rgba(0,0,0,.2);
 }
+
+/* ── Dark section: content color overrides ── */
+.ss-wrap .wi-section .cs-eyebrow {
+    color: var(--ss-accent);
+    background: rgba(194,249,113,.12);
+    border-color: rgba(194,249,113,.25);
+}
+.ss-wrap .wi-section .cs-eyebrow::before {
+    background: var(--ss-accent);
+}
+.ss-wrap .wi-title { color: #fff; }
+.ss-wrap .wi-title em { color: var(--ss-accent); }
+.ss-wrap .wi-header-desc { color: rgba(255,255,255,.45); }
+
+/* Tabs */
+.ss-wrap .wi-tabs { background: rgba(255,255,255,.08); }
+.ss-wrap .wi-tab { color: rgba(255,255,255,.45); }
+.ss-wrap .wi-tab.active { background: rgba(255,255,255,.12); color: #fff; box-shadow: none; }
+
+/* Accordion card */
+.ss-wrap .wi-accord {
+    background: rgba(255,255,255,.05);
+    border-color: rgba(255,255,255,.08);
+}
+.ss-wrap .wi-row { border-bottom-color: rgba(255,255,255,.07); }
+.ss-wrap .wi-row-btn:hover { background: rgba(255,255,255,.04); }
+.ss-wrap .wi-row.open .wi-row-btn { background: rgba(194,249,113,.1); }
+
+/* Number badge */
+.ss-wrap .wi-row-num { background: rgba(255,255,255,.1); color: rgba(255,255,255,.45); }
+.ss-wrap .wi-row.open .wi-row-num { background: var(--ss-accent); color: #121212; }
+
+/* Row title */
+.ss-wrap .wi-row-title { color: #fff; }
+.ss-wrap .wi-row.open .wi-row-title { color: var(--ss-accent); }
+
+/* Chevron */
+.ss-wrap .wi-row-chevron { background: rgba(255,255,255,.1); }
+.ss-wrap .wi-row-chevron svg { stroke: rgba(255,255,255,.5); }
+.ss-wrap .wi-row.open .wi-row-chevron { background: var(--ss-accent); }
+.ss-wrap .wi-row.open .wi-row-chevron svg { stroke: #121212; }
+
+/* Body text */
+.ss-wrap .wi-body-desc { color: rgba(255,255,255,.6); }
+.ss-wrap .wi-row.open .wi-row-body-inner { border-left-color: var(--ss-accent); }
+
+/* Roadmap progress */
+.ss-wrap .wi-prog-label { color: rgba(255,255,255,.35); }
+.ss-wrap .wi-prog-pct { color: #fff; }
+.ss-wrap .wi-prog-bar { background: rgba(255,255,255,.1); }
 
 .ss-wrap .wi-header {
     display: flex; align-items: flex-end; justify-content: space-between;
