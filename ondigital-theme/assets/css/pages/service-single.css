@@ -96,7 +96,16 @@ html, body { overflow: auto !important; height: auto !important; }
 }
 
 .ss-hero::before {
-    display: none;
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+        linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,.04) 1px, transparent 1px);
+    background-size: 100px 100px;
+    -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .ss-hero .container { position: relative; z-index: 1; }
