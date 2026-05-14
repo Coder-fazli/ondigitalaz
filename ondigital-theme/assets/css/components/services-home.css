@@ -412,3 +412,79 @@
         font-size: 13px;
     }
 }
+
+/* =============================================================================
+   Features Section — floating card matching gl-section / ss-highlights style
+   ============================================================================= */
+
+.features-area {
+    background-color: #f3ffe0;
+    border-radius: 40px;
+    margin: 60px 20px;
+}
+
+.features-area .features-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.features-area .feature-box {
+    background: #fff;
+    border-radius: 20px;
+    padding: 36px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 2px 12px rgba(18, 18, 18, 0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.features-area .feature-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(18, 18, 18, 0.1);
+}
+
+.features-area .feature-box .thumb img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+}
+
+.features-area .feature-box .content .title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.features-area .feature-box .content .text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--secondary);
+    margin: 0;
+}
+
+@media only screen and (max-width: 991px) {
+    .features-area .features-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .features-area {
+        border-radius: 24px;
+        margin: 40px 12px;
+    }
+
+    .features-area .features-wrapper {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 24px;
+    }
+
+    .features-area .feature-box {
+        padding: 24px 20px;
+    }
+}
