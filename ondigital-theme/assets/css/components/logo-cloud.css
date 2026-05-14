@@ -1,38 +1,18 @@
 /* =============================================================================
-   Logo Cloud — infinite marquee with edge fade (replaces Swiper client slider)
+   Logo Cloud — dual-row infinite marquee, opposite directions
    ============================================================================= */
-
-/* Partners section — separate dark floating card below stats */
-.clients-area {
-    background: #121212;
-    margin: 16px 20px 0;
-    border-radius: 40px;
-    padding: 36px 0;
-}
 
 .clients-area .clients-area-inner {
     border-bottom: none !important;
-    padding: 0 !important;
-}
-
-/* PARTNERS label */
-.clients-area .section-header {
-    margin-bottom: 20px;
-}
-.clients-area .section-title-wrapper h2 {
-    color: rgba(255,255,255,.35);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    text-align: center;
-    margin: 0;
 }
 
 .clients-area .client-slider {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     overflow: hidden;
-    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     cursor: default;
 }
 
@@ -42,6 +22,12 @@
     gap: 64px;
     width: max-content;
     will-change: transform;
+    padding: 18px 0;
+}
+
+/* Subtle separator between the two rows */
+.logo-marquee-track + .logo-marquee-track {
+    border-top: 1px solid var(--border);
 }
 
 .logo-marquee-track .client-box {
@@ -52,23 +38,24 @@
 }
 
 .logo-marquee-track .client-box img {
-    height: 40px;
+    height: 36px;
     width: auto;
     max-width: 140px;
     object-fit: contain;
-    opacity: 0.7;
-    filter: brightness(0) invert(1);
-    transition: opacity 0.3s;
+    opacity: 0.55;
+    filter: grayscale(1);
+    transition: opacity 0.3s, filter 0.3s;
     pointer-events: none;
     user-select: none;
 }
 
 .logo-marquee-track .client-box:hover img {
     opacity: 1;
+    filter: grayscale(0);
     pointer-events: auto;
 }
 
-/* Hide empty slots — when no image is set the box still takes space */
+/* Hide empty slots */
 .logo-marquee-track .client-box:not(:has(img[src])) {
     display: none;
 }
@@ -76,9 +63,10 @@
 @media only screen and (max-width: 767px) {
     .logo-marquee-track {
         gap: 40px;
+        padding: 14px 0;
     }
 
     .logo-marquee-track .client-box img {
-        height: 30px;
+        height: 26px;
     }
 }
