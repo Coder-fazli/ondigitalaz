@@ -164,12 +164,12 @@ function ondigital_enqueue_page_assets() {
 
             // Admin-controlled service card colors — must come after handle is enqueued
             $opts   = get_option( 'ondigital_options', array() );
-            $srv_bg = sanitize_hex_color( $opts['services_bg']     ?? '' ) ?: '#121212';
-            $card_1 = sanitize_hex_color( $opts['services_card_1'] ?? '' ) ?: '#1a1a1a';
-            $card_2 = sanitize_hex_color( $opts['services_card_2'] ?? '' ) ?: '#1c1c1c';
-            $card_3 = sanitize_hex_color( $opts['services_card_3'] ?? '' ) ?: '#1e1e1e';
-            $card_4 = sanitize_hex_color( $opts['services_card_4'] ?? '' ) ?: '#1a1a1a';
-            $card_5 = sanitize_hex_color( $opts['services_card_5'] ?? '' ) ?: '#1c1c1c';
+            $srv_bg = sanitize_hex_color( $opts['services_bg']     ?? '' ) ?: '#f3ffe0';
+            $card_1 = sanitize_hex_color( $opts['services_card_1'] ?? '' ) ?: '#fefce8';
+            $card_2 = sanitize_hex_color( $opts['services_card_2'] ?? '' ) ?: '#f0f5ff';
+            $card_3 = sanitize_hex_color( $opts['services_card_3'] ?? '' ) ?: '#fff4f0';
+            $card_4 = sanitize_hex_color( $opts['services_card_4'] ?? '' ) ?: '#f5f0ff';
+            $card_5 = sanitize_hex_color( $opts['services_card_5'] ?? '' ) ?: '#f0fff8';
             wp_add_inline_style( 'ondigital-services-home', "
                 .service-area { background-color: {$srv_bg} !important; }
                 .od-srv-slide:nth-child(5n+1) .od-srv-card { background-color: {$card_1} !important; }
