@@ -341,20 +341,21 @@
     100%{ box-shadow: 0 0 0 0   rgba(209,248,67,0); }
 }
 
-/* ── Stats bar ── */
+/* ── Stats bar — dark floating card (top half, joins partners below) ── */
 .ond-hero__stats {
     display: flex;
     align-items: stretch;
-    border-top: 1px solid rgba(0,0,0,.08);
-    margin: 0 -80px;
+    margin: 0 20px;
+    background: #121212;
+    border-radius: 40px 40px 0 0;
     position: relative;
     z-index: 1;
 }
 
 .ond-hero__stat {
     flex: 1;
-    padding: 36px 48px;
-    border-right: 1px solid rgba(0,0,0,.08);
+    padding: 40px 48px;
+    border-right: 1px solid rgba(255,255,255,.08);
     text-align: center;
 }
 .ond-hero__stat:last-child { border-right: none; }
@@ -362,7 +363,7 @@
 .ond-hero__stat-num {
     font-size: 52px;
     font-weight: 600;
-    color: #0a0a0a;
+    color: #ffffff;
     letter-spacing: -.03em;
     line-height: 1;
     margin-bottom: 8px;
@@ -372,12 +373,12 @@
     font-size: 26px;
     color: #c2f971;
     font-weight: 700;
-    -webkit-text-stroke: 1px #5a7000;
+    -webkit-text-stroke: 0;
 }
 
 .ond-hero__stat-label {
     font-size: 12px;
-    color: rgba(0,0,0,.45);
+    color: rgba(255,255,255,.45);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .1em;
@@ -388,7 +389,7 @@
    ============================================================================= */
 @media only screen and (max-width: 1399px) {
     .ond-hero { padding: 82px 60px 0; }
-    .ond-hero__stats { margin: 0 -60px; }
+    .ond-hero__stats { margin: 0 20px; }
 }
 
 @media only screen and (max-width: 1199px) {
@@ -409,7 +410,7 @@
         grid-template-rows: auto auto auto;
         padding: 100px 40px 0;
     }
-    .ond-hero__stats { margin: 0 -40px; }
+    .ond-hero__stats { margin: 0 20px; }
     .ond-hero__visual { padding: 20px 0; justify-content: center; }
     .ond-hero__visual::before { width: 280px; height: 280px; }
     .ond-hero__bars { height: 110px; gap: 10px; }
@@ -431,7 +432,8 @@
     }
     .ond-hero__content { padding-left: 0; }
     .ond-hero__badge { display: none; }
-    .ond-hero__stats { margin: 0 -24px; display: grid; grid-template-columns: 1fr 1fr; }
+    .ond-hero__stats { margin: 0 12px; display: grid; grid-template-columns: 1fr 1fr; border-radius: 24px 24px 0 0; }
+    .clients-area { margin: 0 12px; border-radius: 0 0 24px 24px; }
     .ond-hero__stat { padding: 24px 16px; border-bottom: 1px solid rgba(0,0,0,.08); }
     .ond-hero__stat:nth-child(2) { border-right: none; }
     .ond-hero__stat:nth-child(3),

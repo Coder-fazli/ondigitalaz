@@ -3,6 +3,23 @@
    Loaded after home.css — overrides old .service-area rules
    ============================================================================= */
 
+/* =============================================================================
+   Global — all home page sections match hero width (80px each side)
+   ============================================================================= */
+
+.body-seo-agency .container {
+    max-width: 1280px;
+}
+
+/* =============================================================================
+   Features — hide duplicate sub-title rendered by base theme CSS
+   ============================================================================= */
+
+.features-area .feature-box .sub-title,
+.features-area .feature-box .content .sub-title {
+    display: none;
+}
+
 /* Section subtitle with left line */
 .section-subtitle {
     font-size: 16px;
