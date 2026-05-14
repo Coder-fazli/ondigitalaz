@@ -96,14 +96,16 @@
 
 @media only screen and (max-width: 767px) {
     .promo-bar-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
         padding: 0 20px;
     }
 
     .promo-bar-right {
-        gap: 15px;
+        gap: 14px;
+        flex-shrink: 0;
     }
 
     .promo-btn {
