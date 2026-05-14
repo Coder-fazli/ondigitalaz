@@ -89,6 +89,17 @@
 }
 
 /* =============================================================================
+   Mobile — shrink header CTA button padding
+   ============================================================================= */
+
+@media only screen and (max-width: 1199px) {
+    .header__button .wc-btn-primary {
+        padding: 10px 16px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* =============================================================================
    Mobile burger button — bigger tap target with right padding
    ============================================================================= */
 
