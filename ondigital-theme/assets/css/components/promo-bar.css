@@ -114,6 +114,10 @@
 }
 
 @media only screen and (max-width: 576px) {
+    .promo-bar {
+        padding: 20px 0;
+    }
+
     .promo-message {
         font-size: 10px;
     }
