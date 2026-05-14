@@ -448,6 +448,7 @@
 
 .features-area .section-header {
     margin-bottom: 0 !important;
+    align-items: flex-start !important;
 }
 
 .features-area .features-wrapper-box {
