@@ -2,51 +2,77 @@
     var track = document.querySelector('.logo-marquee-track');
     if (!track) return;
 
-    // Hide client-box items where the visible image fails to load
+    var SPEED       = 0.7;  // px per frame at 60fps (normal)
+    var SPEED_HOVER = 0.2;  // px per frame on hover (slow)
+    var currentSpeed = SPEED;
+    var targetSpeed  = SPEED;
+
+    // Hide broken images
     track.querySelectorAll('.client-box img').forEach(function (img) {
         img.addEventListener('error', function () {
             img.style.display = 'none';
-            // If all imgs in this box are hidden, hide the box
             var box = img.closest('.client-box');
-            if (box && Array.from(box.querySelectorAll('img')).every(function (i) { return i.style.display === 'none'; })) {
-                box.style.display = 'none';
+            if (box) {
+                var imgs = Array.from(box.querySelectorAll('img'));
+                if (imgs.every(function (i) { return i.style.display === 'none'; })) {
+                    box.style.display = 'none';
+                }
             }
         });
     });
 
-    var BASE_DURATION  = 35;   // seconds — normal speed
-    var HOVER_DURATION = 90;   // seconds — slowed speed on hover
-    var current = BASE_DURATION;
-    var target  = BASE_DURATION;
-    var raf     = null;
+    function init() {
+        // Measure the original set width (one set of logos)
+        var origBoxes = Array.from(track.querySelectorAll('.client-box'));
 
-    function lerp(a, b, t) { return a + (b - a) * t; }
-
-    function tick() {
-        current = lerp(current, target, 0.06);
-        track.style.animationDuration = current.toFixed(3) + 's';
-
-        if (Math.abs(current - target) > 0.01) {
-            raf = requestAnimationFrame(tick);
-        } else {
-            current = target;
-            track.style.animationDuration = current + 's';
-            raf = null;
+        // Clone logo set until track fills at least 3× the viewport width
+        // so there's always enough content in view during the loop
+        var safeWidth = window.innerWidth * 3;
+        while (track.scrollWidth < safeWidth) {
+            origBoxes.forEach(function (box) {
+                var clone = box.cloneNode(true);
+                track.appendChild(clone);
+            });
         }
+
+        // Measure width of the ORIGINAL set (before clones)
+        // = sum of each original box's offsetWidth + gap (64px)
+        var GAP = 64;
+        var origSetWidth = origBoxes.reduce(function (sum, box) {
+            return sum + box.offsetWidth + GAP;
+        }, 0);
+
+        var pos = 0;
+
+        function animate() {
+            // Lerp speed
+            currentSpeed += (targetSpeed - currentSpeed) * 0.05;
+
+            pos -= currentSpeed;
+
+            // When we've scrolled one full original set, teleport back — seamless
+            if (pos <= -origSetWidth) {
+                pos += origSetWidth;
+            }
+
+            track.style.transform = 'translateX(' + pos + 'px)';
+            requestAnimationFrame(animate);
+        }
+
+        track.parentElement.addEventListener('mouseenter', function () {
+            targetSpeed = SPEED_HOVER;
+        });
+        track.parentElement.addEventListener('mouseleave', function () {
+            targetSpeed = SPEED;
+        });
+
+        animate();
     }
 
-    function startLerp() {
-        if (raf) cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(tick);
+    // Run after layout so offsetWidth is accurate
+    if (document.readyState === 'complete') {
+        init();
+    } else {
+        window.addEventListener('load', init);
     }
-
-    track.addEventListener('mouseenter', function () {
-        target = HOVER_DURATION;
-        startLerp();
-    });
-
-    track.addEventListener('mouseleave', function () {
-        target = BASE_DURATION;
-        startLerp();
-    });
 })();

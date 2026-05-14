@@ -14,12 +14,7 @@
     align-items: center;
     gap: 64px;
     width: max-content;
-    animation: logoScroll 35s linear infinite;
-}
-
-@keyframes logoScroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    will-change: transform;
 }
 
 .logo-marquee-track .client-box {

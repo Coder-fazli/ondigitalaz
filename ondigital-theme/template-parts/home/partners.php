@@ -56,8 +56,7 @@ $brands = ondigital_get_repeater( 'partners', $default_brands );
                         $logo_items .= '</div>';
                     endforeach;
 
-                    // Output twice — second set makes loop seamless
-                    echo $logo_items;
+                    // Output once — JS clones to fill viewport
                     echo $logo_items;
                     ?>
                 </div>
