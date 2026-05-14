@@ -76,6 +76,12 @@
     margin-top: 56px;
 }
 
+@media only screen and (max-width: 576px) {
+    .header-area {
+        margin-top: 25px;
+    }
+}
+
 /* Remove margin when header is sticky (fixed) so no gap at top */
 .header-area.sticky {
     margin-top: 0 !important;

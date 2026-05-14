@@ -334,19 +334,21 @@
 // OFFCANVAS 3 (global scope for onclick handlers)
 // =====================================================
 function showCanvas3() {
-    var area = document.querySelector('.offcanvas-3__area');
-    if (!area) return;
-    area.style.cssText = 'visibility:visible;opacity:1;transform:none;left:0;';
-    // Reset any GSAP inline styles on child elements
-    area.querySelectorAll('.offcanvas-3__menu ul li, .offcanvas-3__meta, .offcanvas-3__social').forEach(function(el) {
-        el.style.cssText = '';
-    });
+    if (typeof gsap === 'undefined') return;
+    gsap.killTweensOf('.offcanvas-3__area');
+    gsap.killTweensOf('.offcanvas-3__menu ul li');
+    gsap.killTweensOf('.offcanvas-3__meta');
+    gsap.killTweensOf('.offcanvas-3__social');
+    gsap.set('.offcanvas-3__area', { visibility: 'visible', opacity: 1, rotationY: 0, left: 0, perspective: 0 });
+    gsap.set('.offcanvas-3__menu ul li', { opacity: 1, top: 0, rotationX: 0 });
+    gsap.set('.offcanvas-3__meta', { visibility: 'visible', opacity: 1, top: 0 });
+    gsap.set('.offcanvas-3__social', { visibility: 'visible', opacity: 1, top: 0 });
     document.querySelector('body').style.overflow = 'hidden';
 }
 
 function hideCanvas3() {
-    var area = document.querySelector('.offcanvas-3__area');
-    if (!area) return;
-    area.style.cssText = 'visibility:hidden;opacity:0;';
+    if (typeof gsap === 'undefined') return;
+    gsap.killTweensOf('.offcanvas-3__area');
+    gsap.set('.offcanvas-3__area', { visibility: 'hidden', opacity: 0 });
     document.querySelector('body').style.overflow = 'auto';
 }
