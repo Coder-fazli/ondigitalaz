@@ -186,7 +186,7 @@
 
 .service-area .section-header .text {
     max-width: 350px;
-    color: var(--secondary);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .service-area .section-header .title-wrapper {
