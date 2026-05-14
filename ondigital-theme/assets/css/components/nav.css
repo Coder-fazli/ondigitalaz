@@ -77,3 +77,22 @@
     z-index: 100;
     margin-top: 56px;
 }
+
+/* Remove margin when header is sticky (fixed) so no gap at top */
+.header-area.sticky {
+    margin-top: 0 !important;
+}
+
+/* =============================================================================
+   Mobile burger button — bigger tap target with right padding
+   ============================================================================= */
+
+.header__navicon .open-offcanvas {
+    padding: 10px 14px 10px 10px;
+    font-size: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    line-height: 1;
+}

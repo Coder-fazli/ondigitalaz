@@ -334,30 +334,21 @@
 // OFFCANVAS 3 (global scope for onclick handlers)
 // =====================================================
 function showCanvas3() {
-    if (typeof gsap === 'undefined') return;
-    var canvas3 = gsap.timeline();
-    canvas3.to(".offcanvas-3__area", {
-        left: 0, visibility: "visible", duration: 0.8, opacity: 1, rotationY: 0, perspective: 0,
-    });
-    canvas3.to(".offcanvas-3__menu ul li", {
-        opacity: 1, top: 0, stagger: 0.05, duration: 1, rotationX: 0,
-    }, "-=0.1");
-    canvas3.to(".offcanvas-3__meta", {
-        top: 0, visibility: "visible", duration: 0.8, opacity: 1,
-    }, "-=0.5");
-    canvas3.to(".offcanvas-3__social", {
-        top: 0, visibility: "visible", duration: 0.8, opacity: 1,
-    }, "-=0.5");
-    document.querySelector('body').style.overflow = "hidden";
+    var area = document.querySelector('.offcanvas-3__area');
+    if (area) {
+        area.style.visibility = 'visible';
+        area.style.opacity = '1';
+        area.style.left = '0';
+        area.style.transform = 'none';
+    }
+    document.querySelector('body').style.overflow = 'hidden';
 }
 
 function hideCanvas3() {
-    if (typeof gsap === 'undefined') return;
-    var canvas3 = gsap.timeline();
-    canvas3.to(".offcanvas-3__area", { duration: 0.8, rotationY: -90, opacity: 0 });
-    canvas3.to(".offcanvas-3__area", { visibility: "hidden", duration: 0.1, rotationY: 50, left: 0, rotationX: 0 });
-    canvas3.to(".offcanvas-3__menu ul li", { opacity: 0, top: -100, stagger: 0.01, duration: 0.1, rotationX: 50 });
-    canvas3.to(".offcanvas-3__meta", { top: -30, visibility: "hidden", duration: 0.8, opacity: 1 }, "-=0.5");
-    canvas3.to(".offcanvas-3__social", { top: -30, visibility: "hidden", duration: 0.8, opacity: 1 }, "-=0.5");
-    document.querySelector('body').style.overflow = "auto";
+    var area = document.querySelector('.offcanvas-3__area');
+    if (area) {
+        area.style.visibility = 'hidden';
+        area.style.opacity = '0';
+    }
+    document.querySelector('body').style.overflow = 'auto';
 }
