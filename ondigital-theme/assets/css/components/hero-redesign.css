@@ -69,6 +69,7 @@
     justify-content: flex-start;
     padding-top: 40px;
     padding-bottom: 60px;
+    padding-left: 60px;
 }
 
 /* ── Entrance animations ── */
@@ -217,7 +218,8 @@
 .ond-hero__visual {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-right: 40px;
     position: relative;
     z-index: 1;
 }
@@ -408,7 +410,7 @@
         padding: 100px 40px 0;
     }
     .ond-hero__stats { margin: 0 -40px; }
-    .ond-hero__visual { padding: 20px 0; }
+    .ond-hero__visual { padding: 20px 0; justify-content: center; }
     .ond-hero__visual::before { width: 280px; height: 280px; }
     .ond-hero__bars { height: 110px; gap: 10px; }
     .ond-bar { width: 20px; }
@@ -427,6 +429,7 @@
         padding: 20px 24px 0;
         min-height: unset;
     }
+    .ond-hero__content { padding-left: 0; }
     .ond-hero__badge { display: none; }
     .ond-hero__stats { margin: 0 -24px; display: grid; grid-template-columns: 1fr 1fr; }
     .ond-hero__stat { padding: 24px 16px; border-bottom: 1px solid rgba(0,0,0,.08); }
