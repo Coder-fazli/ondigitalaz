@@ -446,21 +446,20 @@
     padding-bottom: 40px !important;
 }
 
-.features-area .features-area-inner {
-    position: relative;
-}
-
 .features-area .section-header {
-    margin-bottom: 0 !important;
+    position: relative;
+    min-height: 320px;
+    margin-bottom: 24px !important;
     display: block !important;
 }
 
-/* Float animation in top-right corner, out of flow */
+/* Animation anchored to section-header top-right — never overlaps cards */
 .features-area .features-team-img-wrapper {
     position: absolute !important;
-    top: 0;
+    top: -10px;
     right: 0;
     pointer-events: none;
+    z-index: 1;
 }
 
 .features-area .features-wrapper-box {
