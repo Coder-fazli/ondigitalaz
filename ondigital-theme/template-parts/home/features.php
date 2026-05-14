@@ -19,7 +19,7 @@ $features = ondigital_get_repeater( 'features', $default_features );
 ?>
 <section class="features-area">
     <div class="container">
-        <div class="features-area-inner section-spacing-top">
+        <div class="features-area-inner">
             <div class="section-header">
                 <div class="section-title-wrapper">
                     <div class="title-wrapper">
