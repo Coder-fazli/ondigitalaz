@@ -29,7 +29,15 @@ $features = ondigital_get_repeater( 'features', $default_features );
                     </div>
                 </div>
                 <div class="text-wrapper features-team-img-wrapper">
-                    <img class="features-team-img has_fade_anim" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/features-team.png' ); ?>" alt="<?php esc_attr_e( 'Team', 'ondigital' ); ?>">
+                    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+                    <dotlottie-player
+                        src="<?php echo esc_url( ONDIGITAL_URI . '/assets/animations/hero-animation.lottie' ); ?>"
+                        background="transparent"
+                        speed="1"
+                        style="width:320px;height:320px;"
+                        loop
+                        autoplay>
+                    </dotlottie-player>
                 </div>
             </div>
             <div class="features-wrapper-box">
