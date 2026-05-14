@@ -447,19 +447,28 @@
 }
 
 .features-area .section-header {
-    position: relative;
-    min-height: 320px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 40px;
     margin-bottom: 24px !important;
-    display: block !important;
 }
 
-/* Animation anchored to section-header top-right — never overlaps cards */
+.features-area .section-title-wrapper {
+    flex: 1;
+}
+
+/* Fixed-height animation box — controls section-header height without overflow */
 .features-area .features-team-img-wrapper {
-    position: absolute !important;
-    top: -10px;
-    right: 0;
-    pointer-events: none;
-    z-index: 1;
+    flex-shrink: 0;
+    width: 320px;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 8px 32px rgba(0,0,0,.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .features-area .features-wrapper-box {
