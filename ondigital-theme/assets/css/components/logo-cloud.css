@@ -42,16 +42,15 @@
     width: auto;
     max-width: 140px;
     object-fit: contain;
-    opacity: 0.55;
-    filter: grayscale(1);
-    transition: opacity 0.3s, filter 0.3s;
+    opacity: 0.85;
+    filter: none;
+    transition: opacity 0.3s;
     pointer-events: none;
     user-select: none;
 }
 
 .logo-marquee-track .client-box:hover img {
     opacity: 1;
-    filter: grayscale(0);
     pointer-events: auto;
 }
 
