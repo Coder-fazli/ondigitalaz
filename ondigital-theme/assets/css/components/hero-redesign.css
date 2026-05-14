@@ -341,13 +341,13 @@
     100%{ box-shadow: 0 0 0 0   rgba(209,248,67,0); }
 }
 
-/* ── Stats bar — dark floating card (top half, joins partners below) ── */
+/* ── Stats bar — dark floating card ── */
 .ond-hero__stats {
     display: flex;
     align-items: stretch;
     margin: 0 20px;
     background: #121212;
-    border-radius: 40px 40px 0 0;
+    border-radius: 40px;
     position: relative;
     z-index: 1;
 }
@@ -432,8 +432,8 @@
     }
     .ond-hero__content { padding-left: 0; }
     .ond-hero__badge { display: none; }
-    .ond-hero__stats { margin: 0 12px; display: grid; grid-template-columns: 1fr 1fr; border-radius: 24px 24px 0 0; }
-    .clients-area { margin: 0 12px; border-radius: 0 0 24px 24px; }
+    .ond-hero__stats { margin: 0 12px; display: grid; grid-template-columns: 1fr 1fr; border-radius: 24px; }
+    .clients-area { margin: 16px 12px 0 !important; border-radius: 24px !important; }
     .ond-hero__stat { padding: 24px 16px; border-bottom: 1px solid rgba(0,0,0,.08); }
     .ond-hero__stat:nth-child(2) { border-right: none; }
     .ond-hero__stat:nth-child(3),
