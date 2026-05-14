@@ -34,7 +34,7 @@ $features = ondigital_get_repeater( 'features', $default_features );
                         src="<?php echo esc_url( ONDIGITAL_URI . '/assets/animations/hero-animation.lottie' ); ?>"
                         background="transparent"
                         speed="1"
-                        style="width:280px;height:280px;"
+                        style="width:380px;height:380px;"
                         loop
                         autoplay>
                     </dotlottie-player>
