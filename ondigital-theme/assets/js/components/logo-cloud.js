@@ -2,6 +2,18 @@
     var track = document.querySelector('.logo-marquee-track');
     if (!track) return;
 
+    // Hide client-box items where the visible image fails to load
+    track.querySelectorAll('.client-box img').forEach(function (img) {
+        img.addEventListener('error', function () {
+            img.style.display = 'none';
+            // If all imgs in this box are hidden, hide the box
+            var box = img.closest('.client-box');
+            if (box && Array.from(box.querySelectorAll('img')).every(function (i) { return i.style.display === 'none'; })) {
+                box.style.display = 'none';
+            }
+        });
+    });
+
     var BASE_DURATION  = 35;   // seconds — normal speed
     var HOVER_DURATION = 90;   // seconds — slowed speed on hover
     var current = BASE_DURATION;
