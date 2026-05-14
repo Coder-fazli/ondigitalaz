@@ -423,20 +423,28 @@
     margin: 60px 20px;
 }
 
+/* Override the large section-spacing-top padding */
+.features-area .features-area-inner {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+}
+
 .features-area .features-wrapper {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
-    margin-top: 40px;
+    margin-top: 32px;
 }
 
 .features-area .feature-box {
     background: #fff;
     border-radius: 20px;
-    padding: 36px 28px 32px;
+    padding: 32px 24px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 16px;
     box-shadow: 0 2px 12px rgba(18, 18, 18, 0.06);
     transition: transform 0.3s, box-shadow 0.3s;
 }
