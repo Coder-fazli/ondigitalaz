@@ -81,6 +81,7 @@
 /* Remove margin when header is sticky (fixed) so no gap at top */
 .header-area.sticky {
     margin-top: 0 !important;
+    top: 0 !important;
 }
 
 /* =============================================================================
