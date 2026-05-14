@@ -335,20 +335,18 @@
 // =====================================================
 function showCanvas3() {
     var area = document.querySelector('.offcanvas-3__area');
-    if (area) {
-        area.style.visibility = 'visible';
-        area.style.opacity = '1';
-        area.style.left = '0';
-        area.style.transform = 'none';
-    }
+    if (!area) return;
+    area.style.cssText = 'visibility:visible;opacity:1;transform:none;left:0;';
+    // Reset any GSAP inline styles on child elements
+    area.querySelectorAll('.offcanvas-3__menu ul li, .offcanvas-3__meta, .offcanvas-3__social').forEach(function(el) {
+        el.style.cssText = '';
+    });
     document.querySelector('body').style.overflow = 'hidden';
 }
 
 function hideCanvas3() {
     var area = document.querySelector('.offcanvas-3__area');
-    if (area) {
-        area.style.visibility = 'hidden';
-        area.style.opacity = '0';
-    }
+    if (!area) return;
+    area.style.cssText = 'visibility:hidden;opacity:0;';
     document.querySelector('body').style.overflow = 'auto';
 }
