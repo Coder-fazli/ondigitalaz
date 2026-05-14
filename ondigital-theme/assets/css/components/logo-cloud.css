@@ -1,0 +1,58 @@
+/* =============================================================================
+   Logo Cloud — infinite marquee with edge fade (replaces Swiper client slider)
+   ============================================================================= */
+
+.clients-area .client-slider {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    cursor: default;
+}
+
+.logo-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    width: max-content;
+    animation: logoScroll 35s linear infinite;
+}
+
+@keyframes logoScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.logo-marquee-track .client-box {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-marquee-track .client-box img {
+    height: 28px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    opacity: 0.5;
+    filter: grayscale(1);
+    transition: opacity 0.4s, filter 0.4s;
+    pointer-events: none;
+    user-select: none;
+}
+
+.logo-marquee-track .client-box:hover img {
+    opacity: 1;
+    filter: grayscale(0);
+    pointer-events: auto;
+}
+
+@media only screen and (max-width: 767px) {
+    .logo-marquee-track {
+        gap: 40px;
+    }
+
+    .logo-marquee-track .client-box img {
+        height: 22px;
+    }
+}

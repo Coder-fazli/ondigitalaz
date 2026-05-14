@@ -142,6 +142,8 @@ function ondigital_enqueue_page_assets() {
 
         // Home page: component CSS overrides (loaded after home.css)
         if ( 'home' === $slug ) {
+            wp_enqueue_style( 'ondigital-logo-cloud',   ONDIGITAL_URI . '/assets/css/components/logo-cloud.css',   array( 'ondigital-home' ), ONDIGITAL_VERSION );
+            wp_enqueue_script( 'ondigital-logo-cloud',  ONDIGITAL_URI . '/assets/js/components/logo-cloud.js',    array(), ONDIGITAL_VERSION, true );
             wp_enqueue_style( 'ondigital-hero-redesign', ONDIGITAL_URI . '/assets/css/components/hero-redesign.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
             wp_enqueue_style( 'ondigital-counter',       ONDIGITAL_URI . '/assets/css/components/counter.css',       array( 'ondigital-home' ), ONDIGITAL_VERSION );
             wp_enqueue_style( 'ondigital-services-home', ONDIGITAL_URI . '/assets/css/components/services-home.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
