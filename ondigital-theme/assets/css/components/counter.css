@@ -120,6 +120,26 @@
 }
 
 @media only screen and (max-width: 767px) {
+    .counter-area .counter-items {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+    }
+
+    .counter-area .counter-item {
+        border-right: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 24px 16px;
+    }
+
+    .counter-area .counter-item:nth-child(2n) {
+        border-right: none;
+    }
+
+    .counter-area .counter-item:nth-last-child(-n+2) {
+        border-bottom: none;
+    }
+
     .counter-area .counter-item .number {
         font-size: 42px;
         padding: 5px 14px;
