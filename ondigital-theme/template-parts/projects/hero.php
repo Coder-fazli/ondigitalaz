@@ -5,6 +5,15 @@
  * @package OnDigital
  */
 
+// Admin options
+$lang         = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
+$pa_badge     = ondigital_get_option( 'projects_archive_badge_' . $lang )
+             ?: ondigital_get_option( 'projects_archive_badge_az', 'Layihələr və Keyslar' );
+$pa_title     = ondigital_get_option( 'projects_archive_title_' . $lang )
+             ?: ondigital_get_option( 'projects_archive_title_az', 'Nəticə danışır.' );
+$pa_desc      = ondigital_get_option( 'projects_archive_desc_' . $lang )
+             ?: ondigital_get_option( 'projects_archive_desc_az', 'Hər layihə real problemlə başlayır, ölçülə bilən nəticə ilə bitir. Boş göstəricilər yox — yalnız böyüməni əks etdirən rəqəmlər.' );
+
 // Fetch all projects
 $project_query = new WP_Query( array(
     'post_type'      => 'project',
@@ -29,17 +38,16 @@ $all_terms = get_terms( array(
     <div class="pa-hero-inner">
 
       <div class="pa-eyebrow has_fade_anim">
-        <span></span><?php esc_html_e( 'Layihələr və Keyslar', 'ondigital' ); ?>
+        <span></span><?php echo esc_html( $pa_badge ); ?>
       </div>
 
       <h1 class="pa-title has_text_move_anim">
-        <?php esc_html_e( 'Nəticə', 'ondigital' ); ?><br>
-        <em><?php esc_html_e( 'danışır.', 'ondigital' ); ?></em>
+        <?php echo esc_html( $pa_title ); ?>
       </h1>
 
       <div class="pa-hero-bottom">
         <p class="pa-desc has_fade_anim">
-          <?php esc_html_e( 'Hər layihə real problemlə başlayır, ölçülə bilən nəticə ilə bitir. Boş göstəricilər yox — yalnız böyüməni əks etdirən rəqəmlər.', 'ondigital' ); ?>
+          <?php echo esc_html( $pa_desc ); ?>
         </p>
         <div class="pa-stats has_fade_anim">
           <div class="pa-stat">
