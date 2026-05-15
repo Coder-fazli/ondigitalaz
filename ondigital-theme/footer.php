@@ -77,19 +77,6 @@ $footer_terms_url  = ondigital_get_option( 'footer_terms_url_' . $lang, '' );
                 <p class="info-text"><?php echo esc_html( $footer_tagline ); ?></p>
             <?php endif; ?>
 
-            <?php if ( $footer_partner_label || $footer_partner_badge ) : ?>
-                <div class="footer-partner">
-                    <?php if ( $footer_partner_label ) : ?>
-                        <span class="footer-partner-label"><?php echo esc_html( $footer_partner_label ); ?></span>
-                    <?php endif; ?>
-                    <?php if ( $footer_partner_badge ) :
-                        $badge_url = wp_get_attachment_image_url( $footer_partner_badge, 'medium' );
-                        if ( $badge_url ) : ?>
-                            <img src="<?php echo esc_url( $badge_url ); ?>" alt="<?php esc_attr_e( 'Partner Badge', 'ondigital' ); ?>" class="footer-partner-badge">
-                        <?php endif;
-                    endif; ?>
-                </div>
-            <?php endif; ?>
         </div>
 
         <!-- Column 2: Quick Links -->

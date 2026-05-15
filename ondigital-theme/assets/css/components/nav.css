@@ -139,6 +139,19 @@
     }
 }
 
+/* Mobile footer column order — quicklinks directly under logo */
+@media only screen and (max-width: 767px) {
+    .footer-area .footer-area-inner {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .footer-col-brand      { order: 1; }
+    .footer-col-quicklinks { order: 2; }
+    .footer-col-services   { order: 3; }
+    .footer-col-contact    { order: 4; width: 100%; }
+    .footer-col-social     { order: 5; width: 100%; }
+}
+
 /* Header — align logo with hero content (80px from edge) */
 header .container.large {
     padding-left: 80px !important;
