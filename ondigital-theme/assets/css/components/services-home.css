@@ -17,7 +17,7 @@
     grid-template-columns: 1fr auto !important;
 }
 
-/* FAQ — move sidebar text below questions on mobile */
+/* FAQ — move sidebar text below questions on mobile, match width */
 @media only screen and (max-width: 767px) {
     .faq-area .section-content {
         display: flex !important;
@@ -25,9 +25,17 @@
     }
     .faq-area .section-content .content-last {
         order: 1;
+        width: 100%;
     }
     .faq-area .section-content .btn-wrapper {
         order: 2;
+        width: 100%;
+        margin-inline-start: 0 !important;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+    }
+    .faq-area .section-content .text-wrapper {
+        margin-inline-start: 0 !important;
     }
 }
 
