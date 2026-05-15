@@ -46,6 +46,17 @@
     }
 }
 
+/* Mobile — reduce large section-spacing-top gaps */
+@media only screen and (max-width: 767px) {
+    .project-area .project-area-inner,
+    .report-area .report-area-inner,
+    .counter-area .counter-area-inner,
+    .testimonial-area .testimonial-area-inner,
+    .blog-area .blog-area-inner {
+        padding-top: 48px !important;
+    }
+}
+
 /* Fix project/testimonial slider nav hover — black on black bug */
 .slider-nav .nav-icon:hover,
 .testimonial-area .slider-nav [role=button]:hover,
