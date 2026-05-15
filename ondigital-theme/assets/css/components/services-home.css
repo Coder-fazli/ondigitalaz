@@ -31,11 +31,18 @@
         order: 2;
         width: 100%;
         margin-inline-start: 0 !important;
-        padding-top: 24px;
-        border-top: 1px solid var(--border);
     }
     .faq-area .section-content .text-wrapper {
         margin-inline-start: 0 !important;
+    }
+    /* Full width button so separator line matches accordion width */
+    .faq-area .section-content .wc-btn-underline {
+        max-width: none !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        gap: 16px !important;
     }
 }
 
