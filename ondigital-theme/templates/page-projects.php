@@ -19,13 +19,10 @@ add_action( 'wp_enqueue_scripts', function() {
 
 get_header();
 
-// Section 1: Hero + Work Grid
+// Section 1: Hero + Partners marquee + Work Grid
 get_template_part( 'template-parts/projects/hero' );
 
-// Section 2: Partners (3 rows)
-get_template_part( 'template-parts/projects/partners' );
-
-// Section 3: CTA (shared)
+// Section 2: CTA (shared)
 get_template_part( 'template-parts/shared/cta' );
 
 get_footer();
