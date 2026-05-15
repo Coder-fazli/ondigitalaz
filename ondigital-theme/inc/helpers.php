@@ -87,9 +87,12 @@ function ondigital_get_social_links(): array {
         $links[ $key ] = esc_url( $url );
     }
 
-    // youtube only if explicitly set (no default)
+    // youtube + whatsapp only if explicitly set (no default)
     if ( ! empty( $options['youtube'] ) ) {
         $links['youtube'] = esc_url( $options['youtube'] );
+    }
+    if ( ! empty( $options['whatsapp'] ) ) {
+        $links['whatsapp'] = esc_url( $options['whatsapp'] );
     }
 
     return $links;

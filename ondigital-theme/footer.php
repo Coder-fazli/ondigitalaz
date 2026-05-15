@@ -165,6 +165,7 @@ $footer_terms_url  = ondigital_get_option( 'footer_terms_url_' . $lang, '' );
                 'youtube'   => 'fa-youtube',
                 'behance'   => 'fa-behance',
                 'pinterest' => 'fa-pinterest-p',
+                'whatsapp'  => 'fa-whatsapp',
             );
             ?>
             <div class="footer-social-in-contact">

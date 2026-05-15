@@ -67,6 +67,7 @@
                             'youtube'   => 'fa-youtube',
                             'behance'   => 'fa-behance',
                             'pinterest' => 'fa-pinterest-p',
+                            'whatsapp'  => 'fa-whatsapp',
                         );
                         foreach ( $social_links as $platform => $url ) :
                             $icon = $social_icons[ $platform ] ?? '';

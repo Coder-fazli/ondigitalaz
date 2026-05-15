@@ -114,6 +114,18 @@
 }
 
 /* =============================================================================
+   Footer social icons — 4 per row always
+   ============================================================================= */
+
+.footer-col-social .social-links,
+.footer-social-in-contact .social-links {
+    display: grid !important;
+    grid-template-columns: repeat(4, auto) !important;
+    justify-content: start !important;
+    gap: 10px !important;
+}
+
+/* =============================================================================
    Footer — match hero content width (80px each side, max 1280px)
    ============================================================================= */
 

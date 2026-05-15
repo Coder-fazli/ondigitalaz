@@ -53,6 +53,10 @@ if ( ! defined( 'ABSPATH' ) ) {
             <?php od_url( 'youtube', 'YouTube', $options ); ?>
             <?php od_url( 'behance', 'Behance', $options ); ?>
         </div>
+        <div class="od-field-row">
+            <?php od_url( 'whatsapp', 'WhatsApp', $options ); ?>
+            <?php od_url( 'pinterest', 'Pinterest', $options ); ?>
+        </div>
     <?php od_card_close(); ?>
 
 </div>
