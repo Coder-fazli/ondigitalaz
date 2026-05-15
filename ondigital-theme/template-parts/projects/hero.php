@@ -55,7 +55,7 @@ $all_terms = get_terms( array(
       </div>
 
       <h1 class="pa-title has_text_move_anim">
-        <?php echo esc_html( $pa_title ); ?>
+        <?php echo wp_kses_post( $pa_title ); ?>
       </h1>
 
       <div class="pa-hero-bottom">

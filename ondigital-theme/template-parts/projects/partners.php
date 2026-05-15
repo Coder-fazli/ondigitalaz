@@ -5,6 +5,8 @@
  * @package OnDigital
  */
 
+$partners_title = ondigital_get_option( 'partners_title', "We worked with the world's best companies" );
+
 $default_brands = array(
     array( 'image_light' => 0, 'image_dark' => 0, 'alt' => 'Partner 1', '_fallback_light' => 'img-s-13', '_fallback_dark' => 'img-s-13-light' ),
     array( 'image_light' => 0, 'image_dark' => 0, 'alt' => 'Partner 2', '_fallback_light' => 'img-s-14', '_fallback_dark' => 'img-s-14-light' ),
@@ -40,13 +42,24 @@ foreach ( $brands as $brand ) :
     $logo_items .= '</div>';
 endforeach;
 ?>
-<div class="pa-partners">
-    <div class="client-slider">
-        <!-- Row 1: scrolls left -->
-        <div class="logo-marquee-track" data-direction="left"><?php echo $logo_items; ?></div>
-        <!-- Row 2: scrolls right -->
-        <div class="logo-marquee-track" data-direction="right"><?php echo $logo_items; ?></div>
-        <!-- Row 3: scrolls left -->
-        <div class="logo-marquee-track" data-direction="left"><?php echo $logo_items; ?></div>
+<div class="clients-area">
+    <div class="container">
+        <div class="clients-area-inner">
+            <div class="section-header">
+                <div class="section-title-wrapper">
+                    <div class="title-wrapper">
+                        <h2 class="section-title has_word_anim"><?php echo esc_html( $partners_title ); ?></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="client-slider has_fade_anim">
+                <!-- Row 1: scrolls left -->
+                <div class="logo-marquee-track" data-direction="left"><?php echo $logo_items; ?></div>
+                <!-- Row 2: scrolls right -->
+                <div class="logo-marquee-track" data-direction="right"><?php echo $logo_items; ?></div>
+                <!-- Row 3: scrolls left -->
+                <div class="logo-marquee-track" data-direction="left"><?php echo $logo_items; ?></div>
+            </div>
+        </div>
     </div>
 </div>

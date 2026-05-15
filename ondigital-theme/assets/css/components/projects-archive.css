@@ -227,17 +227,6 @@
   .pa-hero-lottie { display: none; }
 }
 
-/* ── Partners 3-row marquee ── */
-.pa-partners {
-  background: #fff;
-  padding: 0;
-  overflow: hidden;
-  border-top: 1px solid rgba(0,0,0,.06);
-}
-.pa-partners .client-slider {
-  overflow: hidden;
-}
-
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .pa-hero, .pa-filter, .pa-grid { padding-left: 40px; padding-right: 40px; }
