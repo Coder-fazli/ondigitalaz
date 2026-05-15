@@ -16,16 +16,15 @@ $langs = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
 
     <!-- Brand Column -->
     <?php od_card_open( __( 'Brand Column', 'ondigital' ), 'dashicons-admin-appearance' ); ?>
+        <?php od_image( 'footer_logo', __( 'Footer Logo', 'ondigital' ), $options ); ?>
+        <?php od_divider(); ?>
         <?php od_lang_open(); ?>
         <?php foreach ( $langs as $lang => $label ) : ?>
             <?php od_lang_pane( $lang ); ?>
                 <?php od_textarea( 'footer_tagline_' . $lang, __( 'Tagline', 'ondigital' ), $options ); ?>
-                <?php od_text( 'footer_partner_label_' . $lang, __( 'Partner Label (e.g. Partner with)', 'ondigital' ), $options ); ?>
             <?php od_lang_pane_close(); ?>
         <?php endforeach; ?>
         <?php od_lang_close(); ?>
-        <?php od_divider(); ?>
-        <?php od_image( 'footer_partner_badge', __( 'Partner Badge Image', 'ondigital' ), $options ); ?>
     <?php od_card_close(); ?>
 
     <!-- Quick Links -->

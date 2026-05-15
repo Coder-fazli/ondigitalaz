@@ -57,19 +57,31 @@ $footer_terms_url  = ondigital_get_option( 'footer_terms_url_' . $lang, '' );
 <footer class="footer-area">
     <div class="footer-area-inner">
 
-        <!-- Column 1: Brand + Partner -->
+        <!-- Column 1: Brand -->
         <div class="footer-widget-wrapper footer-col-brand">
             <div class="footer-logo">
-                <?php if ( has_custom_logo() ) :
+                <?php
+                $footer_logo_id  = ondigital_get_option( 'footer_logo' );
+                $footer_logo_url = $footer_logo_id ? wp_get_attachment_image_url( $footer_logo_id, 'full' ) : '';
+
+                if ( $footer_logo_url ) : ?>
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+                        <img src="<?php echo esc_url( $footer_logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" style="max-width:160px;height:auto;">
+                    </a>
+                <?php elseif ( has_custom_logo() ) :
                     $logo_id    = get_theme_mod( 'custom_logo' );
                     $logo_url   = wp_get_attachment_image_url( $logo_id, 'full' );
                     $logo_w     = absint( get_theme_mod( 'ondigital_logo_width', 150 ) );
                     $logo_h     = absint( get_theme_mod( 'ondigital_logo_height', 0 ) );
                     $logo_style = 'width:' . $logo_w . 'px;height:' . ( $logo_h ? $logo_h . 'px' : 'auto' ) . ';';
                 ?>
-                    <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" style="<?php echo esc_attr( $logo_style ); ?>">
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+                        <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" style="<?php echo esc_attr( $logo_style ); ?>">
+                    </a>
                 <?php else : ?>
-                    <h2 class="site-title"><?php bloginfo( 'name' ); ?></h2>
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+                        <h2 class="site-title"><?php bloginfo( 'name' ); ?></h2>
+                    </a>
                 <?php endif; ?>
             </div>
 
