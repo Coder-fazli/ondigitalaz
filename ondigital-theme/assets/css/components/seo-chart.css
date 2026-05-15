@@ -98,3 +98,38 @@
 .od-period-btn.active .od-btn-label {
     color: #fff;
 }
+
+/* ── Mobile ── */
+@media only screen and (max-width: 767px) {
+    #od-seo-chart-wrap {
+        min-height: 280px;
+    }
+
+    /* Move period buttons below chart, horizontal row */
+    .od-chart-periods {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    .od-period-btn {
+        flex: 1;
+        width: auto;
+        padding: 10px 12px;
+        border-radius: 8px;
+    }
+
+    .od-btn-top {
+        margin-bottom: 4px;
+    }
+
+    .od-btn-badge {
+        font-size: 12px;
+    }
+
+    .od-btn-label {
+        font-size: 11px;
+    }
+}
