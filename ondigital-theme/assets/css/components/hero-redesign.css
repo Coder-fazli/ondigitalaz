@@ -427,7 +427,7 @@
 
 @media only screen and (max-width: 767px) {
     .ond-hero {
-        padding: 64px 24px 32px;
+        padding: 120px 24px 32px;
         min-height: unset;
     }
     .ond-hero__content {
@@ -504,9 +504,13 @@
     }
     .ond-hero__partner {
         flex-basis: 100%;
-        height: 40px;
+        width: auto;
+        height: auto;
+        max-height: 44px;
+        object-fit: contain;
+        object-position: left center;
         margin-left: 0;
-        margin-top: 8px;
+        margin-top: 12px;
     }
     .ond-hero__bars { height: 90px; gap: 8px; }
     .ond-bar { width: 16px; }
