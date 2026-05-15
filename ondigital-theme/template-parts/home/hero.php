@@ -35,10 +35,6 @@ $stat4_label  = ondigital_get_option( 'hero_stat4_label', 'Müştəri Məmnuniyy
     <!-- Left: Content -->
     <div class="ond-hero__content">
 
-        <div class="ond-hero__badge">
-            <span class="ond-hero__badge-dot"></span>
-            <?php echo esc_html( $hero_badge ); ?>
-        </div>
 
         <h1 class="ond-hero__title">
             <span class="ond-hero__title-line ond-hero__title-line--1"><?php echo esc_html( $hero_h1_line1 ); ?></span>
