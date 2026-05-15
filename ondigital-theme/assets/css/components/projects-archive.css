@@ -227,6 +227,21 @@
   .pa-hero-lottie { display: none; }
 }
 
+/* ── Partners section title — small centered label like home page ── */
+.pa-section ~ .clients-area .section-header,
+.clients-area .section-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.pa-section ~ .clients-area .section-title {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase !important;
+  color: var(--pa-muted) !important;
+  line-height: 1 !important;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .pa-hero, .pa-filter, .pa-grid { padding-left: 40px; padding-right: 40px; }

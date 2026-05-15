@@ -45,6 +45,13 @@ endforeach;
 <div class="clients-area">
     <div class="container">
         <div class="clients-area-inner">
+            <div class="section-header">
+                <div class="section-title-wrapper">
+                    <div class="title-wrapper">
+                        <h2 class="section-title has_word_anim"><?php echo esc_html( $partners_title ); ?></h2>
+                    </div>
+                </div>
+            </div>
             <div class="client-slider has_fade_anim">
                 <!-- Row 1: scrolls left -->
                 <div class="logo-marquee-track" data-direction="left"><?php echo $logo_items; ?></div>
