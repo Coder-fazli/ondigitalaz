@@ -118,23 +118,36 @@
    ============================================================================= */
 
 .footer-area .footer-area-inner {
-    max-width: 1280px;
+    max-width: 1600px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 60px;
+    padding-right: 60px;
 }
 
 @media only screen and (max-width: 991px) {
     .footer-area .footer-area-inner {
-        padding-left: 40px;
-        padding-right: 40px;
+        padding-left: 32px;
+        padding-right: 32px;
     }
 }
 
 @media only screen and (max-width: 576px) {
     .footer-area .footer-area-inner {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* Header — align logo with hero content (80px from edge) */
+header .container.large {
+    padding-left: 80px !important;
+    padding-right: 80px !important;
+}
+
+@media only screen and (max-width: 1199px) {
+    header .container.large {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
     }
 }
