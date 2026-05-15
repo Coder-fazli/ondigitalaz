@@ -7,6 +7,11 @@
    Global — all home page sections match hero width (80px each side)
    ============================================================================= */
 
+/* Remove max-width constraint on projects section title */
+.project-area .section-title {
+    max-width: none !important;
+}
+
 .body-seo-agency .container {
     max-width: 1280px;
 }

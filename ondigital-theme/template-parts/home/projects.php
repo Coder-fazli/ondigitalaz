@@ -36,11 +36,6 @@ $static_projects = array(
                             </h2>
                         </div>
                     </div>
-                    <div class="text-wrapper">
-                        <p class="text has_fade_anim" data-delay="0.30">
-                            <?php esc_html_e( 'Our design services starts and ends with a best-in-class experience strategy that builds to provide you with an informed response.', 'ondigital' ); ?>
-                        </p>
-                    </div>
                     <div class="slider-nav has_fade_anim" data-delay="0.45">
                         <div class="project-button-prev nav-icon">
                             <i class="fa-solid fa-arrow-left"></i>
