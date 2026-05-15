@@ -12,6 +12,11 @@
     max-width: none !important;
 }
 
+/* Push arrows to far right — was 3-col grid, middle text removed */
+.project-area .section-header {
+    grid-template-columns: 1fr auto !important;
+}
+
 /* Fix project/testimonial slider nav hover — black on black bug */
 .slider-nav .nav-icon:hover,
 .testimonial-area .slider-nav [role=button]:hover,
