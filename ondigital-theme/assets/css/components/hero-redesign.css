@@ -433,14 +433,14 @@
     .ond-hero__content { padding-left: 0; }
     .ond-hero__badge { display: none; }
     .ond-hero__stats { margin: 0 12px; display: grid; grid-template-columns: 1fr 1fr; border-radius: 24px; }
-    .ond-hero__stat { padding: 24px 16px; border-bottom: 1px solid rgba(0,0,0,.08); }
+    .ond-hero__stat { padding: 20px 16px; border-bottom: 1px solid rgba(255,255,255,.08); }
     .ond-hero__stat:nth-child(2) { border-right: none; }
     .ond-hero__stat:nth-child(3),
     .ond-hero__stat:nth-child(4) { border-bottom: none; }
     .ond-hero__stat:nth-child(4) { border-right: none; }
-    .ond-hero__stat-num { font-size: 28px; }
-    .ond-hero__stat-num sup { font-size: 14px; }
-    .ond-hero__stat-label { font-size: 10px; }
+    .ond-hero__stat-num { font-size: 22px; font-weight: 400; letter-spacing: -.01em; }
+    .ond-hero__stat-num sup { font-size: 12px; }
+    .ond-hero__stat-label { font-size: 9px; letter-spacing: .08em; }
 
     .ond-hero__title { font-size: 40px; }
     .ond-hero__desc { font-size: 15px; margin-bottom: 20px; }
