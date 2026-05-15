@@ -17,6 +17,20 @@
     grid-template-columns: 1fr auto !important;
 }
 
+/* FAQ — move sidebar text below questions on mobile */
+@media only screen and (max-width: 767px) {
+    .faq-area .section-content {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .faq-area .section-content .content-last {
+        order: 1;
+    }
+    .faq-area .section-content .btn-wrapper {
+        order: 2;
+    }
+}
+
 /* Fix project/testimonial slider nav hover — black on black bug */
 .slider-nav .nav-icon:hover,
 .testimonial-area .slider-nav [role=button]:hover,
