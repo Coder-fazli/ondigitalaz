@@ -144,13 +144,36 @@
     .footer-area .footer-area-inner {
         display: flex !important;
         flex-wrap: wrap !important;
-        grid-template-columns: unset !important;
+        gap: 32px 0 !important;
     }
-    .footer-col-brand      { order: 1; width: 100%; }
-    .footer-col-quicklinks { order: 2; width: 50%; }
-    .footer-col-services   { order: 3; width: 50%; }
-    .footer-col-contact    { order: 4; width: 100%; }
-    .footer-col-social     { order: 5; width: 100%; }
+    .footer-area .footer-col-brand {
+        order: 1;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .footer-area .footer-col-quicklinks {
+        order: 2;
+        flex: 0 0 50%;
+        max-width: 50%;
+        box-sizing: border-box;
+        padding-right: 16px;
+    }
+    .footer-area .footer-col-services {
+        order: 3;
+        flex: 0 0 50%;
+        max-width: 50%;
+        box-sizing: border-box;
+    }
+    .footer-area .footer-col-contact {
+        order: 4;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .footer-area .footer-col-social {
+        order: 5;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
 
 /* Header — align logo with hero content (80px from edge) */
