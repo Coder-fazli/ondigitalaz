@@ -12,6 +12,15 @@
     max-width: none !important;
 }
 
+/* Fix project/testimonial slider nav hover — black on black bug */
+.slider-nav .nav-icon:hover,
+.testimonial-area .slider-nav [role=button]:hover,
+.nav-icon:hover {
+    background-color: #c2f971 !important;
+    border-color: #c2f971 !important;
+    color: #121212 !important;
+}
+
 .body-seo-agency .container {
     max-width: 1280px;
 }
