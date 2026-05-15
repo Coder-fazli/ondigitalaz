@@ -50,10 +50,6 @@ $all_terms = get_terms( array(
 
     <div class="pa-hero-inner">
 
-      <div class="pa-eyebrow has_fade_anim">
-        <span></span><?php echo esc_html( $pa_badge ); ?>
-      </div>
-
       <h1 class="pa-title has_text_move_anim">
         <?php echo wp_kses_post( $pa_title ); ?>
       </h1>

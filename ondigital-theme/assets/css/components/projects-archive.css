@@ -214,17 +214,31 @@
 /* ── Lottie decoration ── */
 .pa-hero-lottie {
   position: absolute;
-  top: 60px;
+  top: 140px;
   right: 40px;
   pointer-events: none;
   z-index: 0;
-  opacity: .55;
+  opacity: .6;
 }
 @media (max-width: 1024px) {
   .pa-hero-lottie { opacity: .3; right: 0; }
 }
 @media (max-width: 767px) {
   .pa-hero-lottie { display: none; }
+}
+
+/* ── Partners dark wrapper ── */
+.pa-clients-dark {
+  background: #121212;
+}
+.pa-clients-dark .section-title {
+  color: #fff;
+}
+.pa-clients-dark .clients-area-inner {
+  border-color: rgba(255,255,255,.08);
+}
+.pa-clients-dark .logo-marquee-track + .logo-marquee-track {
+  border-color: rgba(255,255,255,.08);
 }
 
 /* ── Responsive ── */
