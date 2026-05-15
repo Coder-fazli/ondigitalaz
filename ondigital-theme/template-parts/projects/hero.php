@@ -35,6 +35,19 @@ $all_terms = get_terms( array(
   <!-- ── Hero ── -->
   <div class="pa-hero">
     <div class="pa-hero-line"></div>
+
+    <!-- Lottie animation — decorative top-right -->
+    <div class="pa-hero-lottie">
+        <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+        <dotlottie-player
+            src="<?php echo esc_url( ONDIGITAL_URI . '/assets/animations/hero-animation.lottie' ); ?>"
+            background="transparent"
+            speed="1"
+            style="width:420px;height:420px;"
+            loop autoplay>
+        </dotlottie-player>
+    </div>
+
     <div class="pa-hero-inner">
 
       <div class="pa-eyebrow has_fade_anim">
