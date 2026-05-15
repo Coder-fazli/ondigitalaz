@@ -112,3 +112,29 @@
     color: inherit;
     line-height: 1;
 }
+
+/* =============================================================================
+   Footer — match hero content width (80px each side, max 1280px)
+   ============================================================================= */
+
+.footer-area .footer-area-inner {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+@media only screen and (max-width: 991px) {
+    .footer-area .footer-area-inner {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .footer-area .footer-area-inner {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
