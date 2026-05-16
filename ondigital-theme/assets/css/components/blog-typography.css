@@ -185,10 +185,129 @@
     color: #444;
 }
 
+/* ── Post header (title + meta below image) ── */
+.blog-post-header {
+    max-width: 860px;
+    margin: 24px auto 40px;
+}
+
+.blog-post-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.blog-cat {
+    background: #c2f971;
+    color: #0a0a0a;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    padding: 4px 12px;
+    border-radius: 100px;
+}
+
+.blog-date,
+.blog-read-time {
+    font-size: 13px;
+    color: rgba(0,0,0,.45);
+}
+
+.blog-date::before,
+.blog-read-time::before {
+    content: '·';
+    margin-right: 8px;
+    color: rgba(0,0,0,.25);
+}
+
+.blog-cat + .blog-date::before { display: none; }
+
+.blog-post-title {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -.03em;
+    color: #0a0a0a;
+    margin: 0;
+}
+
+/* ── Table of Contents ── */
+.blog-toc {
+    position: sticky;
+    top: 100px;
+    background: #f8f8f6;
+    border-radius: 14px;
+    padding: 20px 20px 16px;
+    margin-bottom: 32px;
+}
+
+.blog-toc-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(0,0,0,.4);
+    margin-bottom: 14px;
+}
+
+.blog-toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.blog-toc-list li a {
+    font-size: 13px;
+    color: rgba(0,0,0,.55);
+    text-decoration: none;
+    line-height: 1.5;
+    display: block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background .2s, color .2s;
+}
+
+.blog-toc-list li a:hover,
+.blog-toc-list li a.active {
+    background: #fff;
+    color: #0a0a0a;
+}
+
+.blog-toc-list li.toc-sub a {
+    padding-left: 20px;
+    font-size: 12px;
+}
+
 /* ── Mobile ── */
+@media (max-width: 991px) {
+    .blogdetails__wrapper {
+        flex-direction: column;
+    }
+    .blogdetails-contentleft {
+        width: 100%;
+    }
+    .blog-toc {
+        position: static;
+        margin-bottom: 24px;
+    }
+}
+
 @media (max-width: 767px) {
     .blog-details-area {
         padding-bottom: 64px;
+    }
+    .blog-post-title {
+        font-size: 26px;
+    }
+    .blog-details-area .blog-thumb {
+        border-radius: 12px;
+        margin: 20px auto 28px;
     }
     .blogdetails-contentright .text-wrapper h2 { font-size: 22px; margin-top: 36px; }
     .blogdetails-contentright .text-wrapper h3 { font-size: 19px; margin-top: 28px; }
