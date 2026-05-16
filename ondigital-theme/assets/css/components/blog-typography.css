@@ -59,14 +59,16 @@
 .blogdetails-contentright {
     flex: 1 !important;
     min-width: 0 !important;
+    max-width: 720px !important;
 }
 
-/* ── Table of Contents — JS sticky ── */
+/* ── Table of Contents — JS sticky via transform ── */
 .blog-toc {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 240px;
+    will-change: transform;
     background: #fff;
     border: 1px solid rgba(0,0,0,.08);
     border-radius: 16px;

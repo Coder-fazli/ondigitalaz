@@ -161,35 +161,27 @@ if ( ! empty( $categories ) ) :
         tocList.appendChild(li);
     });
 
-    // Sticky TOC via JS (position:sticky broken by GSAP ScrollSmoother overflow:hidden)
-    var tocBox  = document.getElementById('blog-toc');
-    var leftCol = document.querySelector('.blogdetails-contentleft');
-    var wrapper = document.querySelector('.blogdetails__wrapper');
-    var OFFSET  = 110;
+    // Sticky TOC — transform:translateY (GPU, no layout reflow = smooth)
+    var tocBox     = document.getElementById('blog-toc');
+    var wrapper    = document.querySelector('.blogdetails__wrapper');
+    var OFFSET     = 110;
+    var rafPending = false;
 
     function updateToc() {
-        if (!tocBox || !wrapper || !leftCol) return;
+        if (!tocBox || !wrapper) return;
 
-        // On mobile: TOC is static, just highlight active
         if (window.innerWidth <= 991) {
-            tocBox.style.position = 'relative';
-            tocBox.style.top = 'auto';
+            tocBox.style.transform = 'none';
         } else {
-            var scrollY       = window.scrollY;
-            var wrapperTop    = wrapper.getBoundingClientRect().top + scrollY;
-            var wrapperBottom = wrapperTop + wrapper.offsetHeight;
-            var tocH          = tocBox.offsetHeight;
-            var maxTop        = wrapperBottom - tocH - wrapperTop;
-
-            if (scrollY + OFFSET >= wrapperTop) {
-                var newTop = Math.min(scrollY + OFFSET - wrapperTop, maxTop);
-                tocBox.style.position = 'absolute';
-                tocBox.style.top      = Math.max(0, newTop) + 'px';
-                tocBox.style.width    = leftCol.offsetWidth + 'px';
-            } else {
-                tocBox.style.position = 'absolute';
-                tocBox.style.top      = '0px';
+            var scrollY      = window.scrollY;
+            var wrapperTop   = wrapper.getBoundingClientRect().top + scrollY;
+            var maxTranslate = wrapper.offsetHeight - tocBox.offsetHeight;
+            var translate    = 0;
+            if (scrollY + OFFSET > wrapperTop) {
+                translate = Math.min(scrollY + OFFSET - wrapperTop, Math.max(0, maxTranslate));
+                translate = Math.max(0, translate);
             }
+            tocBox.style.transform = 'translateY(' + translate + 'px)';
         }
 
         // Highlight active heading
@@ -204,6 +196,12 @@ if ( ! empty( $categories ) ) :
         });
     }
 
+    function onScroll() {
+        if (rafPending) return;
+        rafPending = true;
+        requestAnimationFrame(function(){ updateToc(); rafPending = false; });
+    }
+
     // Wrap tables in scrollable container for mobile
     content.querySelectorAll('table').forEach(function(table){
         var wrap = document.createElement('div');
@@ -212,9 +210,9 @@ if ( ! empty( $categories ) ) :
         wrap.appendChild(table);
     });
 
-    window.addEventListener('scroll', updateToc);
+    window.addEventListener('scroll', onScroll, { passive: true });
     var smoothContent = document.getElementById('smooth-content');
-    if (smoothContent) smoothContent.addEventListener('scroll', updateToc);
+    if (smoothContent) smoothContent.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', updateToc);
     updateToc();
 })();
