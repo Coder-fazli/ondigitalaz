@@ -37,13 +37,13 @@ function od_card_close(): void {
 function od_lang_open(): void {
     echo '<div class="od-lang-wrap">';
     echo '<div class="od-lang-tabs">';
-    echo '<span class="od-lang-tab active" data-lang="az">🇦🇿 AZ</span>';
-    echo '<span class="od-lang-tab" data-lang="en">🇬🇧 EN</span>';
+    echo '<span class="od-lang-tab active" data-lang="en">🇬🇧 EN</span>';
+    echo '<span class="od-lang-tab" data-lang="az">🇦🇿 AZ</span>';
     echo '</div>';
 }
 
 function od_lang_pane( string $lang ): void {
-    $active = $lang === 'az' ? 'active' : '';
+    $active = $lang === 'en' ? 'active' : '';
     echo '<div class="od-lang-pane ' . esc_attr( $active ) . '" data-lang="' . esc_attr( $lang ) . '">';
 }
 

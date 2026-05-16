@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$langs = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
+$langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
 ?>
 <div class="od-section active" data-section="footer">
 

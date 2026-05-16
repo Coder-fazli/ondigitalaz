@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$langs    = array( 'az' => '🇦🇿 AZ', 'en' => '🇬🇧 EN' );
+$langs    = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
 $about_faq = ondigital_get_repeater( 'about_faq', array() );
 ?>
 <div class="od-section active" data-section="about">
@@ -34,8 +34,8 @@ $about_faq = ondigital_get_repeater( 'about_faq', array() );
             echo '<div class="od-repeater-row-head"><span>' . sprintf( __( 'FAQ %d', 'ondigital' ), $i + 1 ) . '</span>';
             echo '<div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>';
             echo '<div class="od-lang-wrap"><div class="od-lang-tabs">';
-            echo '<span class="od-lang-tab active" data-lang="az">🇦🇿 AZ</span>';
-            echo '<span class="od-lang-tab" data-lang="en">🇬🇧 EN</span>';
+            echo '<span class="od-lang-tab" data-lang="az">🇦🇿 AZ</span>';
+            echo '<span class="od-lang-tab active" data-lang="en">🇬🇧 EN</span>';
             echo '</div>';
             foreach ( array( 'az', 'en' ) as $lang ) :
                 $active = $lang === 'az' ? 'active' : '';
