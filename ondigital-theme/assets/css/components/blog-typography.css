@@ -146,5 +146,17 @@
     .blogdetails-contentright .text-wrapper h3 { font-size: 18px; margin-top: 24px; }
     .blogdetails-contentright .text-wrapper p  { font-size: 15px; }
     .blogdetails-contentright .text-wrapper blockquote { padding: 16px 20px; }
-    .blogdetails-contentright .text-wrapper table { font-size: 13px; overflow-x: auto; display: block; }
+    .blogdetails-contentright .text-wrapper .table-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 28px 0;
+        border-radius: 12px;
+        border: 1px solid rgba(0,0,0,.08);
+    }
+    .blogdetails-contentright .text-wrapper .table-scroll table {
+        margin: 0;
+        white-space: nowrap;
+        min-width: 500px;
+        border-radius: 0;
+    }
 }

@@ -204,6 +204,14 @@ if ( ! empty( $categories ) ) :
         });
     }
 
+    // Wrap tables in scrollable container for mobile
+    content.querySelectorAll('table').forEach(function(table){
+        var wrap = document.createElement('div');
+        wrap.className = 'table-scroll';
+        table.parentNode.insertBefore(wrap, table);
+        wrap.appendChild(table);
+    });
+
     window.addEventListener('scroll', updateToc);
     var smoothContent = document.getElementById('smooth-content');
     if (smoothContent) smoothContent.addEventListener('scroll', updateToc);
