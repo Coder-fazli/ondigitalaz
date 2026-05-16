@@ -160,6 +160,17 @@
     }
     .blogdetails-contentright .text-wrapper .table-scroll td,
     .blogdetails-contentright .text-wrapper .table-scroll th {
-        white-space: nowrap;
+        white-space: nowrap !important;
+    }
+    /* Fallback — target table directly even without .table-scroll wrapper */
+    .blogdetails-contentright .text-wrapper table td,
+    .blogdetails-contentright .text-wrapper table th {
+        white-space: nowrap !important;
+    }
+    .blogdetails-contentright .text-wrapper table {
+        display: block !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        width: 100% !important;
     }
 }
