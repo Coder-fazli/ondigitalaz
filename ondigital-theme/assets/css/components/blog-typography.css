@@ -21,7 +21,7 @@
 .blog-post-header { max-width: 860px; margin: 24px auto 40px; }
 
 .blog-post-meta {
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 24px;
     flex-wrap: wrap; margin-bottom: 16px;
 }
 .blog-cat {
@@ -38,7 +38,7 @@
 .blog-share {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
     flex-wrap: wrap;
     margin-left: auto;
 }
