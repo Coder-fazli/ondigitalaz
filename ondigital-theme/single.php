@@ -161,18 +161,47 @@ if ( ! empty( $categories ) ) :
         tocList.appendChild(li);
     });
 
-    // Highlight active heading on scroll
-    window.addEventListener('scroll', function(){
-        var scrollY = window.scrollY + 120;
+    // Sticky TOC via JS (position:sticky broken by GSAP ScrollSmoother overflow:hidden)
+    var tocBox    = document.getElementById('blog-toc');
+    var leftCol   = document.querySelector('.blogdetails-contentleft');
+    var wrapper   = document.querySelector('.blogdetails__wrapper');
+    var OFFSET    = 110;
+
+    function updateToc() {
+        if (!tocBox || !wrapper || !leftCol) return;
+        var scrollY       = window.scrollY;
+        var wrapperTop    = wrapper.getBoundingClientRect().top + scrollY;
+        var wrapperBottom = wrapperTop + wrapper.offsetHeight;
+        var tocH          = tocBox.offsetHeight;
+        var maxTop        = wrapperBottom - tocH - wrapperTop;
+
+        if (scrollY + OFFSET >= wrapperTop) {
+            var newTop = Math.min(scrollY + OFFSET - wrapperTop, maxTop);
+            tocBox.style.position = 'absolute';
+            tocBox.style.top      = Math.max(0, newTop) + 'px';
+            tocBox.style.width    = leftCol.offsetWidth + 'px';
+        } else {
+            tocBox.style.position = 'absolute';
+            tocBox.style.top      = '0px';
+        }
+
+        // Highlight active heading
+        var scrollYH = scrollY + OFFSET + 20;
         headings.forEach(function(h){
             var link = tocList.querySelector('a[href="#' + h.id + '"]');
             if (!link) return;
-            if (h.offsetTop <= scrollY) {
+            if (h.getBoundingClientRect().top + scrollY <= scrollYH) {
                 tocList.querySelectorAll('a').forEach(function(a){ a.classList.remove('active'); });
                 link.classList.add('active');
             }
         });
-    });
+    }
+
+    // Listen on both window scroll and smooth-content scroll
+    window.addEventListener('scroll', updateToc);
+    var smoothContent = document.getElementById('smooth-content');
+    if (smoothContent) smoothContent.addEventListener('scroll', updateToc);
+    updateToc();
 })();
 </script>
 

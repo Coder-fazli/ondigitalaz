@@ -247,7 +247,7 @@
     min-width: 240px !important;
     max-width: 240px !important;
     flex-shrink: 0 !important;
-    position: relative;
+    position: relative !important;
 }
 
 .blogdetails-contentright {
@@ -256,10 +256,10 @@
     max-width: calc(100% - 288px) !important;
 }
 
-/* ── Table of Contents — sticky ── */
+/* ── Table of Contents — sticky via JS ── */
 .blog-toc {
-    position: sticky;
-    top: 100px;
+    position: absolute;
+    top: 0;
     width: 240px;
     background: #fff;
     border: 1px solid rgba(0,0,0,.08);
