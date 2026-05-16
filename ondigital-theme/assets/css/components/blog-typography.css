@@ -155,8 +155,11 @@
     }
     .blogdetails-contentright .text-wrapper .table-scroll table {
         margin: 0;
-        white-space: nowrap;
         min-width: 500px;
         border-radius: 0;
+    }
+    .blogdetails-contentright .text-wrapper .table-scroll td,
+    .blogdetails-contentright .text-wrapper .table-scroll th {
+        white-space: nowrap;
     }
 }
