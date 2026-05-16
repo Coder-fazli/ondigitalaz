@@ -140,12 +140,16 @@ if ( ! empty( $categories ) ) :
 <!-- TOC generator -->
 <script>
 (function(){
-    var content = document.getElementById('post-content');
-    var tocList = document.getElementById('toc-list');
-    var toc     = document.getElementById('blog-toc');
-    if (!content || !tocList) return;
+    var content  = document.getElementById('post-content');
+    var tocList  = document.getElementById('toc-list');
+    var toc      = document.getElementById('blog-toc');
+    var tocEnabled = <?php echo get_post_meta( get_the_ID(), '_toc_enabled', true ) === '0' ? 'false' : 'true'; ?>;
+    var tocDepth   = '<?php echo esc_js( get_post_meta( get_the_ID(), '_toc_depth', true ) ?: 'h2h3' ); ?>';
 
-    var headings = content.querySelectorAll('h2, h3');
+    if (!content || !tocList || !tocEnabled) { if(toc) toc.style.display = 'none'; return; }
+
+    var selector = tocDepth === 'h2' ? 'h2' : tocDepth === 'h3' ? 'h3' : 'h2, h3';
+    var headings = content.querySelectorAll(selector);
     if (headings.length < 2) { toc.style.display = 'none'; return; }
 
     headings.forEach(function(h, i){

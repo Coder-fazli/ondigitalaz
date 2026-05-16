@@ -40,6 +40,70 @@ function ondigital_default_closed_metaboxes(): void {
 // Register Meta Boxes
 // =============================================================================
 
+// =============================================================================
+// Blog Post — Table of Contents metabox
+// =============================================================================
+
+add_action( 'add_meta_boxes', 'ondigital_register_post_toc_metabox' );
+function ondigital_register_post_toc_metabox() {
+    add_meta_box(
+        'ondigital_post_toc',
+        __( 'Table of Contents', 'ondigital' ),
+        'ondigital_post_toc_render',
+        'post',
+        'side',
+        'default'
+    );
+}
+
+function ondigital_post_toc_render( $post ) {
+    wp_nonce_field( 'ondigital_post_toc_save', 'ondigital_post_toc_nonce' );
+    $depth   = get_post_meta( $post->ID, '_toc_depth', true ) ?: 'h2h3';
+    $enabled = get_post_meta( $post->ID, '_toc_enabled', true );
+    $enabled = $enabled === '' ? '1' : $enabled;
+    ?>
+    <p style="margin-bottom:10px;">
+        <label style="display:flex;align-items:center;gap:8px;font-weight:600;">
+            <input type="checkbox" name="_toc_enabled" value="1" <?php checked( $enabled, '1' ); ?>>
+            <?php esc_html_e( 'Show Table of Contents', 'ondigital' ); ?>
+        </label>
+    </p>
+    <p style="margin-bottom:6px;font-weight:600;"><?php esc_html_e( 'Include headings:', 'ondigital' ); ?></p>
+    <p>
+        <label style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <input type="radio" name="_toc_depth" value="h2" <?php checked( $depth, 'h2' ); ?>>
+            <?php esc_html_e( 'H2 only', 'ondigital' ); ?>
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <input type="radio" name="_toc_depth" value="h3" <?php checked( $depth, 'h3' ); ?>>
+            <?php esc_html_e( 'H3 only', 'ondigital' ); ?>
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;">
+            <input type="radio" name="_toc_depth" value="h2h3" <?php checked( $depth, 'h2h3' ); ?>>
+            <?php esc_html_e( 'H2 + H3', 'ondigital' ); ?>
+        </label>
+    </p>
+    <?php
+}
+
+add_action( 'save_post_post', 'ondigital_post_toc_save' );
+function ondigital_post_toc_save( $post_id ) {
+    if ( ! isset( $_POST['ondigital_post_toc_nonce'] ) ) return;
+    if ( ! wp_verify_nonce( $_POST['ondigital_post_toc_nonce'], 'ondigital_post_toc_save' ) ) return;
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+
+    $enabled = isset( $_POST['_toc_enabled'] ) ? '1' : '0';
+    update_post_meta( $post_id, '_toc_enabled', $enabled );
+
+    $depth = sanitize_text_field( $_POST['_toc_depth'] ?? 'h2h3' );
+    if ( ! in_array( $depth, array( 'h2', 'h3', 'h2h3' ), true ) ) $depth = 'h2h3';
+    update_post_meta( $post_id, '_toc_depth', $depth );
+}
+
+// =============================================================================
+// Register Meta Boxes
+// =============================================================================
+
 add_action( 'add_meta_boxes', 'ondigital_register_meta_boxes' );
 function ondigital_register_meta_boxes() {
 
