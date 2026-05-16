@@ -226,6 +226,7 @@ function ondigital_enqueue_page_assets() {
         if ( file_exists( $css ) ) {
             wp_enqueue_style( 'ondigital-blog-details', ONDIGITAL_URI . '/assets/css/pages/blog-details.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
         }
+        wp_enqueue_style( 'ondigital-blog-typography', ONDIGITAL_URI . '/assets/css/components/blog-typography.css', array( 'ondigital-blog-details' ), ONDIGITAL_VERSION );
         $js = ONDIGITAL_DIR . '/assets/js/pages/blog-details.js';
         if ( file_exists( $js ) ) {
             wp_enqueue_script( 'ondigital-blog-details', ONDIGITAL_URI . '/assets/js/pages/blog-details.js', array( 'bootstrap' ), ONDIGITAL_VERSION, true );
