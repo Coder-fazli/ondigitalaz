@@ -10,18 +10,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Get the current language code (az or en).
+ * Get the current language code (en, az, etc.).
+ * Defaults to 'en' when Polylang is not active.
  */
 function ondigital_get_lang(): string {
     if ( function_exists( 'pll_current_language' ) ) {
-        return pll_current_language() ?: 'az';
+        return pll_current_language() ?: 'en';
     }
-    return 'az';
+    return 'en';
 }
 
 /**
  * Read a scalar option from the central options array.
- * Tries language-specific key first, falls back to AZ, then $default.
+ * Tries current language key first, then EN, then AZ, then $default.
  */
 function ondigital_get_option( string $key, string $default = '' ): string {
     static $options = null;
@@ -31,15 +32,20 @@ function ondigital_get_option( string $key, string $default = '' ): string {
 
     $lang     = ondigital_get_lang();
     $lang_key = $key . '_' . $lang;
+    $en_key   = $key . '_en';
     $az_key   = $key . '_az';
 
     if ( ! empty( $options[ $lang_key ] ) ) {
         return $options[ $lang_key ];
     }
+    // Fall back to EN first, then AZ
+    if ( $lang !== 'en' && ! empty( $options[ $en_key ] ) ) {
+        return $options[ $en_key ];
+    }
     if ( ! empty( $options[ $az_key ] ) ) {
         return $options[ $az_key ];
     }
-    // Legacy fallback (no suffix) — covers transition period
+    // Legacy fallback (no suffix)
     if ( ! empty( $options[ $key ] ) ) {
         return $options[ $key ];
     }

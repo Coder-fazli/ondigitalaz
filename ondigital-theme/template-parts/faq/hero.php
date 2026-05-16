@@ -21,7 +21,7 @@ if ( empty( $faqs ) ) {
 }
 
 $options      = get_option( 'ondigital_options', array() );
-$lang         = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
+$lang         = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
 $title        = $options[ 'faq_title_' . $lang ] ?? $options['faq_title_az'] ?? __( 'Tez-tez verilən suallar', 'ondigital' );
 $sidebar_text = $options[ 'faq_sidebar_text_' . $lang ] ?? $options['faq_sidebar_text_az'] ?? __( 'Dizayn, inkişaf və strategiya sahəsində mükəmməl xidmət göstəririk', 'ondigital' );
 $sidebar_url  = $options[ 'faq_sidebar_url_' . $lang ] ?? $options['faq_sidebar_url_az'] ?? home_url( '/elaqe/' );

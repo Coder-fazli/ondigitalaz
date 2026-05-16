@@ -121,10 +121,10 @@ if ( $promo_enabled !== '0' && $promo_enabled !== 0 && false !== $promo_enabled 
     <div class="promo-bar-inner">
         <div class="promo-bar-left">
             <?php
-            $promo_lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
+            $promo_lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
             $promo_text = ondigital_get_option( 'promo_bar_text_' . $promo_lang )
-                        ?: ondigital_get_option( 'promo_bar_text_az' )
-                        ?: ondigital_get_option( 'promo_bar_text_en', 'Are you ready to meet E-adam?' );
+                        ?: ondigital_get_option( 'promo_bar_text_en' )
+                        ?: ondigital_get_option( 'promo_bar_text_az', 'Are you ready to meet E-adam?' );
             ?>
             <p class="promo-message"><?php echo esc_html( $promo_text ); ?></p>
         </div>

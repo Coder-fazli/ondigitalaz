@@ -31,7 +31,7 @@ $icons = array(
     '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
 );
 
-$lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
+$lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
 ?>
 <section class="cs-section cs-process-sec">
     <div class="cs-inner">

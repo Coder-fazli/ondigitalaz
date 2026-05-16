@@ -6,7 +6,7 @@
  */
 
 // Admin options
-$lang         = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
+$lang         = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
 $pa_badge     = ondigital_get_option( 'projects_archive_badge_' . $lang )
              ?: ondigital_get_option( 'projects_archive_badge_az', 'Layihələr və Keyslar' );
 $pa_title     = ondigital_get_option( 'projects_archive_title_' . $lang )

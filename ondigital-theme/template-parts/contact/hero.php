@@ -6,7 +6,7 @@
  */
 
 $options = get_option( 'ondigital_options', array() );
-$lang    = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
+$lang    = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
 $badge   = $options[ 'contact_badge_' . $lang ] ?? $options['contact_badge_az'] ?? __( 'Bizimlə əlaqə', 'ondigital' );
 $title   = $options[ 'contact_title_' . $lang ] ?? $options['contact_title_az'] ?? __( 'Sualınız var? Sadəcə soruşun.', 'ondigital' );
 ?>

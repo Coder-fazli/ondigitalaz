@@ -16,7 +16,7 @@ the_post();
 
 $id      = get_the_ID();
 $od_opts = get_option( 'ondigital_options', array() );
-$lang    = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
+$lang    = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
 
 $stat_number  = get_post_meta( $id, '_service_stat_number', true ) ?: '+240%';
 $stat_label   = get_post_meta( $id, '_service_stat_label',  true ) ?: 'Üzvi trafik artımı';

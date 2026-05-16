@@ -5,7 +5,7 @@
  * @package OnDigital
  */
 
-$lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'az';
+$lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
 
 // Brand column
 $footer_tagline      = ondigital_get_option( 'footer_tagline_' . $lang, 'Ondigital ilə rəqəmsal dövrə uyğunlaşın!' );
