@@ -34,6 +34,46 @@
 .blog-date::before, .blog-read-time::before { content: '·'; margin-right: 8px; color: rgba(0,0,0,.25); }
 .blog-cat + .blog-date::before { display: none; }
 
+/* ── Share icons ── */
+.blog-share {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+.blog-share-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(0,0,0,.4);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin-right: 2px;
+}
+.blog-share-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    transition: transform .2s, opacity .2s;
+    color: #fff;
+}
+.blog-share-btn:hover { transform: scale(1.12); opacity: .9; color: #fff; }
+.blog-share-wa { background: #25D366; }
+.blog-share-fb { background: #1877F2; }
+.blog-share-li { background: #0A66C2; }
+.blog-share-tg { background: #229ED9; }
+.blog-share-copy { background: #0a0a0a; }
+
+@media (max-width: 767px) {
+    .blog-share { margin-left: 0; margin-top: 8px; }
+}
+
 .blog-post-title {
     font-size: clamp(26px, 4vw, 48px);
     font-weight: 800; line-height: 1.15;

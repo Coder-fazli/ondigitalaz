@@ -24,7 +24,9 @@ get_header(); ?>
             <div class="blog-post-header">
                 <div class="blog-post-meta">
                     <?php
-                    $cats = get_the_category();
+                    $cats       = get_the_category();
+                    $post_url   = urlencode( get_permalink() );
+                    $post_title = urlencode( get_the_title() );
                     if ( $cats ) :
                     ?>
                     <span class="blog-cat"><?php echo esc_html( $cats[0]->name ); ?></span>
@@ -32,11 +34,31 @@ get_header(); ?>
                     <span class="blog-date"><?php echo esc_html( get_the_date( 'd M Y' ) ); ?></span>
                     <span class="blog-read-time">
                         <?php
-                        $words    = str_word_count( strip_tags( get_the_content() ) );
-                        $minutes  = max( 1, ceil( $words / 200 ) );
+                        $words   = str_word_count( strip_tags( get_the_content() ) );
+                        $minutes = max( 1, ceil( $words / 200 ) );
                         echo esc_html( $minutes . ' min read' );
                         ?>
                     </span>
+
+                    <!-- Share icons -->
+                    <div class="blog-share">
+                        <span class="blog-share-label"><?php esc_html_e( 'Share:', 'ondigital' ); ?></span>
+                        <a href="https://wa.me/?text=<?php echo $post_title; ?>%20<?php echo $post_url; ?>" target="_blank" rel="noopener" class="blog-share-btn blog-share-wa" title="WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $post_url; ?>" target="_blank" rel="noopener" class="blog-share-btn blog-share-fb" title="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $post_url; ?>&title=<?php echo $post_title; ?>" target="_blank" rel="noopener" class="blog-share-btn blog-share-li" title="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://t.me/share/url?url=<?php echo $post_url; ?>&text=<?php echo $post_title; ?>" target="_blank" rel="noopener" class="blog-share-btn blog-share-tg" title="Telegram">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
+                        <button class="blog-share-btn blog-share-copy" title="Copy link" onclick="navigator.clipboard.writeText('<?php echo esc_js( get_permalink() ); ?>');this.innerHTML='<i class=\'fa-solid fa-check\'></i>';setTimeout(()=>this.innerHTML='<i class=\'fa-solid fa-link\'></i>',2000)">
+                            <i class="fa-solid fa-link"></i>
+                        </button>
+                    </div>
                 </div>
                 <h1 class="blog-post-title"><?php the_title(); ?></h1>
             </div>
@@ -50,12 +72,6 @@ get_header(); ?>
                         <p class="blog-toc-title"><?php esc_html_e( 'Contents', 'ondigital' ); ?></p>
                         <ul class="blog-toc-list" id="toc-list"></ul>
                     </div>
-                    <ul class="blogdetails-overview dark-overview">
-                        <li>
-                            <i class="fa-solid fa-share-nodes"></i>
-                            <span><?php esc_html_e( 'Share', 'ondigital' ); ?></span>
-                        </li>
-                    </ul>
                 </div>
 
                 <!-- Right: Article content -->
