@@ -9,281 +9,181 @@
  */
 
 get_header();
+
+$lang    = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
+$ty_title = $lang === 'az' ? 'Təşəkkür edirik!' : 'Thank you!';
+$ty_sub   = $lang === 'az'
+    ? 'Müraciətiniz qəbul edildi. Tezliklə sizinlə əlaqə saxlayacağıq.'
+    : 'Your message has been received. We\'ll be in touch shortly.';
+$ty_home  = $lang === 'az' ? 'Ana Səhifə' : 'Go to Homepage';
+$ty_svcs  = $lang === 'az' ? 'Xidmətlər' : 'Our Services';
 ?>
 
 <style>
-.breadcrumb-wrapper { display: none !important; }
+.breadcrumb-wrapper,
+.progress-wrap { display: none !important; }
 
-@keyframes od-floatA {
-    0%,100% { transform: translateY(0) rotate(0deg); }
-    50%      { transform: translateY(-18px) rotate(6deg); }
-}
-@keyframes od-floatB {
-    0%,100% { transform: translateY(0) rotate(0deg); }
-    50%      { transform: translateY(14px) rotate(-5deg); }
-}
-@keyframes od-floatC {
-    0%,100% { transform: translate(0,0) scale(1); }
-    50%      { transform: translate(10px,-10px) scale(1.06); }
-}
-@keyframes od-popIn {
-    0%   { opacity:0; transform: scale(.6); }
-    70%  { transform: scale(1.1); }
-    100% { opacity:1; transform: scale(1); }
-}
-@keyframes od-drawCheck {
+@keyframes odty-check {
     from { stroke-dashoffset: 60; }
     to   { stroke-dashoffset: 0; }
 }
-@keyframes od-fadeUp {
-    from { opacity:0; transform:translateY(22px); }
-    to   { opacity:1; transform:translateY(0); }
+@keyframes odty-fadein {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes od-pulse {
-    0%,100% { box-shadow: 0 0 0 0 rgba(194,249,113,.45); }
-    50%      { box-shadow: 0 0 0 20px rgba(194,249,113,0); }
+@keyframes odty-scale {
+    0%   { transform: scale(0.7); opacity: 0; }
+    60%  { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
 }
 
-.odty-hero {
-    position: relative;
-    background: #c2f971;
-    overflow: hidden;
-    min-height: 100vh;
+.odty-page {
+    min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.odty-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle, rgba(10,10,10,.12) 1.2px, transparent 1.2px);
-    background-size: 28px 28px;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.odty-blob {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 1;
-}
-.odty-blob--1 {
-    width:360px; height:360px;
-    background: radial-gradient(circle at 40% 40%, #0a0a0a 0%, #1a1a1a 70%);
-    top:-130px; left:-90px;
-    animation: od-floatA 8s ease-in-out infinite;
-}
-.odty-blob--2 {
-    width:280px; height:280px;
-    background: radial-gradient(circle at 60% 60%, #0a0a0a 0%, #1a1a1a 70%);
-    bottom:-110px; right:-70px;
-    animation: od-floatB 9s ease-in-out infinite;
-}
-.odty-blob--3 {
-    width:160px; height:160px;
-    background: radial-gradient(circle, #1a1a1a 0%, #0a0a0a 80%);
-    top:30px; right:200px;
-    opacity:.4;
-    animation: od-floatC 7s ease-in-out infinite;
-}
-.odty-blob--4 {
-    width:90px; height:90px;
-    background: #0a0a0a;
-    bottom:50px; left:230px;
-    opacity:.2;
-    animation: od-floatA 11s ease-in-out infinite reverse;
-}
-.odty-ring {
-    position: absolute;
-    width:220px; height:220px;
-    border: 2px solid rgba(10,10,10,.15);
-    border-radius: 50%;
-    top:50%; left:72%;
-    transform: translate(-50%,-50%);
-    z-index: 1;
-    pointer-events: none;
-    animation: od-floatB 10s ease-in-out infinite;
-}
-.odty-ring::after {
-    content:'';
-    position:absolute;
-    width:140px; height:140px;
-    border:1.5px solid rgba(10,10,10,.1);
-    border-radius:50%;
-    top:50%; left:50%;
-    transform:translate(-50%,-50%);
-}
-
-.odty-content {
-    position: relative;
-    z-index: 3;
-    text-align: center;
     padding: 80px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 640px;
+    background: #fff;
 }
 
-.odty-icon-wrap {
-    width: 100px; height: 100px;
-    background: #0a0a0a;
+.odty-card {
+    text-align: center;
+    max-width: 480px;
+    width: 100%;
+}
+
+.odty-icon {
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
+    background: #f3ffe0;
+    border: 2px solid #c2f971;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 36px;
-    animation: od-popIn .6s cubic-bezier(.34,1.56,.64,1) both,
-               od-pulse 2.5s 1s ease-in-out infinite;
+    margin: 0 auto 32px;
+    animation: odty-scale .5s cubic-bezier(.34,1.56,.64,1) both;
 }
-.odty-icon-wrap svg { width: 46px; height: 46px; }
-.odty-check {
-    stroke: #c2f971;
-    stroke-width: 3;
+.odty-icon svg {
+    width: 32px;
+    height: 32px;
+}
+.odty-check-path {
+    stroke: #0a0a0a;
+    stroke-width: 2.5;
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
     stroke-dasharray: 60;
     stroke-dashoffset: 60;
-    animation: od-drawCheck .5s .55s ease forwards;
+    animation: odty-check .45s .4s ease forwards;
 }
-
-.odty-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(10,10,10,.12);
-    border: 1px solid rgba(10,10,10,.18);
-    color: #0a0a0a;
-    font-size: .68rem;
-    font-weight: 700;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    padding: 6px 14px;
-    border-radius: 100px;
-    margin-bottom: 20px;
-    animation: od-fadeUp .5s .2s ease both;
-}
-.odty-eyebrow-dot { width:7px; height:7px; background:#0a0a0a; border-radius:50%; }
 
 .odty-title {
-    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-size: clamp(32px, 5vw, 52px);
     font-weight: 900;
     color: #0a0a0a;
-    letter-spacing: -.04em;
-    line-height: 1;
+    letter-spacing: -.03em;
+    line-height: 1.1;
     margin: 0 0 16px;
-    animation: od-fadeUp .5s .3s ease both;
+    animation: odty-fadein .5s .2s ease both;
 }
+
 .odty-sub {
-    font-size: clamp(.9rem, 1.8vw, 1.1rem);
-    color: rgba(10,10,10,.65);
-    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(0,0,0,.5);
     margin: 0 0 12px;
-    animation: od-fadeUp .5s .4s ease both;
+    animation: odty-fadein .5s .3s ease both;
 }
+
 .odty-service-tag {
     display: none;
-    background: #0a0a0a;
-    color: #c2f971;
-    font-size: .75rem;
+    background: #c2f971;
+    color: #0a0a0a;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: .08em;
+    letter-spacing: .1em;
     text-transform: uppercase;
     padding: 5px 14px;
     border-radius: 100px;
     margin-bottom: 36px;
-    animation: od-fadeUp .5s .48s ease both;
+    animation: odty-fadein .5s .35s ease both;
+}
+
+.odty-divider {
+    width: 40px;
+    height: 2px;
+    background: #c2f971;
+    margin: 28px auto 32px;
+    border-radius: 2px;
+    animation: odty-fadein .5s .3s ease both;
 }
 
 .odty-ctas {
     display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+    gap: 10px;
     justify-content: center;
-    animation: od-fadeUp .5s .56s ease both;
+    flex-wrap: wrap;
+    animation: odty-fadein .5s .45s ease both;
 }
+
 .odty-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 14px 28px;
+    padding: 13px 24px;
     border-radius: 10px;
-    font-size: .9rem;
+    font-size: 14px;
     font-weight: 700;
     text-decoration: none;
     transition: transform .15s, box-shadow .2s;
+    border: none;
+    cursor: pointer;
 }
 .odty-btn:hover { transform: translateY(-2px); }
 .odty-btn--primary {
     background: #0a0a0a;
-    color: #c2f971;
-    box-shadow: 0 4px 20px rgba(10,10,10,.2);
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,.12);
 }
 .odty-btn--primary:hover { background: #222; color: #c2f971; }
 .odty-btn--secondary {
-    background: rgba(10,10,10,.1);
+    background: #f5f5f3;
     color: #0a0a0a;
-    border: 1.5px solid rgba(10,10,10,.18);
 }
-.odty-btn--secondary:hover { background: rgba(10,10,10,.18); color: #0a0a0a; }
+.odty-btn--secondary:hover { background: #eee; color: #0a0a0a; }
 
-@media (max-width: 768px) {
-    .odty-blob--3, .odty-blob--4, .odty-ring { display: none; }
-    .odty-blob--1 { width:160px; height:160px; top:-55px; left:-45px; }
-    .odty-blob--2 { width:130px; height:130px; bottom:-50px; right:-40px; }
-    .odty-content { padding: 60px 20px; }
-    .odty-icon-wrap { width:84px; height:84px; }
-    .odty-icon-wrap svg { width:38px; height:38px; }
-    .odty-ctas { flex-direction: column; width: 100%; }
+@media (max-width: 480px) {
+    .odty-page { padding: 60px 20px; }
+    .odty-ctas { flex-direction: column; }
     .odty-btn { justify-content: center; }
 }
 </style>
 
-<div class="odty-hero">
-    <div class="odty-blob odty-blob--1"></div>
-    <div class="odty-blob odty-blob--2"></div>
-    <div class="odty-blob odty-blob--3"></div>
-    <div class="odty-blob odty-blob--4"></div>
-    <div class="odty-ring"></div>
+<div class="odty-page">
+    <div class="odty-card">
 
-    <div class="odty-content">
-
-        <div class="odty-icon-wrap">
+        <div class="odty-icon">
             <svg viewBox="0 0 24 24">
-                <polyline class="odty-check" points="4,13 9,18 20,7"/>
+                <polyline class="odty-check-path" points="4,13 9,18 20,7"/>
             </svg>
         </div>
 
-        <span class="odty-eyebrow">
-            <span class="odty-eyebrow-dot"></span>
-            OnDigital
-        </span>
-
-        <?php
-        $lang     = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
-        $ty_title = $lang === 'az' ? 'Təşəkkür edirik!' : 'Thank you!';
-        $ty_sub   = $lang === 'az'
-            ? 'Müraciətiniz qəbul edildi. Tezliklə sizinlə əlaqə saxlayacağıq.'
-            : 'Your message has been received. We\'ll get back to you shortly.';
-        $ty_home  = $lang === 'az' ? 'Ana Səhifə' : 'Home';
-        $ty_svcs  = $lang === 'az' ? 'Xidmətlər' : 'Services';
-        ?>
         <h1 class="odty-title"><?php echo esc_html( $ty_title ); ?></h1>
         <p class="odty-sub"><?php echo esc_html( $ty_sub ); ?></p>
 
         <span class="odty-service-tag" id="odty-service-label"></span>
 
+        <div class="odty-divider"></div>
+
         <div class="odty-ctas">
             <a href="<?php echo esc_url( home_url('/') ); ?>" class="odty-btn odty-btn--primary">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                 <?php echo esc_html( $ty_home ); ?>
             </a>
             <a href="<?php echo esc_url( home_url('/xidmetler/') ); ?>" class="odty-btn odty-btn--secondary">
                 <?php echo esc_html( $ty_svcs ); ?>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
         </div>
 
@@ -293,25 +193,15 @@ get_header();
 <script>
 (function(){
     var param = new URLSearchParams(window.location.search).get('xidmet');
-    var serviceNames = {
-        'seo':          'SEO',
-        'google-ads':   'Google Ads',
-        'meta-ads':     'Meta Ads',
-        'tiktok-ads':   'TikTok Ads',
-        'smm':          'SMM',
-        'web':          'Web Design',
-        'branding':     'Branding',
-        'contact':      'Əlaqə Formu',
+    var names = {
+        'seo': 'SEO', 'google-ads': 'Google Ads', 'meta-ads': 'Meta Ads',
+        'tiktok-ads': 'TikTok Ads', 'smm': 'SMM', 'web': 'Web Design',
+        'branding': 'Branding', 'contact': 'Contact Form',
     };
-    if (param && serviceNames[param]) {
+    if (param && names[param]) {
         var tag = document.getElementById('odty-service-label');
-        if (tag) {
-            tag.textContent = serviceNames[param];
-            tag.style.display = 'inline-block';
-        }
+        if (tag) { tag.textContent = names[param]; tag.style.display = 'inline-block'; }
     }
-
-    // GTM conversion push
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: 'form_success', xidmet: param || 'unknown' });
 })();
