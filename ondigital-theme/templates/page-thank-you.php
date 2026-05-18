@@ -262,18 +262,27 @@ get_header();
             OnDigital
         </span>
 
-        <h1 class="odty-title"><?php esc_html_e( 'Təşəkkür edirik!', 'ondigital' ); ?></h1>
-        <p class="odty-sub"><?php esc_html_e( 'Müraciətiniz qəbul edildi. Tezliklə sizinlə əlaqə saxlayacağıq.', 'ondigital' ); ?></p>
+        <?php
+        $lang     = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
+        $ty_title = $lang === 'az' ? 'Təşəkkür edirik!' : 'Thank you!';
+        $ty_sub   = $lang === 'az'
+            ? 'Müraciətiniz qəbul edildi. Tezliklə sizinlə əlaqə saxlayacağıq.'
+            : 'Your message has been received. We\'ll get back to you shortly.';
+        $ty_home  = $lang === 'az' ? 'Ana Səhifə' : 'Home';
+        $ty_svcs  = $lang === 'az' ? 'Xidmətlər' : 'Services';
+        ?>
+        <h1 class="odty-title"><?php echo esc_html( $ty_title ); ?></h1>
+        <p class="odty-sub"><?php echo esc_html( $ty_sub ); ?></p>
 
         <span class="odty-service-tag" id="odty-service-label"></span>
 
         <div class="odty-ctas">
             <a href="<?php echo esc_url( home_url('/') ); ?>" class="odty-btn odty-btn--primary">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                <?php esc_html_e( 'Ana Səhifə', 'ondigital' ); ?>
+                <?php echo esc_html( $ty_home ); ?>
             </a>
             <a href="<?php echo esc_url( home_url('/xidmetler/') ); ?>" class="odty-btn odty-btn--secondary">
-                <?php esc_html_e( 'Xidmətlər', 'ondigital' ); ?>
+                <?php echo esc_html( $ty_svcs ); ?>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
         </div>
