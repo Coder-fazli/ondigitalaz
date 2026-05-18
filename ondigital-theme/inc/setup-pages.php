@@ -17,7 +17,7 @@ function ondigital_create_required_pages(): void {
 
     $pages = array(
         array(
-            'slug'     => 'teshekkurler',
+            'slug'     => 'thank-you',
             'title'    => 'Thank You',
             'template' => 'templates/page-thank-you.php',
         ),

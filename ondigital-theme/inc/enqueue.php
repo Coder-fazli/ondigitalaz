@@ -63,7 +63,7 @@ function ondigital_enqueue_assets() {
     // Form redirect — runs on all pages, redirects to thank-you after successful submission
     wp_enqueue_script( 'ondigital-form-redirect', ONDIGITAL_URI . '/assets/js/components/form-redirect.js', array(), ONDIGITAL_VERSION, true );
     wp_localize_script( 'ondigital-form-redirect', 'odFormRedirect', array(
-        'thankYouUrl' => home_url( '/teshekkurler/' ),
+        'thankYouUrl' => home_url( '/thank-you/' ),
     ) );
 }
 

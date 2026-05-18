@@ -3,7 +3,7 @@
 
     var THANK_YOU_URL = window.odFormRedirect && window.odFormRedirect.thankYouUrl
         ? window.odFormRedirect.thankYouUrl
-        : '/teshekkurler/';
+        : '/thank-you/';
 
     // Watch for active trigger to capture service context
     var pendingService = '';
