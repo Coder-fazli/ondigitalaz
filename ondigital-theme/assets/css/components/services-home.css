@@ -410,8 +410,8 @@
 }
 
 .od-srv-text {
-    flex: 1;
-    margin-top: 16px;
+    margin-top: auto;
+    margin-bottom: 0;
     font-size: 15px;
     line-height: 1.65;
     color: var(--secondary);
@@ -422,7 +422,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-top: 32px;
+    margin-top: 20px;
     font-size: 14px;
     font-weight: 600;
     color: var(--primary);
