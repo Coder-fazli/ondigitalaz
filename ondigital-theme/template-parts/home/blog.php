@@ -7,12 +7,14 @@
 
 $blog_title = ondigital_get_option( 'blog_title', 'Journal' );
 
+$current_lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
+
 $blog_query = new WP_Query( array(
     'post_type'      => 'post',
     'posts_per_page' => 3,
     'orderby'        => 'date',
     'order'          => 'DESC',
-    'lang'           => '',
+    'lang'           => $current_lang,
 ) );
 
 // Fallback static posts
@@ -52,8 +54,12 @@ $delays = array( '0.15', '0.30', '0.45' );
                     </div>
                 </div>
                 <div class="btn-wrapper has_fade_anim" data-delay="0.30" data-fade-from="right">
-                    <a href="<?php echo esc_url( home_url( '/bloq/' ) ); ?>" class="wc-btn wc-btn-underline btn-text-flip">
-                        <span data-text="<?php esc_attr_e( 'Bütün məqalələr', 'ondigital' ); ?>"><?php esc_html_e( 'Bütün məqalələr', 'ondigital' ); ?></span>
+                    <?php
+                    $blog_link_text = $current_lang === 'az' ? 'Bütün məqalələr' : 'All articles';
+                    $blog_link_url  = get_post_type_archive_link( 'post' ) ?: home_url( '/blog/' );
+                    ?>
+                    <a href="<?php echo esc_url( $blog_link_url ); ?>" class="wc-btn wc-btn-underline btn-text-flip">
+                        <span data-text="<?php echo esc_attr( $blog_link_text ); ?>"><?php echo esc_html( $blog_link_text ); ?></span>
                     </a>
                 </div>
             </div>
