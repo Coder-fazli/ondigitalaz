@@ -86,8 +86,14 @@ function ondigital_setup_az_home(): void {
         return;
     }
 
-    // Already has AZ translation — nothing to do
-    if ( pll_get_post( $front_page_id, 'az' ) ) {
+    // Already has AZ translation — make sure template is correct
+    $existing_az = pll_get_post( $front_page_id, 'az' );
+    if ( $existing_az ) {
+        $current_tpl = get_post_meta( $existing_az, '_wp_page_template', true );
+        if ( ! $current_tpl || $current_tpl === 'default' ) {
+            $en_tpl = get_post_meta( $front_page_id, '_wp_page_template', true ) ?: 'templates/page-home.php';
+            update_post_meta( $existing_az, '_wp_page_template', $en_tpl );
+        }
         return;
     }
 
@@ -110,11 +116,12 @@ function ondigital_setup_az_home(): void {
         return;
     }
 
-    // Copy template from EN
+    // Copy template from EN — fallback to page-home.php
     $template = get_post_meta( $front_page_id, '_wp_page_template', true );
-    if ( $template ) {
-        update_post_meta( $az_home_id, '_wp_page_template', $template );
+    if ( ! $template || $template === 'default' ) {
+        $template = 'templates/page-home.php';
     }
+    update_post_meta( $az_home_id, '_wp_page_template', $template );
 
     // Set language + link as translation
     pll_set_post_language( $az_home_id, 'az' );
