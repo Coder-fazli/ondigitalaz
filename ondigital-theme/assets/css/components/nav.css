@@ -262,8 +262,52 @@ header .container.large {
     color: #fff;
 }
 
-/* Mobile off-canvas */
+/* Mobile off-canvas switcher */
 .od-lang-switch--mobile {
-    margin: 24px 0 0;
-    padding: 0 4px;
+    margin: 32px 0 0;
+    padding: 0;
+}
+
+.od-lang-switch--mobile .od-lang-btn {
+    height: 40px;
+    padding: 0 14px;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.od-lang-switch--mobile .od-lang-btn:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.od-lang-switch--mobile .od-lang-code {
+    color: #fff;
+}
+
+/* ── Off-canvas sub-menu: fix Arolax 8vh font on nested items ── */
+.offcanvas-3__menu ul ul {
+    margin-top: 12px !important;
+    padding-left: 4px !important;
+}
+
+.offcanvas-3__menu ul ul li {
+    padding-inline-start: 16px !important;
+    margin-bottom: 0 !important;
+}
+
+.offcanvas-3__menu ul ul li:not(:last-child) {
+    margin-bottom: 10px !important;
+}
+
+.offcanvas-3__menu ul ul li a {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.03em !important;
+    -webkit-text-fill-color: unset !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    background-image: none !important;
+}
+
+.offcanvas-3__menu ul ul li a:hover {
+    color: #fff !important;
+    letter-spacing: 0.03em !important;
 }

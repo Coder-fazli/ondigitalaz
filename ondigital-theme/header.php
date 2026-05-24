@@ -197,7 +197,7 @@ if ( $promo_enabled !== '0' && $promo_enabled !== 0 && false !== $promo_enabled 
                 $od_langs = pll_the_languages( array( 'raw' => 1 ) );
                 $od_flags = array( 'en' => '🇬🇧', 'az' => '🇦🇿' );
             ?>
-            <div class="od-lang-switch">
+            <div class="od-lang-switch d-none d-xl-flex">
                 <?php foreach ( $od_langs as $l ) :
                     if ( $l['current_lang'] ) continue; ?>
                 <a href="<?php echo esc_url( $l['url'] ); ?>" class="od-lang-btn" hreflang="<?php echo esc_attr( $l['slug'] ); ?>">
