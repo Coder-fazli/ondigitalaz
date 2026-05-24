@@ -76,9 +76,21 @@
     margin-top: 56px;
 }
 
+@media only screen and (max-width: 991px) {
+    .header-area {
+        margin-top: 62px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .header-area {
+        margin-top: 66px;
+    }
+}
+
 @media only screen and (max-width: 576px) {
     .header-area {
-        margin-top: 48px;
+        margin-top: 72px;
     }
 }
 
@@ -96,6 +108,11 @@
     .header__button .wc-btn-primary {
         padding: 10px 16px !important;
         font-size: 13px !important;
+    }
+
+    .header-area .header-area__inner {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
     }
 }
 
