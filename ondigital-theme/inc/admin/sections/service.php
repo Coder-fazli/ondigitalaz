@@ -18,6 +18,20 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
         <?php esc_html_e( 'Individual service content (hero image, highlights, process steps, what\'s included, FAQ, etc.) is managed via meta boxes on each Service post in WordPress Admin → Services.', 'ondigital' ); ?>
     </p>
 
+    <!-- ── SERVICES GRID HEADER ── -->
+    <?php od_card_open( __( 'Services Grid — Section Header', 'ondigital' ), 'dashicons-editor-textcolor' ); ?>
+
+        <?php od_lang_open(); ?>
+        <?php foreach ( $langs as $lang => $label ) : ?>
+            <?php od_lang_pane( $lang ); ?>
+                <?php od_text( 'services_grid_title_' . $lang, __( 'Section Title', 'ondigital' ), $options, __( 'e.g. Our exclusive services', 'ondigital' ) ); ?>
+                <?php od_textarea( 'services_grid_body_' . $lang, __( 'Section Description', 'ondigital' ), $options, __( 'Short text on the right side of the title', 'ondigital' ) ); ?>
+            <?php od_lang_pane_close(); ?>
+        <?php endforeach; ?>
+        <?php od_lang_close(); ?>
+
+    <?php od_card_close(); ?>
+
     <!-- ── SERVICES GRID CARDS ── -->
     <?php od_card_open( __( 'Services Grid Cards', 'ondigital' ), 'dashicons-grid-view' ); ?>
 
