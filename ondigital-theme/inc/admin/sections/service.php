@@ -99,6 +99,22 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
 
     <?php od_card_close(); ?>
 
+    <!-- ── SERVICES PAGE HERO ── -->
+    <?php od_card_open( __( 'Services Page — Hero', 'ondigital' ), 'dashicons-format-image' ); ?>
+
+        <?php od_image( 'services_hero_thumb', __( 'Hero Image', 'ondigital' ), $options ); ?>
+
+        <?php od_lang_open(); ?>
+        <?php foreach ( $langs as $lang => $label ) : ?>
+            <?php od_lang_pane( $lang ); ?>
+                <?php od_text( 'services_hero_title_' . $lang, __( 'Hero Title', 'ondigital' ), $options, __( 'e.g. Rəqəmsal dünyada fərq yaradan dizayn', 'ondigital' ) ); ?>
+                <?php od_textarea( 'services_hero_body_' . $lang, __( 'Hero Description', 'ondigital' ), $options, __( 'Short description below the title', 'ondigital' ) ); ?>
+            <?php od_lang_pane_close(); ?>
+        <?php endforeach; ?>
+        <?php od_lang_close(); ?>
+
+    <?php od_card_close(); ?>
+
     <!-- ── ARCHIVE PAGE ── -->
     <?php od_card_open( __( 'Services Archive Page', 'ondigital' ), 'dashicons-admin-tools' ); ?>
 
