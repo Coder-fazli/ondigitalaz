@@ -265,7 +265,10 @@ header .container.large {
 /* Mobile off-canvas switcher */
 .od-lang-switch--mobile {
     margin: 32px 0 0;
+    margin-left: 0;
+    margin-right: 0;
     padding: 0;
+    position: static;
 }
 
 .od-lang-switch--mobile .od-lang-btn {
