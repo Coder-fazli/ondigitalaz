@@ -6,13 +6,21 @@
 .clients-area {
     background-color: #fff !important;
 }
-.clients-area .client-area-text h2,
-.clients-area .section-title {
-    color: var(--primary) !important;
-}
 .clients-area-inner {
     padding-inline-start: 0 !important;
     margin-inline-end: 0 !important;
+}
+
+/* ── Partners title: ghost gray minimal label ── */
+.clients-area .section-title,
+.clients-area .client-area-text h2 {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: #b0b0b0 !important;
+    text-align: center !important;
+    margin-bottom: 32px !important;
 }
 
 .od-sg-section {
