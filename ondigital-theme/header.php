@@ -192,6 +192,21 @@ if ( $promo_enabled !== '0' && $promo_enabled !== 0 && false !== $promo_enabled 
                     ?>
                 </nav>
             </div>
+            <?php
+            if ( function_exists( 'pll_the_languages' ) ) :
+                $od_langs = pll_the_languages( array( 'raw' => 1 ) );
+                $od_flags = array( 'en' => '🇬🇧', 'az' => '🇦🇿' );
+            ?>
+            <div class="od-lang-switch">
+                <?php foreach ( $od_langs as $l ) :
+                    if ( $l['current_lang'] ) continue; ?>
+                <a href="<?php echo esc_url( $l['url'] ); ?>" class="od-lang-btn" hreflang="<?php echo esc_attr( $l['slug'] ); ?>">
+                    <span class="od-lang-flag"><?php echo $od_flags[ $l['slug'] ] ?? '🌐'; ?></span>
+                    <span class="od-lang-code"><?php echo esc_html( strtoupper( $l['slug'] ) ); ?></span>
+                </a>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
             <div class="header__button">
                 <?php
                 $header_btn_text  = ondigital_get_option( 'header_btn_text', 'Başlayaq' );
@@ -205,20 +220,6 @@ if ( $promo_enabled !== '0' && $promo_enabled !== 0 && false !== $promo_enabled 
                     <span data-text="<?php echo esc_attr( $header_btn_text ); ?>"><?php echo esc_html( $header_btn_text ); ?></span>
                 </a>
             </div>
-            <?php
-            if ( function_exists( 'pll_the_languages' ) ) :
-                $od_langs = pll_the_languages( array( 'raw' => 1 ) );
-                $od_flags = array( 'en' => '🇬🇧', 'az' => '🇦🇿' );
-            ?>
-            <div class="od-lang-switch">
-                <?php foreach ( $od_langs as $l ) :
-                    if ( $l['current_lang'] ) continue; ?>
-                <a href="<?php echo esc_url( $l['url'] ); ?>" class="od-lang-btn" hreflang="<?php echo esc_attr( $l['slug'] ); ?>" title="<?php echo esc_attr( strtoupper( $l['slug'] ) ); ?>">
-                    <?php echo $od_flags[ $l['slug'] ] ?? strtoupper( $l['slug'] ); ?>
-                </a>
-                <?php endforeach; ?>
-            </div>
-            <?php endif; ?>
             <div class="header__navicon d-xl-none">
                 <button onclick="showCanvas3()" class="open-offcanvas">
                     <i class="fa-solid fa-bars"></i>
