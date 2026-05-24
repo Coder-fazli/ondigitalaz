@@ -171,6 +171,21 @@
                 '<div class="od-field"><label>URL</label><input type="url" name="ondigital_footer_services_links[' + i + '][url]" value="" placeholder="https://"></div>' +
                 '</div></div>';
         },
+        services_card: function (i) {
+            return '<div class="od-repeater-row od-sc-row">' +
+                '<div class="od-repeater-row-head"><span>Column ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
+                imgField('ondigital_services_cards[' + i + '][icon]', 'Icon') +
+                '<div class="od-field-row">' +
+                '<div class="od-field"><label>Title (EN)</label><input type="text" name="ondigital_services_cards[' + i + '][title_en]" value=""></div>' +
+                '<div class="od-field"><label>Title (AZ)</label><input type="text" name="ondigital_services_cards[' + i + '][title_az]" value=""></div>' +
+                '</div>' +
+                '<div class="od-field"><label>Title Link URL</label><input type="text" name="ondigital_services_cards[' + i + '][url]" value="" placeholder="/services/seo/"></div>' +
+                '<div class="od-field"><label style="font-weight:600;display:block;margin-bottom:8px;">Feature Items</label>' +
+                '<div class="od-sc-items" data-card="' + i + '"></div>' +
+                '<button type="button" class="button od-sc-add-item" data-card="' + i + '">+ Add Item</button>' +
+                '</div>' +
+                '</div>';
+        },
         project_step: function (i) {
             return '<div class="od-repeater-row">' +
                 '<div class="od-repeater-row-head"><span>Step ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
@@ -195,6 +210,54 @@
             '<button type="button" class="button od-remove-img">Remove</button>' +
             '</div></div></div>';
     }
+
+    // ── Services card: add item ────────────────────────────────────
+    $(document).on('click', '.od-sc-add-item', function () {
+        var ci   = $(this).data('card');
+        var list = $(this).closest('.od-field').find('.od-sc-items');
+        var ii   = list.find('.od-sc-item').length;
+        list.append(
+            '<div class="od-sc-item" style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">' +
+            '<input type="text" name="ondigital_services_cards[' + ci + '][items][' + ii + '][text_en]" placeholder="EN" style="flex:1;">' +
+            '<input type="text" name="ondigital_services_cards[' + ci + '][items][' + ii + '][text_az]" placeholder="AZ" style="flex:1;">' +
+            '<input type="text" name="ondigital_services_cards[' + ci + '][items][' + ii + '][url]" placeholder="URL" style="width:140px;">' +
+            '<button type="button" class="od-sc-remove-item" style="color:#c00;background:none;border:none;cursor:pointer;font-size:18px;line-height:1;">&times;</button>' +
+            '</div>'
+        );
+    });
+
+    // ── Services card: remove item ─────────────────────────────────
+    $(document).on('click', '.od-sc-remove-item', function () {
+        var list = $(this).closest('.od-sc-items');
+        $(this).closest('.od-sc-item').remove();
+        var ci = list.data('card');
+        list.find('.od-sc-item').each(function (ii) {
+            $(this).find('[name]').each(function () {
+                $(this).attr('name', $(this).attr('name').replace(/\[items\]\[\d+\]/, '[items][' + ii + ']'));
+            });
+        });
+    });
+
+    // ── Services card: reindex cards after remove ──────────────────
+    $(document).on('click', '#repeater-services_card .od-remove-row', function () {
+        setTimeout(function () {
+            $('#repeater-services_card .od-sc-row').each(function (ci) {
+                $(this).find('.od-repeater-row-head span').text('Column ' + (ci + 1));
+                $(this).find('.od-sc-items').attr('data-card', ci);
+                $(this).find('.od-sc-add-item').attr('data-card', ci);
+                // reindex card-level fields
+                $(this).find('[name^="ondigital_services_cards"]').each(function () {
+                    $(this).attr('name', $(this).attr('name').replace(/ondigital_services_cards\[\d+\]/, 'ondigital_services_cards[' + ci + ']'));
+                });
+                // reindex item fields
+                $(this).find('.od-sc-items .od-sc-item').each(function (ii) {
+                    $(this).find('[name]').each(function () {
+                        $(this).attr('name', $(this).attr('name').replace(/\[items\]\[\d+\]/, '[items][' + ii + ']'));
+                    });
+                });
+            });
+        }, 10);
+    });
 
     $(document).on('click', '.od-add-row', function () {
         var type      = $(this).data('repeater');

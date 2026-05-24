@@ -18,6 +18,75 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
         <?php esc_html_e( 'Individual service content (hero image, highlights, process steps, what\'s included, FAQ, etc.) is managed via meta boxes on each Service post in WordPress Admin → Services.', 'ondigital' ); ?>
     </p>
 
+    <!-- ── SERVICES GRID CARDS ── -->
+    <?php od_card_open( __( 'Services Grid Cards', 'ondigital' ), 'dashicons-grid-view' ); ?>
+
+    <p style="color:#646970;font-size:13px;margin:0 0 16px;">4 columns shown on the services page. Each column: icon, title (EN+AZ), bullet items with optional links.</p>
+
+    <?php $cards = get_option( 'ondigital_services_cards', array() ); ?>
+    <div class="od-repeater" id="repeater-services_card">
+    <?php foreach ( $cards as $ci => $card ) :
+        $icon_id  = absint( $card['icon'] ?? 0 );
+        $icon_url = $icon_id ? wp_get_attachment_image_url( $icon_id, 'thumbnail' ) : '';
+        $items    = $card['items'] ?? array();
+    ?>
+        <div class="od-repeater-row od-sc-row">
+            <div class="od-repeater-row-head">
+                <span><?php printf( 'Column %d', $ci + 1 ); ?></span>
+                <div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div>
+            </div>
+
+            <div class="od-field">
+                <label><?php esc_html_e( 'Icon', 'ondigital' ); ?></label>
+                <div class="od-image-field">
+                    <div class="od-image-preview <?php echo $icon_url ? '' : 'empty'; ?>">
+                        <?php if ( $icon_url ) : ?><img src="<?php echo esc_url( $icon_url ); ?>"><?php endif; ?>
+                    </div>
+                    <div class="od-image-btns">
+                        <input type="hidden" name="ondigital_services_cards[<?php echo $ci; ?>][icon]" value="<?php echo esc_attr( $icon_id ); ?>" class="od-img-id">
+                        <button type="button" class="button od-upload-img">Select</button>
+                        <button type="button" class="button od-remove-img">Remove</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="od-field-row">
+                <div class="od-field">
+                    <label>Title (EN)</label>
+                    <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][title_en]" value="<?php echo esc_attr( $card['title_en'] ?? '' ); ?>">
+                </div>
+                <div class="od-field">
+                    <label>Title (AZ)</label>
+                    <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][title_az]" value="<?php echo esc_attr( $card['title_az'] ?? '' ); ?>">
+                </div>
+            </div>
+
+            <div class="od-field">
+                <label>Title Link URL</label>
+                <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][url]" value="<?php echo esc_attr( $card['url'] ?? '' ); ?>" placeholder="/services/seo/">
+            </div>
+
+            <div class="od-field">
+                <label style="font-weight:600;display:block;margin-bottom:8px;">Feature Items</label>
+                <div class="od-sc-items" data-card="<?php echo $ci; ?>">
+                <?php foreach ( $items as $ii => $item ) : ?>
+                    <div class="od-sc-item" style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">
+                        <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][text_en]" value="<?php echo esc_attr( $item['text_en'] ?? '' ); ?>" placeholder="EN" style="flex:1;">
+                        <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][text_az]" value="<?php echo esc_attr( $item['text_az'] ?? '' ); ?>" placeholder="AZ" style="flex:1;">
+                        <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][url]" value="<?php echo esc_attr( $item['url'] ?? '' ); ?>" placeholder="URL" style="width:140px;">
+                        <button type="button" class="od-sc-remove-item" style="color:#c00;background:none;border:none;cursor:pointer;font-size:18px;line-height:1;">&times;</button>
+                    </div>
+                <?php endforeach; ?>
+                </div>
+                <button type="button" class="button od-sc-add-item" data-card="<?php echo $ci; ?>">+ Add Item</button>
+            </div>
+        </div>
+    <?php endforeach; ?>
+    </div>
+    <button type="button" class="button od-add-row" data-repeater="services_card" style="margin-top:10px;">+ Add Column</button>
+
+    <?php od_card_close(); ?>
+
     <!-- ── ARCHIVE PAGE ── -->
     <?php od_card_open( __( 'Services Archive Page', 'ondigital' ), 'dashicons-admin-tools' ); ?>
 

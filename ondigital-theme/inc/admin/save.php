@@ -52,7 +52,7 @@ function ondigital_panel_save(): void {
     update_option( 'ondigital_options', $updated );
 
     // Handle repeaters
-    $repeater_keys = array( 'partners', 'features', 'pricing', 'faq', 'about_faq', 'stats', 'testimonials', 'text_slider', 'about_clients', 'about_faq_items', 'footer_quick_links', 'footer_services_links', 'project_steps' );
+    $repeater_keys = array( 'partners', 'features', 'pricing', 'faq', 'about_faq', 'stats', 'testimonials', 'text_slider', 'about_clients', 'about_faq_items', 'footer_quick_links', 'footer_services_links', 'project_steps', 'services_cards' );
 
     foreach ( $repeater_keys as $rkey ) {
         if ( ! isset( $_POST[ 'ondigital_' . $rkey ] ) ) {
@@ -154,6 +154,26 @@ function ondigital_sanitize_repeater( string $key, array $raw ): array {
                 $out[] = array(
                     'label' => sanitize_text_field( $item['label'] ?? '' ),
                     'url'   => esc_url_raw( $item['url'] ?? '' ),
+                );
+                break;
+            case 'services_cards':
+                $fitems = array();
+                if ( isset( $item['items'] ) && is_array( $item['items'] ) ) {
+                    foreach ( $item['items'] as $fi ) {
+                        if ( ! is_array( $fi ) ) continue;
+                        $fitems[] = array(
+                            'text_en' => sanitize_text_field( $fi['text_en'] ?? '' ),
+                            'text_az' => sanitize_text_field( $fi['text_az'] ?? '' ),
+                            'url'     => esc_url_raw( $fi['url'] ?? '' ),
+                        );
+                    }
+                }
+                $out[] = array(
+                    'icon'     => absint( $item['icon'] ?? 0 ),
+                    'title_en' => sanitize_text_field( $item['title_en'] ?? '' ),
+                    'title_az' => sanitize_text_field( $item['title_az'] ?? '' ),
+                    'url'      => esc_url_raw( $item['url'] ?? '' ),
+                    'items'    => $fitems,
                 );
                 break;
             case 'project_steps':
