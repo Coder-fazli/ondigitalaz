@@ -228,6 +228,8 @@ function ondigital_enqueue_page_assets() {
             wp_enqueue_script( 'ondigital-services', ONDIGITAL_URI . '/assets/js/pages/services.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
         }
         wp_enqueue_style( 'ondigital-services-page', ONDIGITAL_URI . '/assets/css/components/services-page.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+        wp_enqueue_style( 'ondigital-logo-cloud', ONDIGITAL_URI . '/assets/css/components/logo-cloud.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+        wp_enqueue_script( 'ondigital-logo-cloud', ONDIGITAL_URI . '/assets/js/components/logo-cloud.js', array( 'jquery' ), ONDIGITAL_VERSION, true );
     }
 
     // Project archive CSS/JS is handled directly in archive-project.php
