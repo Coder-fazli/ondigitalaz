@@ -3,23 +3,28 @@
    ============================================================================= */
 
 .counter-area {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding: 80px 60px;
     border-bottom: 1px solid var(--border);
 }
 
 @media only screen and (max-width: 1199px) {
-    .counter-area {
-        padding-top: 60px;
-        padding-bottom: 60px;
-    }
+    .counter-area { padding-left: 40px; padding-right: 40px; }
 }
 
 @media only screen and (max-width: 767px) {
-    .counter-area {
-        padding-top: 50px;
-        padding-bottom: 50px;
-    }
+    .counter-area { padding-left: 20px; padding-right: 20px; }
+}
+
+@media only screen and (max-width: 576px) {
+    .counter-area { padding-left: 0; padding-right: 0; }
+}
+
+@media only screen and (max-width: 1199px) {
+    .counter-area { padding-top: 60px; padding-bottom: 60px; }
+}
+
+@media only screen and (max-width: 767px) {
+    .counter-area { padding-top: 50px; padding-bottom: 50px; }
 }
 
 /* Section title */

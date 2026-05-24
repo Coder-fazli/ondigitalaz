@@ -19,8 +19,7 @@ $counters = ondigital_get_repeater( 'stats', $default_counters );
 $delays = array( '0.15', '0.30', '0.45', '0.60' );
 ?>
 <section class="counter-area">
-    <div class="container">
-        <div class="counter-area-inner">
+    <div class="counter-area-inner">
 
             <h2 class="counter-section-title has_text_move_anim">
                 <?php echo wp_kses_post( $stats_title ); ?>
@@ -38,5 +37,4 @@ $delays = array( '0.15', '0.30', '0.45', '0.60' );
             </div>
 
         </div>
-    </div>
 </section>
