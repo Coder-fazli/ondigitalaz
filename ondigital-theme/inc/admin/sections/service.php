@@ -77,13 +77,14 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
             </div>
 
             <div class="od-field">
-                <label style="font-weight:600;display:block;margin-bottom:8px;">Feature Items <small style="font-weight:400;color:#888;">(EN text · AZ text · URL)</small></label>
+                <label style="font-weight:600;display:block;margin-bottom:8px;">Feature Items <small style="font-weight:400;color:#888;">(EN text · AZ text · URL EN · URL AZ)</small></label>
                 <div class="od-sc-items" data-card="<?php echo $ci; ?>">
                 <?php foreach ( $items as $ii => $item ) : ?>
-                    <div class="od-sc-item" style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">
-                        <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][text_en]" value="<?php echo esc_attr( $item['text_en'] ?? '' ); ?>" placeholder="EN" style="flex:1;">
-                        <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][text_az]" value="<?php echo esc_attr( $item['text_az'] ?? '' ); ?>" placeholder="AZ" style="flex:1;">
-                        <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][url]" value="<?php echo esc_attr( $item['url'] ?? '' ); ?>" placeholder="URL (optional)" style="width:150px;">
+                    <div class="od-sc-item" style="display:flex;gap:6px;align-items:center;margin-bottom:6px;flex-wrap:wrap;">
+                        <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][text_en]" value="<?php echo esc_attr( $item['text_en'] ?? '' ); ?>" placeholder="EN text" style="flex:1;min-width:100px;">
+                        <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][text_az]" value="<?php echo esc_attr( $item['text_az'] ?? '' ); ?>" placeholder="AZ text" style="flex:1;min-width:100px;">
+                        <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][url_en]" value="<?php echo esc_attr( $item['url_en'] ?? $item['url'] ?? '' ); ?>" placeholder="URL (EN)" style="width:130px;">
+                        <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][url_az]" value="<?php echo esc_attr( $item['url_az'] ?? '' ); ?>" placeholder="URL (AZ)" style="width:130px;">
                         <button type="button" class="od-sc-remove-item" style="color:#c00;background:none;border:none;cursor:pointer;font-size:18px;line-height:1;">&times;</button>
                     </div>
                 <?php endforeach; ?>

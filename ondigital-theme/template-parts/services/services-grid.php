@@ -53,7 +53,7 @@ $cards = get_option( 'ondigital_services_cards', array() );
                 <ul class="od-sg-features">
                     <?php foreach ( $items as $item ) :
                         $text = $lang === 'az' ? ( $item['text_az'] ?? $item['text_en'] ?? '' ) : ( $item['text_en'] ?? '' );
-                        $url  = $item['url'] ?? '';
+                        $url  = $lang === 'az' ? ( $item['url_az'] ?? $item['url_en'] ?? $item['url'] ?? '' ) : ( $item['url_en'] ?? $item['url'] ?? '' );
                         if ( ! $text ) continue;
                     ?>
                     <li>

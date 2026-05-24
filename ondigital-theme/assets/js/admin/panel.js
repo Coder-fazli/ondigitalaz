@@ -233,10 +233,11 @@
         var list = $(this).closest('.od-field').find('.od-sc-items');
         var ii   = list.find('.od-sc-item').length;
         list.append(
-            '<div class="od-sc-item" style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">' +
-            '<input type="text" name="ondigital_services_cards[' + ci + '][items][' + ii + '][text_en]" placeholder="EN" style="flex:1;">' +
-            '<input type="text" name="ondigital_services_cards[' + ci + '][items][' + ii + '][text_az]" placeholder="AZ" style="flex:1;">' +
-            '<input type="text" name="ondigital_services_cards[' + ci + '][items][' + ii + '][url]" placeholder="URL" style="width:140px;">' +
+            '<div class="od-sc-item" style="display:flex;gap:6px;align-items:center;margin-bottom:6px;flex-wrap:wrap;">' +
+            '<input type="text" name="ondigital_services_cards[' + ci + '][items][' + ii + '][text_en]" placeholder="EN text" style="flex:1;min-width:100px;">' +
+            '<input type="text" name="ondigital_services_cards[' + ci + '][items][' + ii + '][text_az]" placeholder="AZ text" style="flex:1;min-width:100px;">' +
+            '<input type="text" name="ondigital_services_cards[' + ci + '][items][' + ii + '][url_en]" placeholder="URL (EN)" style="width:130px;">' +
+            '<input type="text" name="ondigital_services_cards[' + ci + '][items][' + ii + '][url_az]" placeholder="URL (AZ)" style="width:130px;">' +
             '<button type="button" class="od-sc-remove-item" style="color:#c00;background:none;border:none;cursor:pointer;font-size:18px;line-height:1;">&times;</button>' +
             '</div>'
         );

@@ -164,7 +164,8 @@ function ondigital_sanitize_repeater( string $key, array $raw ): array {
                         $fitems[] = array(
                             'text_en' => sanitize_text_field( $fi['text_en'] ?? '' ),
                             'text_az' => sanitize_text_field( $fi['text_az'] ?? '' ),
-                            'url'     => esc_url_raw( $fi['url'] ?? '' ),
+                            'url_en'  => esc_url_raw( $fi['url_en'] ?? $fi['url'] ?? '' ),
+                            'url_az'  => esc_url_raw( $fi['url_az'] ?? '' ),
                         );
                     }
                 }
