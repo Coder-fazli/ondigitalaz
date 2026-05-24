@@ -76,21 +76,9 @@
     margin-top: 56px;
 }
 
-@media only screen and (max-width: 991px) {
-    .header-area {
-        margin-top: 62px;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    .header-area {
-        margin-top: 66px;
-    }
-}
-
 @media only screen and (max-width: 576px) {
     .header-area {
-        margin-top: 72px;
+        margin-top: 61px;
     }
 }
 
