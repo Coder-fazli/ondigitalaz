@@ -19,10 +19,7 @@ get_template_part( 'template-parts/services/services-grid' );
 // Section 4: About Content (shared)
 get_template_part( 'template-parts/about/about-content' );
 
-// Section 5: Clients (shared)
-get_template_part( 'template-parts/about/clients' );
-
-// Section 6: CTA (shared)
+// Section 5: CTA (shared)
 get_template_part( 'template-parts/shared/cta' );
 
 get_footer();

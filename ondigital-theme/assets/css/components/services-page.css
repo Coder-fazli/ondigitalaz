@@ -12,8 +12,8 @@
 
 /* ── Header: title left, description right ── */
 .od-sg-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
     gap: 40px;
     align-items: flex-end;
     padding-bottom: 60px;
@@ -23,7 +23,7 @@
 
 @media only screen and (max-width: 991px) {
     .od-sg-header {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         gap: 20px;
         padding-bottom: 40px;
         margin-bottom: 40px;
@@ -61,17 +61,17 @@
 
 /* ── Grid ── */
 .od-sg-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
     gap: 0;
 }
 
 @media only screen and (max-width: 991px) {
-    .od-sg-grid { grid-template-columns: repeat(2, 1fr); }
+    .od-sg-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
 @media only screen and (max-width: 575px) {
-    .od-sg-grid { grid-template-columns: 1fr; }
+    .od-sg-grid { grid-template-columns: 1fr !important; }
 }
 
 /* ── Item ── */
