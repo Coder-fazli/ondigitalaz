@@ -2,6 +2,19 @@
    Services Page — Grid Section (Arolax-style clean layout)
    ============================================================================= */
 
+/* ── Partners marquee: override Arolax dark background ── */
+.clients-area {
+    background-color: #fff !important;
+}
+.clients-area .client-area-text h2,
+.clients-area .section-title {
+    color: var(--primary) !important;
+}
+.clients-area-inner {
+    padding-inline-start: 0 !important;
+    margin-inline-end: 0 !important;
+}
+
 .od-sg-section {
     padding: 80px 0 100px;
 }
