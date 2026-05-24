@@ -123,6 +123,11 @@ function ondigital_enqueue_page_assets() {
             wp_enqueue_script( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/js/pages/' . $slug . '.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
         }
 
+        // Services page: load clean grid component CSS (after base services.css)
+        if ( 'services' === $slug ) {
+            wp_enqueue_style( 'ondigital-services-page', ONDIGITAL_URI . '/assets/css/components/services-page.css', array( 'ondigital-services' ), ONDIGITAL_VERSION );
+        }
+
         // Blog page: load component CSS (featured posts + blog grid)
         if ( 'blog' === $slug ) {
             wp_enqueue_style( 'ondigital-blog-page', ONDIGITAL_URI . '/assets/css/components/blog-page.css', array( 'bootstrap' ), ONDIGITAL_VERSION );

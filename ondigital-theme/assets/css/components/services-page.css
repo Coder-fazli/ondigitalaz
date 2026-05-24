@@ -1,0 +1,180 @@
+/* =============================================================================
+   Services Page — Grid Section (Arolax-style clean layout)
+   ============================================================================= */
+
+.od-sg-section {
+    padding: 80px 0 100px;
+}
+
+@media only screen and (max-width: 767px) {
+    .od-sg-section { padding: 48px 0 64px; }
+}
+
+/* ── Header: title left, description right ── */
+.od-sg-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: flex-end;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(18, 18, 18, 0.12);
+    margin-bottom: 60px;
+}
+
+@media only screen and (max-width: 991px) {
+    .od-sg-header {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding-bottom: 40px;
+        margin-bottom: 40px;
+    }
+}
+
+.od-sg-title {
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.08;
+    color: var(--primary);
+    margin: 0;
+}
+
+@media only screen and (max-width: 1199px) {
+    .od-sg-title { font-size: 44px; }
+}
+
+@media only screen and (max-width: 767px) {
+    .od-sg-title { font-size: 32px; }
+}
+
+.od-sg-desc {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--secondary);
+    max-width: 400px;
+    align-self: flex-end;
+    margin: 0;
+}
+
+@media only screen and (max-width: 991px) {
+    .od-sg-desc { max-width: 100%; }
+}
+
+/* ── Grid ── */
+.od-sg-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+}
+
+@media only screen and (max-width: 991px) {
+    .od-sg-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media only screen and (max-width: 575px) {
+    .od-sg-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Item ── */
+.od-sg-item {
+    padding: 40px 32px 40px 0;
+    border-right: 1px solid rgba(18, 18, 18, 0.10);
+}
+
+.od-sg-item:last-child,
+.od-sg-item:nth-child(4n) {
+    border-right: none;
+}
+
+@media only screen and (max-width: 991px) {
+    .od-sg-item {
+        padding: 32px 24px 32px 0;
+        border-bottom: 1px solid rgba(18, 18, 18, 0.10);
+    }
+    .od-sg-item:nth-child(2n) { border-right: none; }
+    .od-sg-item:nth-last-child(-n+2):not(:nth-child(odd)):not(:nth-child(even) ~ .od-sg-item) {
+        border-bottom: none;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .od-sg-item {
+        padding: 28px 0;
+        border-right: none;
+    }
+    .od-sg-item:last-child { border-bottom: none; }
+}
+
+/* ── Icon ── */
+.od-sg-icon {
+    margin-bottom: 24px;
+    color: var(--primary);
+}
+
+.od-sg-icon img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    display: block;
+}
+
+.od-sg-icon--placeholder svg {
+    display: block;
+    color: var(--primary);
+    opacity: 0.7;
+}
+
+/* ── Name ── */
+.od-sg-name {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--primary);
+    margin: 0 0 20px;
+}
+
+.od-sg-name a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.od-sg-name a:hover {
+    color: #c2f971;
+}
+
+/* ── Feature list ── */
+.od-sg-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.od-sg-features li {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--secondary);
+    padding-left: 14px;
+    position: relative;
+}
+
+.od-sg-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.5;
+}
+
+/* ── Excerpt fallback ── */
+.od-sg-excerpt {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--secondary);
+    margin: 0;
+}
