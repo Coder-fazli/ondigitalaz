@@ -200,3 +200,51 @@ header .container.large {
         padding-right: 24px !important;
     }
 }
+
+/* =============================================================================
+   Language Switcher — flag-only, current language hidden
+   ============================================================================= */
+
+.od-lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.od-lang-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(18, 18, 18, 0.15);
+    border-radius: 8px;
+    font-size: 18px;
+    line-height: 1;
+    text-decoration: none !important;
+    background: transparent;
+    transition: border-color 0.2s, background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.od-lang-btn:hover {
+    border-color: rgba(18, 18, 18, 0.35);
+    background-color: rgba(18, 18, 18, 0.05);
+}
+
+/* Dark / transparent header */
+.header-transparent .od-lang-btn,
+.dark .od-lang-btn {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+.header-transparent .od-lang-btn:hover,
+.dark .od-lang-btn:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Mobile off-canvas */
+.od-lang-switch--mobile {
+    margin-top: 24px;
+    padding: 0 4px;
+}

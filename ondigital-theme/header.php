@@ -92,6 +92,19 @@
                 ) );
                 ?>
             </nav>
+            <?php if ( function_exists( 'pll_the_languages' ) ) :
+                $od_langs_m = pll_the_languages( array( 'raw' => 1 ) );
+                $od_flags_m = array( 'en' => '🇬🇧', 'az' => '🇦🇿' );
+            ?>
+            <div class="od-lang-switch od-lang-switch--mobile">
+                <?php foreach ( $od_langs_m as $l ) :
+                    if ( $l['current_lang'] ) continue; ?>
+                <a href="<?php echo esc_url( $l['url'] ); ?>" class="od-lang-btn" hreflang="<?php echo esc_attr( $l['slug'] ); ?>" title="<?php echo esc_attr( strtoupper( $l['slug'] ) ); ?>">
+                    <?php echo $od_flags_m[ $l['slug'] ] ?? strtoupper( $l['slug'] ); ?>
+                </a>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -179,6 +192,20 @@ if ( $promo_enabled !== '0' && $promo_enabled !== 0 && false !== $promo_enabled 
                     ?>
                 </nav>
             </div>
+            <?php
+            if ( function_exists( 'pll_the_languages' ) ) :
+                $od_langs = pll_the_languages( array( 'raw' => 1 ) );
+                $od_flags = array( 'en' => '🇬🇧', 'az' => '🇦🇿' );
+            ?>
+            <div class="od-lang-switch">
+                <?php foreach ( $od_langs as $l ) :
+                    if ( $l['current_lang'] ) continue; ?>
+                <a href="<?php echo esc_url( $l['url'] ); ?>" class="od-lang-btn" hreflang="<?php echo esc_attr( $l['slug'] ); ?>" title="<?php echo esc_attr( strtoupper( $l['slug'] ) ); ?>">
+                    <?php echo $od_flags[ $l['slug'] ] ?? strtoupper( $l['slug'] ); ?>
+                </a>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
             <div class="header__button">
                 <?php
                 $header_btn_text  = ondigital_get_option( 'header_btn_text', 'Başlayaq' );
