@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'ODF_DB_VERSION', '1.1' );
+define( 'ODF_DB_VERSION', '1.2' );
 
 function odf_create_table(): void {
     global $wpdb;
@@ -23,6 +23,8 @@ function odf_create_table(): void {
         ecommerce    varchar(100)        NOT NULL DEFAULT '',
         source       varchar(500)        NOT NULL DEFAULT '',
         services     varchar(1000)       NOT NULL DEFAULT '',
+        form_source  varchar(100)        NOT NULL DEFAULT '',
+        message      text                NOT NULL,
         submitted_at datetime            NOT NULL,
         is_read      tinyint(1)          NOT NULL DEFAULT 0,
         PRIMARY KEY (id)
@@ -46,17 +48,19 @@ function odf_save_submission( array $data ): void {
     $wpdb->insert(
         $wpdb->prefix . 'odf_submissions',
         array(
-            'name'         => $data['name']      ?? '',
-            'email'        => $data['email']     ?? '',
-            'phone'        => $data['phone']     ?? '',
-            'company'      => $data['company']   ?? '',
-            'ecommerce'    => $data['ecommerce'] ?? '',
-            'source'       => $data['source']    ?? '',
-            'services'     => $data['services']  ?? '',
+            'name'         => $data['name']        ?? '',
+            'email'        => $data['email']       ?? '',
+            'phone'        => $data['phone']       ?? '',
+            'company'      => $data['company']     ?? '',
+            'ecommerce'    => $data['ecommerce']   ?? '',
+            'source'       => $data['source']      ?? '',
+            'services'     => $data['services']    ?? '',
+            'form_source'  => $data['form_source'] ?? '',
+            'message'      => $data['message']     ?? '',
             'submitted_at' => current_time( 'mysql' ),
             'is_read'      => 0,
         ),
-        array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d' )
+        array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d' )
     );
 }
 

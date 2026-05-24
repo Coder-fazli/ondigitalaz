@@ -99,20 +99,33 @@ function odf_render_messages(): void {
         <?php else : ?>
 
         <div class="odf-messages-list">
-            <?php foreach ( $rows as $row ) :
-                $is_unread = ! $row->is_read;
-                $sources   = $row->source ? implode( ', ', array_map( 'ucfirst', explode( ',', $row->source ) ) ) : '—';
+            <?php
+            $source_labels = array(
+                'contact-page' => array( 'label' => 'Contact Page', 'color' => '#2271b1' ),
+                'popup'        => array( 'label' => 'Popup Form',   'color' => '#8b5cf6' ),
+                'service-page' => array( 'label' => 'Service Page', 'color' => '#d97706' ),
+                'about-page'   => array( 'label' => 'About Page',   'color' => '#059669' ),
+            );
+            foreach ( $rows as $row ) :
+                $is_unread   = ! $row->is_read;
+                $found_from  = $row->source ? implode( ', ', array_map( 'ucfirst', explode( ',', $row->source ) ) ) : '';
+                $form_source = isset( $row->form_source ) ? $row->form_source : '';
+                $services    = isset( $row->services ) && $row->services ? $row->services : '';
+                $src_info    = $form_source && isset( $source_labels[ $form_source ] ) ? $source_labels[ $form_source ] : null;
             ?>
             <div class="odf-message-card <?php echo $is_unread ? 'is-unread' : ''; ?>" data-id="<?php echo esc_attr( $row->id ); ?>">
 
                 <div class="odf-msg-header">
                     <div class="odf-msg-meta">
-                        <?php if ( $is_unread ) : ?>
-                        <span class="odf-dot"></span>
-                        <?php endif; ?>
+                        <?php if ( $is_unread ) : ?><span class="odf-dot"></span><?php endif; ?>
                         <strong class="odf-msg-name"><?php echo esc_html( $row->name ?: '(No name)' ); ?></strong>
                         <?php if ( $row->email ) : ?>
                         <a href="mailto:<?php echo esc_attr( $row->email ); ?>" class="odf-msg-email"><?php echo esc_html( $row->email ); ?></a>
+                        <?php endif; ?>
+                        <?php if ( $src_info ) : ?>
+                        <span class="odf-source-badge" style="background:<?php echo esc_attr( $src_info['color'] ); ?>15;color:<?php echo esc_attr( $src_info['color'] ); ?>;border-color:<?php echo esc_attr( $src_info['color'] ); ?>40;">
+                            <?php echo esc_html( $src_info['label'] ); ?>
+                        </span>
                         <?php endif; ?>
                     </div>
                     <div class="odf-msg-right">
@@ -136,8 +149,14 @@ function odf_render_messages(): void {
                     <?php if ( $row->ecommerce ) : ?>
                     <span class="odf-detail"><strong>E-commerce:</strong> <?php echo esc_html( ucfirst( $row->ecommerce ) ); ?></span>
                     <?php endif; ?>
-                    <?php if ( $row->source ) : ?>
-                    <span class="odf-detail"><strong>Source:</strong> <?php echo esc_html( $sources ); ?></span>
+                    <?php if ( $found_from ) : ?>
+                    <span class="odf-detail"><strong>Found us via:</strong> <?php echo esc_html( $found_from ); ?></span>
+                    <?php endif; ?>
+                    <?php if ( $services ) : ?>
+                    <span class="odf-detail odf-detail--services"><strong>Services:</strong> <?php echo esc_html( $services ); ?></span>
+                    <?php endif; ?>
+                    <?php if ( $row->message ?? '' ) : ?>
+                    <span class="odf-detail odf-detail--message"><strong>Message:</strong> <?php echo esc_html( $row->message ); ?></span>
                     <?php endif; ?>
                 </div>
 
@@ -216,9 +235,15 @@ function odf_render_messages(): void {
     .odf-btn-delete { background:#ffeaea; color:#c00; }
     .odf-btn-delete:hover { background:#ffd5d5; }
 
+    .odf-source-badge {
+        display:inline-block; font-size:11px; font-weight:700; padding:2px 10px;
+        border-radius:20px; border:1px solid; letter-spacing:0.03em; text-transform:uppercase;
+    }
     .odf-msg-body   { display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:12px; padding-top:12px; border-top:1px solid #f0f0f0; }
     .odf-detail     { font-size:13px; color:#555; }
     .odf-detail strong { color:#222; }
+    .odf-detail--services,
+    .odf-detail--message { flex-basis:100%; }
     </style>
     <?php
 }

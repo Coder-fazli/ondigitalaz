@@ -5,51 +5,49 @@
  * @package OnDigital
  */
 
-$lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
-
 // Brand column
-$footer_tagline      = ondigital_get_option( 'footer_tagline_' . $lang, 'Ondigital ilə rəqəmsal dövrə uyğunlaşın!' );
-$footer_partner_label = ondigital_get_option( 'footer_partner_label_' . $lang, 'Partner with' );
+$footer_tagline      = ondigital_get_option( 'footer_tagline', 'Adapt to the digital age with Ondigital!' );
+$footer_partner_label = ondigital_get_option( 'footer_partner_label', 'Partner with' );
 $footer_partner_badge = ondigital_get_option( 'footer_partner_badge', '' );
 
 // Quick links column
-$footer_quick_links_title = ondigital_get_option( 'footer_quick_links_title_' . $lang, 'Sürətli keçidlər' );
+$footer_quick_links_title = ondigital_get_option( 'footer_quick_links_title', 'Quick Links' );
 $footer_quick_links       = ondigital_get_repeater( 'footer_quick_links', array() );
 if ( empty( $footer_quick_links ) ) {
     $footer_quick_links = array(
-        array( 'label' => __( 'Haqqımızda', 'ondigital' ), 'url' => home_url( '/about' ) ),
-        array( 'label' => __( 'Xidmətlər', 'ondigital' ),  'url' => home_url( '/services' ) ),
-        array( 'label' => __( 'Layihələr', 'ondigital' ),  'url' => home_url( '/projects' ) ),
-        array( 'label' => __( 'Bloq', 'ondigital' ),       'url' => home_url( '/blog' ) ),
-        array( 'label' => __( 'Əlaqə', 'ondigital' ),      'url' => home_url( '/contact' ) ),
+        array( 'label' => __( 'About', 'ondigital' ),    'url' => home_url( '/about' ) ),
+        array( 'label' => __( 'Services', 'ondigital' ), 'url' => home_url( '/services' ) ),
+        array( 'label' => __( 'Projects', 'ondigital' ), 'url' => home_url( '/projects' ) ),
+        array( 'label' => __( 'Blog', 'ondigital' ),     'url' => home_url( '/blog' ) ),
+        array( 'label' => __( 'Contact', 'ondigital' ),  'url' => home_url( '/contact' ) ),
     );
 }
 
 // Services links column
-$footer_services_col_title = ondigital_get_option( 'footer_services_col_title_' . $lang, 'Xidmətlər' );
+$footer_services_col_title = ondigital_get_option( 'footer_services_col_title', 'Services' );
 $footer_services_links     = ondigital_get_repeater( 'footer_services_links', array() );
 if ( empty( $footer_services_links ) ) {
     $footer_services_links = array(
-        array( 'label' => __( 'Rəqəmsal Marketinq', 'ondigital' ),     'url' => home_url( '/services' ) ),
-        array( 'label' => __( 'SEO Xidməti', 'ondigital' ),            'url' => home_url( '/services' ) ),
-        array( 'label' => __( 'Sosial Media Marketinq', 'ondigital' ), 'url' => home_url( '/services' ) ),
-        array( 'label' => __( 'Web Development', 'ondigital' ),        'url' => home_url( '/services' ) ),
-        array( 'label' => __( 'Brendinq & Dizayn', 'ondigital' ),      'url' => home_url( '/services' ) ),
-        array( 'label' => __( 'Email marketinq', 'ondigital' ),        'url' => home_url( '/services' ) ),
+        array( 'label' => __( 'Digital Marketing', 'ondigital' ),     'url' => home_url( '/services' ) ),
+        array( 'label' => __( 'SEO', 'ondigital' ),                   'url' => home_url( '/services' ) ),
+        array( 'label' => __( 'Social Media Marketing', 'ondigital' ),'url' => home_url( '/services' ) ),
+        array( 'label' => __( 'Web Development', 'ondigital' ),       'url' => home_url( '/services' ) ),
+        array( 'label' => __( 'Branding & Design', 'ondigital' ),     'url' => home_url( '/services' ) ),
+        array( 'label' => __( 'Email Marketing', 'ondigital' ),       'url' => home_url( '/services' ) ),
     );
 }
 
 // Contact column
-$footer_contact_title   = ondigital_get_option( 'footer_contact_title_' . $lang, 'Əlaqə' );
-$footer_social_title    = ondigital_get_option( 'footer_social_title_' . $lang, 'Sosial media' );
-$footer_contact_phone   = ondigital_get_option( 'contact_phone', '+994 (55) 431 47 50' );
-$footer_contact_email   = ondigital_get_option( 'contact_email', 'office@ondigital.az' );
-$footer_contact_address = ondigital_get_option( 'contact_address_' . $lang, 'Old Town Plaza, 10-cu mərtəbə, №1007. 123 Bəşir Səfəroğlu Küçəsi, Bakı' );
+$footer_contact_title   = ondigital_get_option( 'footer_contact_title', 'Contact' );
+$footer_social_title    = ondigital_get_option( 'footer_social_title', 'Social Media' );
+$footer_contact_phone   = ondigital_get_option( 'phone', '+994 (55) 431 47 50' );
+$footer_contact_email   = ondigital_get_option( 'email', 'office@ondigital.az' );
+$footer_contact_address = ondigital_get_option( 'address', 'Old Town Plaza, 10th floor, #1007. 123 Bashir Safaroglu St, Baku' );
 
 // Copyright bar
-$footer_copyright  = ondigital_get_option( 'footer_copyright_' . $lang, 'Copyright <strong>OnDigital</strong> ' . date( 'Y' ) );
-$footer_terms_text = ondigital_get_option( 'footer_terms_text_' . $lang, 'Terms & Conditions' );
-$footer_terms_url  = ondigital_get_option( 'footer_terms_url_' . $lang, '' );
+$footer_copyright  = ondigital_get_option( 'footer_copyright', 'Copyright <strong>OnDigital</strong> ' . date( 'Y' ) );
+$footer_terms_text = ondigital_get_option( 'footer_terms_text', 'Terms & Conditions' );
+$footer_terms_url  = ondigital_get_option( 'footer_terms_url', '' );
 ?>
 
 </main>

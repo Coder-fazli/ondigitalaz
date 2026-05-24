@@ -42,13 +42,15 @@ function odf_handle_submit(): void {
 
     // Save to database
     odf_save_submission( array(
-        'name'      => $name,
-        'email'     => $email,
-        'phone'     => $phone,
-        'company'   => $company,
-        'ecommerce' => $ecomm,
-        'source'    => implode( ',', $sources ),
-        'services'  => implode( ', ', $services ),
+        'name'        => $name,
+        'email'       => $email,
+        'phone'       => $phone,
+        'company'     => $company,
+        'ecommerce'   => $ecomm,
+        'source'      => implode( ',', $sources ),
+        'services'    => implode( ', ', $services ),
+        'form_source' => $form_source,
+        'message'     => $message,
     ) );
 
     $source_labels = array(
