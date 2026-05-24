@@ -192,6 +192,19 @@ if ( $promo_enabled !== '0' && $promo_enabled !== 0 && false !== $promo_enabled 
                     ?>
                 </nav>
             </div>
+            <div class="header__button">
+                <?php
+                $header_btn_text  = ondigital_get_option( 'header_btn_text', 'Başlayaq' );
+                $header_btn_url   = ondigital_get_option( 'header_btn_url', '/teklif-al/' );
+                $_opts            = get_option( 'ondigital_options', array() );
+                $header_btn_popup = isset( $_opts['header_btn_popup'] ) && $_opts['header_btn_popup'] === '1';
+                ?>
+                <a class="wc-btn wc-btn-primary btn-text-flip"
+                   href="<?php echo $header_btn_popup ? '#' : esc_url( $header_btn_url ); ?>"
+                   <?php echo $header_btn_popup ? 'data-od-form="contact"' : ''; ?>>
+                    <span data-text="<?php echo esc_attr( $header_btn_text ); ?>"><?php echo esc_html( $header_btn_text ); ?></span>
+                </a>
+            </div>
             <?php
             if ( function_exists( 'pll_the_languages' ) ) :
                 $od_langs = pll_the_languages( array( 'raw' => 1 ) );
@@ -206,19 +219,6 @@ if ( $promo_enabled !== '0' && $promo_enabled !== 0 && false !== $promo_enabled 
                 <?php endforeach; ?>
             </div>
             <?php endif; ?>
-            <div class="header__button">
-                <?php
-                $header_btn_text  = ondigital_get_option( 'header_btn_text', 'Başlayaq' );
-                $header_btn_url   = ondigital_get_option( 'header_btn_url', '/teklif-al/' );
-                $_opts            = get_option( 'ondigital_options', array() );
-                $header_btn_popup = isset( $_opts['header_btn_popup'] ) && $_opts['header_btn_popup'] === '1';
-                ?>
-                <a class="wc-btn wc-btn-primary btn-text-flip"
-                   href="<?php echo $header_btn_popup ? '#' : esc_url( $header_btn_url ); ?>"
-                   <?php echo $header_btn_popup ? 'data-od-form="contact"' : ''; ?>>
-                    <span data-text="<?php echo esc_attr( $header_btn_text ); ?>"><?php echo esc_html( $header_btn_text ); ?></span>
-                </a>
-            </div>
             <div class="header__navicon d-xl-none">
                 <button onclick="showCanvas3()" class="open-offcanvas">
                     <i class="fa-solid fa-bars"></i>
