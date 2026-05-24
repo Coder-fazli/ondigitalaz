@@ -97,7 +97,7 @@
 
 /* ── Item ── */
 .od-sg-item {
-    padding: 40px 32px 40px 0;
+    padding: 48px 40px 56px 0;
     border-right: 1px solid rgba(18, 18, 18, 0.10);
 }
 
@@ -165,32 +165,25 @@
 
 /* ── Feature list ── */
 .od-sg-features {
-    list-style: none;
-    padding: 0;
+    list-style: disc;
+    padding: 0 0 0 18px;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
 }
 
 .od-sg-features li {
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.55;
     color: var(--secondary);
-    padding-left: 16px;
-    position: relative;
+    font-weight: 300;
+    padding-bottom: 12px;
 }
 
-.od-sg-features li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 6px;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: currentColor;
-    opacity: 0.45;
+.od-sg-features li:last-child {
+    padding-bottom: 0;
+}
+
+.od-sg-features li::marker {
+    opacity: 0.6;
 }
 
 /* ── Excerpt fallback ── */
