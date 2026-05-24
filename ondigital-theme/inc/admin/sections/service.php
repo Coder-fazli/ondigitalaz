@@ -165,6 +165,29 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
 
     <?php od_card_close(); ?>
 
+    <!-- ── AGENCY BLOCK ── -->
+    <?php od_card_open( __( 'Agency Block (image + title + description)', 'ondigital' ), 'dashicons-admin-home' ); ?>
+
+        <?php od_row_open(); ?>
+            <?php od_image( 'about_content_thumb', __( 'Main Image (left)', 'ondigital' ), $options ); ?>
+            <?php od_image( 'about_content_bg',    __( 'Background Image (right panel)', 'ondigital' ), $options ); ?>
+        <?php od_row_close(); ?>
+
+        <?php od_lang_open(); ?>
+        <?php foreach ( $langs as $lang => $label ) : ?>
+            <?php od_lang_pane( $lang ); ?>
+                <?php od_text(     'about_content_title_'    . $lang, __( 'Title', 'ondigital' ),       $options, __( 'e.g. Sadə amma peşəkar səviyyədə agentlik', 'ondigital' ) ); ?>
+                <?php od_textarea( 'about_content_body_'     . $lang, __( 'Description', 'ondigital' ), $options, __( 'Supports <span class="..."> for accent word', 'ondigital' ) ); ?>
+                <?php od_row_open(); ?>
+                    <?php od_text( 'about_content_btn_text_' . $lang, __( 'Button Text', 'ondigital' ), $options, __( 'e.g. Ətraflı', 'ondigital' ) ); ?>
+                    <?php od_text( 'about_content_btn_url_'  . $lang, __( 'Button URL', 'ondigital' ),  $options, __( '/elaqe/', 'ondigital' ) ); ?>
+                <?php od_row_close(); ?>
+            <?php od_lang_pane_close(); ?>
+        <?php endforeach; ?>
+        <?php od_lang_close(); ?>
+
+    <?php od_card_close(); ?>
+
     <!-- ── SEO ── -->
     <?php od_card_open( __( 'Archive Page SEO', 'ondigital' ), 'dashicons-search' ); ?>
 
