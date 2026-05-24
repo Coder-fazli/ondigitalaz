@@ -123,9 +123,11 @@ function ondigital_enqueue_page_assets() {
             wp_enqueue_script( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/js/pages/' . $slug . '.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
         }
 
-        // Services page: load clean grid component CSS
+        // Services page: load clean grid component CSS + partners marquee
         if ( 'services' === $slug ) {
-            wp_enqueue_style( 'ondigital-services-page', ONDIGITAL_URI . '/assets/css/components/services-page.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+            wp_enqueue_style(  'ondigital-services-page', ONDIGITAL_URI . '/assets/css/components/services-page.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+            wp_enqueue_style(  'ondigital-logo-cloud',    ONDIGITAL_URI . '/assets/css/components/logo-cloud.css',    array( 'bootstrap' ), ONDIGITAL_VERSION );
+            wp_enqueue_script( 'ondigital-logo-cloud',    ONDIGITAL_URI . '/assets/js/components/logo-cloud.js',      array( 'jquery' ),    ONDIGITAL_VERSION, true );
         }
 
         // Blog page: load component CSS (featured posts + blog grid)
