@@ -172,7 +172,8 @@ function ondigital_sanitize_repeater( string $key, array $raw ): array {
                     'icon'     => absint( $item['icon'] ?? 0 ),
                     'title_en' => sanitize_text_field( $item['title_en'] ?? '' ),
                     'title_az' => sanitize_text_field( $item['title_az'] ?? '' ),
-                    'url'      => esc_url_raw( $item['url'] ?? '' ),
+                    'url_en'   => esc_url_raw( $item['url_en'] ?? $item['url'] ?? '' ),
+                    'url_az'   => esc_url_raw( $item['url_az'] ?? '' ),
                     'items'    => $fitems,
                 );
                 break;

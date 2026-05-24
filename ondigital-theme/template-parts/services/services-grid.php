@@ -30,7 +30,7 @@ $cards = get_option( 'ondigital_services_cards', array() );
                 $icon_id   = absint( $card['icon'] ?? 0 );
                 $icon_url  = $icon_id ? wp_get_attachment_image_url( $icon_id, 'thumbnail' ) : '';
                 $title     = $lang === 'az' ? ( $card['title_az'] ?? $card['title_en'] ?? '' ) : ( $card['title_en'] ?? '' );
-                $card_url  = $card['url'] ?? '';
+                $card_url  = $lang === 'az' ? ( $card['url_az'] ?? $card['url_en'] ?? '' ) : ( $card['url_en'] ?? $card['url'] ?? '' );
                 $items     = $card['items'] ?? array();
                 $delay     = 0.1 + ( $i * 0.1 );
             ?>

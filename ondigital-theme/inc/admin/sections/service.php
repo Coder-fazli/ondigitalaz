@@ -31,10 +31,14 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
         $items    = $card['items'] ?? array();
     ?>
         <div class="od-repeater-row od-sc-row">
-            <div class="od-repeater-row-head">
-                <span><?php printf( 'Column %d', $ci + 1 ); ?></span>
-                <div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div>
+            <div class="od-repeater-row-head od-sc-toggle" style="cursor:pointer;user-select:none;">
+                <span><?php printf( 'Column %d — %s', $ci + 1, esc_html( $card['title_en'] ?? '' ) ); ?></span>
+                <div class="od-row-actions">
+                    <span class="od-sc-arrow" style="margin-right:8px;font-size:11px;opacity:.5;">▲</span>
+                    <button type="button" class="od-remove-row">&times;</button>
+                </div>
             </div>
+            <div class="od-sc-body">
 
             <div class="od-field">
                 <label><?php esc_html_e( 'Icon', 'ondigital' ); ?></label>
@@ -61,25 +65,33 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
                 </div>
             </div>
 
-            <div class="od-field">
-                <label>Title Link URL</label>
-                <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][url]" value="<?php echo esc_attr( $card['url'] ?? '' ); ?>" placeholder="/services/seo/">
+            <div class="od-field-row">
+                <div class="od-field">
+                    <label>URL (EN)</label>
+                    <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][url_en]" value="<?php echo esc_attr( $card['url_en'] ?? $card['url'] ?? '' ); ?>" placeholder="/services/seo/">
+                </div>
+                <div class="od-field">
+                    <label>URL (AZ)</label>
+                    <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][url_az]" value="<?php echo esc_attr( $card['url_az'] ?? '' ); ?>" placeholder="/az/services/seo/">
+                </div>
             </div>
 
             <div class="od-field">
-                <label style="font-weight:600;display:block;margin-bottom:8px;">Feature Items</label>
+                <label style="font-weight:600;display:block;margin-bottom:8px;">Feature Items <small style="font-weight:400;color:#888;">(EN text · AZ text · URL)</small></label>
                 <div class="od-sc-items" data-card="<?php echo $ci; ?>">
                 <?php foreach ( $items as $ii => $item ) : ?>
                     <div class="od-sc-item" style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">
                         <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][text_en]" value="<?php echo esc_attr( $item['text_en'] ?? '' ); ?>" placeholder="EN" style="flex:1;">
                         <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][text_az]" value="<?php echo esc_attr( $item['text_az'] ?? '' ); ?>" placeholder="AZ" style="flex:1;">
-                        <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][url]" value="<?php echo esc_attr( $item['url'] ?? '' ); ?>" placeholder="URL" style="width:140px;">
+                        <input type="text" name="ondigital_services_cards[<?php echo $ci; ?>][items][<?php echo $ii; ?>][url]" value="<?php echo esc_attr( $item['url'] ?? '' ); ?>" placeholder="URL (optional)" style="width:150px;">
                         <button type="button" class="od-sc-remove-item" style="color:#c00;background:none;border:none;cursor:pointer;font-size:18px;line-height:1;">&times;</button>
                     </div>
                 <?php endforeach; ?>
                 </div>
                 <button type="button" class="button od-sc-add-item" data-card="<?php echo $ci; ?>">+ Add Item</button>
             </div>
+
+            </div><!-- .od-sc-body -->
         </div>
     <?php endforeach; ?>
     </div>

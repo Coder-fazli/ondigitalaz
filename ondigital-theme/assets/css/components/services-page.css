@@ -146,11 +146,11 @@
 
 /* ── Name ── */
 .od-sg-name {
-    font-size: 22px;
+    font-size: 28px;
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.2;
     color: var(--primary);
-    margin: 0 0 20px;
+    margin: 0 0 24px;
 }
 
 .od-sg-name a {
@@ -174,8 +174,8 @@
 }
 
 .od-sg-features li {
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 15px;
+    line-height: 1.6;
     color: var(--secondary);
     padding-left: 16px;
     position: relative;

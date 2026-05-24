@@ -173,18 +173,25 @@
         },
         services_card: function (i) {
             return '<div class="od-repeater-row od-sc-row">' +
-                '<div class="od-repeater-row-head"><span>Column ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
+                '<div class="od-repeater-row-head od-sc-toggle" style="cursor:pointer;user-select:none;">' +
+                '<span>Column ' + (i + 1) + '</span>' +
+                '<div class="od-row-actions"><span class="od-sc-arrow" style="margin-right:8px;font-size:11px;opacity:.5;">▲</span><button type="button" class="od-remove-row">&times;</button></div>' +
+                '</div>' +
+                '<div class="od-sc-body">' +
                 imgField('ondigital_services_cards[' + i + '][icon]', 'Icon') +
                 '<div class="od-field-row">' +
                 '<div class="od-field"><label>Title (EN)</label><input type="text" name="ondigital_services_cards[' + i + '][title_en]" value=""></div>' +
                 '<div class="od-field"><label>Title (AZ)</label><input type="text" name="ondigital_services_cards[' + i + '][title_az]" value=""></div>' +
                 '</div>' +
-                '<div class="od-field"><label>Title Link URL</label><input type="text" name="ondigital_services_cards[' + i + '][url]" value="" placeholder="/services/seo/"></div>' +
-                '<div class="od-field"><label style="font-weight:600;display:block;margin-bottom:8px;">Feature Items</label>' +
+                '<div class="od-field-row">' +
+                '<div class="od-field"><label>URL (EN)</label><input type="text" name="ondigital_services_cards[' + i + '][url_en]" value="" placeholder="/services/seo/"></div>' +
+                '<div class="od-field"><label>URL (AZ)</label><input type="text" name="ondigital_services_cards[' + i + '][url_az]" value="" placeholder="/az/services/seo/"></div>' +
+                '</div>' +
+                '<div class="od-field"><label style="font-weight:600;display:block;margin-bottom:8px;">Feature Items <small style=\'font-weight:400;color:#888;\'>(EN · AZ · URL)</small></label>' +
                 '<div class="od-sc-items" data-card="' + i + '"></div>' +
                 '<button type="button" class="button od-sc-add-item" data-card="' + i + '">+ Add Item</button>' +
                 '</div>' +
-                '</div>';
+                '</div></div>';
         },
         project_step: function (i) {
             return '<div class="od-repeater-row">' +
@@ -210,6 +217,15 @@
             '<button type="button" class="button od-remove-img">Remove</button>' +
             '</div></div></div>';
     }
+
+    // ── Services card: toggle collapse ────────────────────────────
+    $(document).on('click', '.od-sc-toggle', function (e) {
+        if ($(e.target).closest('.od-remove-row').length) return;
+        var body  = $(this).next('.od-sc-body');
+        var arrow = $(this).find('.od-sc-arrow');
+        body.slideToggle(150);
+        arrow.text(body.is(':visible') ? '▼' : '▲');
+    });
 
     // ── Services card: add item ────────────────────────────────────
     $(document).on('click', '.od-sc-add-item', function () {
