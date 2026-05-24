@@ -227,6 +227,7 @@ function ondigital_enqueue_page_assets() {
         if ( file_exists( $js ) ) {
             wp_enqueue_script( 'ondigital-services', ONDIGITAL_URI . '/assets/js/pages/services.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
         }
+        wp_enqueue_style( 'ondigital-services-page', ONDIGITAL_URI . '/assets/css/components/services-page.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
     }
 
     // Project archive CSS/JS is handled directly in archive-project.php

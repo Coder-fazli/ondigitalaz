@@ -639,7 +639,7 @@ function ondigital_register_post_types() {
             'not_found'          => __( 'No services found.', 'ondigital' ),
         ),
         'public'       => true,
-        'has_archive'  => false,
+        'has_archive'  => true,
         'rewrite'      => array( 'slug' => 'services', 'with_front' => false ),
         'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes' ),
         'menu_icon'    => 'dashicons-admin-tools',
