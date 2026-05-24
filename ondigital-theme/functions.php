@@ -640,7 +640,7 @@ function ondigital_register_post_types() {
         ),
         'public'       => true,
         'has_archive'  => true,
-        'rewrite'      => array( 'slug' => 'xidmetler' ),
+        'rewrite'      => array( 'slug' => 'services', 'with_front' => false ),
         'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes' ),
         'menu_icon'    => 'dashicons-admin-tools',
         'show_in_rest' => true,
@@ -692,7 +692,7 @@ function ondigital_register_taxonomies() {
         ),
         'public'       => true,
         'hierarchical' => true,
-        'rewrite'      => array( 'slug' => 'xidmet-kateqoriya' ),
+        'rewrite'      => array( 'slug' => 'services', 'with_front' => false, 'hierarchical' => true ),
         'show_in_rest' => true,
     ) );
 }

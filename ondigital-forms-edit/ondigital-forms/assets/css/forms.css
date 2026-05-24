@@ -1,0 +1,14 @@
+/* Spinner — shared across all form buttons */
+@keyframes odf-spin {
+    to { transform: rotate(360deg); }
+}
+.odf-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: odf-spin .7s linear infinite;
+    vertical-align: middle;
+}

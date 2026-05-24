@@ -1,0 +1,159 @@
+/* =============================================================================
+   OD Forms — Template: Contact Page
+   Inline form rendered inside the contact page card via odf_render_contact_page_inline().
+   ============================================================================= */
+
+.odf-hp { display: none !important; }
+
+.odf-cp-wrap { height: 100%; }
+
+.odf-cp-title {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 0 0 28px;
+    color: #121212;
+}
+
+.odf-cp-title em { font-style: normal; color: #c2f971; }
+
+.odf-cp-form { display: flex; flex-direction: column; }
+
+.odf-cp-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.odf-cp-group { margin-bottom: 20px; }
+
+.odf-cp-group input,
+.odf-cp-group textarea {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    color: #121212;
+    border: none;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 12px 0;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    resize: none;
+}
+
+.odf-cp-group input:focus,
+.odf-cp-group textarea:focus { border-bottom-color: #c2f971; }
+
+.odf-cp-group input::placeholder,
+.odf-cp-group textarea::placeholder { color: #bbb; font-weight: 400; }
+
+.odf-cp-group textarea { min-height: 90px; }
+
+.odf-cp-footer { display: flex; justify-content: flex-end; margin-top: 8px; }
+
+.odf-cp-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #c2f971;
+    color: #0a0a0a;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.odf-cp-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(194, 249, 113, 0.4);
+}
+
+.odf-cp-error { margin-top: 12px; font-size: 13px; color: #c00; }
+
+.odf-cp-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 200px;
+    text-align: center;
+}
+
+.odf-cp-success-icon { font-size: 48px; color: #c2f971; }
+
+.odf-cp-success p {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    max-width: 320px;
+    line-height: 1.5;
+}
+
+/* Services checkbox pills */
+.odf-cp-services {
+    margin-bottom: 20px;
+}
+
+.odf-cp-services-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 12px;
+}
+
+.odf-cp-services-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.odf-cp-service-pill {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.odf-cp-service-pill input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+}
+
+.odf-cp-service-pill span {
+    display: inline-block;
+    padding: 7px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    background: transparent;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+    user-select: none;
+}
+
+.odf-cp-service-pill input[type="checkbox"]:checked + span {
+    background: #c2f971;
+    border-color: #c2f971;
+    color: #121212;
+    font-weight: 600;
+}
+
+.odf-cp-service-pill:hover span {
+    border-color: #c2f971;
+}
+
+@media (max-width: 860px) {
+    .odf-cp-row { grid-template-columns: 1fr; gap: 0; }
+}
