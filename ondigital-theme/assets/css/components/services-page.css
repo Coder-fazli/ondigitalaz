@@ -165,9 +165,10 @@
 
 /* ── Feature list ── */
 .od-sg-features {
-    list-style: disc;
-    padding: 0 0 0 18px;
+    list-style: disc !important;
+    padding: 0 0 0 18px !important;
     margin: 0;
+    display: block !important;
 }
 
 .od-sg-features li {
@@ -176,14 +177,20 @@
     color: var(--secondary);
     font-weight: 300;
     padding-bottom: 12px;
+    padding-inline-start: 0 !important;
+    list-style: disc !important;
 }
 
 .od-sg-features li:last-child {
     padding-bottom: 0;
 }
 
+.od-sg-features li::before {
+    display: none !important;
+}
+
 .od-sg-features li::marker {
-    opacity: 0.6;
+    color: var(--secondary);
 }
 
 /* ── Excerpt fallback ── */
