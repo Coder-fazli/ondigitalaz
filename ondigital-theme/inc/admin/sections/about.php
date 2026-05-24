@@ -269,6 +269,29 @@ $about_faq = ondigital_get_repeater( 'about_faq', array() );
         ?>
     <?php od_card_close(); ?>
 
+    <!-- ── ABOUT CONTENT BLOCK (shared: services page + about page) ── -->
+    <?php od_card_open( __( 'Agency Block (image + title + description)', 'ondigital' ), 'dashicons-admin-home' ); ?>
+
+        <?php od_row_open(); ?>
+            <?php od_image( 'about_content_thumb', __( 'Main Image (left)', 'ondigital' ), $options ); ?>
+            <?php od_image( 'about_content_bg',    __( 'Background Image (right panel)', 'ondigital' ), $options ); ?>
+        <?php od_row_close(); ?>
+
+        <?php od_lang_open(); ?>
+        <?php foreach ( array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' ) as $lang => $label ) : ?>
+            <?php od_lang_pane( $lang ); ?>
+                <?php od_text(     'about_content_title_'    . $lang, __( 'Title', 'ondigital' ),       $options, __( 'e.g. Sadə amma peşəkar səviyyədə agentlik', 'ondigital' ) ); ?>
+                <?php od_textarea( 'about_content_body_'     . $lang, __( 'Description', 'ondigital' ), $options, __( 'Supports <span> for accent word', 'ondigital' ) ); ?>
+                <?php od_row_open(); ?>
+                    <?php od_text( 'about_content_btn_text_' . $lang, __( 'Button Text', 'ondigital' ), $options, __( 'e.g. Ətraflı', 'ondigital' ) ); ?>
+                    <?php od_text( 'about_content_btn_url_'  . $lang, __( 'Button URL', 'ondigital' ),  $options, __( '/elaqe/', 'ondigital' ) ); ?>
+                <?php od_row_close(); ?>
+            <?php od_lang_pane_close(); ?>
+        <?php endforeach; ?>
+        <?php od_lang_close(); ?>
+
+    <?php od_card_close(); ?>
+
     <!-- ── CTA ── -->
     <?php od_card_open( __( 'New: 8. CTA & Form', 'ondigital' ), 'dashicons-email-alt' ); ?>
         <?php
