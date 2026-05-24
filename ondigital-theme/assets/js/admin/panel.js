@@ -175,9 +175,9 @@
             return '<div class="od-repeater-row od-sc-row">' +
                 '<div class="od-repeater-row-head od-sc-toggle" style="cursor:pointer;user-select:none;">' +
                 '<span>Column ' + (i + 1) + '</span>' +
-                '<div class="od-row-actions"><span class="od-sc-arrow" style="margin-right:8px;font-size:11px;opacity:.5;">▲</span><button type="button" class="od-remove-row">&times;</button></div>' +
+                '<div class="od-row-actions"><span class="od-sc-arrow" style="margin-right:8px;font-size:11px;opacity:.5;">▼</span><button type="button" class="od-remove-row">&times;</button></div>' +
                 '</div>' +
-                '<div class="od-sc-body">' +
+                '<div class="od-sc-body" style="display:none;">' +
                 imgField('ondigital_services_cards[' + i + '][icon]', 'Icon') +
                 '<div class="od-field-row">' +
                 '<div class="od-field"><label>Title (EN)</label><input type="text" name="ondigital_services_cards[' + i + '][title_en]" value=""></div>' +
@@ -221,10 +221,11 @@
     // ── Services card: toggle collapse ────────────────────────────
     $(document).on('click', '.od-sc-toggle', function (e) {
         if ($(e.target).closest('.od-remove-row').length) return;
-        var body  = $(this).next('.od-sc-body');
-        var arrow = $(this).find('.od-sc-arrow');
+        var body   = $(this).next('.od-sc-body');
+        var arrow  = $(this).find('.od-sc-arrow');
+        var isOpen = body.is(':visible');
         body.slideToggle(150);
-        arrow.text(body.is(':visible') ? '▼' : '▲');
+        arrow.text(isOpen ? '▼' : '▲');
     });
 
     // ── Services card: add item ────────────────────────────────────

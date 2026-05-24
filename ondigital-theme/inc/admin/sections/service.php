@@ -48,11 +48,11 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
             <div class="od-repeater-row-head od-sc-toggle" style="cursor:pointer;user-select:none;">
                 <span><?php printf( 'Column %d — %s', $ci + 1, esc_html( $card['title_en'] ?? '' ) ); ?></span>
                 <div class="od-row-actions">
-                    <span class="od-sc-arrow" style="margin-right:8px;font-size:11px;opacity:.5;">▲</span>
+                    <span class="od-sc-arrow" style="margin-right:8px;font-size:11px;opacity:.5;">▼</span>
                     <button type="button" class="od-remove-row">&times;</button>
                 </div>
             </div>
-            <div class="od-sc-body">
+            <div class="od-sc-body" style="display:none;">
 
             <div class="od-field">
                 <label><?php esc_html_e( 'Icon', 'ondigital' ); ?></label>
