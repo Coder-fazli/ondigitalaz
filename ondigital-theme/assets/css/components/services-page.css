@@ -97,30 +97,41 @@
 
 /* ── Item ── */
 .od-sg-item {
-    padding: 48px 40px 56px 0;
+    padding: 48px 40px 56px 40px;
     border-right: 1px solid rgba(18, 18, 18, 0.10);
 }
 
+/* First column in each row: flush with container edge */
+.od-sg-item:nth-child(4n+1) {
+    padding-left: 0;
+}
+
+/* Last column in each row: no right border */
 .od-sg-item:last-child,
 .od-sg-item:nth-child(4n) {
     border-right: none;
+    padding-right: 0;
 }
 
 @media only screen and (max-width: 991px) {
     .od-sg-item {
-        padding: 32px 24px 32px 0;
+        padding: 32px 24px 32px 24px;
         border-bottom: 1px solid rgba(18, 18, 18, 0.10);
     }
-    .od-sg-item:nth-child(2n) { border-right: none; }
-    .od-sg-item:nth-last-child(-n+2):not(:nth-child(odd)):not(:nth-child(even) ~ .od-sg-item) {
-        border-bottom: none;
-    }
+    /* Reset 4-col overrides */
+    .od-sg-item:nth-child(4n+1) { padding-left: 0; }
+    .od-sg-item:nth-child(4n) { border-right: 1px solid rgba(18, 18, 18, 0.10); padding-right: 24px; }
+    /* 2-col: odd = left column, even = right column */
+    .od-sg-item:nth-child(odd)  { padding-left: 0; }
+    .od-sg-item:nth-child(even) { border-right: none; padding-right: 0; }
+    /* Remove bottom border from last row */
+    .od-sg-item:nth-last-child(-n+2) { border-bottom: none; }
 }
 
 @media only screen and (max-width: 575px) {
     .od-sg-item {
-        padding: 28px 0;
-        border-right: none;
+        padding: 28px 0 !important;
+        border-right: none !important;
     }
     .od-sg-item:last-child { border-bottom: none; }
 }
