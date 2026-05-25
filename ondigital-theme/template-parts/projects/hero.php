@@ -54,26 +54,6 @@ $all_terms = get_terms( array(
         <?php echo wp_kses_post( $pa_title ); ?>
       </h1>
 
-      <div class="pa-hero-bottom">
-        <p class="pa-desc has_fade_anim">
-          <?php echo esc_html( $pa_desc ); ?>
-        </p>
-        <div class="pa-stats has_fade_anim">
-          <div class="pa-stat">
-            <div class="pa-stat-n">24<em>+</em></div>
-            <div class="pa-stat-l"><?php esc_html_e( 'Müştəri', 'ondigital' ); ?></div>
-          </div>
-          <div class="pa-stat">
-            <div class="pa-stat-n">8</div>
-            <div class="pa-stat-l"><?php esc_html_e( 'Sənaye', 'ondigital' ); ?></div>
-          </div>
-          <div class="pa-stat">
-            <div class="pa-stat-n">€2M<em>+</em></div>
-            <div class="pa-stat-l"><?php esc_html_e( 'Gəlir', 'ondigital' ); ?></div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 

@@ -692,11 +692,19 @@ function ondigital_register_taxonomies() {
         ),
         'public'       => true,
         'hierarchical' => true,
-        'rewrite'      => array( 'slug' => 'services', 'with_front' => false, 'hierarchical' => true ),
+        'rewrite'      => array( 'slug' => 'service-category', 'with_front' => false, 'hierarchical' => true ),
         'show_in_rest' => true,
     ) );
 }
 
+
+// Flush rewrite rules once after taxonomy slug change
+add_action( 'init', function() {
+    if ( get_option( 'ondigital_flushed_service_cat_slug' ) !== '2' ) {
+        flush_rewrite_rules( false );
+        update_option( 'ondigital_flushed_service_cat_slug', '2' );
+    }
+}, 999 );
 
 // =============================================================================
 // 6b. POLYLANG — register CPTs as translatable
