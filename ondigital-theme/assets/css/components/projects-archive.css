@@ -214,7 +214,7 @@
 /* ── Lottie decoration ── */
 .pa-hero-lottie {
   position: absolute;
-  top: 140px;
+  top: 70px;
   right: 40px;
   pointer-events: none;
   z-index: 0;
