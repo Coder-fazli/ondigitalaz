@@ -9,29 +9,56 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'wp_enqueue_scripts', 'odf_enqueue_frontend' );
 function odf_enqueue_frontend(): void {
-    // Contact Popup — loaded on every page (modal renders in footer globally)
-    wp_enqueue_style( 'odf-contact-popup', ODF_URI . 'assets/css/forms-contact-popup.css', array(), ODF_VERSION );
+    // Use filemtime so any uploaded file change busts the browser cache automatically.
+    $v = function( string $rel ): string {
+        $path = ODF_DIR . $rel;
+        return file_exists( $path ) ? (string) filemtime( $path ) : ODF_VERSION;
+    };
 
-    // Contact Page form CSS
+    wp_enqueue_style( 'odf-contact-popup', ODF_URI . 'assets/css/forms-contact-popup.css', array(), $v( 'assets/css/forms-contact-popup.css' ) );
+
     if ( is_page_template( 'templates/page-contact.php' ) ) {
-        wp_enqueue_style( 'odf-contact-page', ODF_URI . 'assets/css/forms-contact-page.css', array(), ODF_VERSION );
+        wp_enqueue_style( 'odf-contact-page', ODF_URI . 'assets/css/forms-contact-page.css', array(), $v( 'assets/css/forms-contact-page.css' ) );
     }
 
-    // About Page form CSS
     if ( is_page_template( 'templates/page-about-new.php' ) ) {
-        wp_enqueue_style( 'odf-about-page', ODF_URI . 'assets/css/forms-about-page.css', array(), ODF_VERSION );
+        wp_enqueue_style( 'odf-about-page', ODF_URI . 'assets/css/forms-about-page.css', array(), $v( 'assets/css/forms-about-page.css' ) );
     }
 
-    // Service Page — only on service single pages
     if ( is_singular( 'service' ) ) {
-        wp_enqueue_style( 'odf-service-page', ODF_URI . 'assets/css/forms-service-page.css', array(), ODF_VERSION );
+        wp_enqueue_style( 'odf-service-page', ODF_URI . 'assets/css/forms-service-page.css', array(), $v( 'assets/css/forms-service-page.css' ) );
     }
 
-    wp_enqueue_script( 'odf-forms', ODF_URI . 'assets/js/forms.js', array(), ODF_VERSION, true );
+    wp_enqueue_script( 'odf-forms', ODF_URI . 'assets/js/forms.js', array(), $v( 'assets/js/forms.js' ), true );
     wp_localize_script( 'odf-forms', 'odfVars', array(
         'ajaxurl' => admin_url( 'admin-ajax.php' ),
         'nonce'   => wp_create_nonce( 'odf_submit' ),
     ) );
+}
+
+add_action( 'upgrader_process_complete', 'odf_purge_caches', 10, 0 );
+add_action( 'activated_plugin',          'odf_purge_caches' );
+function odf_purge_caches(): void {
+    // WP Rocket
+    if ( function_exists( 'rocket_clean_domain' ) ) {
+        rocket_clean_domain();
+    }
+    // LiteSpeed Cache
+    if ( class_exists( 'LiteSpeed_Cache_API' ) ) {
+        LiteSpeed_Cache_API::purge_all();
+    }
+    // W3 Total Cache
+    if ( function_exists( 'w3tc_flush_all' ) ) {
+        w3tc_flush_all();
+    }
+    // WP Super Cache
+    if ( function_exists( 'wp_cache_clear_cache' ) ) {
+        wp_cache_clear_cache();
+    }
+    // WP Fastest Cache
+    if ( isset( $GLOBALS['wp_fastest_cache'] ) && method_exists( $GLOBALS['wp_fastest_cache'], 'deleteCache' ) ) {
+        $GLOBALS['wp_fastest_cache']->deleteCache();
+    }
 }
 
 function odf_render_contact_page_inline(): void {
@@ -269,14 +296,25 @@ function odf_render_modal(): void {
         array( 'value' => 'starting', 'label' => $o( 'radio_opt3' ), 'icon' => 'fa-solid fa-clock' ),
     );
 
-    $src_opts = array(
-        array( 'value' => 'instagram', 'label' => $o( 'src_instagram' ), 'icon' => 'fa-brands fa-instagram' ),
-        array( 'value' => 'tiktok',    'label' => $o( 'src_tiktok' ),    'icon' => 'fa-brands fa-tiktok' ),
-        array( 'value' => 'facebook',  'label' => $o( 'src_facebook' ),  'icon' => 'fa-brands fa-facebook-f' ),
-        array( 'value' => 'linkedin',  'label' => $o( 'src_linkedin' ),  'icon' => 'fa-brands fa-linkedin-in' ),
-        array( 'value' => 'youtube',   'label' => $o( 'src_youtube' ),   'icon' => 'fa-brands fa-youtube' ),
-        array( 'value' => 'other',     'label' => $o( 'src_other' ),     'icon' => 'fa-solid fa-star' ),
+    $popup_services_args = array(
+        'post_type'      => 'service',
+        'posts_per_page' => -1,
+        'orderby'        => 'menu_order',
+        'order'          => 'ASC',
+        'post_status'    => 'publish',
     );
+    if ( function_exists( 'pll_current_language' ) ) {
+        $popup_services_args['lang'] = $lang;
+    }
+    $popup_services_q     = new WP_Query( $popup_services_args );
+    $popup_service_items  = array();
+    if ( $popup_services_q->have_posts() ) {
+        while ( $popup_services_q->have_posts() ) {
+            $popup_services_q->the_post();
+            $popup_service_items[] = get_the_title();
+        }
+        wp_reset_postdata();
+    }
 
     $labels = $lang === 'az' ? array(
         'name'       => 'Ad Soyad',
@@ -362,17 +400,14 @@ function odf_render_modal(): void {
                 </div>
                 <?php endif; ?>
 
-                <?php if ( $show( 'field_source' ) && $src_question ) : ?>
+                <?php if ( $show( 'field_source' ) && $src_question && ! empty( $popup_service_items ) ) : ?>
                 <div class="odf-group">
                     <p class="odf-group-label"><?php echo esc_html( $src_question ); ?></p>
-                    <div class="odf-choice-grid odf-choice-grid--3">
-                        <?php foreach ( $src_opts as $opt ) : ?>
-                        <label class="odf-choice-btn">
-                            <input type="checkbox" name="odf_source[]" value="<?php echo esc_attr( $opt['value'] ); ?>">
-                            <span class="odf-choice-inner">
-                                <i class="<?php echo esc_attr( $opt['icon'] ); ?>"></i>
-                                <?php echo esc_html( $opt['label'] ); ?>
-                            </span>
+                    <div class="odf-cp-services-grid">
+                        <?php foreach ( $popup_service_items as $svc_title ) : ?>
+                        <label class="odf-cp-service-pill">
+                            <input type="checkbox" name="odf_services[]" value="<?php echo esc_attr( $svc_title ); ?>">
+                            <span><?php echo esc_html( $svc_title ); ?></span>
                         </label>
                         <?php endforeach; ?>
                     </div>

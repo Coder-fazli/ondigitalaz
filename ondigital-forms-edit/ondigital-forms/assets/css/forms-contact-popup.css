@@ -293,6 +293,61 @@
     font-family: 'Poppins', sans-serif;
 }
 
+/* Service pills */
+.odf-modal .odf-cp-services-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.odf-modal .odf-cp-service-pill {
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+    user-select: none;
+}
+
+.odf-modal .odf-cp-service-pill input[type="checkbox"] {
+    position: absolute !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    pointer-events: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.odf-modal .odf-cp-service-pill span {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 18px;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    background: #f7f7f7;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1;
+    transition: border-color 0.18s, background 0.18s, color 0.18s, box-shadow 0.18s;
+    white-space: nowrap;
+}
+
+.odf-modal .odf-cp-service-pill:hover span {
+    border-color: #3fd467;
+    background: #fff;
+    color: #111;
+}
+
+.odf-modal .odf-cp-service-pill input[type="checkbox"]:checked + span {
+    background: #3fd467;
+    border-color: #3fd467;
+    color: #0d0d0d;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(63, 212, 103, 0.3);
+}
+
 @media (max-width: 600px) {
     .odf-modal {
         padding: 28px 20px;

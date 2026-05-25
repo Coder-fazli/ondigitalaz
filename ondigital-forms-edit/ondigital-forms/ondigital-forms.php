@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'ODF_VERSION', '1.2.0' );
+define( 'ODF_VERSION', '1.3.0' );
 define( 'ODF_DIR',     plugin_dir_path( __FILE__ ) );
 define( 'ODF_URI',     plugin_dir_url( __FILE__ ) );
 

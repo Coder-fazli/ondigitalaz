@@ -1,15 +1,20 @@
 <?php
 /**
  * Blog - Featured Posts Section
+ * Matches Arolax blog.html .featured-post-area structure exactly.
+ * First post spans 2 cols × 2 rows; items 2 & 3 stack on the right.
  *
  * @package OnDigital
  */
 
-$featured_query = new WP_Query( array(
+$_pll_lang = function_exists( 'pll_current_language' ) ? pll_current_language() : '';
+
+$featured_query = new WP_Query( array_filter( array(
     'post_type'      => 'post',
     'posts_per_page' => 3,
     'orderby'        => 'date',
     'order'          => 'DESC',
+    'lang'           => $_pll_lang ?: null,
     'meta_query'     => array(
         array(
             'key'     => '_is_featured',
@@ -17,16 +22,17 @@ $featured_query = new WP_Query( array(
             'compare' => '=',
         ),
     ),
-) );
+) ) );
 
-// Fallback to latest 3 posts if no featured posts
+// Fallback: latest 3 posts if none are marked featured
 if ( ! $featured_query->have_posts() ) {
-    $featured_query = new WP_Query( array(
+    $featured_query = new WP_Query( array_filter( array(
         'post_type'      => 'post',
         'posts_per_page' => 3,
         'orderby'        => 'date',
         'order'          => 'DESC',
-    ) );
+        'lang'           => $_pll_lang ?: null,
+    ) ) );
 }
 
 $static_featured = array(
@@ -49,18 +55,27 @@ $static_featured = array(
         'image' => 'img-s-19.webp',
     ),
 );
+
+// Arolax delays: item 1 = none, item 2 = 0.30, item 3 = 0.45 + data-on-scroll=0
+$delays     = array( '', '0.30', '0.45' );
+$on_scrolls = array( '', '', '0' );
 ?>
 <div class="featured-post-area">
     <div class="container">
         <div class="featured-post-box">
             <div class="featured-posts">
+
                 <?php if ( $featured_query->have_posts() ) : ?>
-                    <?php $i = 0; while ( $featured_query->have_posts() ) : $featured_query->the_post(); $delay = $i * 0.30; ?>
-                        <article class="blog-box has_fade_anim" <?php echo $i > 0 ? 'data-delay="' . esc_attr( $delay ) . '"' : ''; ?>>
+                    <?php $idx = 0; while ( $featured_query->have_posts() ) : $featured_query->the_post(); ?>
+                        <article class="blog-box has_fade_anim"
+                            <?php if ( $delays[ $idx ] ) echo 'data-delay="' . esc_attr( $delays[ $idx ] ) . '"'; ?>
+                            <?php if ( $on_scrolls[ $idx ] !== '' ) echo ' data-on-scroll="' . esc_attr( $on_scrolls[ $idx ] ) . '"'; ?>>
                             <a href="<?php the_permalink(); ?>">
                                 <div class="thumb">
                                     <?php if ( has_post_thumbnail() ) : ?>
                                         <?php the_post_thumbnail( 'ondigital-blog-featured' ); ?>
+                                    <?php else : ?>
+                                        <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/blog/img-s-' . ( 17 + $idx ) . '.webp' ); ?>" alt="<?php the_title_attribute(); ?>">
                                     <?php endif; ?>
                                 </div>
                                 <div class="content">
@@ -68,42 +83,39 @@ $static_featured = array(
                                         <h2 class="title"><?php the_title(); ?></h2>
                                         <span class="tag">
                                             <?php
-                                            $categories = get_the_category();
-                                            echo ! empty( $categories ) ? esc_html( $categories[0]->name ) : '';
+                                            $cats = get_the_category();
+                                            echo ! empty( $cats ) ? esc_html( $cats[0]->name ) : esc_html__( 'Seçilmiş Məqalə', 'ondigital' );
                                             ?>
-                                            <br>
-                                            <?php echo esc_html( get_the_date( 'M - Y' ) ); ?>
+                                            <br><?php echo esc_html( get_the_date( 'M - Y' ) ); ?>
                                         </span>
                                     </div>
-                                    <div class="icon">
-                                        <i class="fa-solid fa-arrow-right"></i>
-                                    </div>
+                                    <div class="icon"><i class="fa-solid fa-arrow-right"></i></div>
                                 </div>
                             </a>
                         </article>
-                    <?php $i++; endwhile; ?>
-                    <?php wp_reset_postdata(); ?>
+                    <?php $idx++; endwhile; wp_reset_postdata(); ?>
+
                 <?php else : ?>
-                    <?php foreach ( $static_featured as $i => $post_item ) : ?>
-                        <article class="blog-box has_fade_anim" <?php echo $i > 0 ? 'data-delay="' . esc_attr( $i * 0.30 ) . '"' : ''; ?>>
+                    <?php foreach ( $static_featured as $i => $item ) : ?>
+                        <article class="blog-box has_fade_anim"
+                            <?php if ( $delays[ $i ] ) echo 'data-delay="' . esc_attr( $delays[ $i ] ) . '"'; ?>
+                            <?php if ( $on_scrolls[ $i ] !== '' ) echo ' data-on-scroll="' . esc_attr( $on_scrolls[ $i ] ) . '"'; ?>>
                             <a href="#">
                                 <div class="thumb">
-                                    <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/blog/' . $post_item['image'] ); ?>" alt="<?php echo esc_attr( $post_item['title'] ); ?>">
+                                    <img src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/blog/' . $item['image'] ); ?>" alt="<?php echo esc_attr( $item['title'] ); ?>">
                                 </div>
                                 <div class="content">
                                     <div class="content-first">
-                                        <h2 class="title"><?php echo esc_html( $post_item['title'] ); ?></h2>
-                                        <span class="tag"><?php echo esc_html( $post_item['tag'] ); ?> <br>
-                                            <?php echo esc_html( $post_item['date'] ); ?></span>
+                                        <h2 class="title"><?php echo esc_html( $item['title'] ); ?></h2>
+                                        <span class="tag"><?php echo esc_html( $item['tag'] ); ?><br><?php echo esc_html( $item['date'] ); ?></span>
                                     </div>
-                                    <div class="icon">
-                                        <i class="fa-solid fa-arrow-right"></i>
-                                    </div>
+                                    <div class="icon"><i class="fa-solid fa-arrow-right"></i></div>
                                 </div>
                             </a>
                         </article>
                     <?php endforeach; ?>
                 <?php endif; ?>
+
             </div>
         </div>
     </div>
