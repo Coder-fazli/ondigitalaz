@@ -13,3 +13,63 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: ondigital
 Tags: custom-logo, custom-menu, translation-ready, one-column, two-columns
 */
+
+/* =============================================================================
+   CTA Section — gap between heading and button
+   ============================================================================= */
+.cta-area .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+@media only screen and (max-width: 767px) {
+    .cta-area .section-header {
+        gap: 32px;
+    }
+}
+
+/* =============================================================================
+   Home Hero — mobile button sizing
+   ============================================================================= */
+@media only screen and (max-width: 767px) {
+    .ond-hero .wc-btn-primary,
+    .hero-area .wc-btn-primary {
+        width: 60% !important;
+        min-width: 0 !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+
+    .ond-hero a.wc-btn:not(.wc-btn-primary),
+    .hero-area a.wc-btn:not(.wc-btn-primary) {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+}
+
+/* =============================================================================
+   Blog page — section fixes
+   ============================================================================= */
+
+/* Center the pagination row */
+.pagination-box {
+    display: flex;
+    justify-content: center;
+}
+
+/* Images fill their card containers with no gray placeholder gaps */
+.featured-post-area .blog-box .thumb,
+.blog-area .blog-box .thumb {
+    overflow: hidden;
+}
+
+.featured-post-area .blog-box .thumb img,
+.blog-area .blog-box .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
