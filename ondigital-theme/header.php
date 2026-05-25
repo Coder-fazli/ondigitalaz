@@ -30,13 +30,11 @@
 <div class="offcanvas-3__area">
     <div class="offcanvas-3__inner">
         <div class="offcanvas-3__meta-wrapper">
-            <div>
+            <div class="offcanvas-3__topbar">
                 <button id="close_offcanvas" class="close-button close-offcanvas" onclick="hideCanvas3()">
                     <span></span>
                     <span></span>
                 </button>
-            </div>
-            <div>
                 <?php if ( function_exists( 'pll_the_languages' ) ) :
                     $od_langs_m = pll_the_languages( array( 'raw' => 1 ) );
                     $od_flags_m = array( 'en' => '🇬🇧', 'az' => '🇦🇿' );
@@ -51,6 +49,8 @@
                     <?php endforeach; ?>
                 </div>
                 <?php endif; ?>
+            </div>
+            <div>
                 <div class="offcanvas-3__meta mb-145 d-none d-md-block">
                     <ul>
                         <li>

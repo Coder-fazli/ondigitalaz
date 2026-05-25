@@ -267,6 +267,14 @@ header .container.large {
     color: #fff;
 }
 
+/* Off-canvas top bar — close btn + lang switcher in one row */
+.offcanvas-3__topbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+}
+
 /* Mobile off-canvas switcher — lives in top bar opposite close button */
 .od-lang-switch--mobile {
     margin: 0;
