@@ -267,17 +267,15 @@ header .container.large {
     color: #fff;
 }
 
-/* Mobile off-canvas switcher */
+/* Mobile off-canvas switcher — lives in top bar opposite close button */
 .od-lang-switch--mobile {
-    margin: 0 0 28px;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 0;
     padding: 0;
     position: static;
 }
 
 .od-lang-switch--mobile .od-lang-btn {
-    height: 40px;
+    height: 38px;
     padding: 0 14px;
     border-color: rgba(255, 255, 255, 0.2);
 }
