@@ -263,7 +263,8 @@ function ondigital_enqueue_page_assets() {
         }
     }
 
-    if ( is_post_type_archive( 'od_glossary' ) || is_tax( 'glossary_cat' ) || is_singular( 'od_glossary' ) ) {
+    if ( is_post_type_archive( 'od_glossary' ) || is_tax( 'glossary_cat' ) || is_singular( 'od_glossary' )
+        || ( is_page() && 'templates/page-glossary.php' === get_page_template_slug() ) ) {
         wp_enqueue_style( 'roboto', 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap', array(), null );
         // Load full base theme CSS first (same as global.css fallback) so offcanvas/nav/preloader styles are present
         wp_enqueue_style( 'ondigital-default', ONDIGITAL_URI . '/assets/css/global.css', array( 'bootstrap' ), ONDIGITAL_VERSION );

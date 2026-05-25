@@ -41,7 +41,7 @@ function ondigital_register_glossary_cpt(): void {
         'menu_icon'          => 'dashicons-book-alt',
         'supports'           => array( 'title', 'editor', 'thumbnail' ),
         'has_archive'        => true,
-        'rewrite'            => array( 'slug' => 'sozluk', 'with_front' => false ),
+        'rewrite'            => array( 'slug' => 'dictionary', 'with_front' => false ),
         'show_in_rest'       => true,
     ) );
 }
@@ -104,11 +104,11 @@ function ondigital_glossary_flush_rewrites(): void {
 
 add_action( 'init', 'ondigital_glossary_maybe_flush', 15 );
 function ondigital_glossary_maybe_flush(): void {
-    if ( get_option( 'ondigital_glossary_flushed_v1' ) ) {
+    if ( get_option( 'ondigital_glossary_flushed_v2' ) ) {
         return;
     }
     flush_rewrite_rules();
-    update_option( 'ondigital_glossary_flushed_v1', true );
+    update_option( 'ondigital_glossary_flushed_v2', true );
 }
 
 add_action( 'init', 'ondigital_glossary_seed_demo', 20 );

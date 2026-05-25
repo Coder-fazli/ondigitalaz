@@ -25,6 +25,9 @@ function ondigital_create_required_pages(): void {
         ),
     );
 
+    // ── AZ-only pages (no EN counterpart — EN uses CPT archive directly) ────
+    ondigital_create_az_only_page( 'sozluk', 'Sözlük', 'templates/page-glossary.php' );
+
     foreach ( $pages as $page ) {
         // Create EN version
         $en_page = get_page_by_path( $page['slug'] );
@@ -129,4 +132,44 @@ function ondigital_setup_az_home(): void {
         'en' => $front_page_id,
         'az' => $az_home_id,
     ) );
+}
+
+/**
+ * Create a standalone AZ-only page (no EN counterpart).
+ * Used when EN serves via a CPT archive and AZ needs a regular page.
+ */
+function ondigital_create_az_only_page( string $slug, string $title_az, string $template ): void {
+    if ( ! function_exists( 'pll_set_post_language' ) ) {
+        return;
+    }
+
+    // Already exists?
+    $existing = get_posts( array(
+        'post_type'   => 'page',
+        'name'        => $slug,
+        'post_status' => 'publish',
+        'numberposts' => 1,
+        'lang'        => 'az',
+    ) );
+
+    if ( $existing ) {
+        // Make sure template is set correctly
+        if ( get_post_meta( $existing[0]->ID, '_wp_page_template', true ) !== $template ) {
+            update_post_meta( $existing[0]->ID, '_wp_page_template', $template );
+        }
+        return;
+    }
+
+    $page_id = wp_insert_post( array(
+        'post_title'     => $title_az,
+        'post_name'      => $slug,
+        'post_status'    => 'publish',
+        'post_type'      => 'page',
+        'comment_status' => 'closed',
+    ) );
+
+    if ( $page_id && ! is_wp_error( $page_id ) ) {
+        update_post_meta( $page_id, '_wp_page_template', $template );
+        pll_set_post_language( $page_id, 'az' );
+    }
 }
