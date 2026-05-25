@@ -15,12 +15,13 @@ $terms       = get_the_terms( get_the_ID(), 'glossary_cat' );
 $cat         = ( $terms && ! is_wp_error( $terms ) ) ? $terms[0] : null;
 $archive_url = get_post_type_archive_link( 'od_glossary' );
 
-// Related terms: same category, exclude current
+// Related terms: same category, exclude current — lang:'' shows all regardless of language
 $related_args = array(
     'post_type'      => 'od_glossary',
     'posts_per_page' => 3,
     'post__not_in'   => array( get_the_ID() ),
     'orderby'        => 'rand',
+    'lang'           => '',
 );
 if ( $cat ) {
     $related_args['tax_query'] = array(

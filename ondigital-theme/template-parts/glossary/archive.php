@@ -9,7 +9,8 @@
 $active_letter = isset( $_GET['harf'] ) ? strtoupper( sanitize_text_field( $_GET['harf'] ) ) : 'ALL';
 $search_query  = isset( $_GET['s'] )    ? sanitize_text_field( $_GET['s'] )                   : '';
 
-// Build WP_Query args
+// Build WP_Query args — lang:'' disables Polylang filtering so both
+// language users see all glossary terms (terms are universal).
 $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 $args  = array(
     'post_type'      => 'od_glossary',
@@ -17,6 +18,7 @@ $args  = array(
     'paged'          => $paged,
     'orderby'        => 'title',
     'order'          => 'ASC',
+    'lang'           => '',
 );
 
 if ( $search_query ) {
@@ -42,6 +44,7 @@ $all_terms = get_posts( array(
     'fields'         => 'ids',
     'orderby'        => 'title',
     's'              => $search_query,
+    'lang'           => '',
 ) );
 foreach ( $all_terms as $tid ) {
     $title  = get_the_title( $tid );
