@@ -81,17 +81,6 @@
             </div>
         </div>
         <div class="offcanvas-3__menu-wrapper">
-            <nav class="nav-menu offcanvas-3__menu">
-                <?php
-                wp_nav_menu( array(
-                    'theme_location' => 'primary',
-                    'container'      => false,
-                    'items_wrap'     => '<ul>%3$s</ul>',
-                    'fallback_cb'    => false,
-                    'depth'          => 2,
-                ) );
-                ?>
-            </nav>
             <?php if ( function_exists( 'pll_the_languages' ) ) :
                 $od_langs_m = pll_the_languages( array( 'raw' => 1 ) );
                 $od_flags_m = array( 'en' => '🇬🇧', 'az' => '🇦🇿' );
@@ -105,6 +94,17 @@
                 <?php endforeach; ?>
             </div>
             <?php endif; ?>
+            <nav class="nav-menu offcanvas-3__menu">
+                <?php
+                wp_nav_menu( array(
+                    'theme_location' => 'primary',
+                    'container'      => false,
+                    'items_wrap'     => '<ul>%3$s</ul>',
+                    'fallback_cb'    => false,
+                    'depth'          => 2,
+                ) );
+                ?>
+            </nav>
         </div>
     </div>
 </div>

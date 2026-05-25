@@ -269,7 +269,7 @@ header .container.large {
 
 /* Mobile off-canvas switcher */
 .od-lang-switch--mobile {
-    margin: 32px 0 0;
+    margin: 0 0 28px;
     margin-left: 0;
     margin-right: 0;
     padding: 0;
