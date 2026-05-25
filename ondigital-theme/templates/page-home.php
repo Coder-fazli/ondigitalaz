@@ -40,7 +40,10 @@ get_template_part( 'template-parts/home/blog' );
 // Section 13: Text Slider / Marquee
 get_template_part( 'template-parts/home/text-slider' );
 
-// Section 14: CTA (shared)
+// Section 14: FAQ
+get_template_part( 'template-parts/home/faq' );
+
+// Section 15: CTA (shared)
 get_template_part( 'template-parts/shared/cta' );
 
 get_footer();

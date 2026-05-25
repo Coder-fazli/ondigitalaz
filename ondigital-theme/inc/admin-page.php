@@ -211,6 +211,36 @@ function ondigital_theme_options_save() {
         update_option( 'ondigital_about_faq_items', array() );
     }
 
+    // Footer Quick Links
+    if ( isset( $_POST['ondigital_footer_quick_links'] ) && is_array( $_POST['ondigital_footer_quick_links'] ) ) {
+        $footer_quick_links = array();
+        foreach ( $_POST['ondigital_footer_quick_links'] as $item ) {
+            if ( empty( $item['label'] ) ) continue;
+            $footer_quick_links[] = array(
+                'label' => sanitize_text_field( $item['label'] ?? '' ),
+                'url'   => esc_url_raw( $item['url'] ?? '' ),
+            );
+        }
+        update_option( 'ondigital_footer_quick_links', $footer_quick_links );
+    } else {
+        update_option( 'ondigital_footer_quick_links', array() );
+    }
+
+    // Footer Services Links
+    if ( isset( $_POST['ondigital_footer_services_links'] ) && is_array( $_POST['ondigital_footer_services_links'] ) ) {
+        $footer_services_links = array();
+        foreach ( $_POST['ondigital_footer_services_links'] as $item ) {
+            if ( empty( $item['label'] ) ) continue;
+            $footer_services_links[] = array(
+                'label' => sanitize_text_field( $item['label'] ?? '' ),
+                'url'   => esc_url_raw( $item['url'] ?? '' ),
+            );
+        }
+        update_option( 'ondigital_footer_services_links', $footer_services_links );
+    } else {
+        update_option( 'ondigital_footer_services_links', array() );
+    }
+
     add_settings_error( 'ondigital_theme_options', 'settings_updated', __( 'Settings saved.', 'ondigital' ), 'updated' );
 }
 

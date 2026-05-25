@@ -15,9 +15,9 @@ $about_btn2_url   = ondigital_get_option( 'about_btn2_url' );
 $about_btn2_url   = $about_btn2_url ? $about_btn2_url : home_url( '/xidmetler/' );
 $about_exp_number = ondigital_get_option( 'about_exp_number', '7' );
 $about_exp_label  = ondigital_get_option( 'about_exp_label', 'Years of hall of fame & experience' );
-$about_img1       = ondigital_img( 'about_image_1', '/assets/imgs/gallery/img-s-36.webp' );
-$about_img2       = ondigital_img( 'about_image_2', '/assets/imgs/gallery/img-s-37.webp' );
-$about_img3       = ondigital_img( 'about_image_3', '/assets/imgs/gallery/img-s-38.webp' );
+$about_img1       = ondigital_img( 'about_img1', '/assets/imgs/gallery/img-s-36.webp' );
+$about_img2       = ondigital_img( 'about_img2', '/assets/imgs/gallery/img-s-37.webp' );
+$about_img3       = ondigital_img( 'about_img3', '/assets/imgs/gallery/img-s-38.webp' );
 ?>
 <section class="about-area">
     <div class="container">
@@ -47,10 +47,6 @@ $about_img3       = ondigital_img( 'about_image_3', '/assets/imgs/gallery/img-s-
                     <a href="<?php echo esc_url( $about_btn2_url ); ?>" class="wc-btn wc-btn-underline btn-text-flip">
                         <span data-text="<?php echo esc_attr( $about_btn2_text ); ?>"><?php echo esc_html( $about_btn2_text ); ?></span>
                     </a>
-                </div>
-                <div class="experience-box has_fade_anim">
-                    <h3 class="number wc-counter"><?php echo esc_html( $about_exp_number ); ?><i class="fa-solid fa-plus"></i></h3>
-                    <h3 class="info"><?php echo esc_html( $about_exp_label ); ?></h3>
                 </div>
             </div>
         </div>

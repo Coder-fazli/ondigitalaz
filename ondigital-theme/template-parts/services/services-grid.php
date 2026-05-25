@@ -5,81 +5,110 @@
  * @package OnDigital
  */
 
-$grid_title = ondigital_get_option( 'services_grid_title', 'Eksklüziv <br> xidmətlərimiz' );
-$grid_body  = ondigital_get_option( 'services_grid_body', 'Kateqoriyanı dəyişdirən və insanların həyatına dəyər qatan brendlərə investisiya edirik' );
+$lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
 
-$service_query = new WP_Query( array(
-    'post_type'      => 'service',
-    'posts_per_page' => -1,
-    'orderby'        => 'menu_order',
-    'order'          => 'ASC',
-) );
+$grid_title = ondigital_get_option( 'services_grid_title', 'Our exclusive <br>services' );
+$grid_body  = ondigital_get_option( 'services_grid_body', 'We bet on brands that shift categories and add value to people\'s lives; and on founders who are motivated to shape' );
 
-$static_services = array(
-    array( 'title' => 'Veb Sayt Dizaynı',    'icon' => 'icon-s-1', 'features' => array( 'İstifadəçi İnterfeysi', 'İstifadəçi Təcrübəsi', 'Dizayn Sistemi', 'Prototip', 'Responsive Dizayn', 'Veb & Mobil' ) ),
-    array( 'title' => 'Brend Dizaynı',        'icon' => 'icon-s-2', 'features' => array( 'Loqo Dizaynı', 'Korporativ Üslub', 'Brend Strategiyası', 'Vizual İdentifikasiya', 'Qablaşdırma Dizaynı', 'Çap Materialları' ) ),
-    array( 'title' => 'Rəqəmsal Marketinq',   'icon' => 'icon-s-3', 'features' => array( 'SEO Optimallaşdırma', 'Google Ads', 'Sosial Media', 'Kontent Marketinq', 'Email Marketinq', 'Analitika' ) ),
-    array( 'title' => 'Veb İnkişaf',          'icon' => 'icon-s-4', 'features' => array( 'WordPress', 'E-ticarət', 'API İnteqrasiya', 'CMS İnkişaf', 'Front-end Development', 'Texniki Dəstək' ) ),
-);
+$cards = get_option( 'ondigital_services_cards', array() );
 ?>
-<section class="service-area section-spacing">
+<section class="od-sg-section">
     <div class="container">
-        <div class="service-top-wrapper">
-            <div class="section-heading">
-                <h2 class="section-title has_text_move_anim">
-                    <?php echo wp_kses_post( $grid_title ); ?>
-                </h2>
-            </div>
-            <div class="content">
-                <p class="text has_fade_anim">
-                    <?php echo esc_html( $grid_body ); ?>
-                </p>
-            </div>
+
+        <div class="od-sg-header">
+            <h2 class="od-sg-title has_text_move_anim">
+                <?php echo wp_kses_post( $grid_title ); ?>
+            </h2>
+            <p class="od-sg-desc has_fade_anim" data-fade-from="right" data-delay="0.2">
+                <?php echo esc_html( $grid_body ); ?>
+            </p>
         </div>
-        <div class="services-wrapper-box">
-            <div class="services-grid">
-                <?php if ( $service_query->have_posts() ) : ?>
-                    <?php $delay = 0.15; while ( $service_query->have_posts() ) : $service_query->the_post();
-                        $icon_id       = get_post_meta( get_the_ID(), '_service_icon', true );
-                        $icon_url      = $icon_id ? wp_get_attachment_image_url( $icon_id, 'thumbnail' ) : '';
-                        $features_raw  = get_post_meta( get_the_ID(), '_service_features', true );
-                        $features      = $features_raw ? array_filter( array_map( 'trim', explode( "\n", $features_raw ) ) ) : array();
+
+        <?php if ( ! empty( $cards ) ) : ?>
+        <div class="od-sg-grid">
+            <?php foreach ( $cards as $i => $card ) :
+                $icon_id   = absint( $card['icon'] ?? 0 );
+                $icon_url  = $icon_id ? wp_get_attachment_image_url( $icon_id, 'thumbnail' ) : '';
+                $title     = $lang === 'az' ? ( $card['title_az'] ?? $card['title_en'] ?? '' ) : ( $card['title_en'] ?? '' );
+                $card_url  = $lang === 'az' ? ( $card['url_az'] ?? $card['url_en'] ?? '' ) : ( $card['url_en'] ?? $card['url'] ?? '' );
+                $items     = $card['items'] ?? array();
+                $delay     = 0.1 + ( $i * 0.1 );
+            ?>
+            <div class="od-sg-item has_fade_anim" data-fade-from="bottom" data-delay="<?php echo esc_attr( $delay ); ?>">
+                <?php if ( $icon_url ) : ?>
+                <div class="od-sg-icon">
+                    <img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php echo esc_attr( $title ); ?>" width="48" height="48">
+                </div>
+                <?php endif; ?>
+
+                <h3 class="od-sg-name">
+                    <?php if ( $card_url ) : ?>
+                        <a href="<?php echo esc_url( $card_url ); ?>"><?php echo esc_html( $title ); ?></a>
+                    <?php else : ?>
+                        <?php echo esc_html( $title ); ?>
+                    <?php endif; ?>
+                </h3>
+
+                <?php if ( ! empty( $items ) ) : ?>
+                <ul class="od-sg-features">
+                    <?php foreach ( $items as $item ) :
+                        $text = $lang === 'az' ? ( $item['text_az'] ?? $item['text_en'] ?? '' ) : ( $item['text_en'] ?? '' );
+                        $url  = $lang === 'az' ? ( $item['url_az'] ?? $item['url_en'] ?? $item['url'] ?? '' ) : ( $item['url_en'] ?? $item['url'] ?? '' );
+                        if ( ! $text ) continue;
                     ?>
-                        <div class="service-item has_fade_anim" data-delay="<?php echo esc_attr( $delay ); ?>">
-                            <?php if ( $icon_url ) : ?>
-                                <div class="icon">
-                                    <img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php the_title_attribute(); ?>">
-                                </div>
-                            <?php endif; ?>
-                            <h2 class="title"><?php the_title(); ?></h2>
-                            <?php if ( ! empty( $features ) ) : ?>
-                                <ul class="service-features">
-                                    <?php foreach ( $features as $feature ) : ?>
-                                        <li><?php echo esc_html( $feature ); ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            <?php elseif ( has_excerpt() ) : ?>
-                                <div class="service-features-text"><?php the_excerpt(); ?></div>
-                            <?php endif; ?>
-                        </div>
-                    <?php $delay += 0.15; endwhile; wp_reset_postdata(); ?>
-                <?php else : ?>
-                    <?php foreach ( $static_services as $i => $service ) : ?>
-                        <div class="service-item has_fade_anim" data-delay="<?php echo esc_attr( 0.15 + ( $i * 0.15 ) ); ?>">
-                            <div class="icon">
-                                <img class="show-light" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/' . $service['icon'] . '.webp' ); ?>" alt="<?php echo esc_attr( $service['title'] ); ?>">
-                                <img class="show-dark"  src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/' . $service['icon'] . '-light.webp' ); ?>" alt="<?php echo esc_attr( $service['title'] ); ?>">
-                            </div>
-                            <h2 class="title"><?php echo esc_html( $service['title'] ); ?></h2>
-                            <ul class="service-features">
-                                <?php foreach ( $service['features'] as $feature ) : ?>
-                                    <li><?php echo esc_html( $feature ); ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
+                    <li>
+                        <?php if ( $url ) : ?>
+                            <a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $text ); ?></a>
+                        <?php else : ?>
+                            <?php echo esc_html( $text ); ?>
+                        <?php endif; ?>
+                    </li>
                     <?php endforeach; ?>
+                </ul>
                 <?php endif; ?>
             </div>
+            <?php endforeach; ?>
         </div>
+
+        <?php else : ?>
+        <!-- Fallback: auto-pull from Service CPT if no cards configured -->
+        <?php
+        $service_query = new WP_Query( array(
+            'post_type'      => 'service',
+            'posts_per_page' => -1,
+            'orderby'        => 'menu_order',
+            'order'          => 'ASC',
+            'lang'           => $lang,
+        ) );
+        if ( $service_query->have_posts() ) : ?>
+        <div class="od-sg-grid">
+            <?php $delay = 0.1; while ( $service_query->have_posts() ) : $service_query->the_post();
+                $icon_id      = get_post_meta( get_the_ID(), '_service_icon', true );
+                $icon_url     = $icon_id ? wp_get_attachment_image_url( $icon_id, 'thumbnail' ) : '';
+                $features_raw = get_post_meta( get_the_ID(), '_service_features', true );
+                $features     = $features_raw ? array_filter( array_map( 'trim', explode( "\n", $features_raw ) ) ) : array();
+            ?>
+            <div class="od-sg-item has_fade_anim" data-fade-from="bottom" data-delay="<?php echo esc_attr( $delay ); ?>">
+                <?php if ( $icon_url ) : ?>
+                <div class="od-sg-icon">
+                    <img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php the_title_attribute(); ?>" width="48" height="48">
+                </div>
+                <?php endif; ?>
+                <h3 class="od-sg-name"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                <?php if ( ! empty( $features ) ) : ?>
+                <ul class="od-sg-features">
+                    <?php foreach ( $features as $f ) : ?>
+                    <li><?php echo esc_html( $f ); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php elseif ( has_excerpt() ) : ?>
+                <p class="od-sg-excerpt"><?php echo wp_kses_post( get_the_excerpt() ); ?></p>
+                <?php endif; ?>
+            </div>
+            <?php $delay += 0.1; endwhile; wp_reset_postdata(); ?>
+        </div>
+        <?php endif; ?>
+        <?php endif; ?>
+
     </div>
 </section>

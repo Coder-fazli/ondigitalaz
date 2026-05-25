@@ -19,7 +19,7 @@ $features = ondigital_get_repeater( 'features', $default_features );
 ?>
 <section class="features-area">
     <div class="container">
-        <div class="features-area-inner section-spacing-top">
+        <div class="features-area-inner">
             <div class="section-header">
                 <div class="section-title-wrapper">
                     <div class="title-wrapper">
@@ -27,9 +27,6 @@ $features = ondigital_get_repeater( 'features', $default_features );
                             <?php echo wp_kses_post( $features_title ); ?>
                         </h2>
                     </div>
-                </div>
-                <div class="text-wrapper features-team-img-wrapper">
-                    <img class="features-team-img has_fade_anim" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/features-team.png' ); ?>" alt="<?php esc_attr_e( 'Team', 'ondigital' ); ?>">
                 </div>
             </div>
             <div class="features-wrapper-box">

@@ -10,16 +10,19 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'ONDIGITAL_VERSION', '1.0.0' );
+define( 'ONDIGITAL_VERSION', @filemtime( __DIR__ . '/style.css' ) ?: '1.0.0' );
 define( 'ONDIGITAL_DIR', get_template_directory() );
 define( 'ONDIGITAL_URI', get_template_directory_uri() );
 
 // Include files
 require_once ONDIGITAL_DIR . '/inc/helpers.php';
+require_once ONDIGITAL_DIR . '/inc/smtp.php';
 require_once ONDIGITAL_DIR . '/inc/enqueue.php';
-require_once ONDIGITAL_DIR . '/inc/customizer.php';
 require_once ONDIGITAL_DIR . '/inc/meta-boxes.php';
-require_once ONDIGITAL_DIR . '/inc/admin-page.php';
+require_once ONDIGITAL_DIR . '/inc/admin/panel.php';
+require_once ONDIGITAL_DIR . '/inc/contact-form.php';
+require_once ONDIGITAL_DIR . '/inc/cpt-glossary.php';
+require_once ONDIGITAL_DIR . '/inc/setup-pages.php';
 
 // =============================================================================
 // 1. THEME SETUP
@@ -64,8 +67,9 @@ function ondigital_setup() {
 
     // Image sizes
     add_image_size( 'ondigital-hero', 1920, 1080, true );
+    add_image_size( 'ondigital-blog-featured', 800, 500, true );
     add_image_size( 'ondigital-blog-card', 600, 400, true );
-    add_image_size( 'ondigital-project-card', 800, 600, true );
+    add_image_size( 'ondigital-project-card', 600, 740, true );
     add_image_size( 'ondigital-service-icon', 120, 120, true );
 }
 
@@ -244,6 +248,36 @@ function ondigital_setup_demo_content() {
     }
 
     update_option( 'ondigital_demo_installed', true );
+}
+
+/**
+ * Seed social media links into ondigital_options if not already set.
+ * Runs once on first init after deploy.
+ */
+add_action( 'init', 'ondigital_seed_social_defaults' );
+function ondigital_seed_social_defaults(): void {
+    if ( get_option( 'ondigital_socials_seeded_v2' ) ) {
+        return;
+    }
+    $options  = get_option( 'ondigital_options', array() );
+    $defaults = array(
+        'facebook'        => 'https://www.facebook.com/ondigital.az',
+        'linkedin'        => 'https://www.linkedin.com/company/ondigital-az/',
+        'tiktok'          => 'https://www.tiktok.com/@ondigital.az',
+        'instagram'       => 'https://www.instagram.com/ondigital.az/',
+        'behance'         => 'https://www.behance.net/ondigitalaz/moodboards',
+        'pinterest'       => 'https://www.pinterest.com/ondigital_az/',
+        'contact_phone'   => '+994 (55) 431 47 50',
+        'contact_email'   => 'office@ondigital.az',
+        'contact_address_az' => 'Old Town Plaza, 10-cu mərtəbə, №1007. 123 Bəşir Səfəroğlu Küçəsi, Bakı',
+    );
+    foreach ( $defaults as $key => $url ) {
+        if ( empty( $options[ $key ] ) ) {
+            $options[ $key ] = $url;
+        }
+    }
+    update_option( 'ondigital_options', $options );
+    update_option( 'ondigital_socials_seeded_v2', true );
 }
 
 /**
@@ -606,7 +640,7 @@ function ondigital_register_post_types() {
         ),
         'public'       => true,
         'has_archive'  => true,
-        'rewrite'      => array( 'slug' => 'xidmetler' ),
+        'rewrite'      => array( 'slug' => 'services', 'with_front' => false ),
         'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes' ),
         'menu_icon'    => 'dashicons-admin-tools',
         'show_in_rest' => true,
@@ -658,11 +692,30 @@ function ondigital_register_taxonomies() {
         ),
         'public'       => true,
         'hierarchical' => true,
-        'rewrite'      => array( 'slug' => 'xidmet-kateqoriya' ),
+        'rewrite'      => array( 'slug' => 'service-category', 'with_front' => false, 'hierarchical' => true ),
         'show_in_rest' => true,
     ) );
 }
 
+
+// Flush rewrite rules once after taxonomy slug change
+add_action( 'init', function() {
+    if ( get_option( 'ondigital_flushed_service_cat_slug' ) !== '2' ) {
+        flush_rewrite_rules( false );
+        update_option( 'ondigital_flushed_service_cat_slug', '2' );
+    }
+}, 999 );
+
+// =============================================================================
+// 6b. POLYLANG — register CPTs as translatable
+// =============================================================================
+
+add_filter( 'pll_get_post_types', 'ondigital_pll_post_types' );
+function ondigital_pll_post_types( array $types ): array {
+    $types['service'] = 'service';
+    $types['project'] = 'project';
+    return $types;
+}
 
 // =============================================================================
 // 7. THEME CUSTOMIZER — moved to inc/customizer.php
@@ -672,20 +725,6 @@ function ondigital_register_taxonomies() {
 // 8. HELPER FUNCTIONS — core helpers moved to inc/helpers.php
 // =============================================================================
 
-/**
- * Get social media links as array.
- */
-function ondigital_get_social_links() {
-    $socials = array( 'facebook', 'instagram', 'linkedin', 'tiktok', 'youtube', 'behance', 'pinterest' );
-    $links = array();
-    foreach ( $socials as $social ) {
-        $url = ondigital_get_option( $social );
-        if ( ! empty( $url ) ) {
-            $links[ $social ] = $url;
-        }
-    }
-    return $links;
-}
 
 /**
  * Sanitize SVG output.

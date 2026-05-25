@@ -1,0 +1,132 @@
+/* =============================================================================
+   Promo Bar — Top announcement bar with call-to-action buttons (minimalistic)
+   ============================================================================= */
+
+.promo-bar {
+    background: linear-gradient(90deg, #1a1a1a 0%, #2a3a1a 100%);
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(194, 249, 113, 0.15);
+}
+
+.promo-bar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 60px;
+}
+
+.promo-bar-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.promo-message {
+    font-size: 15px;
+    font-weight: 400;
+    color: #c2f971;
+    margin: 0;
+    line-height: 1.4;
+}
+
+@media only screen and (max-width: 991px) {
+    .promo-message {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .promo-message {
+        font-size: 12px;
+    }
+}
+
+.promo-bar-right {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.promo-btn {
+    border: none;
+    color: #c2f971;
+    background: transparent;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.25s ease;
+    white-space: nowrap;
+    font-family: inherit;
+    text-decoration: none;
+}
+
+.promo-btn:hover {
+    color: #ffffff;
+}
+
+.promo-btn:active {
+    opacity: 0.8;
+}
+
+.promo-btn i {
+    margin-right: 6px;
+    font-size: 13px;
+}
+
+.promo-btn span {
+    display: inline;
+}
+
+.promo-separator {
+    color: rgba(194, 249, 113, 0.4);
+    font-size: 12px;
+    margin: 0 5px;
+}
+
+@media only screen and (max-width: 991px) {
+    .promo-bar-inner {
+        padding: 0 30px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .promo-bar-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 20px;
+    }
+
+    .promo-bar-right {
+        gap: 14px;
+        flex-shrink: 0;
+    }
+
+    .promo-btn {
+        font-size: 11px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .promo-bar {
+        padding: 20px 0;
+    }
+
+    .promo-message {
+        font-size: 10px;
+    }
+
+    .promo-btn {
+        font-size: 10px;
+    }
+
+    .promo-bar-right {
+        gap: 12px;
+    }
+}

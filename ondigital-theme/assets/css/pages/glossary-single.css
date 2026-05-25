@@ -1,0 +1,277 @@
+/* =============================================================================
+   Glossary Single Term — glossary-single.css
+   ============================================================================= */
+
+/* ── Global font for all glossary single elements ── */
+.glossary-single-breadcrumb,
+.glossary-single-hero,
+.glossary-single-content-section,
+.glossary-single-sidebar,
+.glossary-single-body,
+.glossary-single-body *,
+.glossary-sidebar-card,
+.glossary-sidebar-related__link {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+/* ── Single hero (contains breadcrumb) ── */
+.glossary-single-hero {
+    background: #111;
+    margin-top: 80px; /* push section below fixed header so nav stays visible */
+    padding: 30px 0 40px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Breadcrumb — inside dark hero */
+.glossary-breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.glossary-breadcrumb__link {
+    color: rgba(255,255,255,.5);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color .15s;
+}
+
+.glossary-breadcrumb__link:hover { color: #c2f971; }
+
+.glossary-breadcrumb__sep {
+    font-size: 9px;
+    color: rgba(255,255,255,.25);
+}
+
+.glossary-breadcrumb__current {
+    color: rgba(255,255,255,.85);
+    font-weight: 600;
+}
+
+.glossary-single-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+}
+
+.glossary-single-hero__cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #c2f971;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    text-decoration: none;
+    margin-bottom: 16px;
+    border: 1px solid rgba(209,248,67,.3);
+    padding: 4px 12px;
+    border-radius: 20px;
+    transition: background .15s;
+}
+
+.glossary-single-hero__cat:hover {
+    background: rgba(209,248,67,.1);
+}
+
+.glossary-single-hero__title {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+.glossary-single-hero__excerpt {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.7;
+    max-width: 640px;
+    margin: 0;
+}
+
+/* ── Content section ── */
+.glossary-single-content-section {
+    background: #f8f8f8;
+    padding: 60px 0 80px;
+}
+
+.glossary-single-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 40px;
+    align-items: start;
+}
+
+@media (max-width: 991px) {
+    .glossary-single-layout {
+        grid-template-columns: 1fr;
+    }
+    .glossary-single-sidebar {
+        order: -1;
+    }
+}
+
+/* Main content */
+.glossary-single-content {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    padding: 40px 44px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+
+@media (max-width: 575px) {
+    .glossary-single-content { padding: 28px 20px; }
+}
+
+.glossary-single-body {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.8;
+}
+
+.glossary-single-body h2,
+.glossary-single-body h3,
+.glossary-single-body h4 {
+    font-weight: 700;
+    color: #111;
+    margin-top: 2em;
+    margin-bottom: .6em;
+}
+
+.glossary-single-body h2 { font-size: 1.5rem; }
+.glossary-single-body h3 { font-size: 1.25rem; }
+.glossary-single-body h4 { font-size: 1.1rem; }
+
+.glossary-single-body p { margin-bottom: 1.2em; }
+
+.glossary-single-body ul,
+.glossary-single-body ol {
+    padding-left: 24px;
+    margin-bottom: 1.2em;
+}
+
+.glossary-single-body li { margin-bottom: .4em; }
+
+.glossary-single-body a {
+    color: #c2f971;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.glossary-single-body blockquote {
+    border-left: 4px solid #c2f971;
+    margin: 1.5em 0;
+    padding: 12px 20px;
+    background: #f8ffd9;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #555;
+}
+
+/* Back link */
+.glossary-single-back {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.glossary-single-back__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #555;
+    text-decoration: none;
+    transition: color .15s;
+}
+
+.glossary-single-back__link:hover { color: #c2f971; }
+
+/* ── Sidebar ── */
+.glossary-single-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.glossary-sidebar-card {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+
+.glossary-sidebar-card__title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 14px;
+}
+
+.glossary-sidebar-card__cat-badge {
+    display: inline-block;
+    background: rgba(209,248,67,.12);
+    color: #4a6b00;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background .15s;
+    margin-bottom: 10px;
+}
+
+.glossary-sidebar-card__cat-badge:hover {
+    background: rgba(209,248,67,.22);
+}
+
+.glossary-sidebar-card__cat-desc {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Related */
+.glossary-sidebar-related {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.glossary-sidebar-related__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: background .15s, color .15s;
+}
+
+.glossary-sidebar-related__link:hover {
+    background: #f8ffd9;
+    color: #c2f971;
+}
+
+.glossary-sidebar-related__link i {
+    font-size: 12px;
+    color: #c2f971;
+    flex-shrink: 0;
+}

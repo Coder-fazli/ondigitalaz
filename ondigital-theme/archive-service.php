@@ -1,18 +1,16 @@
 <?php
 /**
- * Services archive template.
+ * Archive Template: Services (/services/)
  *
  * @package OnDigital
  */
 
-get_header(); ?>
+get_header();
 
-<?php get_template_part( 'template-parts/services/hero' ); ?>
-<?php get_template_part( 'template-parts/services/clients-slider' ); ?>
-<?php get_template_part( 'template-parts/services/services-grid' ); ?>
-<?php get_template_part( 'template-parts/services/about' ); ?>
-<?php get_template_part( 'template-parts/home/pricing' ); ?>
-<?php get_template_part( 'template-parts/services/contact-cta' ); ?>
-<?php get_template_part( 'template-parts/about/clients' ); ?>
+get_template_part( 'template-parts/services/hero' );
+get_template_part( 'template-parts/projects/partners' );
+get_template_part( 'template-parts/services/services-grid' );
+get_template_part( 'template-parts/about/about-content' );
+get_template_part( 'template-parts/shared/cta' );
 
-<?php get_footer();
+get_footer();

@@ -14,32 +14,10 @@
     <?php wp_head(); ?>
 </head>
 <?php
-$is_home = is_page_template( 'templates/page-home.php' );
-$font_class = $is_home ? 'font-heading-spacegrotesk-bold' : 'font-heading-beatricetrial-regular-2';
 ?>
-<body <?php body_class( $font_class ); ?>>
+<body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Preloader -->
-<div id="preloader">
-    <div id="container" class="container-preloader">
-        <div class="animation-preloader">
-            <div class="spinner"></div>
-            <div class="txt-loading">
-                <?php
-                $site_name = strtoupper( get_bloginfo( 'name' ) );
-                $letters = str_split( $site_name );
-                foreach ( $letters as $letter ) :
-                    if ( $letter === ' ' ) continue;
-                ?>
-                    <span data-text="<?php echo esc_attr( $letter ); ?>" class="characters"><?php echo esc_html( $letter ); ?></span>
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-    </div>
-</div>
 
 <!-- Scroll to top -->
 <div class="progress-wrap">
@@ -52,11 +30,25 @@ $font_class = $is_home ? 'font-heading-spacegrotesk-bold' : 'font-heading-beatri
 <div class="offcanvas-3__area">
     <div class="offcanvas-3__inner">
         <div class="offcanvas-3__meta-wrapper">
-            <div>
+            <div class="offcanvas-3__topbar">
                 <button id="close_offcanvas" class="close-button close-offcanvas" onclick="hideCanvas3()">
                     <span></span>
                     <span></span>
                 </button>
+                <?php if ( function_exists( 'pll_the_languages' ) ) :
+                    $od_langs_m = pll_the_languages( array( 'raw' => 1 ) );
+                    $od_flags_m = array( 'en' => '🇬🇧', 'az' => '🇦🇿' );
+                ?>
+                <div class="od-lang-switch od-lang-switch--mobile d-xl-none">
+                    <?php foreach ( $od_langs_m as $l ) :
+                        if ( $l['current_lang'] ) continue; ?>
+                    <a href="<?php echo esc_url( $l['url'] ); ?>" class="od-lang-btn" hreflang="<?php echo esc_attr( $l['slug'] ); ?>" title="<?php echo esc_attr( strtoupper( $l['slug'] ) ); ?>">
+                        <span class="od-lang-flag"><?php echo $od_flags_m[ $l['slug'] ] ?? '🌐'; ?></span>
+                        <span class="od-lang-code"><?php echo esc_html( strtoupper( $l['slug'] ) ); ?></span>
+                    </a>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
             </div>
             <div>
                 <div class="offcanvas-3__meta mb-145 d-none d-md-block">
@@ -89,6 +81,7 @@ $font_class = $is_home ? 'font-heading-spacegrotesk-bold' : 'font-heading-beatri
                             'youtube'   => 'fa-youtube',
                             'behance'   => 'fa-behance',
                             'pinterest' => 'fa-pinterest-p',
+                            'whatsapp'  => 'fa-whatsapp',
                         );
                         foreach ( $social_links as $platform => $url ) :
                             $icon = $social_icons[ $platform ] ?? '';
@@ -132,6 +125,38 @@ $font_class = $is_home ? 'font-heading-spacegrotesk-bold' : 'font-heading-beatri
     </div>
 </div>
 
+<!-- Promo Bar -->
+<?php
+$promo_enabled = ondigital_get_option( 'promo_bar_enabled' );
+// Show by default (true) unless explicitly disabled (0 or false)
+if ( $promo_enabled !== '0' && $promo_enabled !== 0 && false !== $promo_enabled ) :
+?>
+<div class="promo-bar">
+    <div class="promo-bar-inner">
+        <div class="promo-bar-left">
+            <?php
+            $promo_lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
+            $promo_text = ondigital_get_option( 'promo_bar_text_' . $promo_lang )
+                        ?: ondigital_get_option( 'promo_bar_text_en' )
+                        ?: ondigital_get_option( 'promo_bar_text_az', 'Are you ready to meet E-adam?' );
+            ?>
+            <p class="promo-message"><?php echo esc_html( $promo_text ); ?></p>
+        </div>
+        <div class="promo-bar-right">
+            <button class="promo-btn promo-btn-meet" data-od-form="contact">
+                <i class="fa-solid fa-calendar"></i>
+                <span><?php echo esc_html( ondigital_get_option( 'promo_btn_meet', 'Meet' ) ); ?></span>
+            </button>
+            <span class="promo-separator">/</span>
+            <a class="promo-btn promo-btn-call" href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', ondigital_get_option( 'phone', '+994554314750' ) ) ); ?>">
+                <i class="fa-solid fa-phone"></i>
+                <span><?php echo esc_html( ondigital_get_option( 'promo_btn_call', 'Call' ) ); ?></span>
+            </a>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
 <!-- Header -->
 <header class="header-area">
     <div class="container large">
@@ -168,12 +193,31 @@ $font_class = $is_home ? 'font-heading-spacegrotesk-bold' : 'font-heading-beatri
                     ?>
                 </nav>
             </div>
+            <?php
+            if ( function_exists( 'pll_the_languages' ) ) :
+                $od_langs = pll_the_languages( array( 'raw' => 1 ) );
+                $od_flags = array( 'en' => '🇬🇧', 'az' => '🇦🇿' );
+            ?>
+            <div class="od-lang-switch d-none d-xl-flex">
+                <?php foreach ( $od_langs as $l ) :
+                    if ( $l['current_lang'] ) continue; ?>
+                <a href="<?php echo esc_url( $l['url'] ); ?>" class="od-lang-btn" hreflang="<?php echo esc_attr( $l['slug'] ); ?>">
+                    <span class="od-lang-flag"><?php echo $od_flags[ $l['slug'] ] ?? '🌐'; ?></span>
+                    <span class="od-lang-code"><?php echo esc_html( strtoupper( $l['slug'] ) ); ?></span>
+                </a>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
             <div class="header__button">
                 <?php
-                $header_btn_text = get_theme_mod( 'ondigital_header_btn_text', 'Get started' );
-                $header_btn_url  = get_theme_mod( 'ondigital_header_btn_url', '/teklif-al/' );
+                $header_btn_text  = ondigital_get_option( 'header_btn_text', 'Başlayaq' );
+                $header_btn_url   = ondigital_get_option( 'header_btn_url', '/teklif-al/' );
+                $_opts            = get_option( 'ondigital_options', array() );
+                $header_btn_popup = isset( $_opts['header_btn_popup'] ) && $_opts['header_btn_popup'] === '1';
                 ?>
-                <a class="wc-btn wc-btn-primary btn-text-flip" href="<?php echo esc_url( $header_btn_url ); ?>">
+                <a class="wc-btn wc-btn-primary btn-text-flip"
+                   href="<?php echo $header_btn_popup ? '#' : esc_url( $header_btn_url ); ?>"
+                   <?php echo $header_btn_popup ? 'data-od-form="contact"' : ''; ?>>
                     <span data-text="<?php echo esc_attr( $header_btn_text ); ?>"><?php echo esc_html( $header_btn_text ); ?></span>
                 </a>
             </div>

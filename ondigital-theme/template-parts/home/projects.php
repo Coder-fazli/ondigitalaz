@@ -10,6 +10,7 @@ $projects_query = new WP_Query( array(
     'posts_per_page' => 8,
     'orderby'        => 'date',
     'order'          => 'DESC',
+    'lang'           => '',
 ) );
 
 // Fallback static projects
@@ -34,11 +35,6 @@ $static_projects = array(
                                 <?php echo wp_kses_post( $projects_title ); ?>
                             </h2>
                         </div>
-                    </div>
-                    <div class="text-wrapper">
-                        <p class="text has_fade_anim" data-delay="0.30">
-                            <?php esc_html_e( 'Our design services starts and ends with a best-in-class experience strategy that builds to provide you with an informed response.', 'ondigital' ); ?>
-                        </p>
                     </div>
                     <div class="slider-nav has_fade_anim" data-delay="0.45">
                         <div class="project-button-prev nav-icon">

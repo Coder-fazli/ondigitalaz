@@ -1,16 +1,40 @@
 /* =============================================================================
+   Global — progress-wrap (scroll-to-top button) must always be constrained
+   Without this, the SVG expands to full page on pages that don't load global.css
+   ============================================================================= */
+
+.progress-wrap {
+    position: fixed !important;
+    right: 30px !important;
+    bottom: 30px !important;
+    height: 46px !important;
+    width: 46px !important;
+    border-radius: 50px !important;
+    z-index: 10000 !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.progress-wrap.active-progress {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* =============================================================================
    Global — Primary button color override
    ============================================================================= */
 
 .wc-btn-primary {
-    background-color: #25f281 !important;
-    border-color: #25f281 !important;
+    background-color: #c2f971 !important;
+    border-color: #c2f971 !important;
     color: #121212 !important;
 }
 
 .wc-btn-primary:hover {
-    background-color: #25f281 !important;
-    border-color: #25f281 !important;
+    background-color: #c2f971 !important;
+    border-color: #c2f971 !important;
     color: #121212 !important;
 }
 
@@ -42,4 +66,262 @@
 .main-menu ul.dp-menu li a {
     border-radius: 0 !important;
     padding: 10px 22px !important;
+}
+
+/* =============================================================================
+   Header — Position below promo bar with margin
+   ============================================================================= */
+
+.header-area {
+    margin-top: 56px;
+}
+
+@media only screen and (max-width: 576px) {
+    .header-area {
+        margin-top: 61px;
+    }
+}
+
+/* Remove margin when header is sticky (fixed) so no gap at top */
+.header-area.sticky {
+    margin-top: 0 !important;
+    top: 0 !important;
+}
+
+/* =============================================================================
+   Mobile — shrink header CTA button padding
+   ============================================================================= */
+
+@media only screen and (max-width: 1199px) {
+    .header__button .wc-btn-primary {
+        padding: 10px 16px !important;
+        font-size: 13px !important;
+    }
+
+    .header-area .header-area__inner {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+}
+
+/* =============================================================================
+   Mobile burger button — bigger tap target with right padding
+   ============================================================================= */
+
+.header__navicon .open-offcanvas {
+    padding: 10px 14px 10px 10px;
+    font-size: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    line-height: 1;
+}
+
+/* =============================================================================
+   Footer social icons — 4 per row always
+   ============================================================================= */
+
+.footer-col-social .social-links,
+.footer-social-in-contact .social-links {
+    display: grid !important;
+    grid-template-columns: repeat(4, auto) !important;
+    justify-content: start !important;
+    gap: 10px !important;
+}
+
+/* =============================================================================
+   Footer — match hero content width (80px each side, max 1280px)
+   ============================================================================= */
+
+.footer-area .footer-area-inner {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+@media only screen and (max-width: 991px) {
+    .footer-area .footer-area-inner {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .footer-area .footer-area-inner {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* Mobile footer — quicklinks + services side by side, others full width */
+@media only screen and (max-width: 767px) {
+    .footer-area .footer-area-inner {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 32px 0 !important;
+    }
+    .footer-area .footer-col-brand {
+        order: 1;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .footer-area .footer-col-quicklinks {
+        order: 2;
+        flex: 0 0 50%;
+        max-width: 50%;
+        box-sizing: border-box;
+        padding-right: 16px;
+    }
+    .footer-area .footer-col-services {
+        order: 3;
+        flex: 0 0 50%;
+        max-width: 50%;
+        box-sizing: border-box;
+    }
+    .footer-area .footer-col-contact {
+        order: 4;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .footer-area .footer-col-social {
+        order: 5;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* Header — align logo with hero content (80px from edge) */
+header .container.large {
+    padding-left: 80px !important;
+    padding-right: 80px !important;
+}
+
+@media only screen and (max-width: 1199px) {
+    header .container.large {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+}
+
+/* =============================================================================
+   Language Switcher — flag-only, current language hidden
+   ============================================================================= */
+
+.od-lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+    margin-right: 16px;
+}
+
+.od-lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 14px;
+    height: 44px;
+    border: 1.5px solid rgba(18, 18, 18, 0.18);
+    border-radius: 10px;
+    text-decoration: none !important;
+    background: transparent;
+    transition: border-color 0.2s, background-color 0.2s;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.od-lang-btn:hover {
+    border-color: var(--primary);
+    background-color: rgba(18, 18, 18, 0.04);
+}
+
+.od-lang-flag {
+    font-size: 22px;
+    line-height: 1;
+    display: block;
+}
+
+.od-lang-code {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    line-height: 1;
+}
+
+/* Dark / transparent header */
+.header-transparent .od-lang-btn,
+.dark .od-lang-btn {
+    border-color: rgba(255, 255, 255, 0.25);
+}
+.header-transparent .od-lang-btn:hover,
+.dark .od-lang-btn:hover {
+    border-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.header-transparent .od-lang-code,
+.dark .od-lang-code {
+    color: #fff;
+}
+
+/* Off-canvas top bar — close btn + lang switcher in one row */
+.offcanvas-3__topbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+}
+
+/* Mobile off-canvas switcher — lives in top bar opposite close button */
+.od-lang-switch--mobile {
+    margin: 0;
+    padding: 0;
+    position: static;
+}
+
+.od-lang-switch--mobile .od-lang-btn {
+    height: 38px;
+    padding: 0 14px;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.od-lang-switch--mobile .od-lang-btn:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.od-lang-switch--mobile .od-lang-code {
+    color: #fff;
+}
+
+/* ── Off-canvas sub-menu: fix Arolax 8vh font on nested items ── */
+.offcanvas-3__menu ul ul {
+    margin-top: 12px !important;
+    padding-left: 4px !important;
+}
+
+.offcanvas-3__menu ul ul li {
+    padding-inline-start: 16px !important;
+    margin-bottom: 0 !important;
+}
+
+.offcanvas-3__menu ul ul li:not(:last-child) {
+    margin-bottom: 10px !important;
+}
+
+.offcanvas-3__menu ul ul li a {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.03em !important;
+    -webkit-text-fill-color: unset !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    background-image: none !important;
+}
+
+.offcanvas-3__menu ul ul li a:hover {
+    color: #fff !important;
+    letter-spacing: 0.03em !important;
 }

@@ -29,36 +29,35 @@ $brands = ondigital_get_repeater( 'partners', $default_brands );
                 </div>
             </div>
             <div class="client-slider has_fade_anim">
-                <div class="swiper client-slider-active">
-                    <div class="swiper-wrapper">
-                        <?php foreach ( $brands as $brand ) :
-                            $alt = esc_attr( $brand['alt'] ?? '' );
+                <?php
+                $logo_items = '';
+                foreach ( $brands as $brand ) :
+                    $alt = esc_attr( $brand['alt'] ?? '' );
 
-                            // Light image
-                            if ( ! empty( $brand['image_light'] ) ) {
-                                $light_url = wp_get_attachment_image_url( $brand['image_light'], 'medium' );
-                            } else {
-                                $fallback = $brand['_fallback_light'] ?? 'img-s-13';
-                                $light_url = ONDIGITAL_URI . '/assets/imgs/brand/' . $fallback . '.webp';
-                            }
+                    if ( ! empty( $brand['image_light'] ) ) {
+                        $light_url = wp_get_attachment_image_url( $brand['image_light'], 'medium' );
+                    } else {
+                        $fallback  = $brand['_fallback_light'] ?? 'img-s-13';
+                        $light_url = ONDIGITAL_URI . '/assets/imgs/brand/' . $fallback . '.webp';
+                    }
 
-                            // Dark image
-                            if ( ! empty( $brand['image_dark'] ) ) {
-                                $dark_url = wp_get_attachment_image_url( $brand['image_dark'], 'medium' );
-                            } else {
-                                $fallback = $brand['_fallback_dark'] ?? 'img-s-13-light';
-                                $dark_url = ONDIGITAL_URI . '/assets/imgs/brand/' . $fallback . '.webp';
-                            }
-                        ?>
-                            <div class="swiper-slide">
-                                <div class="client-box">
-                                    <img class="show-light" src="<?php echo esc_url( $light_url ); ?>" alt="<?php echo $alt; ?>">
-                                    <img class="show-dark" src="<?php echo esc_url( $dark_url ); ?>" alt="<?php echo $alt; ?>">
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
+                    if ( ! empty( $brand['image_dark'] ) ) {
+                        $dark_url = wp_get_attachment_image_url( $brand['image_dark'], 'medium' );
+                    } else {
+                        $fallback = $brand['_fallback_dark'] ?? 'img-s-13-light';
+                        $dark_url = ONDIGITAL_URI . '/assets/imgs/brand/' . $fallback . '.webp';
+                    }
+
+                    $logo_items .= '<div class="client-box">';
+                    $logo_items .= '<img class="show-light" src="' . esc_url( $light_url ) . '" alt="' . $alt . '" loading="lazy">';
+                    $logo_items .= '<img class="show-dark" src="' . esc_url( $dark_url ) . '" alt="' . $alt . '" loading="lazy">';
+                    $logo_items .= '</div>';
+                endforeach;
+                ?>
+                <!-- Row 1: scrolls left -->
+                <div class="logo-marquee-track" data-direction="left"><?php echo $logo_items; ?></div>
+                <!-- Row 2: scrolls right -->
+                <div class="logo-marquee-track" data-direction="right"><?php echo $logo_items; ?></div>
             </div>
         </div>
     </div>

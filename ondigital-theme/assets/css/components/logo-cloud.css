@@ -1,0 +1,71 @@
+/* =============================================================================
+   Logo Cloud — dual-row infinite marquee, opposite directions
+   ============================================================================= */
+
+.clients-area .clients-area-inner {
+    border-bottom: none !important;
+}
+
+.clients-area .client-slider {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    cursor: default;
+}
+
+.logo-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    width: max-content;
+    will-change: transform;
+    padding: 18px 0;
+}
+
+/* Subtle separator between the two rows */
+.logo-marquee-track + .logo-marquee-track {
+    border-top: 1px solid var(--border);
+}
+
+.logo-marquee-track .client-box {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-marquee-track .client-box img {
+    height: 36px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
+    opacity: 0.85;
+    filter: none;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    user-select: none;
+}
+
+.logo-marquee-track .client-box:hover img {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Hide empty slots */
+.logo-marquee-track .client-box:not(:has(img[src])) {
+    display: none;
+}
+
+@media only screen and (max-width: 767px) {
+    .logo-marquee-track {
+        gap: 40px;
+        padding: 14px 0;
+    }
+
+    .logo-marquee-track .client-box img {
+        height: 26px;
+    }
+}

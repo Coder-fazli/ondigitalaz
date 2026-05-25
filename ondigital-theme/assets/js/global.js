@@ -16,21 +16,11 @@
     }
 
     // =====================================================
-    // PRELOADER
+    // INIT
     // =====================================================
     $(document).ready(function () {
-        $('#container').addClass('loaded');
-        if ($('#container').hasClass('loaded')) {
-            $('#preloader').delay(1000).queue(function () {
-                $(this).remove();
-            });
-        }
-
-        // Initialize everything after preloader
-        setTimeout(function () {
-            initAnimations();
-            initUI();
-        }, 100);
+        initAnimations();
+        initUI();
     });
 
     // =====================================================
@@ -40,29 +30,18 @@
         if (typeof gsap === 'undefined') return;
 
         try {
-            // Text Move Animation
+            // Text Move Animation — simplified to subtle fade-up (no 3D flip)
             var text_animation = gsap.utils.toArray(".has_text_move_anim");
-            if (text_animation.length && typeof SplitText !== 'undefined') {
-                text_animation.forEach(function (splitTextLine) {
-                    var delay_value = splitTextLine.getAttribute("data-delay") || 0.1;
-                    var tl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: splitTextLine,
-                            start: 'top 85%',
-                            toggleActions: 'play none none none'
-                        }
-                    });
-                    var itemSplitted = new SplitText(splitTextLine, { type: "lines" });
-                    gsap.set(splitTextLine, { perspective: 400 });
-                    itemSplitted.split({ type: "lines" });
-                    tl.from(itemSplitted.lines, {
-                        duration: 1,
-                        delay: delay_value,
+            if (text_animation.length) {
+                text_animation.forEach(function (el) {
+                    var delay_value = parseFloat(el.getAttribute("data-delay") || 0.1);
+                    gsap.from(el, {
                         opacity: 0,
-                        rotationX: -80,
-                        force3D: true,
-                        transformOrigin: "top center -50",
-                        stagger: 0.1
+                        y: 24,
+                        duration: 0.65,
+                        delay: delay_value,
+                        ease: "power2.out",
+                        scrollTrigger: { trigger: el, start: 'top 88%' }
                     });
                 });
             }
@@ -126,9 +105,9 @@
                 gsap.utils.toArray(".has_fade_anim").forEach(function (item) {
                     var fade_direction = item.getAttribute("data-fade-from") || "bottom";
                     var onscroll_value = item.getAttribute("data-on-scroll") !== null ? item.getAttribute("data-on-scroll") : 1;
-                    var duration_value = item.getAttribute("data-duration") || 1.15;
-                    var fade_offset = item.getAttribute("data-fade-offset") || 50;
-                    var delay_value = item.getAttribute("data-delay") || 0.15;
+                    var duration_value = item.getAttribute("data-duration") || 0.6;
+                    var fade_offset = item.getAttribute("data-fade-offset") || 20;
+                    var delay_value = item.getAttribute("data-delay") || 0.1;
                     var ease_value = item.getAttribute("data-ease") || "power2.out";
 
                     var animation_settings = {
@@ -239,7 +218,7 @@
         var header = document.querySelector('header');
         if (header) {
             window.addEventListener('scroll', function () {
-                if (window.scrollY > 500) {
+                if (window.scrollY > 100) {
                     header.classList.add('sticky');
                 } else {
                     header.classList.remove('sticky');
@@ -356,29 +335,20 @@
 // =====================================================
 function showCanvas3() {
     if (typeof gsap === 'undefined') return;
-    var canvas3 = gsap.timeline();
-    canvas3.to(".offcanvas-3__area", {
-        left: 0, visibility: "visible", duration: 0.8, opacity: 1, rotationY: 0, perspective: 0,
-    });
-    canvas3.to(".offcanvas-3__menu ul li", {
-        opacity: 1, top: 0, stagger: 0.05, duration: 1, rotationX: 0,
-    }, "-=0.1");
-    canvas3.to(".offcanvas-3__meta", {
-        top: 0, visibility: "visible", duration: 0.8, opacity: 1,
-    }, "-=0.5");
-    canvas3.to(".offcanvas-3__social", {
-        top: 0, visibility: "visible", duration: 0.8, opacity: 1,
-    }, "-=0.5");
-    document.querySelector('body').style.overflow = "hidden";
+    gsap.killTweensOf('.offcanvas-3__area');
+    gsap.killTweensOf('.offcanvas-3__menu ul li');
+    gsap.killTweensOf('.offcanvas-3__meta');
+    gsap.killTweensOf('.offcanvas-3__social');
+    gsap.set('.offcanvas-3__area', { visibility: 'visible', opacity: 1, rotationY: 0, left: 0, perspective: 0 });
+    gsap.set('.offcanvas-3__menu ul li', { opacity: 1, top: 0, rotationX: 0 });
+    gsap.set('.offcanvas-3__meta', { visibility: 'visible', opacity: 1, top: 0 });
+    gsap.set('.offcanvas-3__social', { visibility: 'visible', opacity: 1, top: 0 });
+    document.querySelector('body').style.overflow = 'hidden';
 }
 
 function hideCanvas3() {
     if (typeof gsap === 'undefined') return;
-    var canvas3 = gsap.timeline();
-    canvas3.to(".offcanvas-3__area", { duration: 0.8, rotationY: -90, opacity: 0 });
-    canvas3.to(".offcanvas-3__area", { visibility: "hidden", duration: 0.1, rotationY: 50, left: 0, rotationX: 0 });
-    canvas3.to(".offcanvas-3__menu ul li", { opacity: 0, top: -100, stagger: 0.01, duration: 0.1, rotationX: 50 });
-    canvas3.to(".offcanvas-3__meta", { top: -30, visibility: "hidden", duration: 0.8, opacity: 1 }, "-=0.5");
-    canvas3.to(".offcanvas-3__social", { top: -30, visibility: "hidden", duration: 0.8, opacity: 1 }, "-=0.5");
-    document.querySelector('body').style.overflow = "auto";
+    gsap.killTweensOf('.offcanvas-3__area');
+    gsap.set('.offcanvas-3__area', { visibility: 'hidden', opacity: 0 });
+    document.querySelector('body').style.overflow = 'auto';
 }
