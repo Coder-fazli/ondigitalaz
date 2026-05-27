@@ -126,9 +126,13 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
     od_divider();
 
     od_repeater( $features, 'feature', 'ondigital_features', function( $i, $row ) {
-        echo '<div class="od-repeater-row">';
-        echo '<div class="od-repeater-row-head"><span>' . sprintf( __( 'Feature %d', 'ondigital' ), $i + 1 ) . '</span>';
-        echo '<div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>';
+        $label = $row['title_en'] ?? $row['title'] ?? sprintf( __( 'Feature %d', 'ondigital' ), $i + 1 );
+        echo '<div class="od-repeater-row od-sc-row">';
+        echo '<div class="od-repeater-row-head od-sc-toggle" style="cursor:pointer;user-select:none;">';
+        echo '<span>' . esc_html( $label ) . '</span>';
+        echo '<div class="od-row-actions"><span class="od-sc-arrow" style="margin-right:8px;font-size:11px;opacity:.5;">▼</span><button type="button" class="od-remove-row">&times;</button></div></div>';
+
+        echo '<div class="od-sc-body" style="display:none;">';
 
         // Language tabs (same pattern as FAQ)
         echo '<div class="od-lang-wrap">';
@@ -149,13 +153,14 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
         echo '<textarea autocomplete="off" name="ondigital_features[' . $i . '][description_az]" rows="2">' . esc_textarea( $row['description_az'] ?? '' ) . '</textarea></div>';
         echo '</div>';
         echo '</div>';
+
         $light_url = ! empty( $row['icon_light'] ) ? wp_get_attachment_image_url( $row['icon_light'], 'thumbnail' ) : '';
         $dark_url  = ! empty( $row['icon_dark'] )  ? wp_get_attachment_image_url( $row['icon_dark'],  'thumbnail' ) : '';
         echo '<div class="od-field-row">';
         foreach ( array( 'light' => $light_url, 'dark' => $dark_url ) as $variant => $url ) :
-            $label = $variant === 'light' ? __( 'Icon (Light)', 'ondigital' ) : __( 'Icon (Dark)', 'ondigital' );
-            $field = 'icon_' . $variant;
-            echo '<div class="od-field"><label>' . esc_html( $label ) . '</label>';
+            $label_img = $variant === 'light' ? __( 'Icon (Light)', 'ondigital' ) : __( 'Icon (Dark)', 'ondigital' );
+            $field     = 'icon_' . $variant;
+            echo '<div class="od-field"><label>' . esc_html( $label_img ) . '</label>';
             echo '<div class="od-image-field"><div class="od-image-preview ' . ( $url ? '' : 'empty' ) . '">';
             if ( $url ) echo '<img src="' . esc_url( $url ) . '">';
             echo '</div><div class="od-image-btns">';
@@ -164,6 +169,8 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
             echo '<button type="button" class="button od-remove-img">' . esc_html__( 'Remove', 'ondigital' ) . '</button>';
             echo '</div></div></div>';
         endforeach;
+        echo '</div>';
+
         echo '</div></div>';
     } );
 

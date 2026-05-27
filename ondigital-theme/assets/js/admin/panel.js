@@ -73,8 +73,12 @@
                 '</div>';
         },
         feature: function (i) {
-            return '<div class="od-repeater-row">' +
-                '<div class="od-repeater-row-head"><span>Feature ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
+            return '<div class="od-repeater-row od-sc-row">' +
+                '<div class="od-repeater-row-head od-sc-toggle" style="cursor:pointer;user-select:none;">' +
+                '<span>Feature ' + (i + 1) + '</span>' +
+                '<div class="od-row-actions"><span class="od-sc-arrow" style="margin-right:8px;font-size:11px;opacity:.5;">▼</span><button type="button" class="od-remove-row">&times;</button></div>' +
+                '</div>' +
+                '<div class="od-sc-body" style="display:none;">' +
                 '<div class="od-lang-wrap">' +
                 '<div class="od-lang-tabs">' +
                 '<span class="od-lang-tab active" data-lang="en">🇬🇧 EN</span>' +
@@ -92,6 +96,7 @@
                 '<div class="od-field-row">' +
                 imgField('ondigital_features[' + i + '][icon_light]', 'Icon (Light)') +
                 imgField('ondigital_features[' + i + '][icon_dark]', 'Icon (Dark)') +
+                '</div>' +
                 '</div></div>';
         },
         pricing: function (i) {
