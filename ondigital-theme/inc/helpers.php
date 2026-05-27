@@ -38,12 +38,9 @@ function ondigital_get_option( string $key, string $default = '' ): string {
     if ( ! empty( $options[ $lang_key ] ) ) {
         return $options[ $lang_key ];
     }
-    // Fall back to EN first, then AZ
+    // Non-EN languages fall back to EN, never the other way around
     if ( $lang !== 'en' && ! empty( $options[ $en_key ] ) ) {
         return $options[ $en_key ];
-    }
-    if ( ! empty( $options[ $az_key ] ) ) {
-        return $options[ $az_key ];
     }
     // Legacy fallback (no suffix)
     if ( ! empty( $options[ $key ] ) ) {
