@@ -75,8 +75,16 @@
         feature: function (i) {
             return '<div class="od-repeater-row">' +
                 '<div class="od-repeater-row-head"><span>Feature ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
-                '<div class="od-field"><label>Title</label><input type="text" name="ondigital_features[' + i + '][title]" value=""></div>' +
-                '<div class="od-field"><label>Description</label><textarea name="ondigital_features[' + i + '][description]" rows="2"></textarea></div>' +
+                '<div style="background:#f0f7ff;border-radius:6px;padding:10px 12px;margin-bottom:8px;">' +
+                '<div style="font-size:11px;font-weight:700;color:#555;margin-bottom:8px;">🇬🇧 EN</div>' +
+                '<div class="od-field"><label>Title (EN)</label><input type="text" name="ondigital_features[' + i + '][title_en]" value=""></div>' +
+                '<div class="od-field"><label>Description (EN)</label><textarea name="ondigital_features[' + i + '][description_en]" rows="2"></textarea></div>' +
+                '</div>' +
+                '<div style="background:#f0fff4;border-radius:6px;padding:10px 12px;margin-bottom:8px;">' +
+                '<div style="font-size:11px;font-weight:700;color:#555;margin-bottom:8px;">🇦🇿 AZ</div>' +
+                '<div class="od-field"><label>Title (AZ)</label><input type="text" name="ondigital_features[' + i + '][title_az]" value=""></div>' +
+                '<div class="od-field"><label>Description (AZ)</label><textarea name="ondigital_features[' + i + '][description_az]" rows="2"></textarea></div>' +
+                '</div>' +
                 '<div class="od-field-row">' +
                 imgField('ondigital_features[' + i + '][icon_light]', 'Icon (Light)') +
                 imgField('ondigital_features[' + i + '][icon_dark]', 'Icon (Dark)') +
