@@ -83,10 +83,10 @@ function ondigital_sanitize_repeater( string $key, array $raw ): array {
                 break;
             case 'features':
                 $out[] = array(
-                    'title_en'       => sanitize_text_field( $item['title_en'] ?? $item['title'] ?? '' ),
-                    'title_az'       => sanitize_text_field( $item['title_az'] ?? $item['title'] ?? '' ),
-                    'description_en' => sanitize_textarea_field( $item['description_en'] ?? $item['description'] ?? '' ),
-                    'description_az' => sanitize_textarea_field( $item['description_az'] ?? $item['description'] ?? '' ),
+                    'title_en'       => sanitize_text_field( $item['title_en'] ?? '' ),
+                    'title_az'       => sanitize_text_field( $item['title_az'] ?? '' ),
+                    'description_en' => sanitize_textarea_field( $item['description_en'] ?? '' ),
+                    'description_az' => sanitize_textarea_field( $item['description_az'] ?? '' ),
                     'icon_light'     => absint( $item['icon_light'] ?? 0 ),
                     'icon_dark'      => absint( $item['icon_dark'] ?? 0 ),
                 );

@@ -134,18 +134,18 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
         echo '<div style="background:#f0f7ff;border-radius:6px;padding:10px 12px;margin-bottom:8px;">';
         echo '<div style="font-size:11px;font-weight:700;color:#555;margin-bottom:8px;">🇬🇧 EN</div>';
         echo '<div class="od-field"><label>' . esc_html__( 'Title (EN)', 'ondigital' ) . '</label>';
-        echo '<input type="text" name="ondigital_features[' . $i . '][title_en]" value="' . esc_attr( $row['title_en'] ?? $row['title'] ?? '' ) . '"></div>';
+        echo '<input type="text" name="ondigital_features[' . $i . '][title_en]" value="' . esc_attr( $row['title_en'] ?? '' ) . '"></div>';
         echo '<div class="od-field"><label>' . esc_html__( 'Description (EN)', 'ondigital' ) . '</label>';
-        echo '<textarea name="ondigital_features[' . $i . '][description_en]" rows="2">' . esc_textarea( $row['description_en'] ?? $row['description'] ?? '' ) . '</textarea></div>';
+        echo '<textarea name="ondigital_features[' . $i . '][description_en]" rows="2">' . esc_textarea( $row['description_en'] ?? '' ) . '</textarea></div>';
         echo '</div>';
 
         // AZ fields
         echo '<div style="background:#f0fff4;border-radius:6px;padding:10px 12px;margin-bottom:8px;">';
         echo '<div style="font-size:11px;font-weight:700;color:#555;margin-bottom:8px;">🇦🇿 AZ</div>';
         echo '<div class="od-field"><label>' . esc_html__( 'Title (AZ)', 'ondigital' ) . '</label>';
-        echo '<input type="text" name="ondigital_features[' . $i . '][title_az]" value="' . esc_attr( $row['title_az'] ?? $row['title'] ?? '' ) . '"></div>';
+        echo '<input type="text" name="ondigital_features[' . $i . '][title_az]" value="' . esc_attr( $row['title_az'] ?? '' ) . '"></div>';
         echo '<div class="od-field"><label>' . esc_html__( 'Description (AZ)', 'ondigital' ) . '</label>';
-        echo '<textarea name="ondigital_features[' . $i . '][description_az]" rows="2">' . esc_textarea( $row['description_az'] ?? $row['description'] ?? '' ) . '</textarea></div>';
+        echo '<textarea name="ondigital_features[' . $i . '][description_az]" rows="2">' . esc_textarea( $row['description_az'] ?? '' ) . '</textarea></div>';
         echo '</div>';
         $light_url = ! empty( $row['icon_light'] ) ? wp_get_attachment_image_url( $row['icon_light'], 'thumbnail' ) : '';
         $dark_url  = ! empty( $row['icon_dark'] )  ? wp_get_attachment_image_url( $row['icon_dark'],  'thumbnail' ) : '';
