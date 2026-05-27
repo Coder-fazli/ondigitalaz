@@ -130,22 +130,24 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
         echo '<div class="od-repeater-row-head"><span>' . sprintf( __( 'Feature %d', 'ondigital' ), $i + 1 ) . '</span>';
         echo '<div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>';
 
-        // EN fields
-        echo '<div style="background:#f0f7ff;border-radius:6px;padding:10px 12px;margin-bottom:8px;">';
-        echo '<div style="font-size:11px;font-weight:700;color:#555;margin-bottom:8px;">🇬🇧 EN</div>';
-        echo '<div class="od-field"><label>' . esc_html__( 'Title (EN)', 'ondigital' ) . '</label>';
-        echo '<input type="text" name="ondigital_features[' . $i . '][title_en]" value="' . esc_attr( $row['title_en'] ?? $row['title'] ?? '' ) . '"></div>';
-        echo '<div class="od-field"><label>' . esc_html__( 'Description (EN)', 'ondigital' ) . '</label>';
-        echo '<textarea name="ondigital_features[' . $i . '][description_en]" rows="2">' . esc_textarea( $row['description_en'] ?? $row['description'] ?? '' ) . '</textarea></div>';
+        // Language tabs (same pattern as FAQ)
+        echo '<div class="od-lang-wrap">';
+        echo '<div class="od-lang-tabs">';
+        echo '<span class="od-lang-tab active" data-lang="en">🇬🇧 EN</span>';
+        echo '<span class="od-lang-tab" data-lang="az">🇦🇿 AZ</span>';
         echo '</div>';
-
-        // AZ fields
-        echo '<div style="background:#f0fff4;border-radius:6px;padding:10px 12px;margin-bottom:8px;">';
-        echo '<div style="font-size:11px;font-weight:700;color:#555;margin-bottom:8px;">🇦🇿 AZ</div>';
+        echo '<div class="od-lang-pane active" data-lang="en">';
+        echo '<div class="od-field"><label>' . esc_html__( 'Title (EN)', 'ondigital' ) . '</label>';
+        echo '<input type="text" autocomplete="off" name="ondigital_features[' . $i . '][title_en]" value="' . esc_attr( $row['title_en'] ?? $row['title'] ?? '' ) . '"></div>';
+        echo '<div class="od-field"><label>' . esc_html__( 'Description (EN)', 'ondigital' ) . '</label>';
+        echo '<textarea autocomplete="off" name="ondigital_features[' . $i . '][description_en]" rows="2">' . esc_textarea( $row['description_en'] ?? $row['description'] ?? '' ) . '</textarea></div>';
+        echo '</div>';
+        echo '<div class="od-lang-pane" data-lang="az">';
         echo '<div class="od-field"><label>' . esc_html__( 'Title (AZ)', 'ondigital' ) . '</label>';
-        echo '<input type="text" name="ondigital_features[' . $i . '][title_az]" value="' . esc_attr( $row['title_az'] ?? '' ) . '"></div>';
+        echo '<input type="text" autocomplete="off" name="ondigital_features[' . $i . '][title_az]" value="' . esc_attr( $row['title_az'] ?? '' ) . '"></div>';
         echo '<div class="od-field"><label>' . esc_html__( 'Description (AZ)', 'ondigital' ) . '</label>';
-        echo '<textarea name="ondigital_features[' . $i . '][description_az]" rows="2">' . esc_textarea( $row['description_az'] ?? '' ) . '</textarea></div>';
+        echo '<textarea autocomplete="off" name="ondigital_features[' . $i . '][description_az]" rows="2">' . esc_textarea( $row['description_az'] ?? '' ) . '</textarea></div>';
+        echo '</div>';
         echo '</div>';
         $light_url = ! empty( $row['icon_light'] ) ? wp_get_attachment_image_url( $row['icon_light'], 'thumbnail' ) : '';
         $dark_url  = ! empty( $row['icon_dark'] )  ? wp_get_attachment_image_url( $row['icon_dark'],  'thumbnail' ) : '';
