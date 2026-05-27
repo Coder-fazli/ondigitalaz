@@ -328,12 +328,30 @@
         fd.append('nonce', odPanel.nonce);
         fd.append('options', JSON.stringify(options));
 
-        // Append repeater fields by name
+        // Append repeater fields by name — log every field for debugging
         var repeaterFields = form.find('[name^="ondigital_"]');
+        var debugPayload = {};
         repeaterFields.each(function () {
             if ($(this).is(':checkbox') && !$(this).is(':checked')) return;
-            fd.append($(this).attr('name'), $(this).val());
+            var fieldName = $(this).attr('name');
+            var fieldVal  = $(this).val();
+            fd.append(fieldName, fieldVal);
+            // Group by repeater key for cleaner console output
+            var topKey = fieldName.split('[')[0];
+            if (!debugPayload[topKey]) debugPayload[topKey] = [];
+            debugPayload[topKey].push({ name: fieldName, value: fieldVal });
         });
+
+        console.group('[OD Save] Repeater fields being sent');
+        Object.keys(debugPayload).forEach(function (key) {
+            console.group(key);
+            debugPayload[key].forEach(function (f) {
+                console.log(f.name + ' =', JSON.stringify(f.value));
+            });
+            console.groupEnd();
+        });
+        console.log('[OD Save] Scalar options:', options);
+        console.groupEnd();
 
         $.ajax({
             url: odPanel.ajaxurl,
@@ -343,15 +361,18 @@
             contentType: false,
             success: function (res) {
                 btn.text('Save Changes').prop('disabled', false);
+                console.log('[OD Save] Server response:', res);
                 if (res.success) {
                     notice.text(odPanel.saved).css('color', '#46b450').show();
                 } else {
+                    console.error('[OD Save] Server returned error:', res);
                     notice.text('Error saving.').css('color', '#dc3232').show();
                 }
                 setTimeout(function () { notice.fadeOut(); }, 3000);
             },
-            error: function () {
+            error: function (xhr, status, err) {
                 btn.text('Save Changes').prop('disabled', false);
+                console.error('[OD Save] AJAX error:', status, err, xhr.responseText);
                 notice.text('Error saving.').css('color', '#dc3232').show();
             }
         });
