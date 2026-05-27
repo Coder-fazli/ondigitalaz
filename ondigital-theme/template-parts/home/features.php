@@ -5,14 +5,15 @@
  * @package OnDigital
  */
 
+$lang           = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
 $features_title = ondigital_get_option( 'features_title', 'We build strong <span>productive</span> market that increase your sales growth' );
 $features_desc  = ondigital_get_option( 'features_description', "We bet on brands that shift categories and add value to people's lives; and on founders who are motivated to shape" );
 
 $default_features = array(
-    array( 'title' => __( 'Productivity', 'ondigital' ), 'description' => __( 'Giving consultancy for every financial projection report and analysis.', 'ondigital' ), 'icon_light' => 0, 'icon_dark' => 0 ),
-    array( 'title' => __( 'Strategy', 'ondigital' ),     'description' => __( 'Experiences your customers for more information about services.', 'ondigital' ), 'icon_light' => 0, 'icon_dark' => 0 ),
-    array( 'title' => __( 'Research', 'ondigital' ),     'description' => __( 'The most completed powerful experience automation with built-in type.', 'ondigital' ), 'icon_light' => 0, 'icon_dark' => 0 ),
-    array( 'title' => __( 'Community', 'ondigital' ),    'description' => __( 'Our quality policy: strict and effective management to have best band for you.', 'ondigital' ), 'icon_light' => 0, 'icon_dark' => 0 ),
+    array( 'title_en' => 'Productivity', 'title_az' => 'Məhsuldarlıq', 'description_en' => 'Giving consultancy for every financial projection report and analysis.', 'description_az' => 'Hər maliyyə proqnozu hesabatı və analizi üçün məsləhət.', 'icon_light' => 0, 'icon_dark' => 0 ),
+    array( 'title_en' => 'Strategy',     'title_az' => 'Strategiya',    'description_en' => 'Experiences your customers for more information about services.',         'description_az' => 'Xidmətlər haqqında daha çox məlumat üçün müştərilərinizi tanıyın.', 'icon_light' => 0, 'icon_dark' => 0 ),
+    array( 'title_en' => 'Research',     'title_az' => 'Tədqiqat',      'description_en' => 'The most completed powerful experience automation with built-in type.',   'description_az' => 'Ən tam güclü təcrübə avtomatlaşdırması.',                          'icon_light' => 0, 'icon_dark' => 0 ),
+    array( 'title_en' => 'Community',    'title_az' => 'İcma',          'description_en' => 'Our quality policy: strict and effective management to have best band for you.', 'description_az' => 'Keyfiyyət siyasətimiz: ciddi və effektiv idarəetmə.', 'icon_light' => 0, 'icon_dark' => 0 ),
 );
 
 $features = ondigital_get_repeater( 'features', $default_features );
@@ -32,8 +33,12 @@ $features = ondigital_get_repeater( 'features', $default_features );
             <div class="features-wrapper-box">
                 <div class="features-wrapper">
                     <?php foreach ( $features as $feature ) :
-                        $title = $feature['title'] ?? '';
-                        $desc  = $feature['description'] ?? '';
+                        $title = $lang === 'az'
+                            ? ( $feature['title_az'] ?? $feature['title_en'] ?? $feature['title'] ?? '' )
+                            : ( $feature['title_en'] ?? $feature['title'] ?? '' );
+                        $desc  = $lang === 'az'
+                            ? ( $feature['description_az'] ?? $feature['description_en'] ?? $feature['description'] ?? '' )
+                            : ( $feature['description_en'] ?? $feature['description'] ?? '' );
 
                         // Icon images with fallback
                         if ( ! empty( $feature['icon_light'] ) ) {
