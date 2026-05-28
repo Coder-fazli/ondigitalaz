@@ -777,6 +777,24 @@ add_action( 'admin_menu', function() {
     remove_menu_page( 'edit-comments.php' );
 } );
 
+// =============================================================================
+// Polylang: link EN /dictionary/ ↔ AZ /az/sozluk/ in language switcher
+// =============================================================================
+add_filter( 'pll_translation_url', function( $url, $slug ) {
+    // EN CPT archive → AZ custom page
+    if ( $slug === 'az' && is_post_type_archive( 'od_glossary' ) ) {
+        return home_url( '/az/sozluk/' );
+    }
+    // AZ custom page (page-glossary template) → EN CPT archive
+    if ( $slug === 'en' && is_page() && get_page_template_slug() === 'templates/page-glossary.php' ) {
+        $archive = get_post_type_archive_link( 'od_glossary' );
+        if ( $archive ) {
+            return $archive;
+        }
+    }
+    return $url;
+}, 10, 2 );
+
 add_action( 'wp_before_admin_bar_render', function() {
     global $wp_admin_bar;
     $wp_admin_bar->remove_menu( 'comments' );
