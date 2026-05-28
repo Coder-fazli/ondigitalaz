@@ -22,7 +22,9 @@ get_header();
 // Section 1: Hero + Partners marquee + Work Grid
 get_template_part( 'template-parts/projects/hero' );
 
-// Section 2: CTA (shared)
+// Section 2: CTA (shared) — wrapped so we can center it via CSS
+echo '<div class="projects-page-cta">';
 get_template_part( 'template-parts/shared/cta' );
+echo '</div>';
 
 get_footer();

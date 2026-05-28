@@ -207,6 +207,7 @@
 
 .pa-tall { grid-column: 3; grid-row: 1/3; }
 .pa-tall .pa-thumb { aspect-ratio: auto; flex: 1; min-height: 260px; }
+.pa-tall .pa-body { flex: none; }
 
 .pa-wide { grid-column: span 2; }
 .pa-wide .pa-thumb { aspect-ratio: 21/8; }
@@ -228,12 +229,12 @@
 }
 
 /* ── CTA section on projects archive page ── */
-.page-template-templates-page-projects-php .cta-area .section-header,
-.page-template-templates-page-projects-php .cta-area .section-title-wrapper,
-.page-template-templates-page-projects-php .cta-area .title-wrapper {
+.projects-page-cta .section-header,
+.projects-page-cta .section-title-wrapper,
+.projects-page-cta .title-wrapper {
   text-align: center !important;
 }
-.page-template-templates-page-projects-php .cta-area .btn-wrapper {
+.projects-page-cta .btn-wrapper {
   display: flex;
   justify-content: center;
 }
