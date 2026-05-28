@@ -5,13 +5,14 @@
  * @package OnDigital
  */
 
+$lang        = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
 $stats_title = ondigital_get_option( 'stats_title', 'The reasons why you should work with us' );
 
 $default_counters = array(
-    array( 'number' => '7',   'suffix' => '+', 'label' => "İllik\ntəcrübə" ),
-    array( 'number' => '500', 'suffix' => '+', 'label' => "Uğurla\ntamamlanan" ),
-    array( 'number' => '15',  'suffix' => '',  'label' => "Komanda\nüzvü" ),
-    array( 'number' => '98',  'suffix' => '%', 'label' => "Müştəri\nməmnuniyyəti" ),
+    array( 'number' => '7',   'suffix' => '+', 'label_en' => "Years of\nexperience",  'label_az' => "İllik\ntəcrübə" ),
+    array( 'number' => '500', 'suffix' => '+', 'label_en' => "Successfully\ncompleted", 'label_az' => "Uğurla\ntamamlanan" ),
+    array( 'number' => '15',  'suffix' => '',  'label_en' => "Team\nmembers",           'label_az' => "Komanda\nüzvü" ),
+    array( 'number' => '98',  'suffix' => '%', 'label_en' => "Client\nsatisfaction",   'label_az' => "Müştəri\nməmnuniyyəti" ),
 );
 
 $counters = ondigital_get_repeater( 'stats', $default_counters );
@@ -28,10 +29,13 @@ $delays = array( '0.15', '0.30', '0.45', '0.60' );
             <div class="counter-items">
                 <?php foreach ( $counters as $i => $counter ) :
                     $suffix = $counter['suffix'] ?? '';
+                    $label  = $lang === 'az'
+                        ? ( $counter['label_az'] ?? $counter['label_en'] ?? $counter['label'] ?? '' )
+                        : ( $counter['label_en'] ?? $counter['label'] ?? '' );
                 ?>
                     <div class="counter-item has_fade_anim" data-delay="<?php echo esc_attr( $delays[ $i % 4 ] ); ?>">
                         <h3 class="number"><?php echo esc_html( $counter['number'] . $suffix ); ?></h3>
-                        <p class="text"><?php echo wp_kses_post( nl2br( esc_html( $counter['label'] ) ) ); ?></p>
+                        <p class="text"><?php echo wp_kses_post( nl2br( esc_html( $label ) ) ); ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>

@@ -147,12 +147,26 @@
                 '</div>';
         },
         stats: function (i) {
-            return '<div class="od-repeater-row">' +
-                '<div class="od-repeater-row-head"><span>Counter ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
+            return '<div class="od-repeater-row od-sc-row">' +
+                '<div class="od-repeater-row-head od-sc-toggle" style="cursor:pointer;user-select:none;">' +
+                '<span>Counter ' + (i + 1) + '</span>' +
+                '<div class="od-row-actions"><span class="od-sc-arrow" style="margin-right:8px;font-size:11px;opacity:.5;">▼</span><button type="button" class="od-remove-row">&times;</button></div>' +
+                '</div>' +
+                '<div class="od-sc-body" style="display:none;">' +
                 '<div class="od-field-row">' +
                 '<div class="od-field"><label>Number</label><input type="text" name="ondigital_stats[' + i + '][number]" value=""></div>' +
                 '<div class="od-field"><label>Suffix</label><input type="text" name="ondigital_stats[' + i + '][suffix]" value="" style="max-width:80px;"></div>' +
-                '<div class="od-field"><label>Label</label><input type="text" name="ondigital_stats[' + i + '][label]" value=""></div>' +
+                '</div>' +
+                '<div class="od-lang-wrap"><div class="od-lang-tabs">' +
+                '<span class="od-lang-tab active" data-lang="en">🇬🇧 EN</span>' +
+                '<span class="od-lang-tab" data-lang="az">🇦🇿 AZ</span>' +
+                '</div>' +
+                '<div class="od-lang-pane active" data-lang="en">' +
+                '<div class="od-field"><label>Label (EN)</label><input type="text" autocomplete="off" name="ondigital_stats[' + i + '][label_en]" value=""></div>' +
+                '</div>' +
+                '<div class="od-lang-pane" data-lang="az">' +
+                '<div class="od-field"><label>Label (AZ)</label><input type="text" autocomplete="off" name="ondigital_stats[' + i + '][label_az]" value=""></div>' +
+                '</div></div>' +
                 '</div></div>';
         },
         testimonial: function (i) {

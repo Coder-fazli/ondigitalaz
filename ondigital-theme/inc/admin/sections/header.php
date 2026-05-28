@@ -69,20 +69,19 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
                         style="width:100%;min-height:60px;padding:8px;border:1px solid #ddd;border-radius:4px;font-family:inherit;"
                     ><?php echo esc_textarea( $options[ 'promo_bar_text_' . $lang ] ?? '' ); ?></textarea>
                 </div>
+                <div style="display:flex;gap:16px;margin-top:12px;">
+                    <div class="od-field" style="flex:1;">
+                        <label><?php esc_html_e( 'Meet Button Label', 'ondigital' ); ?></label>
+                        <input type="text" autocomplete="off" name="options[promo_btn_meet_<?php echo esc_attr( $lang ); ?>]" value="<?php echo esc_attr( $options[ 'promo_btn_meet_' . $lang ] ?? '' ); ?>" placeholder="<?php echo $lang === 'az' ? 'Görüş' : 'Meet'; ?>" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;">
+                    </div>
+                    <div class="od-field" style="flex:1;">
+                        <label><?php esc_html_e( 'Call Button Label', 'ondigital' ); ?></label>
+                        <input type="text" autocomplete="off" name="options[promo_btn_call_<?php echo esc_attr( $lang ); ?>]" value="<?php echo esc_attr( $options[ 'promo_btn_call_' . $lang ] ?? '' ); ?>" placeholder="<?php echo $lang === 'az' ? 'Zəng' : 'Call'; ?>" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;">
+                    </div>
+                </div>
             <?php od_lang_pane_close(); ?>
         <?php endforeach; ?>
         <?php od_lang_close(); ?>
-
-        <div style="display:flex;gap:16px;margin-top:20px;">
-            <div class="od-field" style="flex:1;">
-                <label><?php esc_html_e( 'Meet Button Label', 'ondigital' ); ?></label>
-                <input type="text" name="options[promo_btn_meet]" value="<?php echo esc_attr( $options['promo_btn_meet'] ?? 'Meet' ); ?>" placeholder="Meet" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;">
-            </div>
-            <div class="od-field" style="flex:1;">
-                <label><?php esc_html_e( 'Call Button Label', 'ondigital' ); ?></label>
-                <input type="text" name="options[promo_btn_call]" value="<?php echo esc_attr( $options['promo_btn_call'] ?? 'Call' ); ?>" placeholder="Call" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;">
-            </div>
-        </div>
         <p style="margin-top:8px;font-size:12px;color:#888;"><?php esc_html_e( 'Call button dials the phone number set in General → Contact Info.', 'ondigital' ); ?></p>
 
     <?php od_card_close(); ?>

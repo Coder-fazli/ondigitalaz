@@ -126,9 +126,10 @@ function ondigital_sanitize_repeater( string $key, array $raw ): array {
                 break;
             case 'stats':
                 $out[] = array(
-                    'number' => sanitize_text_field( $item['number'] ?? '' ),
-                    'suffix' => sanitize_text_field( $item['suffix'] ?? '' ),
-                    'label'  => sanitize_text_field( $item['label'] ?? '' ),
+                    'number'   => sanitize_text_field( $item['number'] ?? '' ),
+                    'suffix'   => sanitize_text_field( $item['suffix'] ?? '' ),
+                    'label_en' => sanitize_text_field( $item['label_en'] ?? $item['label'] ?? '' ),
+                    'label_az' => sanitize_text_field( $item['label_az'] ?? '' ),
                 );
                 break;
             case 'testimonials':
