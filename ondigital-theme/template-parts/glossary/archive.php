@@ -58,16 +58,20 @@ foreach ( $all_terms as $tid ) {
 $archive_url = get_post_type_archive_link( 'od_glossary' );
 ?>
 
+<?php
+$dict_title       = ondigital_get_option( 'dict_page_title',  'Rəqəmsal Marketinq Sözlüyü' );
+$dict_desc        = ondigital_get_option( 'dict_page_desc',   'Rəqəmsal artımın dilini öyrənin. Sənaye terminlərinin hərtərəfli sözlüyünü araşdırın.' );
+$dict_placeholder = ondigital_get_option( 'dict_search_placeholder', 'Termin axtar (məs. SEO, Dönüşüm dərəcəsi...)' );
+?>
 <!-- ======================== HERO ======================== -->
 <section class="glossary-hero">
     <div class="container">
         <div class="glossary-hero__inner">
             <h1 class="glossary-hero__title">
-                <?php esc_html_e( 'Rəqəmsal', 'ondigital' ); ?>
-                <span class="glossary-hero__accent"><?php esc_html_e( 'Marketinq Sözlüyü', 'ondigital' ); ?></span>
+                <span class="glossary-hero__accent"><?php echo esc_html( $dict_title ); ?></span>
             </h1>
             <p class="glossary-hero__sub">
-                <?php esc_html_e( 'Rəqəmsal artımın dilini öyrənin. Sənaye terminlərinin hərtərəfli sözlüyünü araşdırın.', 'ondigital' ); ?>
+                <?php echo esc_html( $dict_desc ); ?>
             </p>
 
             <form class="glossary-search" action="<?php echo esc_url( $archive_url ); ?>" method="GET" role="search">
@@ -76,7 +80,7 @@ $archive_url = get_post_type_archive_link( 'od_glossary' );
                     type="text"
                     name="s"
                     class="glossary-search__input"
-                    placeholder="<?php esc_attr_e( 'Termin axtar (məs. SEO, Dönüşüm dərəcəsi...)', 'ondigital' ); ?>"
+                    placeholder="<?php echo esc_attr( $dict_placeholder ); ?>"
                     value="<?php echo esc_attr( $search_query ); ?>"
                     autocomplete="off"
                 >
