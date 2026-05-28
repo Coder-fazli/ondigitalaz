@@ -81,6 +81,11 @@ $testi_name     = ondigital_get_option( 'cl_testi_name',     'Elnar Səmədzadə
 $testi_role     = ondigital_get_option( 'cl_testi_role',     'CEO, Nexus Commerce' );
 $testi_initials = ondigital_get_option( 'cl_testi_initials', 'ES' );
 
+$field_name_lbl  = ondigital_get_option( 'cl_field_name',    'Full name' );
+$field_email_lbl = ondigital_get_option( 'cl_field_email',   'Work email' );
+$field_privacy   = ondigital_get_option( 'cl_field_privacy', 'No spam. Unsubscribe anytime.' );
+$trust_text      = ondigital_get_option( 'cl_trust_text',    'teams downloaded this checklist last month.' );
+
 $bottom_h2      = ondigital_get_option( 'cl_bottom_h2',      'Start with the right foundation.' );
 $bottom_em      = ondigital_get_option( 'cl_bottom_em',      'It\'s free.' );
 $bottom_note    = ondigital_get_option( 'cl_bottom_note',    'Takes 30 seconds to get. Could save you months of wrong turns.' );
@@ -143,13 +148,13 @@ get_header();
                         <input type="text" name="cl_hp" style="display:none!important" tabindex="-1" autocomplete="off" aria-hidden="true">
 
                         <div class="cl-field">
-                            <label for="cl-name"><?php esc_html_e( 'Full name', 'ondigital' ); ?></label>
+                            <label for="cl-name"><?php echo esc_html( $field_name_lbl ); ?></label>
                             <input id="cl-name" type="text" name="name" placeholder="Ali Həsənov" autocomplete="name" required aria-required="true" aria-describedby="cl-err-name">
                             <div id="cl-err-name" class="cl-field-error" role="alert"><?php esc_html_e( 'Please enter your full name.', 'ondigital' ); ?></div>
                         </div>
 
                         <div class="cl-field">
-                            <label for="cl-email"><?php esc_html_e( 'Work email', 'ondigital' ); ?></label>
+                            <label for="cl-email"><?php echo esc_html( $field_email_lbl ); ?></label>
                             <input id="cl-email" type="email" name="email" placeholder="ali@yourcompany.az" autocomplete="email" required aria-required="true" aria-describedby="cl-err-email">
                             <div id="cl-err-email" class="cl-field-error" role="alert"><?php esc_html_e( 'Please enter a valid email address.', 'ondigital' ); ?></div>
                         </div>
@@ -162,7 +167,7 @@ get_header();
 
                     <div class="cl-form-privacy" aria-hidden="true">
                         <?php echo $svg_lock; ?>
-                        <?php esc_html_e( 'No spam. Unsubscribe anytime.', 'ondigital' ); ?>
+                        <?php echo esc_html( $field_privacy ); ?>
                     </div>
                 </div>
 
@@ -180,8 +185,8 @@ get_header();
                         <div class="cl-ta">MK</div>
                     </div>
                     <div class="cl-trust-copy">
-                        <strong><?php echo esc_html( $stat1_num . $stat1_sup ); ?> <?php esc_html_e( 'teams', 'ondigital' ); ?></strong>
-                        <?php esc_html_e( 'downloaded this checklist last month.', 'ondigital' ); ?>
+                        <strong><?php echo esc_html( $stat1_num . $stat1_sup ); ?></strong>
+                        <?php echo esc_html( $trust_text ); ?>
                     </div>
                 </div>
 
@@ -196,21 +201,26 @@ get_header();
 <!-- WHAT'S INSIDE -->
 <section class="cl-inside" aria-labelledby="cl-inside-heading">
 
+    <?php
+    $inside_heading    = ondigital_get_option( 'cl_inside_heading',    "What's inside the checklist." );
+    $inside_heading_em = ondigital_get_option( 'cl_inside_heading_em', 'All 40 items.' );
+    $inside_meta       = ondigital_get_option( 'cl_inside_meta',       '4 chapters · 40 items · PDF format' );
+    ?>
     <div class="cl-inside-head">
-        <h2 id="cl-inside-heading"><?php esc_html_e( "What's inside the checklist.", 'ondigital' ); ?> <span><?php esc_html_e( 'All 40 items.', 'ondigital' ); ?></span></h2>
-        <div class="cl-inside-meta"><?php esc_html_e( '4 chapters · 40 items · PDF format', 'ondigital' ); ?></div>
+        <h2 id="cl-inside-heading"><?php echo esc_html( $inside_heading ); ?> <span><?php echo esc_html( $inside_heading_em ); ?></span></h2>
+        <div class="cl-inside-meta"><?php echo esc_html( $inside_meta ); ?></div>
     </div>
 
     <div class="cl-chapters" role="list">
         <?php
         $chapters = array(
-            array( 'num' => '01 — SEO',    'badge' => '10 items', 'title' => __( 'Search Engine Optimisation', 'ondigital' ), 'more' => '+6',
+            array( 'num' => '01 — SEO',    'badge' => '10 items', 'title' => ondigital_get_option( 'cl_ch1_title', 'Search Engine Optimisation' ), 'more' => '+6',
                 'items' => array( __( 'Technical site audit', 'ondigital' ), __( 'Keyword gap analysis', 'ondigital' ), __( 'On-page meta & structure', 'ondigital' ), __( 'Core Web Vitals', 'ondigital' ) ) ),
-            array( 'num' => '02 — ADS',    'badge' => '11 items', 'title' => __( 'Paid Advertising', 'ondigital' ),           'more' => '+7',
+            array( 'num' => '02 — ADS',    'badge' => '11 items', 'title' => ondigital_get_option( 'cl_ch2_title', 'Paid Advertising' ),           'more' => '+7',
                 'items' => array( __( 'Google Ads account structure', 'ondigital' ), __( 'Audience segmentation', 'ondigital' ), __( 'Budget & bid strategy', 'ondigital' ), __( 'Ad creative checklist', 'ondigital' ) ) ),
-            array( 'num' => '03 — SOCIAL', 'badge' => '9 items',  'title' => __( 'Social Media', 'ondigital' ),               'more' => '+5',
+            array( 'num' => '03 — SOCIAL', 'badge' => '9 items',  'title' => ondigital_get_option( 'cl_ch3_title', 'Social Media' ),               'more' => '+5',
                 'items' => array( __( 'Profile optimisation', 'ondigital' ), __( 'Content calendar setup', 'ondigital' ), __( 'Engagement strategy', 'ondigital' ), __( 'Hashtag & reach tactics', 'ondigital' ) ) ),
-            array( 'num' => '04 — CRO',    'badge' => '10 items', 'title' => __( 'Conversion & UX', 'ondigital' ),            'more' => '+6',
+            array( 'num' => '04 — CRO',    'badge' => '10 items', 'title' => ondigital_get_option( 'cl_ch4_title', 'Conversion & UX' ),            'more' => '+6',
                 'items' => array( __( 'Landing page audit', 'ondigital' ), __( 'CTA placement & copy', 'ondigital' ), __( 'Mobile speed check', 'ondigital' ), __( 'Trust signal setup', 'ondigital' ) ) ),
         );
         foreach ( $chapters as $ch ) :

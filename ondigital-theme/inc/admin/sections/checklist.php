@@ -85,18 +85,56 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
         <?php od_lang_close(); ?>
     <?php od_card_close(); ?>
 
+    <!-- ── WHAT'S INSIDE ── -->
+    <?php od_card_open( __( '4. What\'s Inside Section', 'ondigital' ), 'dashicons-list-view' ); ?>
+        <?php od_lang_open(); ?>
+        <?php foreach ( $langs as $lang => $label ) : ?>
+            <?php od_lang_pane( $lang ); ?>
+                <?php od_text( 'cl_inside_heading_' . $lang,  __( 'Section Heading', 'ondigital' ), $options, __( 'e.g. What\'s inside the checklist.', 'ondigital' ) ); ?>
+                <?php od_text( 'cl_inside_heading_em_' . $lang, __( 'Highlighted ending', 'ondigital' ), $options, __( 'e.g. All 40 items.', 'ondigital' ) ); ?>
+                <?php od_text( 'cl_inside_meta_' . $lang,    __( 'Meta line', 'ondigital' ), $options, __( 'e.g. 4 chapters · 40 items · PDF format', 'ondigital' ) ); ?>
+                <?php od_divider(); ?>
+                <?php foreach ( array( 1 => 'SEO', 2 => 'ADS', 3 => 'SOCIAL', 4 => 'CRO' ) as $n => $code ) : ?>
+                <p style="font-weight:600;font-size:12px;color:#666;margin:0 0 8px;text-transform:uppercase;letter-spacing:.05em;">Chapter <?php echo $n; ?> — <?php echo $code; ?></p>
+                <?php od_text( 'cl_ch' . $n . '_title_' . $lang, __( 'Chapter Title', 'ondigital' ), $options ); ?>
+                <?php endforeach; ?>
+            <?php od_lang_pane_close(); ?>
+        <?php endforeach; ?>
+        <?php od_lang_close(); ?>
+    <?php od_card_close(); ?>
+
     <!-- ── TESTIMONIAL ── -->
-    <?php od_card_open( __( '4. Testimonial', 'ondigital' ), 'dashicons-format-quote' ); ?>
-        <?php od_textarea( 'cl_testi_quote', __( 'Quote Text', 'ondigital' ), $options ); ?>
-        <?php od_row_open(); ?>
-            <?php od_text( 'cl_testi_name',     __( 'Name', 'ondigital' ), $options ); ?>
-            <?php od_text( 'cl_testi_role',     __( 'Role / Company', 'ondigital' ), $options ); ?>
-            <?php od_text( 'cl_testi_initials', __( 'Initials (avatar)', 'ondigital' ), $options, 'ES' ); ?>
-        <?php od_row_close(); ?>
+    <?php od_card_open( __( '5. Testimonial', 'ondigital' ), 'dashicons-format-quote' ); ?>
+        <?php od_lang_open(); ?>
+        <?php foreach ( $langs as $lang => $label ) : ?>
+            <?php od_lang_pane( $lang ); ?>
+                <?php od_textarea( 'cl_testi_quote_' . $lang, __( 'Quote Text', 'ondigital' ), $options ); ?>
+                <?php od_row_open(); ?>
+                    <?php od_text( 'cl_testi_name_' . $lang, __( 'Name', 'ondigital' ), $options ); ?>
+                    <?php od_text( 'cl_testi_role_' . $lang, __( 'Role / Company', 'ondigital' ), $options ); ?>
+                <?php od_row_close(); ?>
+            <?php od_lang_pane_close(); ?>
+        <?php endforeach; ?>
+        <?php od_lang_close(); ?>
+        <?php od_text( 'cl_testi_initials', __( 'Initials (avatar)', 'ondigital' ), $options, 'ES' ); ?>
+    <?php od_card_close(); ?>
+
+    <!-- ── FORM LABELS ── -->
+    <?php od_card_open( __( '6. Form Labels', 'ondigital' ), 'dashicons-feedback' ); ?>
+        <?php od_lang_open(); ?>
+        <?php foreach ( $langs as $lang => $label ) : ?>
+            <?php od_lang_pane( $lang ); ?>
+                <?php od_text( 'cl_field_name_' . $lang,    __( 'Name Field Label', 'ondigital' ), $options, __( 'e.g. Full name', 'ondigital' ) ); ?>
+                <?php od_text( 'cl_field_email_' . $lang,   __( 'Email Field Label', 'ondigital' ), $options, __( 'e.g. Work email', 'ondigital' ) ); ?>
+                <?php od_text( 'cl_field_privacy_' . $lang, __( 'Privacy Note', 'ondigital' ),     $options, __( 'e.g. No spam. Unsubscribe anytime.', 'ondigital' ) ); ?>
+                <?php od_text( 'cl_trust_text_' . $lang,    __( 'Trust Copy', 'ondigital' ),       $options, __( 'e.g. teams downloaded this checklist last month.', 'ondigital' ) ); ?>
+            <?php od_lang_pane_close(); ?>
+        <?php endforeach; ?>
+        <?php od_lang_close(); ?>
     <?php od_card_close(); ?>
 
     <!-- ── BOTTOM CTA ── -->
-    <?php od_card_open( __( '5. Bottom CTA', 'ondigital' ), 'dashicons-arrow-right-alt' ); ?>
+    <?php od_card_open( __( '7. Bottom CTA', 'ondigital' ), 'dashicons-arrow-right-alt' ); ?>
         <?php od_lang_open(); ?>
         <?php foreach ( $langs as $lang => $label ) : ?>
             <?php od_lang_pane( $lang ); ?>
