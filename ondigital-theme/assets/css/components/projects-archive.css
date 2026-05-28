@@ -20,7 +20,7 @@
 
 /* ── Hero ── */
 .pa-hero {
-  padding: 160px 60px 100px;
+  padding: 160px 0 100px;
   position: relative;
   overflow: hidden;
   background: #fff;
@@ -45,7 +45,7 @@
 }
 @keyframes paGrow { to { width: 55%; } }
 
-.pa-hero-inner { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; }
+.pa-hero-inner { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 60px; }
 
 .pa-eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
@@ -259,7 +259,7 @@
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-  .pa-hero, .pa-filter, .pa-grid { padding-left: 40px; padding-right: 40px; }
+  .pa-filter, .pa-grid, .pa-hero-inner { padding-left: 40px; padding-right: 40px; }
   .pa-grid { grid-template-columns: 1fr 1fr; }
   .pa-featured { grid-column: 1/-1; }
   .pa-tall { grid-column: auto; grid-row: auto; }
@@ -268,8 +268,8 @@
   .pa-stats { gap: 28px; }
 }
 @media (max-width: 767px) {
-  .pa-hero { padding: 120px 20px 52px; }
-  .pa-filter, .pa-grid { padding-left: 20px; padding-right: 20px; }
+  .pa-hero { padding: 120px 0 52px; }
+  .pa-filter, .pa-grid, .pa-hero-inner { padding-left: 20px; padding-right: 20px; }
   .pa-grid { grid-template-columns: 1fr; gap: 10px; }
   .pa-featured, .pa-tall, .pa-wide { grid-column: auto; grid-row: auto; }
   .pa-hero-bottom { flex-direction: column; align-items: flex-start; }
