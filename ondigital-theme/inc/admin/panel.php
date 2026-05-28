@@ -36,7 +36,8 @@ function ondigital_panel_menu(): void {
     add_submenu_page( 'ondigital', __( 'Project Page', 'ondigital' ), __( 'Project Page', 'ondigital' ), 'manage_options', 'ondigital&section=project', 'ondigital_panel_render' );
     add_submenu_page( 'ondigital', __( 'Service Page', 'ondigital' ), __( 'Service Page', 'ondigital' ), 'manage_options', 'ondigital&section=service', 'ondigital_panel_render' );
     add_submenu_page( 'ondigital', __( 'Contact Page', 'ondigital' ), __( 'Contact Page', 'ondigital' ), 'manage_options', 'ondigital&section=contact', 'ondigital_panel_render' );
-    add_submenu_page( 'ondigital', __( 'Checklist Page', 'ondigital' ), __( 'Checklist Page', 'ondigital' ), 'manage_options', 'ondigital&section=checklist', 'ondigital_panel_render' );
+    add_submenu_page( 'ondigital', __( 'Checklist Page', 'ondigital' ), __( 'Checklist Page', 'ondigital' ), 'manage_options', 'ondigital&section=checklist',  'ondigital_panel_render' );
+    add_submenu_page( 'ondigital', __( 'Dictionary Page', 'ondigital' ), __( 'Dictionary Page', 'ondigital' ), 'manage_options', 'ondigital&section=dictionary', 'ondigital_panel_render' );
     add_submenu_page( 'ondigital', __( 'Footer', 'ondigital' ),    __( 'Footer', 'ondigital' ),    'manage_options', 'ondigital&section=footer',   'ondigital_panel_render' );
 }
 
@@ -105,6 +106,11 @@ function ondigital_panel_sections(): array {
             'title' => __( 'Checklist Page', 'ondigital' ),
             'icon'  => 'dashicons-yes-alt',
             'file'  => 'checklist',
+        ),
+        'dictionary' => array(
+            'title' => __( 'Dictionary Page', 'ondigital' ),
+            'icon'  => 'dashicons-book-alt',
+            'file'  => 'dictionary',
         ),
         'footer' => array(
             'title' => __( 'Footer', 'ondigital' ),
