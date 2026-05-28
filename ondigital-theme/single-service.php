@@ -181,7 +181,45 @@ body { overflow: auto !important; height: auto !important; }
     })();
     </script>
 
-    <!-- ── 4. What's Included + Monthly Roadmap ── -->
+    <!-- ── 4. Process ── -->
+    <section class="ss-process" id="ss-process">
+        <div class="container">
+            <div class="ss-process-header">
+                <?php
+                $process_eyebrow = get_post_meta( $id, '_service_process_eyebrow', true ) ?: __( 'İş Prosesi', 'ondigital' );
+                $process_heading = get_post_meta( $id, '_service_process_heading', true ) ?: __( 'Necə işləyirik', 'ondigital' );
+                ?>
+                <span class="ss-eyebrow"><?php echo esc_html( $process_eyebrow ); ?></span>
+                <h2 class="ss-process-heading"><?php echo esc_html( $process_heading ); ?></h2>
+            </div>
+            <div class="cs-steps">
+                <?php foreach ( $steps as $i => $step ) :
+                    $num   = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                    $icon  = $icons[ $i % count( $icons ) ];
+                    $title = $step[ 'title_' . $lang ] ?? $step['title_az'] ?? '';
+                    $desc  = $step[ 'desc_' . $lang ]  ?? $step['desc_az']  ?? '';
+                    $dur   = $step['duration'] ?? '';
+                ?>
+                    <div class="cs-step">
+                        <div class="cs-step-n"><?php echo esc_html( $num ); ?></div>
+                        <div class="cs-step-connector"></div>
+                        <div class="cs-step-icon"><?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+                        <div class="cs-step-body">
+                            <div class="cs-step-title"><?php echo esc_html( $title ); ?></div>
+                            <?php if ( $desc ) : ?>
+                                <div class="cs-step-desc"><?php echo esc_html( $desc ); ?></div>
+                            <?php endif; ?>
+                        </div>
+                        <?php if ( $dur ) : ?>
+                            <div class="cs-step-dur"><?php echo esc_html( $dur ); ?></div>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 5. What's Included + Monthly Roadmap ── -->
     <section class="wi-section">
         <div class="container">
             <?php
@@ -332,44 +370,6 @@ body { overflow: auto !important; height: auto !important; }
         </div>
     </section>
     <?php endif; ?>
-
-    <!-- ── 5. Process ── -->
-    <section class="ss-process" id="ss-process">
-        <div class="container">
-            <div class="ss-process-header">
-                <?php
-                $process_eyebrow = get_post_meta( $id, '_service_process_eyebrow', true ) ?: __( 'İş Prosesi', 'ondigital' );
-                $process_heading = get_post_meta( $id, '_service_process_heading', true ) ?: __( 'Necə işləyirik', 'ondigital' );
-                ?>
-                <span class="ss-eyebrow"><?php echo esc_html( $process_eyebrow ); ?></span>
-                <h2 class="ss-process-heading"><?php echo esc_html( $process_heading ); ?></h2>
-            </div>
-            <div class="cs-steps">
-                <?php foreach ( $steps as $i => $step ) :
-                    $num   = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
-                    $icon  = $icons[ $i % count( $icons ) ];
-                    $title = $step[ 'title_' . $lang ] ?? $step['title_az'] ?? '';
-                    $desc  = $step[ 'desc_' . $lang ]  ?? $step['desc_az']  ?? '';
-                    $dur   = $step['duration'] ?? '';
-                ?>
-                    <div class="cs-step">
-                        <div class="cs-step-n"><?php echo esc_html( $num ); ?></div>
-                        <div class="cs-step-connector"></div>
-                        <div class="cs-step-icon"><?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
-                        <div class="cs-step-body">
-                            <div class="cs-step-title"><?php echo esc_html( $title ); ?></div>
-                            <?php if ( $desc ) : ?>
-                                <div class="cs-step-desc"><?php echo esc_html( $desc ); ?></div>
-                            <?php endif; ?>
-                        </div>
-                        <?php if ( $dur ) : ?>
-                            <div class="cs-step-dur"><?php echo esc_html( $dur ); ?></div>
-                        <?php endif; ?>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </section>
 
     <!-- ── 6. Who Is This For ── -->
     <?php

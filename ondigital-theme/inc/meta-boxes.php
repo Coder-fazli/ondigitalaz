@@ -20,9 +20,10 @@ function ondigital_default_closed_metaboxes(): void {
     if ( ! $screen || $screen->id !== 'service' ) {
         return;
     }
+    $version = '2';
     $user_id = get_current_user_id();
-    if ( get_user_option( 'closedpostboxes_service', $user_id ) !== false ) {
-        return; // user has already set their own preference
+    if ( get_user_meta( $user_id, 'od_service_boxes_closed_v', true ) === $version ) {
+        return;
     }
     update_user_option( $user_id, 'closedpostboxes_service', array(
         'ondigital_service_meta',
@@ -34,6 +35,7 @@ function ondigital_default_closed_metaboxes(): void {
         'ondigital_service_glossary',
         'ondigital_service_faq',
     ) );
+    update_user_meta( $user_id, 'od_service_boxes_closed_v', $version );
 }
 
 // =============================================================================
