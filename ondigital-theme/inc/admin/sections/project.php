@@ -35,6 +35,19 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
 
     <?php od_card_close(); ?>
 
+    <!-- ── PARTNERS SECTION TITLE ── -->
+    <?php od_card_open( __( 'Partners Section Title', 'ondigital' ), 'dashicons-groups' ); ?>
+
+        <?php od_lang_open(); ?>
+        <?php foreach ( $langs as $lang => $label ) : ?>
+            <?php od_lang_pane( $lang ); ?>
+                <?php od_text( 'partners_title_' . $lang, __( 'Partners Section Title', 'ondigital' ), $options, __( 'e.g. Bizim tərəfdaşlarımız', 'ondigital' ) ); ?>
+            <?php od_lang_pane_close(); ?>
+        <?php endforeach; ?>
+        <?php od_lang_close(); ?>
+
+    <?php od_card_close(); ?>
+
     <!-- ── SEO ── -->
     <?php od_card_open( __( 'Archive Page SEO', 'ondigital' ), 'dashicons-search' ); ?>
 
