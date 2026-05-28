@@ -227,13 +227,13 @@
   .pa-hero-lottie { display: none; }
 }
 
-/* ── CTA section inside projects page ── */
-.pa-section .cta-area .section-header,
-.pa-section .cta-area .section-title-wrapper,
-.pa-section .cta-area .title-wrapper {
+/* ── CTA section on projects archive page ── */
+.page-template-templates-page-projects-php .cta-area .section-header,
+.page-template-templates-page-projects-php .cta-area .section-title-wrapper,
+.page-template-templates-page-projects-php .cta-area .title-wrapper {
   text-align: center !important;
 }
-.pa-section .cta-area .btn-wrapper {
+.page-template-templates-page-projects-php .cta-area .btn-wrapper {
   display: flex;
   justify-content: center;
 }
