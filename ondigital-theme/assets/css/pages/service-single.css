@@ -622,7 +622,7 @@ html, body { overflow: auto !important; height: auto !important; }
    ============================================================================= */
 
 .ss-cta-form {
-    background: #0d0d0d;
+    background: #c2f971;
     padding: 90px 0 100px;
     position: relative;
     overflow: hidden;
@@ -632,8 +632,8 @@ html, body { overflow: auto !important; height: auto !important; }
     content: '';
     position: absolute;
     width: 700px; height: 700px; border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(194,249,113,.07) 0%, transparent 65%);
-    top: 50%; left: -10%;
+    background: radial-gradient(ellipse, rgba(0,0,0,.06) 0%, transparent 65%);
+    top: 50%; left: -15%;
     transform: translateY(-50%);
     pointer-events: none;
 }
@@ -648,50 +648,59 @@ html, body { overflow: auto !important; height: auto !important; }
 }
 
 .ss-cta-form-eyebrow {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center; gap: 8px;
     font-size: 11px; font-weight: 700;
     letter-spacing: .12em; text-transform: uppercase;
-    color: var(--ss-accent);
+    color: #121212;
+    background: rgba(0,0,0,.1);
+    border: 1px solid rgba(0,0,0,.2);
+    padding: 6px 14px; border-radius: 100px;
     margin-bottom: 20px;
+}
+
+.ss-cta-form-eyebrow::before {
+    content: ''; width: 6px; height: 6px;
+    border-radius: 50%; background: #121212; flex-shrink: 0;
 }
 
 .ss-cta-form-title {
     font-size: clamp(26px, 3.2vw, 44px); font-weight: 900;
     letter-spacing: -.03em; line-height: 1.1;
-    color: #fff; margin: 0 0 18px;
+    color: #121212; margin: 0 0 18px;
 }
 
 .ss-cta-form-sub {
     font-size: 16px; line-height: 1.65;
-    color: rgba(255,255,255,.45);
+    color: rgba(0,0,0,.65);
     margin: 0 0 36px;
 }
 
 .ss-cta-form-perks {
     list-style: none; padding: 0; margin: 0;
-    display: flex; flex-direction: column; gap: 16px;
+    display: flex; flex-direction: column; gap: 12px;
 }
 
 .ss-cta-form-perks li {
-    display: flex; align-items: center; gap: 14px;
+    display: flex; align-items: center; gap: 12px;
     font-size: 15px; font-weight: 500;
-    color: rgba(255,255,255,.7);
+    color: rgba(0,0,0,.75);
 }
 
 .ss-cta-perk-icon {
-    width: 26px; height: 26px; flex-shrink: 0;
-    background: rgba(194,249,113,.1);
-    border: 1px solid rgba(194,249,113,.22);
+    width: 22px; height: 22px; flex-shrink: 0;
+    background: rgba(0,0,0,.1);
+    border: 1px solid rgba(0,0,0,.2);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    color: var(--ss-accent); font-size: 11px;
+    color: #121212; font-size: 10px;
 }
 
 .ss-cta-form-right {
     background: #fff;
-    border-radius: 20px;
-    padding: 40px 44px;
-    box-shadow: 0 24px 80px rgba(0,0,0,.35);
+    border-radius: 22px;
+    padding: 40px 36px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.06), 0 24px 64px rgba(0,0,0,.10);
 }
 
 @media (max-width: 960px) {
