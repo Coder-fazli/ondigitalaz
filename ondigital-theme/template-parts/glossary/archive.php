@@ -59,9 +59,16 @@ $archive_url = get_post_type_archive_link( 'od_glossary' );
 ?>
 
 <?php
-$dict_title       = ondigital_get_option( 'dict_page_title',  'Rəqəmsal Marketinq Sözlüyü' );
-$dict_desc        = ondigital_get_option( 'dict_page_desc',   'Rəqəmsal artımın dilini öyrənin. Sənaye terminlərinin hərtərəfli sözlüyünü araşdırın.' );
-$dict_placeholder = ondigital_get_option( 'dict_search_placeholder', 'Termin axtar (məs. SEO, Dönüşüm dərəcəsi...)' );
+$dict_title          = ondigital_get_option( 'dict_page_title',        'Rəqəmsal Marketinq Sözlüyü' );
+$dict_desc           = ondigital_get_option( 'dict_page_desc',         'Rəqəmsal artımın dilini öyrənin. Sənaye terminlərinin hərtərəfli sözlüyünü araşdırın.' );
+$dict_placeholder    = ondigital_get_option( 'dict_search_placeholder', 'Termin axtar (məs. SEO, Dönüşüm dərəcəsi...)' );
+$dict_all_btn        = ondigital_get_option( 'dict_all_btn',            'Hamısı' );
+$dict_all_terms      = ondigital_get_option( 'dict_all_terms',          'Bütün terminlər' );
+$dict_terms_found    = ondigital_get_option( 'dict_terms_found',        'termin tapıldı' );
+$dict_search_results = ondigital_get_option( 'dict_search_results',     'axtarışı' );
+$dict_letter_filter  = ondigital_get_option( 'dict_letter_filter',      'hərfi ilə terminlər' );
+$dict_no_results     = ondigital_get_option( 'dict_no_results',         'Heç bir termin tapılmadı.' );
+$dict_show_all       = ondigital_get_option( 'dict_show_all',           'Hamısını göstər' );
 ?>
 <!-- ======================== HERO ======================== -->
 <section class="glossary-hero">
@@ -97,7 +104,7 @@ $dict_placeholder = ondigital_get_option( 'dict_search_placeholder', 'Termin axt
                 href="<?php echo esc_url( $archive_url . ( $search_query ? '?s=' . urlencode( $search_query ) : '' ) ); ?>"
                 class="glossary-alpha__btn <?php echo ( $active_letter === 'ALL' ) ? 'is-active' : ''; ?>"
             >
-                <?php esc_html_e( 'Hamısı', 'ondigital' ); ?>
+                <?php echo esc_html( $dict_all_btn ); ?>
             </a>
             <?php foreach ( range( 'A', 'Z' ) as $letter ) :
                 $has_terms = ! empty( $letter_counts[ $letter ] );
@@ -130,20 +137,17 @@ $dict_placeholder = ondigital_get_option( 'dict_search_placeholder', 'Termin axt
                 <span class="glossary-grid-header__bar"></span>
                 <?php
                 if ( $search_query ) {
-                    printf( esc_html__( '"%s" axtarışı', 'ondigital' ), esc_html( $search_query ) );
+                    echo '"' . esc_html( $search_query ) . '" ' . esc_html( $dict_search_results );
                 } elseif ( $active_letter !== 'ALL' ) {
-                    printf( esc_html__( '"%s" hərfi ilə terminlər', 'ondigital' ), esc_html( $active_letter ) );
+                    echo '"' . esc_html( $active_letter ) . '" ' . esc_html( $dict_letter_filter );
                 } else {
-                    esc_html_e( 'Bütün terminlər', 'ondigital' );
+                    echo esc_html( $dict_all_terms );
                 }
                 ?>
             </h2>
             <?php if ( $glossary_query->found_posts ) : ?>
             <span class="glossary-grid-header__count">
-                <?php printf(
-                    esc_html__( '%d termin tapıldı', 'ondigital' ),
-                    $glossary_query->found_posts
-                ); ?>
+                <?php echo esc_html( $glossary_query->found_posts . ' ' . $dict_terms_found ); ?>
             </span>
             <?php endif; ?>
         </div>
@@ -214,9 +218,9 @@ $dict_placeholder = ondigital_get_option( 'dict_search_placeholder', 'Termin axt
 
         <div class="glossary-empty">
             <i class="fa-solid fa-book-open glossary-empty__icon"></i>
-            <p><?php esc_html_e( 'Heç bir termin tapılmadı.', 'ondigital' ); ?></p>
+            <p><?php echo esc_html( $dict_no_results ); ?></p>
             <a href="<?php echo esc_url( $archive_url ); ?>" class="glossary-empty__reset">
-                <?php esc_html_e( 'Hamısını göstər', 'ondigital' ); ?>
+                <?php echo esc_html( $dict_show_all ); ?>
             </a>
         </div>
 
