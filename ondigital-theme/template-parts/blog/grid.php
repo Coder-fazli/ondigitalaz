@@ -38,11 +38,11 @@ $static_blogs = array(
             <div class="section-content">
                 <div class="section-title-wrapper">
                     <div class="title-wrapper">
-                        <h2 class="section-title has_fade_anim"><?php esc_html_e( 'Son yazılar', 'ondigital' ); ?></h2>
+                        <h2 class="section-title has_fade_anim"><?php echo esc_html( ondigital_get_option( 'blog_grid_title', 'Son yazılar' ) ); ?></h2>
                     </div>
                 </div>
                 <div class="text-wrapper">
-                    <p class="text has_fade_anim"><?php esc_html_e( 'Rəqəmsal marketinq və texnologiya sahəsindəki yeniliklərdən xəbərdar olun', 'ondigital' ); ?></p>
+                    <p class="text has_fade_anim"><?php echo esc_html( ondigital_get_option( 'blog_grid_desc', 'Rəqəmsal marketinq və texnologiya sahəsindəki yeniliklərdən xəbərdar olun' ) ); ?></p>
                 </div>
             </div>
 

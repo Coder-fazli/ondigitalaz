@@ -28,6 +28,19 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
         <?php od_lang_close(); ?>
     <?php od_card_close(); ?>
 
+    <!-- ── LATEST POSTS SECTION ── -->
+    <?php od_card_open( __( '2. Latest Posts Section', 'ondigital' ), 'dashicons-list-view' ); ?>
+        <?php od_lang_open(); ?>
+        <?php foreach ( $langs as $lang => $label ) : ?>
+            <?php od_lang_pane( $lang ); ?>
+                <?php od_text( 'blog_grid_title_' . $lang,       __( 'Section Heading', 'ondigital' ),   $options, $lang === 'az' ? 'Son yazılar' : 'Latest posts' ); ?>
+                <?php od_textarea( 'blog_grid_desc_' . $lang,    __( 'Section Description', 'ondigital' ), $options ); ?>
+                <?php od_text( 'blog_featured_tag_' . $lang,     __( 'Featured tag label', 'ondigital' ), $options, $lang === 'az' ? 'Seçilmiş Məqalə' : 'Featured Article' ); ?>
+            <?php od_lang_pane_close(); ?>
+        <?php endforeach; ?>
+        <?php od_lang_close(); ?>
+    <?php od_card_close(); ?>
+
     <!-- ── SEO ── -->
     <?php od_card_open( __( '2. SEO', 'ondigital' ), 'dashicons-search' ); ?>
         <?php od_lang_open(); ?>

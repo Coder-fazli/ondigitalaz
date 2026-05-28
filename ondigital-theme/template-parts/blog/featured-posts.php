@@ -35,22 +35,23 @@ if ( ! $featured_query->have_posts() ) {
     ) ) );
 }
 
+$_blog_featured_tag = ondigital_get_option( 'blog_featured_tag', 'Seçilmiş Məqalə' );
 $static_featured = array(
     array(
         'title' => __( 'Sənaye Liderlərindən Anlayışlar', 'ondigital' ),
-        'tag'   => __( 'Seçilmiş Məqalə', 'ondigital' ),
+        'tag'   => $_blog_featured_tag,
         'date'  => 'Mar - 2024',
         'image' => 'img-s-17.webp',
     ),
     array(
         'title' => __( 'Keyfiyyət Qurmaq', 'ondigital' ),
-        'tag'   => __( 'Seçilmiş Məqalə', 'ondigital' ),
+        'tag'   => $_blog_featured_tag,
         'date'  => 'Feb - 2024',
         'image' => 'img-s-18.webp',
     ),
     array(
         'title' => __( 'Bazar Araşdırması', 'ondigital' ),
-        'tag'   => __( 'Seçilmiş Məqalə', 'ondigital' ),
+        'tag'   => $_blog_featured_tag,
         'date'  => 'Jan - 2024',
         'image' => 'img-s-19.webp',
     ),
@@ -88,7 +89,7 @@ $on_scrolls = array( '', '', '0' );
                                         <span class="tag">
                                             <?php
                                             $cats = get_the_category();
-                                            echo ! empty( $cats ) ? esc_html( $cats[0]->name ) : esc_html__( 'Seçilmiş Məqalə', 'ondigital' );
+                                            echo ! empty( $cats ) ? esc_html( $cats[0]->name ) : esc_html( $_blog_featured_tag );
                                             ?>
                                             <br><?php echo esc_html( get_the_date( 'M - Y' ) ); ?>
                                         </span>
