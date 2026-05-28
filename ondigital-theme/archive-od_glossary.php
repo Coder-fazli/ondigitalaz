@@ -5,8 +5,19 @@
  * @package OnDigital
  */
 
-get_header(); ?>
+add_action( 'wp_head', function () {
+    $meta_title = ondigital_get_option( 'dict_meta_title', '' );
+    $meta_desc  = ondigital_get_option( 'dict_meta_desc',  '' );
+    if ( $meta_title ) {
+        echo '<title>' . esc_html( $meta_title ) . '</title>' . "\n";
+    }
+    if ( $meta_desc ) {
+        echo '<meta name="description" content="' . esc_attr( $meta_desc ) . '">' . "\n";
+    }
+}, 1 );
 
-<?php get_template_part( 'template-parts/glossary/archive' ); ?>
+get_header();
 
-<?php get_footer();
+get_template_part( 'template-parts/glossary/archive' );
+
+get_footer();
