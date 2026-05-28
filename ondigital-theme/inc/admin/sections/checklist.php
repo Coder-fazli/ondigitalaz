@@ -147,4 +147,16 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
         <?php od_lang_close(); ?>
     <?php od_card_close(); ?>
 
+    <!-- ── SEO ── -->
+    <?php od_card_open( __( '8. SEO', 'ondigital' ), 'dashicons-search' ); ?>
+        <?php od_lang_open(); ?>
+        <?php foreach ( $langs as $lang => $label ) : ?>
+            <?php od_lang_pane( $lang ); ?>
+                <?php od_text( 'cl_meta_title_' . $lang,    __( 'Meta Title', 'ondigital' ),       $options ); ?>
+                <?php od_textarea( 'cl_meta_desc_' . $lang, __( 'Meta Description', 'ondigital' ), $options ); ?>
+            <?php od_lang_pane_close(); ?>
+        <?php endforeach; ?>
+        <?php od_lang_close(); ?>
+    <?php od_card_close(); ?>
+
 </div>

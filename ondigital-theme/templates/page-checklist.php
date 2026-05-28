@@ -21,6 +21,18 @@ add_filter( 'body_class', function ( $classes ) {
     return $classes;
 } );
 
+/* Inject custom meta title + description */
+add_action( 'wp_head', function () {
+    $meta_title = ondigital_get_option( 'cl_meta_title', '' );
+    $meta_desc  = ondigital_get_option( 'cl_meta_desc',  '' );
+    if ( $meta_title ) {
+        echo '<title>' . esc_html( $meta_title ) . '</title>' . "\n";
+    }
+    if ( $meta_desc ) {
+        echo '<meta name="description" content="' . esc_attr( $meta_desc ) . '">' . "\n";
+    }
+}, 1 );
+
 /* ── AJAX: checklist form submission ── */
 add_action( 'wp_ajax_odf_cl_submit',        'odf_cl_handle_submit' );
 add_action( 'wp_ajax_nopriv_odf_cl_submit', 'odf_cl_handle_submit' );
