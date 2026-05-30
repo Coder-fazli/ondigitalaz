@@ -969,7 +969,7 @@ html, body { overflow: auto !important; height: auto !important; }
     background: #121212; padding: 56px 0 72px;
     position: relative; overflow: hidden;
     border-radius: 40px;
-    margin: 0 20px;
+    margin: 48px 20px 0;
     box-shadow: 0 16px 64px rgba(0,0,0,.2);
 }
 
@@ -1164,7 +1164,10 @@ html, body { overflow: auto !important; height: auto !important; }
     .ss-wrap .wi-section,
     .ss-wrap .gl-section,
     .ss-wrap .wif-section,
-    .ss-wrap .faq-section { padding: 72px 0 80px; }
+    .ss-wrap .faq-section { padding: 48px 0 56px; }
+    .ss-wrap .wi-section  { margin: 32px 12px 0; }
+    .ss-wrap .wif-section { margin: 32px 12px 0; }
+    .ss-wrap .gl-section  { margin: 32px 12px 32px; }
     .ss-wrap .gl-grid { grid-template-columns: 1fr; }
     .ss-wrap .gl-section::after { font-size: 120px; }
     .ss-wrap .wif-col-inner { padding: 24px 20px 26px; }
