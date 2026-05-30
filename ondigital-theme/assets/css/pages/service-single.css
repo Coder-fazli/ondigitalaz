@@ -400,7 +400,7 @@ html, body { overflow: auto !important; height: auto !important; }
 }
 
 /* =============================================================================
-   4. Process — Vertical Slider
+   4. Process — scrollable steps list (shows 5, scroll for more)
    ============================================================================= */
 
 .ss-process {
@@ -417,73 +417,43 @@ html, body { overflow: auto !important; height: auto !important; }
     color: #121212; margin: 0;
 }
 
-/* Dot nav strip */
-.cs-slider-nav {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+/* Scrollable container — 5 steps visible, scroll for more */
+.ss-wrap .cs-steps {
     margin-top: 56px;
-    margin-bottom: 0;
+    max-height: calc(5 * 161px); /* 5 × (80px content + 40px top + 40px bottom + 1px border) */
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ss-accent) var(--ss-border);
 }
 
-.cs-slider-dot {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    border: 1.5px solid var(--ss-border);
-    background: #fff;
-    cursor: pointer;
-    font-size: 11px; font-weight: 800; letter-spacing: .04em;
-    color: rgba(0,0,0,.3);
-    display: flex; align-items: center; justify-content: center;
-    transition: background .25s var(--ss-ease), border-color .25s var(--ss-ease), color .25s var(--ss-ease), box-shadow .25s var(--ss-ease);
-}
+.ss-wrap .cs-steps::-webkit-scrollbar        { width: 4px; }
+.ss-wrap .cs-steps::-webkit-scrollbar-track  { background: transparent; }
+.ss-wrap .cs-steps::-webkit-scrollbar-thumb  { background: var(--ss-accent); border-radius: 99px; }
 
-.cs-slider-dot.active {
-    background: var(--ss-accent);
-    border-color: var(--ss-accent);
-    color: #3a5a00;
-    box-shadow: 0 4px 14px rgba(194,249,113,.4);
-}
-
-.cs-slider-dot:hover:not(.active) {
-    border-color: rgba(0,0,0,.25);
-    color: rgba(0,0,0,.55);
-}
-
-/* Viewport — clips inactive steps */
-.cs-steps-viewport {
-    position: relative;
-}
-
-/* Keep original cs-step styles exactly */
-.ss-wrap .cs-steps-viewport .cs-step {
+.ss-wrap .cs-step {
     display: grid;
     grid-template-columns: 88px 1px 56px 1fr auto;
     align-items: center;
     gap: 36px;
     padding: 40px 0;
     border-top: 1px solid var(--ss-border);
-    border-bottom: 1px solid var(--ss-border);
     position: relative;
     cursor: default;
-    transition: background .3s var(--ss-ease), opacity .3s var(--ss-ease), transform .3s var(--ss-ease);
-    /* hidden by default */
-    display: none;
+    transition: background .3s var(--ss-ease);
 }
 
-.ss-wrap .cs-steps-viewport .cs-step.active {
-    display: grid;
-}
+.ss-wrap .cs-step:last-child { border-bottom: 1px solid var(--ss-border); }
 
 /* Accent line slides in on hover */
-.ss-wrap .cs-steps-viewport .cs-step::after {
+.ss-wrap .cs-step::after {
     content: ''; position: absolute; top: -1px; left: 0;
     height: 2px; width: 0;
     background: var(--ss-accent);
     transition: width .45s var(--ss-ease);
 }
-.ss-wrap .cs-steps-viewport .cs-step:hover::after  { width: 100%; }
-.ss-wrap .cs-steps-viewport .cs-step:hover         { background: rgba(194,249,113,.04); }
+.ss-wrap .cs-step:hover::after  { width: 100%; }
+.ss-wrap .cs-step:hover         { background: rgba(194,249,113,.04); }
 
 /* Number */
 .ss-wrap .cs-step-n {
@@ -491,7 +461,7 @@ html, body { overflow: auto !important; height: auto !important; }
     line-height: 1; color: rgba(0,0,0,.07);
     transition: color .3s var(--ss-ease); user-select: none;
 }
-.ss-wrap .cs-steps-viewport .cs-step:hover .cs-step-n { color: var(--ss-accent); }
+.ss-wrap .cs-step:hover .cs-step-n { color: var(--ss-accent); }
 
 /* Connector line + dot */
 .ss-wrap .cs-step-connector {
@@ -505,7 +475,7 @@ html, body { overflow: auto !important; height: auto !important; }
     background: #fff; border: 2px solid rgba(0,0,0,.15);
     transition: border-color .3s, background .3s;
 }
-.ss-wrap .cs-steps-viewport .cs-step:hover .cs-step-connector::before {
+.ss-wrap .cs-step:hover .cs-step-connector::before {
     background: var(--ss-accent); border-color: var(--ss-accent);
 }
 
@@ -517,7 +487,7 @@ html, body { overflow: auto !important; height: auto !important; }
     flex-shrink: 0;
     transition: background .3s, border-color .3s, box-shadow .3s;
 }
-.ss-wrap .cs-steps-viewport .cs-step:hover .cs-step-icon {
+.ss-wrap .cs-step:hover .cs-step-icon {
     background: var(--ss-accent); border-color: var(--ss-accent);
     box-shadow: 0 8px 24px rgba(194,249,113,.4);
 }
@@ -525,7 +495,7 @@ html, body { overflow: auto !important; height: auto !important; }
     width: 22px; height: 22px; stroke: rgba(0,0,0,.4);
     fill: none; stroke-width: 1.8; transition: stroke .3s;
 }
-.ss-wrap .cs-steps-viewport .cs-step:hover .cs-step-icon svg { stroke: #5a7a00; }
+.ss-wrap .cs-step:hover .cs-step-icon svg { stroke: #5a7a00; }
 
 /* Body */
 .ss-wrap .cs-step-body  { min-width: 0; }
@@ -547,52 +517,19 @@ html, body { overflow: auto !important; height: auto !important; }
     transition: border-color .3s, color .3s, background .3s;
     white-space: nowrap;
 }
-.ss-wrap .cs-steps-viewport .cs-step:hover .cs-step-dur {
+.ss-wrap .cs-step:hover .cs-step-dur {
     border-color: var(--ss-accent); color: #5a7a00;
     background: rgba(194,249,113,.1);
 }
 
-/* Prev / Next controls */
-.cs-slider-controls {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 24px;
-}
-
-.cs-slider-btn {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    border: 1.5px solid var(--ss-border);
-    background: #fff;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: border-color .2s, background .2s, box-shadow .2s;
-}
-
-.cs-slider-btn svg { width: 18px; height: 18px; stroke: #121212; fill: none; stroke-width: 2; }
-
-.cs-slider-btn:hover {
-    border-color: var(--ss-accent);
-    background: var(--ss-accent);
-    box-shadow: 0 4px 14px rgba(194,249,113,.4);
-}
-
-.cs-slider-btn:disabled { opacity: .3; cursor: default; pointer-events: none; }
-
-.cs-slider-counter {
-    font-size: 13px; font-weight: 700; letter-spacing: .04em;
-    color: rgba(0,0,0,.35);
-}
-
 /* Responsive */
 @media (max-width: 1199px) {
-    .ss-wrap .cs-steps-viewport .cs-step { grid-template-columns: 60px 1px 48px 1fr auto; gap: 20px; }
+    .ss-wrap .cs-step { grid-template-columns: 60px 1px 48px 1fr auto; gap: 20px; }
     .ss-wrap .cs-step-n { font-size: 56px; }
 }
 
 @media (max-width: 767px) {
-    .ss-wrap .cs-steps-viewport .cs-step { grid-template-columns: 36px 1px 36px 1fr; gap: 10px; padding: 22px 0; }
+    .ss-wrap .cs-step { grid-template-columns: 36px 1px 36px 1fr; gap: 10px; padding: 22px 0; }
     .ss-wrap .cs-step-n { font-size: 34px; }
     .ss-wrap .cs-step-icon { width: 36px; height: 36px; border-radius: 10px; }
     .ss-wrap .cs-step-icon svg { width: 16px; height: 16px; }

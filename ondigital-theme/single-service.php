@@ -192,22 +192,7 @@ body { overflow: auto !important; height: auto !important; }
                 <span class="ss-eyebrow"><?php echo esc_html( $process_eyebrow ); ?></span>
                 <h2 class="ss-process-heading"><?php echo esc_html( $process_heading ); ?></h2>
             </div>
-            <!-- Dot nav -->
-            <div class="cs-slider-nav">
-                <?php foreach ( $steps as $i => $step ) :
-                    $num = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
-                    $title = $step[ 'title_' . $lang ] ?? $step['title_az'] ?? '';
-                ?>
-                <button class="cs-slider-dot<?php echo $i === 0 ? ' active' : ''; ?>"
-                        data-step="<?php echo $i; ?>"
-                        aria-label="<?php echo esc_attr( $title ); ?>">
-                    <?php echo esc_html( $num ); ?>
-                </button>
-                <?php endforeach; ?>
-            </div>
-
-            <!-- Steps viewport — shows one at a time -->
-            <div class="cs-steps-viewport">
+            <div class="cs-steps">
                 <?php foreach ( $steps as $i => $step ) :
                     $num   = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
                     $icon  = $icons[ $i % count( $icons ) ];
@@ -215,66 +200,25 @@ body { overflow: auto !important; height: auto !important; }
                     $desc  = $step[ 'desc_' . $lang ]  ?? $step['desc_az']  ?? '';
                     $dur   = $step['duration'] ?? '';
                 ?>
-                <div class="cs-step<?php echo $i === 0 ? ' active' : ''; ?>" data-step="<?php echo $i; ?>">
-                    <div class="cs-step-n"><?php echo esc_html( $num ); ?></div>
-                    <div class="cs-step-connector"></div>
-                    <div class="cs-step-icon"><?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
-                    <div class="cs-step-body">
-                        <div class="cs-step-title"><?php echo esc_html( $title ); ?></div>
-                        <?php if ( $desc ) : ?>
-                            <div class="cs-step-desc"><?php echo esc_html( $desc ); ?></div>
+                    <div class="cs-step">
+                        <div class="cs-step-n"><?php echo esc_html( $num ); ?></div>
+                        <div class="cs-step-connector"></div>
+                        <div class="cs-step-icon"><?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+                        <div class="cs-step-body">
+                            <div class="cs-step-title"><?php echo esc_html( $title ); ?></div>
+                            <?php if ( $desc ) : ?>
+                                <div class="cs-step-desc"><?php echo esc_html( $desc ); ?></div>
+                            <?php endif; ?>
+                        </div>
+                        <?php if ( $dur ) : ?>
+                            <div class="cs-step-dur"><?php echo esc_html( $dur ); ?></div>
                         <?php endif; ?>
                     </div>
-                    <?php if ( $dur ) : ?>
-                        <div class="cs-step-dur"><?php echo esc_html( $dur ); ?></div>
-                    <?php endif; ?>
-                </div>
                 <?php endforeach; ?>
-            </div>
-
-            <!-- Prev / Next -->
-            <?php $total = count( $steps ); ?>
-            <div class="cs-slider-controls">
-                <button class="cs-slider-btn cs-slider-prev" aria-label="<?php esc_attr_e( 'Previous step', 'ondigital' ); ?>" disabled>
-                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-                </button>
-                <span class="cs-slider-counter">1 / <?php echo $total; ?></span>
-                <button class="cs-slider-btn cs-slider-next" aria-label="<?php esc_attr_e( 'Next step', 'ondigital' ); ?>"<?php echo $total <= 1 ? ' disabled' : ''; ?>>
-                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                </button>
             </div>
 
         </div>
     </section>
-    <script>
-    (function(){
-        var dots    = document.querySelectorAll('.cs-slider-dot');
-        var steps   = document.querySelectorAll('.cs-steps-viewport .cs-step');
-        var counter = document.querySelector('.cs-slider-counter');
-        var prevBtn = document.querySelector('.cs-slider-prev');
-        var nextBtn = document.querySelector('.cs-slider-next');
-        var total   = steps.length;
-        var current = 0;
-
-        function go(n) {
-            if (n === current || n < 0 || n >= total) return;
-            steps[current].classList.remove('active');
-            dots[current].classList.remove('active');
-            current = n;
-            steps[current].classList.add('active');
-            dots[current].classList.add('active');
-            counter.textContent = (current + 1) + ' / ' + total;
-            prevBtn.disabled = current === 0;
-            nextBtn.disabled = current === total - 1;
-        }
-
-        dots.forEach(function(dot) {
-            dot.addEventListener('click', function() { go(+this.dataset.step); });
-        });
-        prevBtn.addEventListener('click', function() { go(current - 1); });
-        nextBtn.addEventListener('click', function() { go(current + 1); });
-    })();
-    </script>
 
     <!-- ── 5. What's Included + Monthly Roadmap ── -->
     <section class="wi-section">
