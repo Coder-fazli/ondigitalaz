@@ -170,12 +170,25 @@
                 '</div></div>';
         },
         testimonial: function (i) {
-            return '<div class="od-repeater-row">' +
-                '<div class="od-repeater-row-head"><span>Testimonial ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
-                '<div class="od-field"><label>Quote</label><textarea name="ondigital_testimonials[' + i + '][quote]" rows="3"></textarea></div>' +
-                '<div class="od-field-row">' +
+            return '<div class="od-repeater-row od-sc-row">' +
+                '<div class="od-repeater-row-head od-sc-toggle" style="cursor:pointer;user-select:none;">' +
+                '<span>Testimonial ' + (i + 1) + '</span>' +
+                '<div class="od-row-actions"><span class="od-sc-arrow" style="margin-right:8px;font-size:11px;opacity:.5;">▼</span><button type="button" class="od-remove-row">&times;</button></div>' +
+                '</div>' +
+                '<div class="od-sc-body" style="display:none;">' +
+                '<div class="od-lang-wrap"><div class="od-lang-tabs">' +
+                '<span class="od-lang-tab active" data-lang="az">🇦🇿 AZ</span>' +
+                '<span class="od-lang-tab" data-lang="en">🇬🇧 EN</span>' +
+                '</div>' +
+                '<div class="od-lang-pane active" data-lang="az">' +
+                '<div class="od-field"><label>Quote (AZ)</label><textarea name="ondigital_testimonials[' + i + '][quote_az]" rows="3"></textarea></div>' +
+                '<div class="od-field"><label>Role (AZ)</label><input type="text" name="ondigital_testimonials[' + i + '][role_az]" value=""></div>' +
+                '</div>' +
+                '<div class="od-lang-pane" data-lang="en">' +
+                '<div class="od-field"><label>Quote (EN)</label><textarea name="ondigital_testimonials[' + i + '][quote_en]" rows="3"></textarea></div>' +
+                '<div class="od-field"><label>Role (EN)</label><input type="text" name="ondigital_testimonials[' + i + '][role_en]" value=""></div>' +
+                '</div></div>' +
                 '<div class="od-field"><label>Name</label><input type="text" name="ondigital_testimonials[' + i + '][name]" value=""></div>' +
-                '<div class="od-field"><label>Role</label><input type="text" name="ondigital_testimonials[' + i + '][role]" value=""></div>' +
                 '</div></div>';
         },
         text_slider: function (i) {
