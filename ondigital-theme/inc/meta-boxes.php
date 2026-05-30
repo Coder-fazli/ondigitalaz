@@ -383,33 +383,56 @@ function ondigital_service_process_callback( $post ) {
         ?>
     </table>
 
+    <style>
+    .od-step-toggle { border:1px solid #ddd; border-radius:4px; margin-bottom:8px; background:#fff; overflow:hidden; }
+    .od-step-toggle-head { display:flex; align-items:center; gap:8px; padding:10px 12px; cursor:pointer; background:#f9f9f9; user-select:none; }
+    .od-step-toggle-head:hover { background:#f0f0f0; }
+    .od-step-toggle-num { font-size:11px; font-weight:700; background:#2271b1; color:#fff; border-radius:3px; padding:2px 7px; flex-shrink:0; }
+    .od-step-toggle-title { font-size:13px; font-weight:600; color:#1d2327; flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .od-step-toggle-title em { font-weight:400; color:#999; font-style:normal; }
+    .od-step-chevron { margin-left:auto; font-size:12px; color:#666; transition:transform .2s; flex-shrink:0; }
+    .od-step-toggle.open .od-step-chevron { transform:rotate(180deg); }
+    .od-step-toggle-body { display:none; padding:12px; border-top:1px solid #eee; }
+    .od-step-toggle.open .od-step-toggle-body { display:block; }
+    .od-remove-step { background:none; border:none; color:#a00; cursor:pointer; font-size:18px; line-height:1; padding:0 4px; flex-shrink:0; }
+    .od-remove-step:hover { color:#dc3232; }
+    </style>
+
     <div id="service-steps-repeater" style="margin-top:12px;">
-        <?php foreach ( $steps as $i => $step ) : ?>
-        <div class="od-step-row" style="background:#f9f9f9;border:1px solid #ddd;padding:15px;margin-bottom:10px;position:relative;border-radius:4px;">
-            <strong style="display:block;margin-bottom:10px;font-size:13px;"><?php esc_html_e( 'Step', 'ondigital' ); ?> <span class="step-num"><?php echo $i + 1; ?></span></strong>
-            <button type="button" class="od-remove-step" style="position:absolute;top:10px;right:10px;color:#a00;cursor:pointer;background:none;border:none;font-size:20px;line-height:1;" title="<?php esc_attr_e( 'Remove', 'ondigital' ); ?>">×</button>
-            <table class="form-table" style="margin:0;">
-                <tr>
-                    <th style="width:180px;padding:6px 10px;"><?php esc_html_e( 'Title (AZ)', 'ondigital' ); ?></th>
-                    <td style="padding:6px 10px;"><input type="text" name="_service_steps[<?php echo $i; ?>][title_az]" value="<?php echo esc_attr( $step['title_az'] ?? '' ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Kəşfiyyat', 'ondigital' ); ?>"></td>
-                </tr>
-                <tr>
-                    <th style="padding:6px 10px;"><?php esc_html_e( 'Title (EN)', 'ondigital' ); ?></th>
-                    <td style="padding:6px 10px;"><input type="text" name="_service_steps[<?php echo $i; ?>][title_en]" value="<?php echo esc_attr( $step['title_en'] ?? '' ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Discovery', 'ondigital' ); ?>"></td>
-                </tr>
-                <tr>
-                    <th style="padding:6px 10px;"><?php esc_html_e( 'Description (AZ)', 'ondigital' ); ?></th>
-                    <td style="padding:6px 10px;"><textarea name="_service_steps[<?php echo $i; ?>][desc_az]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in Azerbaijani', 'ondigital' ); ?>"><?php echo esc_textarea( $step['desc_az'] ?? '' ); ?></textarea></td>
-                </tr>
-                <tr>
-                    <th style="padding:6px 10px;"><?php esc_html_e( 'Description (EN)', 'ondigital' ); ?></th>
-                    <td style="padding:6px 10px;"><textarea name="_service_steps[<?php echo $i; ?>][desc_en]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in English', 'ondigital' ); ?>"><?php echo esc_textarea( $step['desc_en'] ?? '' ); ?></textarea></td>
-                </tr>
-                <tr>
-                    <th style="padding:6px 10px;"><?php esc_html_e( 'Duration', 'ondigital' ); ?></th>
-                    <td style="padding:6px 10px;"><input type="text" name="_service_steps[<?php echo $i; ?>][duration]" value="<?php echo esc_attr( $step['duration'] ?? '' ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Week 1–2', 'ondigital' ); ?>"></td>
-                </tr>
-            </table>
+        <?php foreach ( $steps as $i => $step ) :
+            $preview = ! empty( $step['title_az'] ) ? esc_html( $step['title_az'] ) : '<em>' . esc_html__( 'untitled', 'ondigital' ) . '</em>';
+        ?>
+        <div class="od-step-toggle<?php echo $i === 0 ? ' open' : ''; ?>">
+            <div class="od-step-toggle-head">
+                <span class="od-step-toggle-num"><?php esc_html_e( 'Step', 'ondigital' ); ?> <span class="step-num"><?php echo $i + 1; ?></span></span>
+                <span class="od-step-toggle-title"><?php echo $preview; ?></span>
+                <span class="od-step-chevron">&#9660;</span>
+                <button type="button" class="od-remove-step" title="<?php esc_attr_e( 'Remove', 'ondigital' ); ?>">×</button>
+            </div>
+            <div class="od-step-toggle-body">
+                <table class="form-table" style="margin:0;">
+                    <tr>
+                        <th style="width:180px;padding:6px 10px;"><?php esc_html_e( 'Title (AZ)', 'ondigital' ); ?></th>
+                        <td style="padding:6px 10px;"><input type="text" name="_service_steps[<?php echo $i; ?>][title_az]" value="<?php echo esc_attr( $step['title_az'] ?? '' ); ?>" class="regular-text od-step-title-az" placeholder="<?php esc_attr_e( 'e.g. Kəşfiyyat', 'ondigital' ); ?>"></td>
+                    </tr>
+                    <tr>
+                        <th style="padding:6px 10px;"><?php esc_html_e( 'Title (EN)', 'ondigital' ); ?></th>
+                        <td style="padding:6px 10px;"><input type="text" name="_service_steps[<?php echo $i; ?>][title_en]" value="<?php echo esc_attr( $step['title_en'] ?? '' ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Discovery', 'ondigital' ); ?>"></td>
+                    </tr>
+                    <tr>
+                        <th style="padding:6px 10px;"><?php esc_html_e( 'Description (AZ)', 'ondigital' ); ?></th>
+                        <td style="padding:6px 10px;"><textarea name="_service_steps[<?php echo $i; ?>][desc_az]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in Azerbaijani', 'ondigital' ); ?>"><?php echo esc_textarea( $step['desc_az'] ?? '' ); ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <th style="padding:6px 10px;"><?php esc_html_e( 'Description (EN)', 'ondigital' ); ?></th>
+                        <td style="padding:6px 10px;"><textarea name="_service_steps[<?php echo $i; ?>][desc_en]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in English', 'ondigital' ); ?>"><?php echo esc_textarea( $step['desc_en'] ?? '' ); ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <th style="padding:6px 10px;"><?php esc_html_e( 'Duration', 'ondigital' ); ?></th>
+                        <td style="padding:6px 10px;"><input type="text" name="_service_steps[<?php echo $i; ?>][duration]" value="<?php echo esc_attr( $step['duration'] ?? '' ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Week 1–2', 'ondigital' ); ?>"></td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <?php endforeach; ?>
     </div>
@@ -420,7 +443,7 @@ function ondigital_service_process_callback( $post ) {
         var addBtn    = document.getElementById('add-service-step');
 
         function reindex() {
-            container.querySelectorAll('.od-step-row').forEach(function(row, i) {
+            container.querySelectorAll('.od-step-toggle').forEach(function(row, i) {
                 row.querySelector('.step-num').textContent = i + 1;
                 row.querySelectorAll('[name]').forEach(function(el) {
                     el.name = el.name.replace(/_service_steps\[\d+\]/, '_service_steps[' + i + ']');
@@ -428,31 +451,55 @@ function ondigital_service_process_callback( $post ) {
             });
         }
 
+        function updatePreview(row) {
+            var titleInput = row.querySelector('.od-step-title-az');
+            var titleEl    = row.querySelector('.od-step-toggle-title');
+            if (!titleInput || !titleEl) return;
+            titleEl.innerHTML = titleInput.value.trim() || '<em><?php esc_html_e( 'untitled', 'ondigital' ); ?></em>';
+        }
+
+        container.addEventListener('input', function(e) {
+            if (e.target.classList.contains('od-step-title-az')) {
+                updatePreview(e.target.closest('.od-step-toggle'));
+            }
+        });
+
         container.addEventListener('click', function(e) {
-            var btn = e.target.closest('.od-remove-step');
-            if (!btn) return;
-            if (container.querySelectorAll('.od-step-row').length > 1) {
-                btn.closest('.od-step-row').remove();
-                reindex();
+            if (e.target.closest('.od-remove-step')) {
+                if (container.querySelectorAll('.od-step-toggle').length > 1) {
+                    e.target.closest('.od-step-toggle').remove();
+                    reindex();
+                }
+                return;
+            }
+            var head = e.target.closest('.od-step-toggle-head');
+            if (head) {
+                head.closest('.od-step-toggle').classList.toggle('open');
             }
         });
 
         addBtn.addEventListener('click', function() {
-            var idx = container.querySelectorAll('.od-step-row').length;
+            var idx = container.querySelectorAll('.od-step-toggle').length;
             var row = document.createElement('div');
-            row.className = 'od-step-row';
-            row.style.cssText = 'background:#f9f9f9;border:1px solid #ddd;padding:15px;margin-bottom:10px;position:relative;border-radius:4px;';
+            row.className = 'od-step-toggle open';
             row.innerHTML =
-                '<strong style="display:block;margin-bottom:10px;font-size:13px;"><?php esc_html_e( 'Step', 'ondigital' ); ?> <span class="step-num">' + (idx + 1) + '</span></strong>' +
-                '<button type="button" class="od-remove-step" style="position:absolute;top:10px;right:10px;color:#a00;cursor:pointer;background:none;border:none;font-size:20px;line-height:1;" title="<?php esc_attr_e( 'Remove', 'ondigital' ); ?>">×</button>' +
-                '<table class="form-table" style="margin:0;">' +
-                    '<tr><th style="width:180px;padding:6px 10px;"><?php esc_html_e( 'Title (AZ)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><input type="text" name="_service_steps[' + idx + '][title_az]" value="" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Kəşfiyyat', 'ondigital' ); ?>"></td></tr>' +
-                    '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Title (EN)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><input type="text" name="_service_steps[' + idx + '][title_en]" value="" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Discovery', 'ondigital' ); ?>"></td></tr>' +
-                    '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Description (AZ)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><textarea name="_service_steps[' + idx + '][desc_az]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in Azerbaijani', 'ondigital' ); ?>"></textarea></td></tr>' +
-                    '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Description (EN)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><textarea name="_service_steps[' + idx + '][desc_en]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in English', 'ondigital' ); ?>"></textarea></td></tr>' +
-                    '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Duration', 'ondigital' ); ?></th><td style="padding:6px 10px;"><input type="text" name="_service_steps[' + idx + '][duration]" value="" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Week 1–2', 'ondigital' ); ?>"></td></tr>' +
-                '</table>';
+                '<div class="od-step-toggle-head">' +
+                    '<span class="od-step-toggle-num"><?php esc_html_e( 'Step', 'ondigital' ); ?> <span class="step-num">' + (idx + 1) + '</span></span>' +
+                    '<span class="od-step-toggle-title"><em><?php esc_html_e( 'untitled', 'ondigital' ); ?></em></span>' +
+                    '<span class="od-step-chevron">&#9660;</span>' +
+                    '<button type="button" class="od-remove-step" title="<?php esc_attr_e( 'Remove', 'ondigital' ); ?>">×</button>' +
+                '</div>' +
+                '<div class="od-step-toggle-body">' +
+                    '<table class="form-table" style="margin:0;">' +
+                        '<tr><th style="width:180px;padding:6px 10px;"><?php esc_html_e( 'Title (AZ)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><input type="text" name="_service_steps[' + idx + '][title_az]" value="" class="regular-text od-step-title-az" placeholder="<?php esc_attr_e( 'e.g. Kəşfiyyat', 'ondigital' ); ?>"></td></tr>' +
+                        '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Title (EN)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><input type="text" name="_service_steps[' + idx + '][title_en]" value="" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Discovery', 'ondigital' ); ?>"></td></tr>' +
+                        '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Description (AZ)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><textarea name="_service_steps[' + idx + '][desc_az]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in Azerbaijani', 'ondigital' ); ?>"></textarea></td></tr>' +
+                        '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Description (EN)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><textarea name="_service_steps[' + idx + '][desc_en]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in English', 'ondigital' ); ?>"></textarea></td></tr>' +
+                        '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Duration', 'ondigital' ); ?></th><td style="padding:6px 10px;"><input type="text" name="_service_steps[' + idx + '][duration]" value="" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Week 1–2', 'ondigital' ); ?>"></td></tr>' +
+                    '</table>' +
+                '</div>';
             container.appendChild(row);
+            row.querySelector('.od-step-title-az').focus();
         });
     })();
     </script>
@@ -868,32 +915,40 @@ function ondigital_project_process_callback( $post ) {
     </table>
 
     <div id="od-steps-repeater" style="margin-top:12px;">
-        <?php foreach ( $steps as $i => $step ) : ?>
-        <div class="od-step-row" style="background:#f9f9f9;border:1px solid #ddd;padding:15px;margin-bottom:10px;position:relative;border-radius:4px;">
-            <strong style="display:block;margin-bottom:10px;font-size:13px;"><?php esc_html_e( 'Step', 'ondigital' ); ?> <span class="step-num"><?php echo $i + 1; ?></span></strong>
-            <button type="button" class="od-remove-step" style="position:absolute;top:10px;right:10px;color:#a00;cursor:pointer;background:none;border:none;font-size:20px;line-height:1;" title="<?php esc_attr_e( 'Remove', 'ondigital' ); ?>">×</button>
-            <table class="form-table" style="margin:0;">
-                <tr>
-                    <th style="width:180px;padding:6px 10px;"><?php esc_html_e( 'Title (AZ)', 'ondigital' ); ?></th>
-                    <td style="padding:6px 10px;"><input type="text" name="_od_steps[<?php echo $i; ?>][title_az]" value="<?php echo esc_attr( $step['title_az'] ?? '' ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Kəşfiyyat', 'ondigital' ); ?>"></td>
-                </tr>
-                <tr>
-                    <th style="padding:6px 10px;"><?php esc_html_e( 'Title (EN)', 'ondigital' ); ?></th>
-                    <td style="padding:6px 10px;"><input type="text" name="_od_steps[<?php echo $i; ?>][title_en]" value="<?php echo esc_attr( $step['title_en'] ?? '' ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Discovery', 'ondigital' ); ?>"></td>
-                </tr>
-                <tr>
-                    <th style="padding:6px 10px;"><?php esc_html_e( 'Description (AZ)', 'ondigital' ); ?></th>
-                    <td style="padding:6px 10px;"><textarea name="_od_steps[<?php echo $i; ?>][desc_az]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in Azerbaijani', 'ondigital' ); ?>"><?php echo esc_textarea( $step['desc_az'] ?? '' ); ?></textarea></td>
-                </tr>
-                <tr>
-                    <th style="padding:6px 10px;"><?php esc_html_e( 'Description (EN)', 'ondigital' ); ?></th>
-                    <td style="padding:6px 10px;"><textarea name="_od_steps[<?php echo $i; ?>][desc_en]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in English', 'ondigital' ); ?>"><?php echo esc_textarea( $step['desc_en'] ?? '' ); ?></textarea></td>
-                </tr>
-                <tr>
-                    <th style="padding:6px 10px;"><?php esc_html_e( 'Duration', 'ondigital' ); ?></th>
-                    <td style="padding:6px 10px;"><input type="text" name="_od_steps[<?php echo $i; ?>][duration]" value="<?php echo esc_attr( $step['duration'] ?? '' ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Week 1–2', 'ondigital' ); ?>"></td>
-                </tr>
-            </table>
+        <?php foreach ( $steps as $i => $step ) :
+            $preview = ! empty( $step['title_az'] ) ? esc_html( $step['title_az'] ) : '<em>' . esc_html__( 'untitled', 'ondigital' ) . '</em>';
+        ?>
+        <div class="od-step-toggle<?php echo $i === 0 ? ' open' : ''; ?>">
+            <div class="od-step-toggle-head">
+                <span class="od-step-toggle-num"><?php esc_html_e( 'Step', 'ondigital' ); ?> <span class="step-num"><?php echo $i + 1; ?></span></span>
+                <span class="od-step-toggle-title"><?php echo $preview; ?></span>
+                <span class="od-step-chevron">&#9660;</span>
+                <button type="button" class="od-remove-step" title="<?php esc_attr_e( 'Remove', 'ondigital' ); ?>">×</button>
+            </div>
+            <div class="od-step-toggle-body">
+                <table class="form-table" style="margin:0;">
+                    <tr>
+                        <th style="width:180px;padding:6px 10px;"><?php esc_html_e( 'Title (AZ)', 'ondigital' ); ?></th>
+                        <td style="padding:6px 10px;"><input type="text" name="_od_steps[<?php echo $i; ?>][title_az]" value="<?php echo esc_attr( $step['title_az'] ?? '' ); ?>" class="regular-text od-step-title-az" placeholder="<?php esc_attr_e( 'e.g. Kəşfiyyat', 'ondigital' ); ?>"></td>
+                    </tr>
+                    <tr>
+                        <th style="padding:6px 10px;"><?php esc_html_e( 'Title (EN)', 'ondigital' ); ?></th>
+                        <td style="padding:6px 10px;"><input type="text" name="_od_steps[<?php echo $i; ?>][title_en]" value="<?php echo esc_attr( $step['title_en'] ?? '' ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Discovery', 'ondigital' ); ?>"></td>
+                    </tr>
+                    <tr>
+                        <th style="padding:6px 10px;"><?php esc_html_e( 'Description (AZ)', 'ondigital' ); ?></th>
+                        <td style="padding:6px 10px;"><textarea name="_od_steps[<?php echo $i; ?>][desc_az]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in Azerbaijani', 'ondigital' ); ?>"><?php echo esc_textarea( $step['desc_az'] ?? '' ); ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <th style="padding:6px 10px;"><?php esc_html_e( 'Description (EN)', 'ondigital' ); ?></th>
+                        <td style="padding:6px 10px;"><textarea name="_od_steps[<?php echo $i; ?>][desc_en]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in English', 'ondigital' ); ?>"><?php echo esc_textarea( $step['desc_en'] ?? '' ); ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <th style="padding:6px 10px;"><?php esc_html_e( 'Duration', 'ondigital' ); ?></th>
+                        <td style="padding:6px 10px;"><input type="text" name="_od_steps[<?php echo $i; ?>][duration]" value="<?php echo esc_attr( $step['duration'] ?? '' ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Week 1–2', 'ondigital' ); ?>"></td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <?php endforeach; ?>
     </div>
@@ -904,7 +959,7 @@ function ondigital_project_process_callback( $post ) {
         var addBtn    = document.getElementById('add-od-step');
 
         function reindex() {
-            container.querySelectorAll('.od-step-row').forEach(function(row, i) {
+            container.querySelectorAll('.od-step-toggle').forEach(function(row, i) {
                 row.querySelector('.step-num').textContent = i + 1;
                 row.querySelectorAll('[name]').forEach(function(el) {
                     el.name = el.name.replace(/_od_steps\[\d+\]/, '_od_steps[' + i + ']');
@@ -912,31 +967,55 @@ function ondigital_project_process_callback( $post ) {
             });
         }
 
+        function updatePreview(row) {
+            var titleInput = row.querySelector('.od-step-title-az');
+            var titleEl    = row.querySelector('.od-step-toggle-title');
+            if (!titleInput || !titleEl) return;
+            titleEl.innerHTML = titleInput.value.trim() || '<em><?php esc_html_e( 'untitled', 'ondigital' ); ?></em>';
+        }
+
+        container.addEventListener('input', function(e) {
+            if (e.target.classList.contains('od-step-title-az')) {
+                updatePreview(e.target.closest('.od-step-toggle'));
+            }
+        });
+
         container.addEventListener('click', function(e) {
-            var btn = e.target.closest('.od-remove-step');
-            if (!btn) return;
-            if (container.querySelectorAll('.od-step-row').length > 1) {
-                btn.closest('.od-step-row').remove();
-                reindex();
+            if (e.target.closest('.od-remove-step')) {
+                if (container.querySelectorAll('.od-step-toggle').length > 1) {
+                    e.target.closest('.od-step-toggle').remove();
+                    reindex();
+                }
+                return;
+            }
+            var head = e.target.closest('.od-step-toggle-head');
+            if (head) {
+                head.closest('.od-step-toggle').classList.toggle('open');
             }
         });
 
         addBtn.addEventListener('click', function() {
-            var idx = container.querySelectorAll('.od-step-row').length;
+            var idx = container.querySelectorAll('.od-step-toggle').length;
             var row = document.createElement('div');
-            row.className = 'od-step-row';
-            row.style.cssText = 'background:#f9f9f9;border:1px solid #ddd;padding:15px;margin-bottom:10px;position:relative;border-radius:4px;';
+            row.className = 'od-step-toggle open';
             row.innerHTML =
-                '<strong style="display:block;margin-bottom:10px;font-size:13px;"><?php esc_html_e( 'Step', 'ondigital' ); ?> <span class="step-num">' + (idx + 1) + '</span></strong>' +
-                '<button type="button" class="od-remove-step" style="position:absolute;top:10px;right:10px;color:#a00;cursor:pointer;background:none;border:none;font-size:20px;line-height:1;" title="<?php esc_attr_e( 'Remove', 'ondigital' ); ?>">×</button>' +
-                '<table class="form-table" style="margin:0;">' +
-                    '<tr><th style="width:180px;padding:6px 10px;"><?php esc_html_e( 'Title (AZ)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><input type="text" name="_od_steps[' + idx + '][title_az]" value="" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Kəşfiyyat', 'ondigital' ); ?>"></td></tr>' +
-                    '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Title (EN)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><input type="text" name="_od_steps[' + idx + '][title_en]" value="" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Discovery', 'ondigital' ); ?>"></td></tr>' +
-                    '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Description (AZ)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><textarea name="_od_steps[' + idx + '][desc_az]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in Azerbaijani', 'ondigital' ); ?>"></textarea></td></tr>' +
-                    '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Description (EN)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><textarea name="_od_steps[' + idx + '][desc_en]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in English', 'ondigital' ); ?>"></textarea></td></tr>' +
-                    '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Duration', 'ondigital' ); ?></th><td style="padding:6px 10px;"><input type="text" name="_od_steps[' + idx + '][duration]" value="" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Week 1–2', 'ondigital' ); ?>"></td></tr>' +
-                '</table>';
+                '<div class="od-step-toggle-head">' +
+                    '<span class="od-step-toggle-num"><?php esc_html_e( 'Step', 'ondigital' ); ?> <span class="step-num">' + (idx + 1) + '</span></span>' +
+                    '<span class="od-step-toggle-title"><em><?php esc_html_e( 'untitled', 'ondigital' ); ?></em></span>' +
+                    '<span class="od-step-chevron">&#9660;</span>' +
+                    '<button type="button" class="od-remove-step" title="<?php esc_attr_e( 'Remove', 'ondigital' ); ?>">×</button>' +
+                '</div>' +
+                '<div class="od-step-toggle-body">' +
+                    '<table class="form-table" style="margin:0;">' +
+                        '<tr><th style="width:180px;padding:6px 10px;"><?php esc_html_e( 'Title (AZ)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><input type="text" name="_od_steps[' + idx + '][title_az]" value="" class="regular-text od-step-title-az" placeholder="<?php esc_attr_e( 'e.g. Kəşfiyyat', 'ondigital' ); ?>"></td></tr>' +
+                        '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Title (EN)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><input type="text" name="_od_steps[' + idx + '][title_en]" value="" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Discovery', 'ondigital' ); ?>"></td></tr>' +
+                        '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Description (AZ)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><textarea name="_od_steps[' + idx + '][desc_az]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in Azerbaijani', 'ondigital' ); ?>"></textarea></td></tr>' +
+                        '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Description (EN)', 'ondigital' ); ?></th><td style="padding:6px 10px;"><textarea name="_od_steps[' + idx + '][desc_en]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Description in English', 'ondigital' ); ?>"></textarea></td></tr>' +
+                        '<tr><th style="padding:6px 10px;"><?php esc_html_e( 'Duration', 'ondigital' ); ?></th><td style="padding:6px 10px;"><input type="text" name="_od_steps[' + idx + '][duration]" value="" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Week 1–2', 'ondigital' ); ?>"></td></tr>' +
+                    '</table>' +
+                '</div>';
             container.appendChild(row);
+            row.querySelector('.od-step-title-az').focus();
         });
     })();
     </script>
