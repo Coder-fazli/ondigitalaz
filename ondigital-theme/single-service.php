@@ -192,32 +192,109 @@ body { overflow: auto !important; height: auto !important; }
                 <span class="ss-eyebrow"><?php echo esc_html( $process_eyebrow ); ?></span>
                 <h2 class="ss-process-heading"><?php echo esc_html( $process_heading ); ?></h2>
             </div>
-            <div class="cs-steps">
-                <?php foreach ( $steps as $i => $step ) :
-                    $num   = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
-                    $icon  = $icons[ $i % count( $icons ) ];
-                    $title = $step[ 'title_' . $lang ] ?? $step['title_az'] ?? '';
-                    $desc  = $step[ 'desc_' . $lang ]  ?? $step['desc_az']  ?? '';
-                    $dur   = $step['duration'] ?? '';
-                ?>
-                    <div class="cs-step">
-                        <div class="cs-step-n"><?php echo esc_html( $num ); ?></div>
-                        <div class="cs-step-connector"></div>
-                        <div class="cs-step-icon"><?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
-                        <div class="cs-step-body">
-                            <div class="cs-step-title"><?php echo esc_html( $title ); ?></div>
-                            <?php if ( $desc ) : ?>
-                                <div class="cs-step-desc"><?php echo esc_html( $desc ); ?></div>
-                            <?php endif; ?>
-                        </div>
-                        <?php if ( $dur ) : ?>
-                            <div class="cs-step-dur"><?php echo esc_html( $dur ); ?></div>
-                        <?php endif; ?>
+            <div class="vs-slider">
+
+                <!-- Nav dots -->
+                <nav class="vs-nav" aria-label="<?php esc_attr_e( 'Steps', 'ondigital' ); ?>">
+                    <div class="vs-track">
+                        <?php foreach ( $steps as $i => $step ) :
+                            $num   = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                            $title = $step[ 'title_' . $lang ] ?? $step['title_az'] ?? '';
+                        ?>
+                        <button class="vs-dot<?php echo $i === 0 ? ' active' : ''; ?>"
+                                data-step="<?php echo $i; ?>"
+                                aria-label="<?php echo esc_attr( $title ); ?>">
+                            <span class="vs-dot-circle"><?php echo esc_html( $num ); ?></span>
+                            <span class="vs-dot-label"><?php echo esc_html( $title ); ?></span>
+                        </button>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
+                </nav>
+
+                <!-- Panels -->
+                <div class="vs-panels">
+                    <?php foreach ( $steps as $i => $step ) :
+                        $icon  = $icons[ $i % count( $icons ) ];
+                        $title = $step[ 'title_' . $lang ] ?? $step['title_az'] ?? '';
+                        $desc  = $step[ 'desc_' . $lang ]  ?? $step['desc_az']  ?? '';
+                        $dur   = $step['duration'] ?? '';
+                        $total = count( $steps );
+                    ?>
+                    <div class="vs-panel<?php echo $i === 0 ? ' active' : ''; ?>" data-step="<?php echo $i; ?>">
+                        <div class="vs-icon"><?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+                        <h3 class="vs-title"><?php echo esc_html( $title ); ?></h3>
+                        <?php if ( $desc ) : ?>
+                            <p class="vs-desc"><?php echo esc_html( $desc ); ?></p>
+                        <?php endif; ?>
+                        <?php if ( $dur ) : ?>
+                            <span class="vs-dur"><?php echo esc_html( $dur ); ?></span>
+                        <?php endif; ?>
+                        <div class="vs-controls">
+                            <button class="vs-btn vs-prev" aria-label="<?php esc_attr_e( 'Previous step', 'ondigital' ); ?>"<?php echo $i === 0 ? ' disabled' : ''; ?>>
+                                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                            </button>
+                            <span class="vs-counter"><?php echo ( $i + 1 ) . ' / ' . $total; ?></span>
+                            <button class="vs-btn vs-next" aria-label="<?php esc_attr_e( 'Next step', 'ondigital' ); ?>"<?php echo $i === $total - 1 ? ' disabled' : ''; ?>>
+                                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+
             </div>
         </div>
     </section>
+    <script>
+    (function(){
+        var dots   = document.querySelectorAll('.vs-dot');
+        var panels = document.querySelectorAll('.vs-panel');
+        var total  = dots.length;
+        var current = 0;
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function go(next) {
+            if (next === current || next < 0 || next >= total) return;
+            var prev = current;
+            current  = next;
+
+            dots[prev].classList.remove('active');
+            dots[current].classList.add('active');
+
+            if (!reduced) {
+                var dir = next > prev ? 1 : -1;
+                panels[prev].style.transform = 'translateY(' + (-14 * dir) + 'px)';
+                panels[prev].style.opacity   = '0';
+                panels[prev].style.transition = 'opacity .2s ease-in, transform .2s ease-in';
+                setTimeout(function() {
+                    panels[prev].classList.remove('active');
+                    panels[prev].style.cssText = '';
+                }, 220);
+            } else {
+                panels[prev].classList.remove('active');
+            }
+
+            panels[current].classList.add('active');
+        }
+
+        dots.forEach(function(dot) {
+            dot.addEventListener('click', function() { go(+this.dataset.step); });
+        });
+
+        document.querySelectorAll('.vs-prev').forEach(function(btn) {
+            btn.addEventListener('click', function() { go(current - 1); });
+        });
+
+        document.querySelectorAll('.vs-next').forEach(function(btn) {
+            btn.addEventListener('click', function() { go(current + 1); });
+        });
+
+        document.querySelector('.vs-slider') && document.querySelector('.vs-slider').addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+            if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  { e.preventDefault(); go(current - 1); }
+        });
+    })();
+    </script>
 
     <!-- ── 5. What's Included + Monthly Roadmap ── -->
     <section class="wi-section">
