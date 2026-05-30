@@ -37,8 +37,8 @@
                     var delay_value = parseFloat(el.getAttribute("data-delay") || 0.1);
                     gsap.from(el, {
                         opacity: 0,
-                        y: 24,
-                        duration: 0.65,
+                        y: 16,
+                        duration: 0.4,
                         delay: delay_value,
                         ease: "power2.out",
                         scrollTrigger: { trigger: el, start: 'top 88%' }
