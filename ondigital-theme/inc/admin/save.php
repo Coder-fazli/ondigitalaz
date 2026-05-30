@@ -134,9 +134,11 @@ function ondigital_sanitize_repeater( string $key, array $raw ): array {
                 break;
             case 'testimonials':
                 $out[] = array(
-                    'quote' => sanitize_textarea_field( $item['quote'] ?? '' ),
-                    'name'  => sanitize_text_field( $item['name'] ?? '' ),
-                    'role'  => sanitize_text_field( $item['role'] ?? '' ),
+                    'quote_az' => sanitize_textarea_field( $item['quote_az'] ?? $item['quote'] ?? '' ),
+                    'quote_en' => sanitize_textarea_field( $item['quote_en'] ?? $item['quote'] ?? '' ),
+                    'name'     => sanitize_text_field( $item['name'] ?? '' ),
+                    'role_az'  => sanitize_text_field( $item['role_az'] ?? $item['role'] ?? '' ),
+                    'role_en'  => sanitize_text_field( $item['role_en'] ?? $item['role'] ?? '' ),
                 );
                 break;
             case 'text_slider':

@@ -5,35 +5,43 @@
  * @package OnDigital
  */
 
-$t_subtitle  = ondigital_get_option( 'testi_subtitle', "Client's Feedback" );
-$t_avatars   = array();
+$lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
+
+$t_subtitle     = ondigital_get_option( 'testi_subtitle_' . $lang,     ondigital_get_option( 'testi_subtitle_az',     "Client's Feedback" ) );
+$t_title        = ondigital_get_option( 'testi_title_' . $lang,        ondigital_get_option( 'testi_title_az',        'What our happy client <span>say</span>' ) );
+$t_body         = ondigital_get_option( 'testi_body_' . $lang,         ondigital_get_option( 'testi_body_az',         'Optimize your impact this holiday season with an AI-driven, multichannel marketing strategy.' ) );
+$t_rating       = ondigital_get_option( 'testi_rating_' . $lang,       ondigital_get_option( 'testi_rating_az',       '4.9' ) );
+$t_review_count = ondigital_get_option( 'testi_review_count_' . $lang, ondigital_get_option( 'testi_review_count_az', '30+ client reviews' ) );
+$t_platform     = ondigital_get_option( 'testi_platform_' . $lang,     ondigital_get_option( 'testi_platform_az',     'Trustpilot' ) );
+
+$t_avatars = array();
 for ( $n = 1; $n <= 5; $n++ ) {
     $url = ondigital_img( 'testi_avatar_' . $n, '' );
     if ( $url ) $t_avatars[] = $url;
 }
-// Fallback: default stacked image if none uploaded
 $t_avatar_fallback = ONDIGITAL_URI . '/assets/imgs/client/img-s-2.webp';
-$t_title        = ondigital_get_option( 'testi_title', 'What our happy client <span>say</span>' );
-$t_body         = ondigital_get_option( 'testi_body', 'Optimize your impact this holiday season with an AI-driven, multichannel marketing strategy.' );
-$t_rating       = ondigital_get_option( 'testi_rating', '4.9' );
-$t_review_count = ondigital_get_option( 'testi_review_count', '30+ client reviews' );
-$t_platform     = ondigital_get_option( 'testi_platform', 'Trustpilot' );
 
 $default_testimonials = array(
     array(
-        'quote' => __( "Analysts used Mode's advanced analytics capabilities to build parameterized report and visualizations with live data. The customer success team then used the intuitive drag interface to delve", 'ondigital' ),
-        'name'  => 'John Butler',
-        'role'  => __( 'Developer', 'ondigital' ),
+        'quote_az' => 'Ondigital komandası peşəkar yanaşması və vaxtında çatdırılması ilə fərqlənir.',
+        'quote_en' => "Analysts used Mode's advanced analytics capabilities to build parameterized report and visualizations with live data.",
+        'name'     => 'John Butler',
+        'role_az'  => 'Proqramçı',
+        'role_en'  => 'Developer',
     ),
     array(
-        'quote' => __( "Analysts used Mode's advanced analytics capabilities to build parameterized report and visualizations with live data. The customer success team then used the intuitive drag interface to delve", 'ondigital' ),
-        'name'  => 'Sarah Johnson',
-        'role'  => __( 'Marketing Director', 'ondigital' ),
+        'quote_az' => 'Ondigital real, ölçülə bilən nəticələr əldə etdiyim yeganə agentlikdir.',
+        'quote_en' => "Analysts used Mode's advanced analytics capabilities to build parameterized report and visualizations with live data.",
+        'name'     => 'Sarah Johnson',
+        'role_az'  => 'Marketinq Direktoru',
+        'role_en'  => 'Marketing Director',
     ),
     array(
-        'quote' => __( "Analysts used Mode's advanced analytics capabilities to build parameterized report and visualizations with live data. The customer success team then used the intuitive drag interface to delve", 'ondigital' ),
-        'name'  => 'Michael Chen',
-        'role'  => __( 'CEO', 'ondigital' ),
+        'quote_az' => 'Xidmət keyfiyyəti və şəffaflıq baxımından Ondigital öz rəqiblərindən xeyli irəlidədir.',
+        'quote_en' => "Analysts used Mode's advanced analytics capabilities to build parameterized report and visualizations with live data.",
+        'name'     => 'Michael Chen',
+        'role_az'  => 'CEO',
+        'role_en'  => 'CEO',
     ),
 );
 
@@ -107,12 +115,12 @@ $testimonials = ondigital_get_repeater( 'testimonials', $default_testimonials );
                                                 <img class="quote-icon show-dark" src="<?php echo esc_url( ONDIGITAL_URI . '/assets/imgs/icon/quote-7-light.webp' ); ?>" alt="<?php esc_attr_e( 'Quote', 'ondigital' ); ?>">
                                             </div>
                                             <div class="text-wrapper">
-                                                <p class="text"><?php echo esc_html( $testimonial['quote'] ?? $testimonial['text'] ?? '' ); ?></p>
+                                                <p class="text"><?php echo esc_html( $testimonial[ 'quote_' . $lang ] ?? $testimonial['quote_az'] ?? $testimonial['quote'] ?? $testimonial['text'] ?? '' ); ?></p>
                                             </div>
                                             <div class="author">
                                                 <div class="meta">
                                                     <span class="name"><?php echo esc_html( $testimonial['name'] ?? '' ); ?></span>
-                                                    <span class="post"><?php echo esc_html( $testimonial['role'] ?? $testimonial['post'] ?? '' ); ?></span>
+                                                    <span class="post"><?php echo esc_html( $testimonial[ 'role_' . $lang ] ?? $testimonial['role_az'] ?? $testimonial['role'] ?? $testimonial['post'] ?? '' ); ?></span>
                                                 </div>
                                             </div>
                                         </div>
