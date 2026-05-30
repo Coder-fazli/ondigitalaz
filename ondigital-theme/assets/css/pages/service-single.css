@@ -529,6 +529,7 @@ html, body { overflow: auto !important; height: auto !important; }
 }
 
 @media (max-width: 767px) {
+    .ss-wrap .cs-steps { max-height: calc(5 * 116px); }
     .ss-wrap .cs-step { grid-template-columns: 36px 1px 36px 1fr; gap: 10px; padding: 22px 0; }
     .ss-wrap .cs-step-n { font-size: 34px; }
     .ss-wrap .cs-step-icon { width: 36px; height: 36px; border-radius: 10px; }
