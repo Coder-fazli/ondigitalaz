@@ -213,6 +213,22 @@ function ondigital_enqueue_page_assets() {
                 .testi-avatars img:first-child {
                     margin-left: 0;
                 }
+
+                /* ── Section breathing room ── */
+                .project-area-inner { padding-bottom: 120px !important; }
+                .counter-area { padding-top: 120px !important; padding-bottom: 120px !important; }
+                .testimonial-area { padding-top: 120px; padding-bottom: 120px; }
+
+                @media only screen and (max-width: 991px) {
+                    .project-area-inner { padding-bottom: 80px !important; }
+                    .counter-area { padding-top: 80px !important; padding-bottom: 80px !important; }
+                    .testimonial-area { padding-top: 80px; padding-bottom: 80px; }
+                }
+                @media only screen and (max-width: 767px) {
+                    .project-area-inner { padding-bottom: 60px !important; }
+                    .counter-area { padding-top: 60px !important; padding-bottom: 60px !important; }
+                    .testimonial-area { padding-top: 60px; padding-bottom: 60px; }
+                }
             ' );
         }
 
