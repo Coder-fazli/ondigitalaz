@@ -33,37 +33,6 @@ add_action( 'wp_head', function () {
     }
 }, 1 );
 
-/* ── AJAX: checklist form submission ── */
-add_action( 'wp_ajax_odf_cl_submit',        'odf_cl_handle_submit' );
-add_action( 'wp_ajax_nopriv_odf_cl_submit', 'odf_cl_handle_submit' );
-if ( ! function_exists( 'odf_cl_handle_submit' ) ) :
-function odf_cl_handle_submit(): void {
-    check_ajax_referer( 'odf_submit', 'nonce' );
-
-    $name  = sanitize_text_field( $_POST['name']  ?? '' );
-    $email = sanitize_email(      $_POST['email'] ?? '' );
-
-    if ( ! $name || ! is_email( $email ) ) {
-        wp_send_json_error( array( 'message' => 'Invalid input.' ) );
-    }
-
-    if ( function_exists( 'odf_save_submission' ) ) {
-        odf_save_submission( array(
-            'name'   => $name,
-            'email'  => $email,
-            'source' => 'checklist-landing',
-        ) );
-    }
-
-    $to      = get_option( 'admin_email' );
-    $subject = sprintf( '[OnDigital] New checklist download — %s', $name );
-    $body    = sprintf( "Name: %s\nEmail: %s\n\nPage: Checklist Landing", $name, $email );
-    wp_mail( $to, $subject, $body );
-
-    wp_send_json_success();
-}
-endif;
-
 /* ── Dynamic content ── */
 $hero_kicker    = ondigital_get_option( 'cl_hero_kicker',    'Free Resource — 2025 Edition' );
 $hero_h1_1      = ondigital_get_option( 'cl_hero_h1_1',      'The digital marketing' );
@@ -156,7 +125,6 @@ get_header();
 
                 <div id="cl-form-fields">
                     <form id="cl-form" novalidate>
-                        <?php wp_nonce_field( 'odf_submit', 'cl_nonce' ); ?>
                         <input type="text" name="cl_hp" style="display:none!important" tabindex="-1" autocomplete="off" aria-hidden="true">
 
                         <div class="cl-field">
@@ -291,7 +259,6 @@ get_header();
 <script>
 (function () {
     var ajaxurl = <?php echo wp_json_encode( admin_url( 'admin-ajax.php' ) ); ?>;
-    var nonce   = <?php echo wp_json_encode( wp_create_nonce( 'odf_submit' ) ); ?>;
 
     var nameEl   = document.getElementById('cl-name');
     var emailEl  = document.getElementById('cl-email');
@@ -331,7 +298,6 @@ get_header();
 
         var fd = new FormData();
         fd.append('action', 'odf_cl_submit');
-        fd.append('nonce',  nonce);
         fd.append('name',   nameEl.value.trim());
         fd.append('email',  emailEl.value.trim());
 

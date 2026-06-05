@@ -16,6 +16,43 @@ define( 'ONDIGITAL_MAIL_TO', 'office@ondigital.az' );
 
 
 // =============================================================================
+// CHECKLIST LANDING PAGE FORM (AJAX)
+// =============================================================================
+
+add_action( 'wp_ajax_odf_cl_submit',        'odf_cl_handle_submit' );
+add_action( 'wp_ajax_nopriv_odf_cl_submit', 'odf_cl_handle_submit' );
+function odf_cl_handle_submit(): void {
+    // Honeypot — bots fill the hidden field
+    if ( ! empty( $_POST['cl_hp'] ) ) {
+        wp_send_json_success();
+        return;
+    }
+
+    $name  = sanitize_text_field( $_POST['name']  ?? '' );
+    $email = sanitize_email(      $_POST['email'] ?? '' );
+
+    if ( ! $name || ! is_email( $email ) ) {
+        wp_send_json_error( array( 'message' => 'Invalid input.' ) );
+    }
+
+    if ( function_exists( 'odf_save_submission' ) ) {
+        odf_save_submission( array(
+            'name'   => $name,
+            'email'  => $email,
+            'source' => 'checklist-landing',
+        ) );
+    }
+
+    $to      = get_option( 'admin_email' );
+    $subject = sprintf( '[OnDigital] New checklist download — %s', $name );
+    $body    = sprintf( "Name: %s\nEmail: %s\n\nPage: Checklist Landing", $name, $email );
+    wp_mail( $to, $subject, $body );
+
+    wp_send_json_success();
+}
+
+
+// =============================================================================
 // CONTACT FORM
 // =============================================================================
 

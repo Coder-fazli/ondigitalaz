@@ -12,6 +12,44 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $langs    = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
 $about_faq = ondigital_get_repeater( 'about_faq', array() );
+
+/**
+ * Bilingual text field. Renders EN + AZ tabs for <base>_en / <base>_az.
+ * The EN pane inherits the legacy no-suffix value the first time, so existing
+ * English content is preserved (and migrates to <base>_en on next save).
+ */
+$an_text = function( string $base, string $label, array $options, string $hint = '' ): void {
+    od_lang_open();
+    foreach ( array( 'en', 'az' ) as $lang ) {
+        od_lang_pane( $lang );
+        $opts = $options;
+        $k    = $base . '_' . $lang;
+        if ( 'en' === $lang && empty( $opts[ $k ] ) && ! empty( $options[ $base ] ) ) {
+            $opts[ $k ] = $options[ $base ];
+        }
+        od_text( $k, $label, $opts, $hint );
+        od_lang_pane_close();
+    }
+    od_lang_close();
+};
+
+/**
+ * Bilingual textarea field. Same behaviour as $an_text.
+ */
+$an_textarea = function( string $base, string $label, array $options, string $hint = '' ): void {
+    od_lang_open();
+    foreach ( array( 'en', 'az' ) as $lang ) {
+        od_lang_pane( $lang );
+        $opts = $options;
+        $k    = $base . '_' . $lang;
+        if ( 'en' === $lang && empty( $opts[ $k ] ) && ! empty( $options[ $base ] ) ) {
+            $opts[ $k ] = $options[ $base ];
+        }
+        od_textarea( $k, $label, $opts, $hint );
+        od_lang_pane_close();
+    }
+    od_lang_close();
+};
 ?>
 <div class="od-section active" data-section="about">
 
@@ -72,38 +110,36 @@ $about_faq = ondigital_get_repeater( 'about_faq', array() );
     <?php od_card_open( __( 'New: 1. Hero', 'ondigital' ), 'dashicons-admin-home' ); ?>
         <p class="od-desc" style="margin-bottom:16px">Used by the <strong>About Us — New</strong> page template.</p>
         <?php
-        od_row_open();
-            od_text( 'an_hero_title_line1', __( 'Title — Line 1', 'ondigital' ), $options, 'e.g. We build the' );
-            od_text( 'an_hero_title_em',    __( 'Title — Accent Word (green)', 'ondigital' ), $options, 'e.g. digital future' );
-        od_row_close();
-        od_text( 'an_hero_title_line3', __( 'Title — Line 3', 'ondigital' ), $options, 'e.g. together' );
-        od_textarea( 'an_hero_desc', __( 'Description', 'ondigital' ), $options );
+        $an_text( 'an_hero_title_line1', __( 'Title — Line 1', 'ondigital' ), $options, 'e.g. We build the' );
+        $an_text( 'an_hero_title_em',    __( 'Title — Accent Word (green)', 'ondigital' ), $options, 'e.g. digital future' );
+        $an_text( 'an_hero_title_line3', __( 'Title — Line 3', 'ondigital' ), $options, 'e.g. together' );
+        $an_textarea( 'an_hero_desc', __( 'Description', 'ondigital' ), $options );
         od_divider();
         od_row_open();
-            od_text( 'an_hero_btn1_text', __( 'Button 1 Text', 'ondigital' ), $options, 'e.g. Our Story' );
+            $an_text( 'an_hero_btn1_text', __( 'Button 1 Text', 'ondigital' ), $options, 'e.g. Our Story' );
             od_url( 'an_hero_btn1_url',   __( 'Button 1 URL', 'ondigital' ), $options );
         od_row_close();
         od_row_open();
-            od_text( 'an_hero_btn2_text', __( 'Button 2 Text', 'ondigital' ), $options, 'e.g. Get in Touch' );
+            $an_text( 'an_hero_btn2_text', __( 'Button 2 Text', 'ondigital' ), $options, 'e.g. Get in Touch' );
             od_url( 'an_hero_btn2_url',   __( 'Button 2 URL', 'ondigital' ), $options );
         od_row_close();
         od_divider();
-        od_text( 'an_funnel_eyebrow', __( 'Funnel Card — Eyebrow', 'ondigital' ), $options, 'e.g. Client Growth Funnel' );
-        od_text( 'an_funnel_sub',     __( 'Funnel Card — Subtitle', 'ondigital' ), $options, 'e.g. How we turn traffic into paying clients' );
+        $an_text( 'an_funnel_eyebrow', __( 'Funnel Card — Eyebrow', 'ondigital' ), $options, 'e.g. Client Growth Funnel' );
+        $an_text( 'an_funnel_sub',     __( 'Funnel Card — Subtitle', 'ondigital' ), $options, 'e.g. How we turn traffic into paying clients' );
         od_divider();
         od_row_open();
             od_text( 'an_funnel_stat1_num', __( 'Footer Stat 1 — Number', 'ondigital' ), $options, 'e.g. 4.2×' );
-            od_text( 'an_funnel_stat1_lbl', __( 'Footer Stat 1 — Label', 'ondigital' ), $options, 'e.g. Average ROAS' );
+            $an_text( 'an_funnel_stat1_lbl', __( 'Footer Stat 1 — Label', 'ondigital' ), $options, 'e.g. Average ROAS' );
         od_row_close();
         od_row_open();
             od_text( 'an_funnel_stat2_num', __( 'Footer Stat 2 — Number', 'ondigital' ), $options, 'e.g. 90 days' );
-            od_text( 'an_funnel_stat2_lbl', __( 'Footer Stat 2 — Label', 'ondigital' ), $options, 'e.g. To first results' );
+            $an_text( 'an_funnel_stat2_lbl', __( 'Footer Stat 2 — Label', 'ondigital' ), $options, 'e.g. To first results' );
         od_row_close();
         od_divider();
         echo '<p class="od-desc">Funnel chart stages</p>';
         for ( $n = 1; $n <= 4; $n++ ) :
+        $an_text( 'an_stage' . $n . '_label', __( 'Stage ' . $n . ' — Label', 'ondigital' ), $options );
         od_row_open();
-            od_text( 'an_stage' . $n . '_label',   __( 'Stage ' . $n . ' — Label', 'ondigital' ), $options );
             od_text( 'an_stage' . $n . '_display',  __( 'Stage ' . $n . ' — Display Value', 'ondigital' ), $options );
             od_text( 'an_stage' . $n . '_cvr',      __( 'Stage ' . $n . ' — CVR % (leave empty = hide)', 'ondigital' ), $options );
             od_text( 'an_stage' . $n . '_value',    __( 'Stage ' . $n . ' — Raw Number (for width)', 'ondigital' ), $options );
@@ -115,23 +151,19 @@ $about_faq = ondigital_get_repeater( 'about_faq', array() );
     <!-- ── STORY ── -->
     <?php od_card_open( __( 'New: 2. Story', 'ondigital' ), 'dashicons-book' ); ?>
         <?php
-        od_text( 'an_story_eyebrow', __( 'Eyebrow', 'ondigital' ), $options, 'e.g. Our Story' );
-        od_row_open();
-            od_text( 'an_story_heading',    __( 'Heading — Before em', 'ondigital' ), $options, 'e.g. Started in 2020 with one' );
-            od_text( 'an_story_heading_em', __( 'Heading — Accent Word', 'ondigital' ), $options, 'e.g. vision' );
-        od_row_close();
-        od_textarea( 'an_story_desc1', __( 'Paragraph 1', 'ondigital' ), $options );
-        od_textarea( 'an_story_desc2', __( 'Paragraph 2', 'ondigital' ), $options );
-        od_textarea( 'an_story_quote', __( 'Pull Quote', 'ondigital' ), $options );
-        od_text( 'an_story_cite',      __( 'Quote Citation', 'ondigital' ), $options, 'e.g. — Zamin Namazov, Founder & CEO' );
+        $an_text( 'an_story_eyebrow', __( 'Eyebrow', 'ondigital' ), $options, 'e.g. Our Story' );
+        $an_text( 'an_story_heading',    __( 'Heading — Before em', 'ondigital' ), $options, 'e.g. Started in 2020 with one' );
+        $an_text( 'an_story_heading_em', __( 'Heading — Accent Word', 'ondigital' ), $options, 'e.g. vision' );
+        $an_textarea( 'an_story_desc1', __( 'Paragraph 1', 'ondigital' ), $options );
+        $an_textarea( 'an_story_desc2', __( 'Paragraph 2', 'ondigital' ), $options );
+        $an_textarea( 'an_story_quote', __( 'Pull Quote', 'ondigital' ), $options );
+        $an_text( 'an_story_cite',      __( 'Quote Citation', 'ondigital' ), $options, 'e.g. — Zamin Namazov, Founder & CEO' );
         od_divider();
         for ( $n = 1; $n <= 3; $n++ ) :
             echo '<p class="od-desc"><strong>' . sprintf( __( 'Pillar %d', 'ondigital' ), $n ) . '</strong></p>';
-            od_row_open();
-                od_text( 'an_pillar' . $n . '_num',   __( 'Number Label', 'ondigital' ), $options, 'e.g. 01 — Mission' );
-                od_text( 'an_pillar' . $n . '_title', __( 'Title', 'ondigital' ), $options );
-            od_row_close();
-            od_textarea( 'an_pillar' . $n . '_body', __( 'Body', 'ondigital' ), $options );
+            $an_text( 'an_pillar' . $n . '_num',   __( 'Number Label', 'ondigital' ), $options, 'e.g. 01 — Mission' );
+            $an_text( 'an_pillar' . $n . '_title', __( 'Title', 'ondigital' ), $options );
+            $an_textarea( 'an_pillar' . $n . '_body', __( 'Body', 'ondigital' ), $options );
         endfor;
         ?>
     <?php od_card_close(); ?>
@@ -149,8 +181,8 @@ $about_faq = ondigital_get_repeater( 'about_faq', array() );
             od_row_open();
                 od_text( 'an_stat' . $n . '_num',    __( 'Stat ' . $n . ' — Number', 'ondigital' ), $options, $stat_defaults[$n][0] );
                 od_text( 'an_stat' . $n . '_suffix', __( 'Stat ' . $n . ' — Suffix (+/%)', 'ondigital' ), $options, $stat_defaults[$n][1] );
-                od_text( 'an_stat' . $n . '_lbl',    __( 'Stat ' . $n . ' — Label', 'ondigital' ), $options, $stat_defaults[$n][2] );
             od_row_close();
+            $an_text( 'an_stat' . $n . '_lbl', __( 'Stat ' . $n . ' — Label', 'ondigital' ), $options, $stat_defaults[$n][2] );
         endfor;
         ?>
     <?php od_card_close(); ?>
@@ -158,15 +190,11 @@ $about_faq = ondigital_get_repeater( 'about_faq', array() );
     <!-- ── VALUES ── -->
     <?php od_card_open( __( 'New: 4. Values', 'ondigital' ), 'dashicons-heart' ); ?>
         <?php
-        od_row_open();
-            od_text( 'an_values_eyebrow',     __( 'Eyebrow', 'ondigital' ), $options, 'e.g. Our Values' );
-        od_row_close();
-        od_row_open();
-            od_text( 'an_values_heading',     __( 'Heading — Before em', 'ondigital' ), $options, 'e.g. The' );
-            od_text( 'an_values_heading_em',  __( 'Heading — Accent Word', 'ondigital' ), $options, 'e.g. foundation' );
-            od_text( 'an_values_heading_end', __( 'Heading — After em', 'ondigital' ), $options, 'e.g. of our work' );
-        od_row_close();
-        od_textarea( 'an_values_sub', __( 'Sub Text', 'ondigital' ), $options );
+        $an_text( 'an_values_eyebrow',     __( 'Eyebrow', 'ondigital' ), $options, 'e.g. Our Values' );
+        $an_text( 'an_values_heading',     __( 'Heading — Before em', 'ondigital' ), $options, 'e.g. The' );
+        $an_text( 'an_values_heading_em',  __( 'Heading — Accent Word', 'ondigital' ), $options, 'e.g. foundation' );
+        $an_text( 'an_values_heading_end', __( 'Heading — After em', 'ondigital' ), $options, 'e.g. of our work' );
+        $an_textarea( 'an_values_sub', __( 'Sub Text', 'ondigital' ), $options );
         od_divider();
         $val_defaults = array(
             1 => array( '01', 'fa-chart-line',      'Data-Driven Decisions', '' ),
@@ -181,9 +209,9 @@ $about_faq = ondigital_get_repeater( 'about_faq', array() );
             od_row_open();
                 od_text( 'an_val' . $n . '_num',   __( 'Number', 'ondigital' ), $options, $val_defaults[$n][0] );
                 od_text( 'an_val' . $n . '_icon',  __( 'FA Icon Class', 'ondigital' ), $options, $val_defaults[$n][1] );
-                od_text( 'an_val' . $n . '_title', __( 'Title', 'ondigital' ), $options, $val_defaults[$n][2] );
             od_row_close();
-            od_textarea( 'an_val' . $n . '_desc', __( 'Description', 'ondigital' ), $options );
+            $an_text( 'an_val' . $n . '_title', __( 'Title', 'ondigital' ), $options, $val_defaults[$n][2] );
+            $an_textarea( 'an_val' . $n . '_desc', __( 'Description', 'ondigital' ), $options );
         endfor;
         ?>
     <?php od_card_close(); ?>
@@ -191,11 +219,9 @@ $about_faq = ondigital_get_repeater( 'about_faq', array() );
     <!-- ── APPROACH ── -->
     <?php od_card_open( __( 'New: 5. Approach', 'ondigital' ), 'dashicons-admin-settings' ); ?>
         <?php
-        od_text( 'an_approach_eyebrow', __( 'Eyebrow', 'ondigital' ), $options, 'e.g. How We Work' );
-        od_row_open();
-            od_text( 'an_approach_heading',    __( 'Heading — Before em', 'ondigital' ), $options, 'e.g. Every step of the process is' );
-            od_text( 'an_approach_heading_em', __( 'Heading — Accent Word', 'ondigital' ), $options, 'e.g. clear' );
-        od_row_close();
+        $an_text( 'an_approach_eyebrow', __( 'Eyebrow', 'ondigital' ), $options, 'e.g. How We Work' );
+        $an_text( 'an_approach_heading',    __( 'Heading — Before em', 'ondigital' ), $options, 'e.g. Every step of the process is' );
+        $an_text( 'an_approach_heading_em', __( 'Heading — Accent Word', 'ondigital' ), $options, 'e.g. clear' );
         od_divider();
         $step_defaults = array(
             1 => array( '01', 'Discovery & Audit' ),
@@ -204,52 +230,43 @@ $about_faq = ondigital_get_repeater( 'about_faq', array() );
             4 => array( '04', 'Reporting & Growth' ),
         );
         for ( $n = 1; $n <= 4; $n++ ) :
-            od_row_open();
-                od_text( 'an_step' . $n . '_num',   __( 'Step ' . $n . ' — Number', 'ondigital' ), $options, $step_defaults[$n][0] );
-                od_text( 'an_step' . $n . '_title', __( 'Step ' . $n . ' — Title', 'ondigital' ), $options, $step_defaults[$n][1] );
-            od_row_close();
-            od_textarea( 'an_step' . $n . '_body', __( 'Step ' . $n . ' — Body', 'ondigital' ), $options );
+            echo '<p class="od-desc"><strong>' . sprintf( __( 'Step %d', 'ondigital' ), $n ) . '</strong></p>';
+            od_text( 'an_step' . $n . '_num', __( 'Step ' . $n . ' — Number', 'ondigital' ), $options, $step_defaults[$n][0] );
+            $an_text( 'an_step' . $n . '_title', __( 'Step ' . $n . ' — Title', 'ondigital' ), $options, $step_defaults[$n][1] );
+            $an_textarea( 'an_step' . $n . '_body', __( 'Step ' . $n . ' — Body', 'ondigital' ), $options );
         endfor;
         od_divider();
         echo '<p class="od-desc"><strong>' . __( 'Visual Card (right side)', 'ondigital' ) . '</strong></p>';
-        od_row_open();
-            od_text( 'an_av_label',    __( 'Label', 'ondigital' ), $options, 'e.g. Why OnDigital' );
-            od_text( 'an_av_big_num',  __( 'Big Number', 'ondigital' ), $options, 'e.g. 100' );
-            od_text( 'an_av_big_word', __( 'Big Word', 'ondigital' ), $options, 'e.g. Bespoke' );
-        od_row_close();
-        od_textarea( 'an_av_desc', __( 'Description', 'ondigital' ), $options );
+        od_text( 'an_av_big_num', __( 'Big Number', 'ondigital' ), $options, 'e.g. 100' );
+        $an_text( 'an_av_label',    __( 'Label', 'ondigital' ), $options, 'e.g. Why OnDigital' );
+        $an_text( 'an_av_big_word', __( 'Big Word', 'ondigital' ), $options, 'e.g. Bespoke' );
+        $an_textarea( 'an_av_desc', __( 'Description', 'ondigital' ), $options );
         od_divider();
         echo '<p class="od-desc"><strong>' . __( 'Tags (up to 5)', 'ondigital' ) . '</strong></p>';
-        od_row_open();
         for ( $n = 1; $n <= 5; $n++ ) :
-            od_text( 'an_av_tag' . $n, __( 'Tag ' . $n, 'ondigital' ), $options );
+            $an_text( 'an_av_tag' . $n, __( 'Tag ' . $n, 'ondigital' ), $options );
         endfor;
-        od_row_close();
         ?>
     <?php od_card_close(); ?>
 
     <!-- ── TEAM ── -->
     <?php od_card_open( __( 'New: 6. Team Header', 'ondigital' ), 'dashicons-groups' ); ?>
         <?php
-        od_text( 'an_team_eyebrow', __( 'Eyebrow', 'ondigital' ), $options, 'e.g. The Team' );
-        od_row_open();
-            od_text( 'an_team_heading',     __( 'Heading — Before em', 'ondigital' ), $options, 'e.g. The' );
-            od_text( 'an_team_heading_em',  __( 'Heading — Accent Word', 'ondigital' ), $options, 'e.g. people' );
-            od_text( 'an_team_heading_end', __( 'Heading — After em', 'ondigital' ), $options, 'e.g. behind your results' );
-        od_row_close();
-        od_textarea( 'an_team_sub', __( 'Sub Text', 'ondigital' ), $options );
+        $an_text( 'an_team_eyebrow', __( 'Eyebrow', 'ondigital' ), $options, 'e.g. The Team' );
+        $an_text( 'an_team_heading',     __( 'Heading — Before em', 'ondigital' ), $options, 'e.g. The' );
+        $an_text( 'an_team_heading_em',  __( 'Heading — Accent Word', 'ondigital' ), $options, 'e.g. people' );
+        $an_text( 'an_team_heading_end', __( 'Heading — After em', 'ondigital' ), $options, 'e.g. behind your results' );
+        $an_textarea( 'an_team_sub', __( 'Sub Text', 'ondigital' ), $options );
         ?>
-        <p class="od-desc" style="margin-top:8px">Team member cards are managed via <strong>WordPress Admin → Team</strong> (CPT). Up to 4 members are shown, ordered by menu order.</p>
+        <p class="od-desc" style="margin-top:8px">Team member cards are managed via <strong>WordPress Admin → Team</strong> (CPT). All members are shown in a slider, ordered by menu order.</p>
     <?php od_card_close(); ?>
 
     <!-- ── TIMELINE ── -->
     <?php od_card_open( __( 'New: 7. Timeline', 'ondigital' ), 'dashicons-clock' ); ?>
         <?php
-        od_text( 'an_tl_eyebrow', __( 'Eyebrow', 'ondigital' ), $options, 'e.g. Our Journey' );
-        od_row_open();
-            od_text( 'an_tl_heading',    __( 'Heading — Before em', 'ondigital' ), $options, 'e.g. Growth' );
-            od_text( 'an_tl_heading_em', __( 'Heading — Accent Word', 'ondigital' ), $options, 'e.g. milestones' );
-        od_row_close();
+        $an_text( 'an_tl_eyebrow', __( 'Eyebrow', 'ondigital' ), $options, 'e.g. Our Journey' );
+        $an_text( 'an_tl_heading',    __( 'Heading — Before em', 'ondigital' ), $options, 'e.g. Growth' );
+        $an_text( 'an_tl_heading_em', __( 'Heading — Accent Word', 'ondigital' ), $options, 'e.g. milestones' );
         od_divider();
         $tl_defaults = array(
             1 => array( '2020', 'Foundation',        'fa-flag',    'left'  ),
@@ -261,10 +278,10 @@ $about_faq = ondigital_get_repeater( 'about_faq', array() );
             echo '<p class="od-desc"><strong>' . sprintf( __( 'Milestone %d', 'ondigital' ), $n ) . '</strong></p>';
             od_row_open();
                 od_text( 'an_tl' . $n . '_year',  __( 'Year', 'ondigital' ), $options, $tl_defaults[$n][0] );
-                od_text( 'an_tl' . $n . '_title', __( 'Title', 'ondigital' ), $options, $tl_defaults[$n][1] );
                 od_text( 'an_tl' . $n . '_icon',  __( 'FA Icon', 'ondigital' ), $options, $tl_defaults[$n][2] );
             od_row_close();
-            od_textarea( 'an_tl' . $n . '_desc', __( 'Description', 'ondigital' ), $options );
+            $an_text( 'an_tl' . $n . '_title', __( 'Title', 'ondigital' ), $options, $tl_defaults[$n][1] );
+            $an_textarea( 'an_tl' . $n . '_desc', __( 'Description', 'ondigital' ), $options );
         endfor;
         ?>
     <?php od_card_close(); ?>
@@ -272,19 +289,17 @@ $about_faq = ondigital_get_repeater( 'about_faq', array() );
     <!-- ── CTA ── -->
     <?php od_card_open( __( 'New: 8. CTA & Form', 'ondigital' ), 'dashicons-email-alt' ); ?>
         <?php
-        od_text( 'an_cta_eyebrow', __( 'Eyebrow', 'ondigital' ), $options, 'e.g. Next Step' );
-        od_row_open();
-            od_text( 'an_cta_title',    __( 'Heading — Before em', 'ondigital' ), $options, "e.g. Let's grow your business" );
-            od_text( 'an_cta_title_em', __( 'Heading — Accent Word', 'ondigital' ), $options, 'e.g. together' );
-        od_row_close();
-        od_textarea( 'an_cta_sub', __( 'Sub Text', 'ondigital' ), $options );
+        $an_text( 'an_cta_eyebrow', __( 'Eyebrow', 'ondigital' ), $options, 'e.g. Next Step' );
+        $an_text( 'an_cta_title',    __( 'Heading — Before em', 'ondigital' ), $options, "e.g. Let's grow your business" );
+        $an_text( 'an_cta_title_em', __( 'Heading — Accent Word', 'ondigital' ), $options, 'e.g. together' );
+        $an_textarea( 'an_cta_sub', __( 'Sub Text', 'ondigital' ), $options );
         od_divider();
         echo '<p class="od-desc"><strong>' . __( 'Perks (4 bullet points)', 'ondigital' ) . '</strong></p>';
         for ( $n = 1; $n <= 4; $n++ ) :
-            od_text( 'an_cta_perk' . $n, sprintf( __( 'Perk %d', 'ondigital' ), $n ), $options );
+            $an_text( 'an_cta_perk' . $n, sprintf( __( 'Perk %d', 'ondigital' ), $n ), $options );
         endfor;
         od_divider();
-        od_text( 'an_cta_form_title', __( 'Form Card Title', 'ondigital' ), $options, 'e.g. Get in Touch' );
+        $an_text( 'an_cta_form_title', __( 'Form Card Title', 'ondigital' ), $options, 'e.g. Get in Touch' );
         ?>
     <?php od_card_close(); ?>
 

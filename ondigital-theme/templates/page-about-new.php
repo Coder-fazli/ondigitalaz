@@ -22,9 +22,9 @@ add_action( 'wp_enqueue_scripts', function() {
 
 get_header();
 
-$options = get_option( 'ondigital_options', array() );
-$o = function( string $key, string $default = '' ) use ( $options ): string {
-    return ! empty( $options[ $key ] ) ? $options[ $key ] : $default;
+/* Language-aware reader: tries <key>_<lang>, then <key>_en, then legacy <key>, then default. */
+$o = function( string $key, string $default = '' ): string {
+    return ondigital_get_option( $key, $default );
 };
 
 /* ── Funnel stages from options (with hardcoded fallbacks) ── */
@@ -300,65 +300,76 @@ $ticker_services = get_posts( array(
             </h2>
             <p class="section-sub"><?php echo esc_html( $o( 'an_team_sub', 'Real in-house experts behind every project — not freelancers, but a dedicated, specialised team.' ) ); ?></p>
         </div>
-        <div class="ab-team-grid">
-            <?php
-            $team = get_posts( array(
-                'post_type'      => 'team_member',
-                'posts_per_page' => 4,
-                'orderby'        => 'menu_order',
-                'order'          => 'ASC',
-            ) );
+        <?php
+        $team = get_posts( array(
+            'post_type'      => 'team_member',
+            'posts_per_page' => -1,
+            'orderby'        => 'menu_order',
+            'order'          => 'ASC',
+        ) );
 
-            if ( $team ) :
-                foreach ( $team as $member ) :
-                    $name  = get_the_title( $member );
-                    $role  = get_post_meta( $member->ID, '_team_role', true );
-                    $bio   = get_post_meta( $member->ID, '_team_bio',  true ) ?: get_the_excerpt( $member );
-                    $li    = get_post_meta( $member->ID, '_team_linkedin',  true );
-                    $ig    = get_post_meta( $member->ID, '_team_instagram', true );
-                    $thumb = get_the_post_thumbnail_url( $member->ID, 'medium' );
-            ?>
-            <div class="ab-team-card">
-                <div class="ab-team-img">
-                    <?php if ( $thumb ) : ?>
-                        <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $name ); ?>" style="width:100%;height:100%;object-fit:cover;">
-                    <?php else : ?>
-                        <div class="ab-team-img-placeholder"><i class="fa-solid fa-user"></i></div>
-                    <?php endif; ?>
-                </div>
-                <div class="ab-team-body">
-                    <div class="ab-team-name"><?php echo esc_html( $name ); ?></div>
-                    <?php if ( $role ) : ?><div class="ab-team-role"><?php echo esc_html( $role ); ?></div><?php endif; ?>
-                    <?php if ( $bio  ) : ?><p class="ab-team-bio"><?php echo esc_html( $bio ); ?></p><?php endif; ?>
-                    <div class="ab-team-socials">
-                        <?php if ( $li ) : ?><a href="<?php echo esc_url($li); ?>" class="ab-team-social" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a><?php endif; ?>
-                        <?php if ( $ig ) : ?><a href="<?php echo esc_url($ig); ?>" class="ab-team-social" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a><?php endif; ?>
-                    </div>
-                </div>
-            </div>
-            <?php
-                endforeach;
-            else :
-                $fallback = array(
-                    array( 'Zamin Namazov',  'Founder & CEO',           '8+ years in digital marketing. One of Azerbaijan\'s leading SEO strategists.',              'fa-linkedin-in', 'fa-instagram' ),
-                    array( 'Ayten Huseynova','Content Director',         '6+ years in strategic content creation and SEO writing across AZ, RU, and EN markets.',    'fa-linkedin-in', 'fa-instagram' ),
-                    array( 'Rauf Aliyev',    'Technical SEO Lead',       'Core Web Vitals, technical audits, crawl optimisation. Deep expertise in Google systems.',  'fa-linkedin-in', 'fa-github'    ),
-                    array( 'Nigar Guliyeva', 'Paid Media Strategist',    'Google Ads, Meta Ads, TikTok Ads. Maximum ROAS from minimum budget. $2M+ managed spend.',   'fa-linkedin-in', 'fa-instagram' ),
+        /* Build a normalised list of members (real posts, or fallback demo data). */
+        $members = array();
+        if ( $team ) {
+            foreach ( $team as $member ) {
+                $members[] = array(
+                    'name'  => get_the_title( $member ),
+                    'role'  => get_post_meta( $member->ID, '_team_role', true ),
+                    'bio'   => get_post_meta( $member->ID, '_team_bio', true ) ?: get_the_excerpt( $member ),
+                    'li'    => get_post_meta( $member->ID, '_team_linkedin',  true ),
+                    'ig'    => get_post_meta( $member->ID, '_team_instagram', true ),
+                    'thumb' => get_the_post_thumbnail_url( $member->ID, 'medium' ),
                 );
-                foreach ( $fallback as $m ) : ?>
-            <div class="ab-team-card">
-                <div class="ab-team-img"><div class="ab-team-img-placeholder"><i class="fa-solid fa-user"></i></div></div>
-                <div class="ab-team-body">
-                    <div class="ab-team-name"><?php echo esc_html( $m[0] ); ?></div>
-                    <div class="ab-team-role"><?php echo esc_html( $m[1] ); ?></div>
-                    <p class="ab-team-bio"><?php echo esc_html( $m[2] ); ?></p>
-                    <div class="ab-team-socials">
-                        <a href="#" class="ab-team-social"><i class="fa-brands <?php echo esc_attr($m[3]); ?>"></i></a>
-                        <a href="#" class="ab-team-social"><i class="fa-brands <?php echo esc_attr($m[4]); ?>"></i></a>
+            }
+        } else {
+            $fallback = array(
+                array( 'Zamin Namazov',  'Founder & CEO',        '8+ years in digital marketing. One of Azerbaijan\'s leading SEO strategists.',             'fa-instagram' ),
+                array( 'Ayten Huseynova','Content Director',      '6+ years in strategic content creation and SEO writing across AZ, RU, and EN markets.',   'fa-instagram' ),
+                array( 'Rauf Aliyev',    'Technical SEO Lead',    'Core Web Vitals, technical audits, crawl optimisation. Deep expertise in Google systems.', 'fa-github'    ),
+                array( 'Nigar Guliyeva', 'Paid Media Strategist', 'Google Ads, Meta Ads, TikTok Ads. Maximum ROAS from minimum budget. $2M+ managed spend.',  'fa-instagram' ),
+            );
+            foreach ( $fallback as $m ) {
+                $members[] = array(
+                    'name'  => $m[0], 'role' => $m[1], 'bio' => $m[2],
+                    'li'    => '#',   'ig'   => '#',   'thumb' => '',
+                );
+            }
+        }
+        ?>
+        <div class="ab-team-slider swiper">
+            <div class="swiper-wrapper">
+                <?php foreach ( $members as $m ) : ?>
+                <div class="swiper-slide">
+                    <div class="ab-team-card">
+                        <div class="ab-team-img">
+                            <?php if ( ! empty( $m['thumb'] ) ) : ?>
+                                <img src="<?php echo esc_url( $m['thumb'] ); ?>" alt="<?php echo esc_attr( $m['name'] ); ?>" style="width:100%;height:100%;object-fit:cover;">
+                            <?php else : ?>
+                                <div class="ab-team-img-placeholder"><i class="fa-solid fa-user"></i></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="ab-team-body">
+                            <div class="ab-team-name"><?php echo esc_html( $m['name'] ); ?></div>
+                            <?php if ( $m['role'] ) : ?><div class="ab-team-role"><?php echo esc_html( $m['role'] ); ?></div><?php endif; ?>
+                            <?php if ( $m['bio'] )  : ?><p class="ab-team-bio"><?php echo esc_html( $m['bio'] ); ?></p><?php endif; ?>
+                            <div class="ab-team-socials">
+                                <?php if ( $m['li'] ) : ?><a href="<?php echo esc_url( $m['li'] ); ?>" class="ab-team-social" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a><?php endif; ?>
+                                <?php if ( $m['ig'] ) : ?><a href="<?php echo esc_url( $m['ig'] ); ?>" class="ab-team-social" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a><?php endif; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; endif; ?>
+            <div class="ab-team-pagination"></div>
+        </div>
+        <div class="ab-team-nav">
+            <button type="button" class="ab-team-arrow ab-team-prev" aria-label="<?php esc_attr_e( 'Previous team members', 'ondigital' ); ?>">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            </button>
+            <button type="button" class="ab-team-arrow ab-team-next" aria-label="<?php esc_attr_e( 'Next team members', 'ondigital' ); ?>">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
         </div>
     </div>
 </section>
@@ -556,6 +567,43 @@ $ticker_services = get_posts( array(
         })(segG);
     });
 })();
+</script>
+
+<script>
+(function () {
+    function initTeamSlider() {
+        if (typeof Swiper === 'undefined') { return; }
+        var el = document.querySelector('.ab-team-slider');
+        if (!el || el.dataset.inited) { return; }
+        el.dataset.inited = '1';
+
+        new Swiper(el, {
+            slidesPerView: 1,
+            spaceBetween: 24,
+            grabCursor: true,
+            watchOverflow: true,
+            navigation: {
+                prevEl: '.ab-team-prev',
+                nextEl: '.ab-team-next',
+            },
+            pagination: {
+                el: '.ab-team-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                600:  { slidesPerView: 2, spaceBetween: 24 },
+                992:  { slidesPerView: 3, spaceBetween: 24 },
+                1200: { slidesPerView: 4, spaceBetween: 24 },
+            },
+        });
+    }
+
+    if (document.readyState !== 'loading') {
+        initTeamSlider();
+    } else {
+        document.addEventListener('DOMContentLoaded', initTeamSlider);
+    }
+}());
 </script>
 
 <?php get_footer(); ?>
