@@ -47,7 +47,8 @@ $footer_contact_address = ondigital_get_option( 'address', 'Old Town Plaza, 10th
 // Copyright bar
 $footer_copyright  = ondigital_get_option( 'footer_copyright', 'Copyright <strong>OnDigital</strong> ' . date( 'Y' ) );
 $footer_terms_text = ondigital_get_option( 'footer_terms_text', 'Terms & Conditions' );
-$footer_terms_url  = ondigital_get_option( 'footer_terms_url', home_url( '/privacy-policy' ) );
+// Terms link always points to the privacy policy (ignore any stale saved value).
+$footer_terms_url  = home_url( '/privacy-policy' );
 ?>
 
 </main>

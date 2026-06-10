@@ -89,6 +89,24 @@
 }
 
 /* =============================================================================
+   Header — left-align the menu (desktop)
+   By default .header__nav uses .pos-center (absolute, centered), which leaves
+   empty space on the left. Put it back in the flex flow next to the logo and
+   push the language switch + CTA button to the far right.
+   ============================================================================= */
+
+@media only screen and (min-width: 1200px) {
+    .header-area .header__nav.pos-center {
+        position: static;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin-inline-start: 32px;  /* small gap after the logo */
+        margin-inline-end: auto;    /* pushes lang switch + button to the right */
+    }
+}
+
+/* =============================================================================
    Mobile — shrink header CTA button padding
    ============================================================================= */
 
