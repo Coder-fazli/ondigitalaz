@@ -297,7 +297,11 @@
 }
 
 .service-area .services-wrapper.swiper {
-    overflow: visible;
+    /* Clip slides that scroll out of view — only the active range stays visible.
+       Vertical padding keeps card box-shadows from getting clipped. */
+    overflow: hidden;
+    padding: 20px 0;
+    margin: -20px 0;
 }
 
 .service-area .services-prev,

@@ -13,6 +13,17 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select,
     font-family: "TASA Orbiter", sans-serif !important;
 }
 
+/* Force one consistent font across the whole footer + copyright bar.
+   Higher specificity than theme heading rules (e.g. .footer-area .title),
+   so column titles, links, text and copyright all match.
+   :not(i):not([class*="fa-"]) keeps Font Awesome icons on their icon font. */
+.footer-area,
+.footer-area :not(i):not([class*="fa-"]),
+.copyright-area,
+.copyright-area :not(i):not([class*="fa-"]) {
+    font-family: "TASA Orbiter", sans-serif !important;
+}
+
 .footer-area {
     background-color: #1a1a1a;
     padding: 0 45px;
