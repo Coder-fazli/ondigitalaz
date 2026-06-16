@@ -378,6 +378,10 @@ body { overflow: auto !important; height: auto !important; }
     <?php
     $wif_title = get_post_meta( $id, '_service_wif_title', true ) ?: __( 'Bu xidmət kimə uyğundur?', 'ondigital' );
     $wif_sub   = get_post_meta( $id, '_service_wif_sub',   true ) ?: __( 'Hər xidmət hər kəs üçün deyil. Aşağıda bu xidmətin kimin üçün uyğun, kimin üçün uyğun olmadığını göstəririk.', 'ondigital' );
+    $wif_note_pre       = get_post_meta( $id, '_service_wif_note_pre',       true ) ?: __( 'Əmin deyilsiniz?', 'ondigital' );
+    $wif_note_link_text = get_post_meta( $id, '_service_wif_note_link_text', true ) ?: __( 'Pulsuz məsləhət alın', 'ondigital' );
+    $wif_note_link_url  = get_post_meta( $id, '_service_wif_note_link_url',  true ) ?: home_url( '/elaqe/' );
+    $wif_note_post      = get_post_meta( $id, '_service_wif_note_post',      true ) ?: __( '— vəziyyətinizi birlikdə qiymətləndirək.', 'ondigital' );
 
     $wif_for_raw = get_post_meta( $id, '_service_wif_for_items', true );
     $wif_for = ( is_array( $wif_for_raw ) && ! empty( $wif_for_raw[0]['title'] ) )
@@ -459,7 +463,7 @@ body { overflow: auto !important; height: auto !important; }
                     </div>
                 </div>
             </div>
-            <p class="wif-note"><?php esc_html_e( 'Əmin deyilsiniz?', 'ondigital' ); ?> <a href="<?php echo esc_url( home_url( '/elaqe/' ) ); ?>"><?php esc_html_e( 'Pulsuz məsləhət alın', 'ondigital' ); ?></a> <?php esc_html_e( '— vəziyyətinizi birlikdə qiymətləndirək.', 'ondigital' ); ?></p>
+            <p class="wif-note"><?php echo esc_html( $wif_note_pre ); ?> <a href="<?php echo esc_url( $wif_note_link_url ); ?>"><?php echo esc_html( $wif_note_link_text ); ?></a> <?php echo esc_html( $wif_note_post ); ?></p>
         </div>
     </section>
 

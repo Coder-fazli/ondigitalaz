@@ -651,6 +651,10 @@ function ondigital_service_wif_callback( $post ) {
         <?php
         od_mb_text( '_service_wif_title', __( 'Section Title', 'ondigital' ),   get_post_meta( $id, '_service_wif_title', true ), __( 'e.g. Bu xidmət kimə uyğundur?', 'ondigital' ) );
         od_mb_text( '_service_wif_sub',   __( 'Section Subtitle', 'ondigital' ), get_post_meta( $id, '_service_wif_sub', true ),   __( 'Short sentence below the title', 'ondigital' ) );
+        od_mb_text( '_service_wif_note_pre',      __( 'Bottom Note — text before link', 'ondigital' ), get_post_meta( $id, '_service_wif_note_pre', true ),      __( 'e.g. Əmin deyilsiniz?', 'ondigital' ) );
+        od_mb_text( '_service_wif_note_link_text',__( 'Bottom Note — link text', 'ondigital' ),        get_post_meta( $id, '_service_wif_note_link_text', true ),__( 'e.g. Pulsuz məsləhət alın', 'ondigital' ) );
+        od_mb_text( '_service_wif_note_link_url', __( 'Bottom Note — link URL', 'ondigital' ),         get_post_meta( $id, '_service_wif_note_link_url', true ), __( 'e.g. /elaqe/ or full https:// link', 'ondigital' ) );
+        od_mb_text( '_service_wif_note_post',     __( 'Bottom Note — text after link', 'ondigital' ),  get_post_meta( $id, '_service_wif_note_post', true ),     __( 'e.g. — vəziyyətinizi birlikdə qiymətləndirək.', 'ondigital' ) );
         ?>
     </table>
 
@@ -1237,10 +1241,13 @@ function ondigital_save_meta_boxes( $post_id ) {
 
     // ── Service: Who Is This For ──
     if ( isset( $_POST['ondigital_service_wif_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_wif_nonce'], 'ondigital_service_wif' ) ) {
-        foreach ( array( '_service_wif_title', '_service_wif_sub' ) as $field ) {
+        foreach ( array( '_service_wif_title', '_service_wif_sub', '_service_wif_note_pre', '_service_wif_note_link_text', '_service_wif_note_post' ) as $field ) {
             if ( isset( $_POST[ $field ] ) ) {
                 update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
             }
+        }
+        if ( isset( $_POST['_service_wif_note_link_url'] ) ) {
+            update_post_meta( $post_id, '_service_wif_note_link_url', esc_url_raw( $_POST['_service_wif_note_link_url'] ) );
         }
         foreach ( array( '_service_wif_for_items', '_service_wif_not_items' ) as $key ) {
             if ( isset( $_POST[ $key ] ) && is_array( $_POST[ $key ] ) ) {
