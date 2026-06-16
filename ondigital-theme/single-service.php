@@ -226,6 +226,8 @@ body { overflow: auto !important; height: auto !important; }
             <?php
             $wi_title       = get_post_meta( $id, '_service_wi_title',       true ) ?: __( 'Nə daxildir', 'ondigital' );
             $wi_header_desc = get_post_meta( $id, '_service_wi_header_desc', true ) ?: __( 'Hər paketdə nələrin olduğunu və aylıq yol xəritəsini aşağıda görə bilərsiniz.', 'ondigital' );
+            $wi_tab1_label  = get_post_meta( $id, '_service_wi_tab1_label',  true ) ?: __( 'Nə daxildir', 'ondigital' );
+            $wi_tab2_label  = get_post_meta( $id, '_service_wi_tab2_label',  true ) ?: __( 'Aylıq yol xəritəsi', 'ondigital' );
             ?>
             <div class="wi-header">
                 <div>
@@ -237,11 +239,11 @@ body { overflow: auto !important; height: auto !important; }
             <div class="wi-tabs">
                 <button class="wi-tab active" data-tab="included">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                    <?php esc_html_e( 'Nə daxildir', 'ondigital' ); ?>
+                    <?php echo esc_html( $wi_tab1_label ); ?>
                 </button>
                 <button class="wi-tab" data-tab="roadmap">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                    <?php esc_html_e( 'Aylıq yol xəritəsi', 'ondigital' ); ?>
+                    <?php echo esc_html( $wi_tab2_label ); ?>
                 </button>
             </div>
 

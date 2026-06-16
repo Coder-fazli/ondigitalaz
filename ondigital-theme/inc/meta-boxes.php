@@ -547,42 +547,87 @@ function ondigital_service_included_callback( $post ) {
         <?php
         od_mb_text( '_service_wi_title',       __( 'Section Title', 'ondigital' ),       get_post_meta( $id, '_service_wi_title', true ),       __( 'e.g. Nə daxildir', 'ondigital' ) );
         od_mb_text( '_service_wi_header_desc', __( 'Header Description', 'ondigital' ),  get_post_meta( $id, '_service_wi_header_desc', true ),  __( 'Short intro below the title', 'ondigital' ) );
+        od_mb_text( '_service_wi_tab1_label',  __( 'Tab 1 Label', 'ondigital' ),        get_post_meta( $id, '_service_wi_tab1_label', true ),  __( 'e.g. Nə daxildir', 'ondigital' ) );
+        od_mb_text( '_service_wi_tab2_label',  __( 'Tab 2 Label', 'ondigital' ),        get_post_meta( $id, '_service_wi_tab2_label', true ),  __( 'e.g. Aylıq yol xəritəsi', 'ondigital' ) );
         ?>
     </table>
 
-    <h4 style="padding:14px 12px 4px;margin:0;border-top:1px solid #ddd;"><?php esc_html_e( '— Tab 1: Nə daxildir (up to 6 items)', 'ondigital' ); ?></h4>
-    <?php foreach ( $wi_items as $i => $item ) : ?>
-    <h4 style="padding:10px 12px 0;margin:0;"><?php printf( esc_html__( 'Item %d', 'ondigital' ), $i + 1 ); ?></h4>
-    <table class="form-table">
-        <tr>
-            <th style="width:200px"><?php esc_html_e( 'Title', 'ondigital' ); ?></th>
-            <td><input type="text" name="_service_wi_items[<?php echo $i; ?>][title]" value="<?php echo esc_attr( $item['title'] ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Texniki SEO Auditi', 'ondigital' ); ?>"></td>
-        </tr>
-        <tr>
-            <th><?php esc_html_e( 'Description', 'ondigital' ); ?></th>
-            <td><textarea name="_service_wi_items[<?php echo $i; ?>][desc]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Short description…', 'ondigital' ); ?>"><?php echo esc_textarea( $item['desc'] ); ?></textarea></td>
-        </tr>
-    </table>
-    <?php endforeach; ?>
+    <?php
+    $wi_tab1 = get_post_meta( $id, '_service_wi_tab1_label', true ) ?: __( 'Nə daxildir', 'ondigital' );
+    $wi_tab2 = get_post_meta( $id, '_service_wi_tab2_label', true ) ?: __( 'Aylıq yol xəritəsi', 'ondigital' );
+    ?>
 
-    <h4 style="padding:14px 12px 4px;margin:0;border-top:1px solid #ddd;"><?php esc_html_e( '— Tab 2: Aylıq yol xəritəsi (up to 5 phases)', 'ondigital' ); ?></h4>
-    <?php foreach ( $rm_items as $i => $item ) : ?>
-    <h4 style="padding:10px 12px 0;margin:0;"><?php printf( esc_html__( 'Phase %d', 'ondigital' ), $i + 1 ); ?></h4>
-    <table class="form-table">
-        <tr>
-            <th style="width:200px"><?php esc_html_e( 'Title', 'ondigital' ); ?></th>
-            <td><input type="text" name="_service_rm_items[<?php echo $i; ?>][title]" value="<?php echo esc_attr( $item['title'] ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. 1–2-ci Həftə — Audit', 'ondigital' ); ?>"></td>
-        </tr>
-        <tr>
-            <th><?php esc_html_e( 'Description', 'ondigital' ); ?></th>
-            <td><textarea name="_service_rm_items[<?php echo $i; ?>][desc]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Phase description…', 'ondigital' ); ?>"><?php echo esc_textarea( $item['desc'] ); ?></textarea></td>
-        </tr>
-        <tr>
-            <th><?php esc_html_e( 'Progress %', 'ondigital' ); ?></th>
-            <td><input type="text" name="_service_rm_items[<?php echo $i; ?>][prog]" value="<?php echo esc_attr( $item['prog'] ); ?>" class="small-text" placeholder="<?php esc_attr_e( 'e.g. 55%', 'ondigital' ); ?>"></td>
-        </tr>
-    </table>
-    <?php endforeach;
+    <div class="od-mb-tabwrap" style="margin-top:8px;border-top:1px solid #ddd;padding-top:14px;">
+        <div class="od-mb-tabs" style="display:flex;gap:6px;margin:0 0 12px;">
+            <button type="button" class="button button-primary od-mb-tab" data-odtab="wi">
+                <?php echo esc_html( $wi_tab1 ); ?> <span style="opacity:.7;">(<?php esc_html_e( 'up to 6 items', 'ondigital' ); ?>)</span>
+            </button>
+            <button type="button" class="button od-mb-tab" data-odtab="rm">
+                <?php echo esc_html( $wi_tab2 ); ?> <span style="opacity:.7;">(<?php esc_html_e( 'up to 5 phases', 'ondigital' ); ?>)</span>
+            </button>
+        </div>
+
+        <!-- Pane 1: Nə daxildir -->
+        <div class="od-mb-pane" data-odpane="wi">
+            <?php foreach ( $wi_items as $i => $item ) : ?>
+            <h4 style="padding:10px 12px 0;margin:0;"><?php printf( esc_html__( 'Item %d', 'ondigital' ), $i + 1 ); ?></h4>
+            <table class="form-table">
+                <tr>
+                    <th style="width:200px"><?php esc_html_e( 'Title', 'ondigital' ); ?></th>
+                    <td><input type="text" name="_service_wi_items[<?php echo $i; ?>][title]" value="<?php echo esc_attr( $item['title'] ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Texniki SEO Auditi', 'ondigital' ); ?>"></td>
+                </tr>
+                <tr>
+                    <th><?php esc_html_e( 'Description', 'ondigital' ); ?></th>
+                    <td><textarea name="_service_wi_items[<?php echo $i; ?>][desc]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Short description…', 'ondigital' ); ?>"><?php echo esc_textarea( $item['desc'] ); ?></textarea></td>
+                </tr>
+            </table>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Pane 2: Aylıq yol xəritəsi -->
+        <div class="od-mb-pane" data-odpane="rm" style="display:none;">
+            <?php foreach ( $rm_items as $i => $item ) : ?>
+            <h4 style="padding:10px 12px 0;margin:0;"><?php printf( esc_html__( 'Phase %d', 'ondigital' ), $i + 1 ); ?></h4>
+            <table class="form-table">
+                <tr>
+                    <th style="width:200px"><?php esc_html_e( 'Title', 'ondigital' ); ?></th>
+                    <td><input type="text" name="_service_rm_items[<?php echo $i; ?>][title]" value="<?php echo esc_attr( $item['title'] ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. 1–2-ci Həftə — Audit', 'ondigital' ); ?>"></td>
+                </tr>
+                <tr>
+                    <th><?php esc_html_e( 'Description', 'ondigital' ); ?></th>
+                    <td><textarea name="_service_rm_items[<?php echo $i; ?>][desc]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'Phase description…', 'ondigital' ); ?>"><?php echo esc_textarea( $item['desc'] ); ?></textarea></td>
+                </tr>
+                <tr>
+                    <th><?php esc_html_e( 'Progress %', 'ondigital' ); ?></th>
+                    <td><input type="text" name="_service_rm_items[<?php echo $i; ?>][prog]" value="<?php echo esc_attr( $item['prog'] ); ?>" class="small-text" placeholder="<?php esc_attr_e( 'e.g. 55%', 'ondigital' ); ?>"></td>
+                </tr>
+            </table>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <script>
+    (function(){
+        var wrap = document.currentScript.previousElementSibling;
+        if ( ! wrap || ! wrap.classList.contains('od-mb-tabwrap') ) {
+            wrap = document.querySelector('.od-mb-tabwrap');
+        }
+        if ( ! wrap ) return;
+        var tabs  = wrap.querySelectorAll('.od-mb-tab');
+        var panes = wrap.querySelectorAll('.od-mb-pane');
+        tabs.forEach(function(tab){
+            tab.addEventListener('click', function(){
+                var key = this.getAttribute('data-odtab');
+                tabs.forEach(function(t){ t.classList.remove('button-primary'); });
+                this.classList.add('button-primary');
+                panes.forEach(function(p){
+                    p.style.display = ( p.getAttribute('data-odpane') === key ) ? '' : 'none';
+                });
+            });
+        });
+    })();
+    </script>
+    <?php
 }
 
 // =============================================================================
@@ -1159,7 +1204,7 @@ function ondigital_save_meta_boxes( $post_id ) {
 
     // ── Service: What's Included & Roadmap ──
     if ( isset( $_POST['ondigital_service_included_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_included_nonce'], 'ondigital_service_included' ) ) {
-        foreach ( array( '_service_wi_title', '_service_wi_header_desc' ) as $field ) {
+        foreach ( array( '_service_wi_title', '_service_wi_header_desc', '_service_wi_tab1_label', '_service_wi_tab2_label' ) as $field ) {
             if ( isset( $_POST[ $field ] ) ) {
                 update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
             }
