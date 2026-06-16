@@ -736,6 +736,8 @@ function ondigital_service_faq_callback( $post ) {
         <?php
         od_mb_text( '_service_faq_panel_title', __( 'Left Panel Title', 'ondigital' ),       get_post_meta( $id, '_service_faq_panel_title', true ), __( 'e.g. Tez-tez soruşulan suallar', 'ondigital' ) );
         od_mb_text( '_service_faq_panel_desc',  __( 'Left Panel Description', 'ondigital' ), get_post_meta( $id, '_service_faq_panel_desc', true ),  __( 'Short text under the title', 'ondigital' ) );
+        od_mb_text( '_service_faq_panel_btn_text', __( 'Button Text', 'ondigital' ),        get_post_meta( $id, '_service_faq_panel_btn_text', true ), __( 'e.g. Sualınız var?', 'ondigital' ) );
+        od_mb_text( '_service_faq_panel_btn_url',  __( 'Button Link (URL)', 'ondigital' ),  get_post_meta( $id, '_service_faq_panel_btn_url', true ),  __( 'e.g. /elaqe/ or full https:// link', 'ondigital' ) );
         ?>
     </table>
 
@@ -1275,10 +1277,13 @@ function ondigital_save_meta_boxes( $post_id ) {
 
     // ── Service: FAQ ──
     if ( isset( $_POST['ondigital_service_faq_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_faq_nonce'], 'ondigital_service_faq' ) ) {
-        foreach ( array( '_service_faq_panel_title', '_service_faq_panel_desc' ) as $field ) {
+        foreach ( array( '_service_faq_panel_title', '_service_faq_panel_desc', '_service_faq_panel_btn_text' ) as $field ) {
             if ( isset( $_POST[ $field ] ) ) {
                 update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
             }
+        }
+        if ( isset( $_POST['_service_faq_panel_btn_url'] ) ) {
+            update_post_meta( $post_id, '_service_faq_panel_btn_url', esc_url_raw( $_POST['_service_faq_panel_btn_url'] ) );
         }
         if ( isset( $_POST['_service_faq_items'] ) && is_array( $_POST['_service_faq_items'] ) ) {
             $items = array();

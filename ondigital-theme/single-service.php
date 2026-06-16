@@ -506,6 +506,8 @@ body { overflow: auto !important; height: auto !important; }
     <?php
     $faq_panel_title = get_post_meta( $id, '_service_faq_panel_title', true ) ?: __( 'Tez-tez soruşulan suallar', 'ondigital' );
     $faq_panel_desc  = get_post_meta( $id, '_service_faq_panel_desc',  true ) ?: __( 'Bu xidmətlə bağlı ən çox gələn suallara cavabları burada tapa bilərsiniz.', 'ondigital' );
+    $faq_btn_text    = get_post_meta( $id, '_service_faq_panel_btn_text', true ) ?: __( 'Sualınız var?', 'ondigital' );
+    $faq_btn_url     = get_post_meta( $id, '_service_faq_panel_btn_url',  true ) ?: home_url( '/elaqe/' );
 
     $faq_items_raw = get_post_meta( $id, '_service_faq_items', true );
     $faq_items = ( is_array( $faq_items_raw ) && ! empty( $faq_items_raw[0]['q'] ) )
@@ -524,8 +526,8 @@ body { overflow: auto !important; height: auto !important; }
                 <span class="cs-eyebrow"><?php esc_html_e( 'FAQ', 'ondigital' ); ?></span>
                 <h2 class="faq-panel-title"><?php echo esc_html( $faq_panel_title ); ?></h2>
                 <p class="faq-panel-desc"><?php echo esc_html( $faq_panel_desc ); ?></p>
-                <a href="<?php echo esc_url( home_url( '/elaqe/' ) ); ?>" class="faq-panel-cta">
-                    <?php esc_html_e( 'Sualınız var?', 'ondigital' ); ?>
+                <a href="<?php echo esc_url( $faq_btn_url ); ?>" class="faq-panel-cta">
+                    <?php echo esc_html( $faq_btn_text ); ?>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
             </div>
