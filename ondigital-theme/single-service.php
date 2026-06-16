@@ -566,18 +566,27 @@ body { overflow: auto !important; height: auto !important; }
 
     <!-- ── CTA + Contact Form ── -->
     <?php
+    $footer_cta_eyebrow = get_post_meta( $id, '_service_footer_cta_eyebrow', true ) ?: __( 'Növbəti addım', 'ondigital' );
     $footer_cta_title = get_post_meta( $id, '_service_footer_cta_title', true ) ?: __( 'Layihənizi birlikdə qurmağa hazırıq', 'ondigital' );
     $footer_cta_sub   = get_post_meta( $id, '_service_footer_cta_sub',   true ) ?: __( 'Bizimlə əlaqə saxlayın, pulsuz məsləhət alın.', 'ondigital' );
-    $perks = $lang === 'en'
-        ? array( 'Free initial consultation', 'Reply within 24 hours', 'Tailored approach for every business' )
-        : array( 'Pulsuz ilkin məsləhət', '24 saat ərzində cavab', 'Hər biznesə fərdi yanaşma' );
+    // Perks: use the per-service fields if any are filled, otherwise fall back to defaults.
+    $perks = array_values( array_filter( array(
+        get_post_meta( $id, '_service_footer_cta_perk1', true ),
+        get_post_meta( $id, '_service_footer_cta_perk2', true ),
+        get_post_meta( $id, '_service_footer_cta_perk3', true ),
+    ) ) );
+    if ( empty( $perks ) ) {
+        $perks = $lang === 'en'
+            ? array( 'Free initial consultation', 'Reply within 24 hours', 'Tailored approach for every business' )
+            : array( 'Pulsuz ilkin məsləhət', '24 saat ərzində cavab', 'Hər biznesə fərdi yanaşma' );
+    }
     ?>
     <section class="ss-cta-form">
         <div class="container">
             <div class="ss-cta-form-inner">
 
                 <div class="ss-cta-form-left">
-                    <span class="ss-cta-form-eyebrow"><?php esc_html_e( 'Növbəti addım', 'ondigital' ); ?></span>
+                    <span class="ss-cta-form-eyebrow"><?php echo esc_html( $footer_cta_eyebrow ); ?></span>
                     <h2 class="ss-cta-form-title"><?php echo esc_html( $footer_cta_title ); ?></h2>
                     <p class="ss-cta-form-sub"><?php echo esc_html( $footer_cta_sub ); ?></p>
                     <ul class="ss-cta-form-perks">

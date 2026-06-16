@@ -516,8 +516,12 @@ function ondigital_service_cta_callback( $post ) {
     ?>
     <table class="form-table">
         <?php
+        od_mb_text( '_service_footer_cta_eyebrow', __( 'Eyebrow (small label)', 'ondigital' ), get_post_meta( $id, '_service_footer_cta_eyebrow', true ), __( 'e.g. Növbəti addım', 'ondigital' ) );
         od_mb_text( '_service_footer_cta_title', __( 'Title', 'ondigital' ),    get_post_meta( $id, '_service_footer_cta_title', true ), __( 'e.g. Layihənizi birlikdə qurmağa hazırıq', 'ondigital' ) );
         od_mb_text( '_service_footer_cta_sub',   __( 'Subtitle', 'ondigital' ), get_post_meta( $id, '_service_footer_cta_sub',   true ), __( 'e.g. Bizimlə əlaqə saxlayın, pulsuz məsləhət alın.', 'ondigital' ) );
+        od_mb_text( '_service_footer_cta_perk1', __( 'Perk 1', 'ondigital' ), get_post_meta( $id, '_service_footer_cta_perk1', true ), __( 'e.g. Pulsuz ilkin məsləhət', 'ondigital' ) );
+        od_mb_text( '_service_footer_cta_perk2', __( 'Perk 2', 'ondigital' ), get_post_meta( $id, '_service_footer_cta_perk2', true ), __( 'e.g. 24 saat ərzində cavab', 'ondigital' ) );
+        od_mb_text( '_service_footer_cta_perk3', __( 'Perk 3', 'ondigital' ), get_post_meta( $id, '_service_footer_cta_perk3', true ), __( 'e.g. Hər biznesə fərdi yanaşma', 'ondigital' ) );
         ?>
     </table>
     <?php
@@ -1146,7 +1150,7 @@ function ondigital_save_meta_boxes( $post_id ) {
 
     // ── Service: CTA sections ──
     if ( isset( $_POST['ondigital_service_cta_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_cta_nonce'], 'ondigital_service_cta' ) ) {
-        foreach ( array( '_service_footer_cta_title', '_service_footer_cta_sub' ) as $field ) {
+        foreach ( array( '_service_footer_cta_eyebrow', '_service_footer_cta_title', '_service_footer_cta_sub', '_service_footer_cta_perk1', '_service_footer_cta_perk2', '_service_footer_cta_perk3' ) as $field ) {
             if ( isset( $_POST[ $field ] ) ) {
                 update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
             }
