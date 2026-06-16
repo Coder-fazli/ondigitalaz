@@ -378,6 +378,8 @@ body { overflow: auto !important; height: auto !important; }
     <?php
     $wif_title = get_post_meta( $id, '_service_wif_title', true ) ?: __( 'Bu xidmət kimə uyğundur?', 'ondigital' );
     $wif_sub   = get_post_meta( $id, '_service_wif_sub',   true ) ?: __( 'Hər xidmət hər kəs üçün deyil. Aşağıda bu xidmətin kimin üçün uyğun, kimin üçün uyğun olmadığını göstəririk.', 'ondigital' );
+    $wif_for_label      = get_post_meta( $id, '_service_wif_for_label',      true ) ?: __( 'Bu xidmət sizin üçündür', 'ondigital' );
+    $wif_not_label      = get_post_meta( $id, '_service_wif_not_label',      true ) ?: __( 'Bu xidmət sizin üçün deyil', 'ondigital' );
     $wif_note_pre       = get_post_meta( $id, '_service_wif_note_pre',       true ) ?: __( 'Əmin deyilsiniz?', 'ondigital' );
     $wif_note_link_text = get_post_meta( $id, '_service_wif_note_link_text', true ) ?: __( 'Pulsuz məsləhət alın', 'ondigital' );
     $wif_note_link_url  = get_post_meta( $id, '_service_wif_note_link_url',  true ) ?: home_url( '/elaqe/' );
@@ -418,7 +420,7 @@ body { overflow: auto !important; height: auto !important; }
                             <span class="wif-col-icon">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
                             </span>
-                            <span class="wif-col-label"><?php esc_html_e( 'Bu xidmət sizin üçündür', 'ondigital' ); ?></span>
+                            <span class="wif-col-label"><?php echo esc_html( $wif_for_label ); ?></span>
                         </div>
                         <ul class="wif-list">
                             <?php foreach ( $wif_for as $item ) : ?>
@@ -443,7 +445,7 @@ body { overflow: auto !important; height: auto !important; }
                             <span class="wif-col-icon">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                             </span>
-                            <span class="wif-col-label"><?php esc_html_e( 'Bu xidmət sizin üçün deyil', 'ondigital' ); ?></span>
+                            <span class="wif-col-label"><?php echo esc_html( $wif_not_label ); ?></span>
                         </div>
                         <ul class="wif-list">
                             <?php foreach ( $wif_not as $item ) : ?>

@@ -651,6 +651,8 @@ function ondigital_service_wif_callback( $post ) {
         <?php
         od_mb_text( '_service_wif_title', __( 'Section Title', 'ondigital' ),   get_post_meta( $id, '_service_wif_title', true ), __( 'e.g. Bu xidmət kimə uyğundur?', 'ondigital' ) );
         od_mb_text( '_service_wif_sub',   __( 'Section Subtitle', 'ondigital' ), get_post_meta( $id, '_service_wif_sub', true ),   __( 'Short sentence below the title', 'ondigital' ) );
+        od_mb_text( '_service_wif_for_label', __( 'Left Column Label (✓ for)', 'ondigital' ),  get_post_meta( $id, '_service_wif_for_label', true ), __( 'e.g. Bu xidmət sizin üçündür', 'ondigital' ) );
+        od_mb_text( '_service_wif_not_label', __( 'Right Column Label (✗ not)', 'ondigital' ), get_post_meta( $id, '_service_wif_not_label', true ), __( 'e.g. Bu xidmət sizin üçün deyil', 'ondigital' ) );
         od_mb_text( '_service_wif_note_pre',      __( 'Bottom Note — text before link', 'ondigital' ), get_post_meta( $id, '_service_wif_note_pre', true ),      __( 'e.g. Əmin deyilsiniz?', 'ondigital' ) );
         od_mb_text( '_service_wif_note_link_text',__( 'Bottom Note — link text', 'ondigital' ),        get_post_meta( $id, '_service_wif_note_link_text', true ),__( 'e.g. Pulsuz məsləhət alın', 'ondigital' ) );
         od_mb_text( '_service_wif_note_link_url', __( 'Bottom Note — link URL', 'ondigital' ),         get_post_meta( $id, '_service_wif_note_link_url', true ), __( 'e.g. /elaqe/ or full https:// link', 'ondigital' ) );
@@ -1241,7 +1243,7 @@ function ondigital_save_meta_boxes( $post_id ) {
 
     // ── Service: Who Is This For ──
     if ( isset( $_POST['ondigital_service_wif_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_wif_nonce'], 'ondigital_service_wif' ) ) {
-        foreach ( array( '_service_wif_title', '_service_wif_sub', '_service_wif_note_pre', '_service_wif_note_link_text', '_service_wif_note_post' ) as $field ) {
+        foreach ( array( '_service_wif_title', '_service_wif_sub', '_service_wif_for_label', '_service_wif_not_label', '_service_wif_note_pre', '_service_wif_note_link_text', '_service_wif_note_post' ) as $field ) {
             if ( isset( $_POST[ $field ] ) ) {
                 update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
             }
