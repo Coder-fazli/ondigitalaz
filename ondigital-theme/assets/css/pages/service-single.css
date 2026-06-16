@@ -417,14 +417,9 @@ html, body { overflow: auto !important; height: auto !important; }
     color: #121212; margin: 0;
 }
 
-/* Scrollable container — 5 steps visible, scroll for more */
+/* Show all steps — no inner scroll, section grows to fit every card */
 .ss-wrap .cs-steps {
     margin-top: 56px;
-    max-height: calc(5 * 161px); /* 5 × (80px content + 40px top + 40px bottom + 1px border) */
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: thin;
-    scrollbar-color: var(--ss-accent) var(--ss-border);
 }
 
 .ss-wrap .cs-steps::-webkit-scrollbar        { width: 4px; }
@@ -529,7 +524,6 @@ html, body { overflow: auto !important; height: auto !important; }
 }
 
 @media (max-width: 767px) {
-    .ss-wrap .cs-steps { max-height: calc(5 * 116px); }
     .ss-wrap .cs-step { grid-template-columns: 36px 1px 36px 1fr; gap: 10px; padding: 22px 0; }
     .ss-wrap .cs-step-n { font-size: 34px; }
     .ss-wrap .cs-step-icon { width: 36px; height: 36px; border-radius: 10px; }
