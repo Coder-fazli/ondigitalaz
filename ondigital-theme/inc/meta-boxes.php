@@ -560,12 +560,13 @@ function ondigital_service_included_callback( $post ) {
     <div class="od-mb-tabwrap" style="margin-top:8px;border-top:1px solid #ddd;padding-top:14px;">
         <div class="od-mb-tabs" style="display:flex;gap:6px;margin:0 0 12px;">
             <button type="button" class="button button-primary od-mb-tab" data-odtab="wi">
-                <?php echo esc_html( $wi_tab1 ); ?> <span style="opacity:.7;">(<?php esc_html_e( 'up to 6 items', 'ondigital' ); ?>)</span>
+                <?php echo esc_html( $wi_tab1 ); ?>
             </button>
             <button type="button" class="button od-mb-tab" data-odtab="rm">
-                <?php echo esc_html( $wi_tab2 ); ?> <span style="opacity:.7;">(<?php esc_html_e( 'up to 5 phases', 'ondigital' ); ?>)</span>
+                <?php echo esc_html( $wi_tab2 ); ?>
             </button>
         </div>
+        <p class="description" style="margin:0 0 10px;"><?php esc_html_e( 'Tab names come from the “Tab 1 Label” / “Tab 2 Label” fields above. Tab 1 holds up to 6 items, Tab 2 up to 5 phases.', 'ondigital' ); ?></p>
 
         <!-- Pane 1: Nə daxildir -->
         <div class="od-mb-pane" data-odpane="wi">
