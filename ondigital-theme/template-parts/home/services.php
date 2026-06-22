@@ -45,7 +45,9 @@ $services_query = new WP_Query( array(
     'posts_per_page' => -1,
     'orderby'        => 'menu_order',
     'order'          => 'ASC',
-    'lang'           => '',
+    // Show only the services for the current language (was '' = all languages,
+    // which made the AZ home page list EN services linking to EN URLs).
+    'lang'           => function_exists( 'pll_current_language' ) ? pll_current_language() : '',
 ) );
 ?>
 <section class="service-area">
