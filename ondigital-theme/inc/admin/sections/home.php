@@ -22,7 +22,8 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
             <?php od_lang_pane( $lang ); ?>
                 <?php od_text( 'hero_subtitle_' . $lang, __( 'Subtitle Badge', 'ondigital' ), $options, __( 'e.g. AWARD WINNING DIGITAL AGENCY', 'ondigital' ) ); ?>
                 <?php od_text( 'hero_h1_line1_' . $lang, __( 'Title Line 1', 'ondigital' ), $options ); ?>
-                <?php od_text( 'hero_h1_line2_' . $lang, __( 'Title Line 2', 'ondigital' ), $options ); ?>
+                <?php od_text( 'hero_h1_line2_' . $lang, __( 'Title Line 2 (highlighted)', 'ondigital' ), $options ); ?>
+                <?php od_text( 'hero_h1_line3_' . $lang, __( 'Title Line 3', 'ondigital' ), $options ); ?>
                 <?php od_textarea( 'hero_body_' . $lang, __( 'Body Text', 'ondigital' ), $options ); ?>
                 <?php od_row_open(); ?>
                     <?php od_text( 'hero_cta_text_' . $lang, __( 'CTA Button Text', 'ondigital' ), $options ); ?>
