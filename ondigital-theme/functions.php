@@ -799,3 +799,14 @@ add_action( 'wp_before_admin_bar_render', function() {
     global $wp_admin_bar;
     $wp_admin_bar->remove_menu( 'comments' );
 } );
+
+// =============================================================================
+// Language switcher flags — inline SVG (emoji flags don't render on Windows)
+// =============================================================================
+function ondigital_lang_flag_svg( string $slug ): string {
+    $flags = array(
+        'en' => '<svg class="od-flag-svg" viewBox="0 0 60 30" aria-hidden="true" focusable="false"><clipPath id="od-uk-a"><path d="M0 0h60v30H0z"/></clipPath><clipPath id="od-uk-b"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#od-uk-a)"><path d="M0 0h60v30H0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#od-uk-b)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg>',
+        'az' => '<svg class="od-flag-svg" viewBox="0 0 60 30" aria-hidden="true" focusable="false"><rect width="60" height="30" fill="#3F9C35"/><rect width="60" height="20" fill="#ED2939"/><rect width="60" height="10" fill="#0092BC"/><circle cx="28" cy="15" r="6" fill="#fff"/><circle cx="30.5" cy="15" r="5" fill="#ED2939"/><path d="M37 15l-3.4 1.1 2.1-2.9v3.6l-2.1-2.9z" fill="#fff"/></svg>',
+    );
+    return $flags[ $slug ] ?? '<svg class="od-flag-svg" viewBox="0 0 60 30" aria-hidden="true" focusable="false"><rect width="60" height="30" rx="2" fill="#ccc"/></svg>';
+}

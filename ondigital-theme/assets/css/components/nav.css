@@ -259,7 +259,17 @@ header .container.large {
 .od-lang-flag {
     font-size: 22px;
     line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+/* Inline SVG flag — renders cross-platform (Windows has no emoji flags) */
+.od-flag-svg {
     display: block;
+    width: 22px;
+    height: 14px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
 .od-lang-code {
