@@ -368,3 +368,91 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea, select,
 .copyright-area .copyright-terms a:hover {
     color: #ffffff;
 }
+
+/* =============================================================================
+   Gutenberg content blocks — the theme dequeues wp-block-library on the front
+   end, so Gallery/Columns blocks lose their layout and stack vertically.
+   These scoped rules restore side-by-side layout inside post content.
+   ============================================================================= */
+
+/* Images never overflow their container */
+.entry-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Gallery block (WP 5.9+ nested-images markup) */
+.entry-content .wp-block-gallery.has-nested-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.entry-content .wp-block-gallery.has-nested-images > figure.wp-block-image {
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+}
+
+.entry-content .wp-block-gallery.has-nested-images > figure.wp-block-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Respect an explicit column count */
+.entry-content .wp-block-gallery.columns-2 > figure.wp-block-image { flex-basis: calc(50% - 8px); }
+.entry-content .wp-block-gallery.columns-3 > figure.wp-block-image { flex-basis: calc(33.333% - 11px); }
+.entry-content .wp-block-gallery.columns-4 > figure.wp-block-image { flex-basis: calc(25% - 12px); }
+
+/* Legacy [gallery] shortcode */
+.entry-content .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.entry-content .gallery .gallery-item {
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.entry-content .gallery .gallery-item img {
+    width: 100%;
+    height: auto;
+    border: 0;
+    border-radius: 8px;
+}
+
+.entry-content .gallery.gallery-columns-2 .gallery-item { flex-basis: calc(50% - 8px); }
+.entry-content .gallery.gallery-columns-3 .gallery-item { flex-basis: calc(33.333% - 11px); }
+.entry-content .gallery.gallery-columns-4 .gallery-item { flex-basis: calc(25% - 12px); }
+
+/* Columns block */
+.entry-content .wp-block-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin: 24px 0;
+}
+
+.entry-content .wp-block-column {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+/* Stack everything on small screens */
+@media only screen and (max-width: 600px) {
+    .entry-content .wp-block-gallery.has-nested-images > figure.wp-block-image,
+    .entry-content .gallery .gallery-item {
+        flex-basis: 100% !important;
+    }
+    .entry-content .wp-block-columns {
+        flex-direction: column;
+    }
+}
