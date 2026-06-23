@@ -163,12 +163,7 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
                 <?php od_text(     'services_meta_title_' . $lang, __( 'Meta Title', 'ondigital' ),       $options ); ?>
                 <?php od_textarea( 'services_meta_desc_'  . $lang, __( 'Meta Description', 'ondigital' ), $options ); ?>
                 <?php od_divider(); ?>
-                <p style="color:#646970;font-size:12px;margin:0 0 12px;"><?php esc_html_e( 'Default labels shown on individual service posts when no custom value is set.', 'ondigital' ); ?></p>
-                <?php od_text( 'service_hero_badge_'      . $lang, __( 'Single Service Badge', 'ondigital' ),         $options, __( 'e.g. Ondigital — Xidmət', 'ondigital' ) ); ?>
-                <?php od_row_open(); ?>
-                    <?php od_text( 'service_hero_btn_primary_' . $lang, __( 'Primary Button', 'ondigital' ), $options, __( 'e.g. Başlayaq', 'ondigital' ) ); ?>
-                    <?php od_text( 'service_hero_btn_ghost_'   . $lang, __( 'Ghost Button', 'ondigital' ),   $options, __( 'e.g. Prosesi gör', 'ondigital' ) ); ?>
-                <?php od_row_close(); ?>
+                <p style="color:#646970;font-size:12px;margin:0 0 12px;"><?php esc_html_e( 'Each service’s hero badge and buttons (text + link) are now edited per service: WordPress Admin → Services → open the service → “1. Hero” box.', 'ondigital' ); ?></p>
             <?php od_lang_pane_close(); ?>
         <?php endforeach; ?>
         <?php od_lang_close(); ?>

@@ -329,6 +329,11 @@ function ondigital_service_meta_callback( $post ) {
         <?php
         od_mb_text( '_service_stat_number', __( 'Hero Stat Number', 'ondigital' ), get_post_meta( $post->ID, '_service_stat_number', true ), __( 'e.g. +240%', 'ondigital' ) );
         od_mb_text( '_service_stat_label',  __( 'Hero Stat Label',  'ondigital' ), get_post_meta( $post->ID, '_service_stat_label',  true ), __( 'e.g. Üzvi trafik artımı', 'ondigital' ) );
+        od_mb_text( '_service_hero_badge',     __( 'Hero Badge / Eyebrow', 'ondigital' ),  get_post_meta( $post->ID, '_service_hero_badge', true ),     __( 'e.g. Ondigital — Xidmət', 'ondigital' ) );
+        od_mb_text( '_service_hero_btn1_text', __( 'Primary Button — Text', 'ondigital' ), get_post_meta( $post->ID, '_service_hero_btn1_text', true ), __( 'e.g. Başlayaq', 'ondigital' ) );
+        od_mb_text( '_service_hero_btn1_url',  __( 'Primary Button — Link', 'ondigital' ), get_post_meta( $post->ID, '_service_hero_btn1_url', true ),  __( 'e.g. /elaqe/ or full https:// link', 'ondigital' ) );
+        od_mb_text( '_service_hero_btn2_text', __( 'Ghost Button — Text', 'ondigital' ),   get_post_meta( $post->ID, '_service_hero_btn2_text', true ), __( 'e.g. Prosesi gör', 'ondigital' ) );
+        od_mb_text( '_service_hero_btn2_url',  __( 'Ghost Button — Link', 'ondigital' ),   get_post_meta( $post->ID, '_service_hero_btn2_url', true ),  __( 'e.g. #ss-process (scrolls to process) or /elaqe/', 'ondigital' ) );
         ?>
         <tr>
             <th><label for="_service_features"><?php esc_html_e( 'Feature List', 'ondigital' ); ?></label></th>
@@ -1173,9 +1178,16 @@ function ondigital_save_meta_boxes( $post_id ) {
                 update_post_meta( $post_id, $field, absint( $_POST[ $field ] ) );
             }
         }
-        foreach ( array( '_service_stat_number', '_service_stat_label' ) as $field ) {
+        foreach ( array( '_service_stat_number', '_service_stat_label', '_service_hero_badge', '_service_hero_btn1_text', '_service_hero_btn2_text' ) as $field ) {
             if ( isset( $_POST[ $field ] ) ) {
                 update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
+            }
+        }
+        foreach ( array( '_service_hero_btn1_url', '_service_hero_btn2_url' ) as $field ) {
+            if ( isset( $_POST[ $field ] ) ) {
+                // Allow in-page anchors (#ss-process) as well as URLs.
+                $val = trim( wp_unslash( $_POST[ $field ] ) );
+                update_post_meta( $post_id, $field, ( strpos( $val, '#' ) === 0 ) ? sanitize_text_field( $val ) : esc_url_raw( $val ) );
             }
         }
         if ( isset( $_POST['_service_features'] ) ) {

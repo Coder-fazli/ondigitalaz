@@ -21,11 +21,13 @@ $lang    = function_exists( 'pll_current_language' ) ? pll_current_language() : 
 $stat_number  = get_post_meta( $id, '_service_stat_number', true ) ?: '+240%';
 $stat_label   = get_post_meta( $id, '_service_stat_label',  true ) ?: 'Üzvi trafik artımı';
 
-// Use ondigital_get_option so an empty saved value falls back (lang → en → legacy → default)
-// instead of rendering blank. Raw $od_opts[...] ?? default kept empty strings → blank buttons.
-$hero_badge       = ondigital_get_option( 'service_hero_badge',      $lang === 'en' ? 'Ondigital — Service' : 'Ondigital — Xidmət' );
-$hero_btn_primary = ondigital_get_option( 'service_hero_btn_primary', $lang === 'en' ? 'Get Started' : 'Başlayaq' );
-$hero_btn_ghost   = ondigital_get_option( 'service_hero_btn_ghost',   $lang === 'en' ? 'See the process' : 'Prosesi gör' );
+// Hero badge + buttons are per-service (edited on the Service post → "1. Hero" box),
+// with a sensible default when left blank.
+$hero_badge           = get_post_meta( $id, '_service_hero_badge',     true ) ?: ( $lang === 'en' ? 'Ondigital — Service' : 'Ondigital — Xidmət' );
+$hero_btn_primary     = get_post_meta( $id, '_service_hero_btn1_text', true ) ?: ( $lang === 'en' ? 'Get Started' : 'Başlayaq' );
+$hero_btn_primary_url = get_post_meta( $id, '_service_hero_btn1_url',  true ) ?: home_url( '/elaqe/' );
+$hero_btn_ghost       = get_post_meta( $id, '_service_hero_btn2_text', true ) ?: ( $lang === 'en' ? 'See the process' : 'Prosesi gör' );
+$hero_btn_ghost_url   = get_post_meta( $id, '_service_hero_btn2_url',  true ) ?: '#ss-process';
 
 $demo_excerpt = __( 'Biz rəqəmsal ekosisteminizi məlumatlarla idarə olunan strategiyalarla yenidən qururuq. Standart şablonlar deyil — sizin üçün xüsusi hazırlanmış texniki mükəmməllik.', 'ondigital' );
 
@@ -72,8 +74,8 @@ body { overflow: auto !important; height: auto !important; }
                     <h1 class="ss-hero-title"><?php the_title(); ?></h1>
                     <p class="ss-hero-desc"><?php echo esc_html( get_the_excerpt() ?: $demo_excerpt ); ?></p>
                     <div class="ss-hero-btns">
-                        <a href="<?php echo esc_url( home_url( '/elaqe/' ) ); ?>" class="ss-btn-primary"><?php echo esc_html( $hero_btn_primary ); ?></a>
-                        <a href="#ss-process" class="ss-btn-ghost"><?php echo esc_html( $hero_btn_ghost ); ?></a>
+                        <a href="<?php echo esc_url( $hero_btn_primary_url ); ?>" class="ss-btn-primary"><?php echo esc_html( $hero_btn_primary ); ?></a>
+                        <a href="<?php echo esc_attr( $hero_btn_ghost_url ); ?>" class="ss-btn-ghost"><?php echo esc_html( $hero_btn_ghost ); ?></a>
                     </div>
                 </div>
 
