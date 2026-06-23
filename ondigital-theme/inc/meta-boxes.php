@@ -549,6 +549,28 @@ function ondigital_service_included_callback( $post ) {
         od_mb_text( '_service_wi_header_desc', __( 'Header Description', 'ondigital' ),  get_post_meta( $id, '_service_wi_header_desc', true ),  __( 'Short intro below the title', 'ondigital' ) );
         od_mb_text( '_service_wi_tab1_label',  __( 'Tab 1 Label', 'ondigital' ),        get_post_meta( $id, '_service_wi_tab1_label', true ),  __( 'e.g. Nə daxildir', 'ondigital' ) );
         od_mb_text( '_service_wi_tab2_label',  __( 'Tab 2 Label', 'ondigital' ),        get_post_meta( $id, '_service_wi_tab2_label', true ),  __( 'e.g. Aylıq yol xəritəsi', 'ondigital' ) );
+
+        // Per-service visibility toggles (default ON; only '0' hides).
+        $wi_show_included = get_post_meta( $id, '_service_wi_show_included', true ) !== '0';
+        $wi_show_roadmap  = get_post_meta( $id, '_service_wi_show_roadmap',  true ) !== '0';
+        ?>
+        <tr>
+            <th><?php esc_html_e( 'Show tabs', 'ondigital' ); ?></th>
+            <td>
+                <label style="display:block;margin-bottom:6px;">
+                    <input type="hidden" name="_service_wi_show_included" value="0">
+                    <input type="checkbox" name="_service_wi_show_included" value="1" <?php checked( $wi_show_included ); ?>>
+                    <?php esc_html_e( 'Show “What’s Included” tab', 'ondigital' ); ?>
+                </label>
+                <label style="display:block;">
+                    <input type="hidden" name="_service_wi_show_roadmap" value="0">
+                    <input type="checkbox" name="_service_wi_show_roadmap" value="1" <?php checked( $wi_show_roadmap ); ?>>
+                    <?php esc_html_e( 'Show “Monthly Roadmap” tab', 'ondigital' ); ?>
+                </label>
+                <p class="description"><?php esc_html_e( 'Untick to hide a tab on this service. If both are unticked, the whole section is hidden.', 'ondigital' ); ?></p>
+            </td>
+        </tr>
+        <?php
         ?>
     </table>
 
@@ -1213,7 +1235,7 @@ function ondigital_save_meta_boxes( $post_id ) {
 
     // ── Service: What's Included & Roadmap ──
     if ( isset( $_POST['ondigital_service_included_nonce'] ) && wp_verify_nonce( $_POST['ondigital_service_included_nonce'], 'ondigital_service_included' ) ) {
-        foreach ( array( '_service_wi_title', '_service_wi_header_desc', '_service_wi_tab1_label', '_service_wi_tab2_label' ) as $field ) {
+        foreach ( array( '_service_wi_title', '_service_wi_header_desc', '_service_wi_tab1_label', '_service_wi_tab2_label', '_service_wi_show_included', '_service_wi_show_roadmap' ) as $field ) {
             if ( isset( $_POST[ $field ] ) ) {
                 update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
             }

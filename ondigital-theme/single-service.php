@@ -21,9 +21,11 @@ $lang    = function_exists( 'pll_current_language' ) ? pll_current_language() : 
 $stat_number  = get_post_meta( $id, '_service_stat_number', true ) ?: '+240%';
 $stat_label   = get_post_meta( $id, '_service_stat_label',  true ) ?: 'Üzvi trafik artımı';
 
-$hero_badge       = $od_opts[ 'service_hero_badge_' . $lang ]       ?? ( $lang === 'en' ? 'Ondigital — Service' : 'Ondigital — Xidmət' );
-$hero_btn_primary = $od_opts[ 'service_hero_btn_primary_' . $lang ]  ?? ( $lang === 'en' ? 'Get Started' : 'Başlayaq' );
-$hero_btn_ghost   = $od_opts[ 'service_hero_btn_ghost_' . $lang ]    ?? ( $lang === 'en' ? 'See the process' : 'Prosesi gör' );
+// Use ondigital_get_option so an empty saved value falls back (lang → en → legacy → default)
+// instead of rendering blank. Raw $od_opts[...] ?? default kept empty strings → blank buttons.
+$hero_badge       = ondigital_get_option( 'service_hero_badge',      $lang === 'en' ? 'Ondigital — Service' : 'Ondigital — Xidmət' );
+$hero_btn_primary = ondigital_get_option( 'service_hero_btn_primary', $lang === 'en' ? 'Get Started' : 'Başlayaq' );
+$hero_btn_ghost   = ondigital_get_option( 'service_hero_btn_ghost',   $lang === 'en' ? 'See the process' : 'Prosesi gör' );
 
 $demo_excerpt = __( 'Biz rəqəmsal ekosisteminizi məlumatlarla idarə olunan strategiyalarla yenidən qururuq. Standart şablonlar deyil — sizin üçün xüsusi hazırlanmış texniki mükəmməllik.', 'ondigital' );
 
@@ -221,6 +223,12 @@ body { overflow: auto !important; height: auto !important; }
     </section>
 
     <!-- ── 5. What's Included + Monthly Roadmap ── -->
+    <?php
+    // Per-service visibility toggles (default ON; only '0' hides).
+    $wi_show_included = get_post_meta( $id, '_service_wi_show_included', true ) !== '0';
+    $wi_show_roadmap  = get_post_meta( $id, '_service_wi_show_roadmap',  true ) !== '0';
+    if ( $wi_show_included || $wi_show_roadmap ) :
+    ?>
     <section class="wi-section">
         <div class="container">
             <?php
@@ -236,6 +244,7 @@ body { overflow: auto !important; height: auto !important; }
                 </div>
                 <p class="wi-header-desc"><?php echo esc_html( $wi_header_desc ); ?></p>
             </div>
+            <?php if ( $wi_show_included && $wi_show_roadmap ) : ?>
             <div class="wi-tabs">
                 <button class="wi-tab active" data-tab="included">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
@@ -246,7 +255,9 @@ body { overflow: auto !important; height: auto !important; }
                     <?php echo esc_html( $wi_tab2_label ); ?>
                 </button>
             </div>
+            <?php endif; ?>
 
+            <?php if ( $wi_show_included ) : ?>
             <!-- Pane: Nə daxildir -->
             <div class="wi-pane active" data-tab="included">
                 <div class="wi-accord">
@@ -281,9 +292,11 @@ body { overflow: auto !important; height: auto !important; }
                     <?php endforeach; ?>
                 </div>
             </div>
+            <?php endif; ?>
 
+            <?php if ( $wi_show_roadmap ) : ?>
             <!-- Pane: Aylıq yol xəritəsi -->
-            <div class="wi-pane" data-tab="roadmap">
+            <div class="wi-pane<?php echo $wi_show_included ? '' : ' active'; ?>" data-tab="roadmap">
                 <div class="wi-accord">
                     <?php
                     $rm_items_raw = get_post_meta( $id, '_service_rm_items', true );
@@ -322,8 +335,10 @@ body { overflow: auto !important; height: auto !important; }
                     <?php endforeach; ?>
                 </div>
             </div>
+            <?php endif; ?>
         </div>
     </section>
+    <?php endif; ?>
     <script>
     (function(){
         // Tab switcher
