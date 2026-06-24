@@ -211,6 +211,21 @@
     }
 }
 
+/* Responsive logo — header.php sets a fixed inline width (e.g. 150px), which
+   looks tiny on large Windows displays at 100% scaling. Override it with a
+   viewport-scaling width: ~150px on small screens up to 200px on big ones.
+   !important is required to beat the inline style. */
+.header-area .header__logo img {
+    width: clamp(150px, 11vw, 200px) !important;
+    height: auto !important;
+}
+
+@media only screen and (max-width: 991px) {
+    .header-area .header__logo img {
+        width: clamp(130px, 30vw, 160px) !important;
+    }
+}
+
 /* Header — align logo with hero content (80px from edge) */
 header .container.large {
     padding-left: 80px !important;
