@@ -28,6 +28,29 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
 
     <?php od_card_close(); ?>
 
+    <!-- ── CONTACT SIDEBAR (INFO PANEL) ── -->
+    <?php od_card_open( __( 'Contact Sidebar (Info Panel)', 'ondigital' ), 'dashicons-phone' ); ?>
+
+        <?php od_lang_open(); ?>
+        <?php foreach ( $langs as $lang => $label ) : ?>
+            <?php od_lang_pane( $lang ); ?>
+                <?php od_text( 'contact_info_title_'  . $lang, __( 'Panel Heading — line 1', 'ondigital' ),        $options, __( 'e.g. Əlaqə', 'ondigital' ) ); ?>
+                <?php od_text( 'contact_info_title2_' . $lang, __( 'Panel Heading — line 2 (mint)', 'ondigital' ), $options, __( 'e.g. Məlumatları', 'ondigital' ) ); ?>
+                <?php od_textarea( 'contact_info_desc_' . $lang, __( 'Panel Description', 'ondigital' ),           $options ); ?>
+                <?php od_text( 'contact_address_' . $lang, __( 'Address', 'ondigital' ),                          $options, __( 'e.g. Bakı, Azərbaycan', 'ondigital' ) ); ?>
+            <?php od_lang_pane_close(); ?>
+        <?php endforeach; ?>
+        <?php od_lang_close(); ?>
+
+        <?php od_divider(); ?>
+        <?php od_row_open(); ?>
+            <?php od_text( 'contact_phone', __( 'Phone Number', 'ondigital' ), $options, __( 'e.g. +994 50 123 45 67', 'ondigital' ) ); ?>
+            <?php od_text( 'contact_email', __( 'Email Address', 'ondigital' ), $options, __( 'e.g. office@ondigital.az', 'ondigital' ) ); ?>
+        <?php od_row_close(); ?>
+        <p style="color:#646970;font-size:12px;margin:8px 0 0;"><?php esc_html_e( 'Social icons are managed in Appearance → Customize → Social Media Links.', 'ondigital' ); ?></p>
+
+    <?php od_card_close(); ?>
+
     <!-- ── SEO ── -->
     <?php od_card_open( __( 'Page SEO', 'ondigital' ), 'dashicons-search' ); ?>
 

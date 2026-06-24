@@ -5,9 +5,14 @@
  * @package OnDigital
  */
 
-$phone   = get_theme_mod( 'ondigital_phone', '+994 50 123 45 67' );
-$email   = get_theme_mod( 'ondigital_email', 'info@ondigital.az' );
-$address = get_theme_mod( 'ondigital_address', 'Bakı, Azərbaycan' );
+// Prefer the Contact Page options (per-language); fall back to the Customizer values.
+$phone   = ondigital_get_option( 'contact_phone' )   ?: get_theme_mod( 'ondigital_phone', '+994 50 123 45 67' );
+$email   = ondigital_get_option( 'contact_email' )   ?: get_theme_mod( 'ondigital_email', 'info@ondigital.az' );
+$address = ondigital_get_option( 'contact_address' ) ?: get_theme_mod( 'ondigital_address', 'Bakı, Azərbaycan' );
+
+$info_title  = ondigital_get_option( 'contact_info_title',  __( 'Əlaqə', 'ondigital' ) );
+$info_title2 = ondigital_get_option( 'contact_info_title2', __( 'Məlumatları', 'ondigital' ) );
+$info_desc   = ondigital_get_option( 'contact_info_desc',   __( 'Bizdən eşitmək istəyirik. Sizə necə kömək edə biləcəyimizi bilin!', 'ondigital' ) );
 
 $social_linkedin  = get_theme_mod( 'ondigital_linkedin', '#' );
 $social_instagram = get_theme_mod( 'ondigital_instagram', '#' );
@@ -19,8 +24,8 @@ $social_facebook  = get_theme_mod( 'ondigital_facebook', '#' );
 
             <!-- Left: Info panel -->
             <div class="contact-info-panel">
-                <h2><?php esc_html_e( 'Əlaqə', 'ondigital' ); ?><br><em><?php esc_html_e( 'Məlumatları', 'ondigital' ); ?></em></h2>
-                <p class="contact-info-desc"><?php esc_html_e( 'Bizdən eşitmək istəyirik. Sizə necə kömək edə biləcəyimizi bilin!', 'ondigital' ); ?></p>
+                <h2><?php echo esc_html( $info_title ); ?><br><em><?php echo esc_html( $info_title2 ); ?></em></h2>
+                <p class="contact-info-desc"><?php echo esc_html( $info_desc ); ?></p>
 
                 <div class="contact-info-item">
                     <div class="contact-info-icon">
