@@ -3,7 +3,7 @@
    ============================================================================= */
 
 .promo-bar {
-    background: linear-gradient(90deg, #1a1a1a 0%, #2a3a1a 100%);
+    background: #1a1a1a;
     padding: 16px 0;
     border-bottom: 1px solid rgba(194, 249, 113, 0.15);
 }
