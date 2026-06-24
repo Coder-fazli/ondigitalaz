@@ -84,21 +84,24 @@ $all_terms = get_terms( array(
         $result_sub   = get_post_meta( $post_id, 'project_result_sub',     true ) ?: '';
         $excerpt      = get_the_excerpt() ?: get_post_meta( $post_id, 'project_short_desc', true );
 
-        // Layout class based on position
-        $layout_class = '';
-        if ( $card_index === 0 ) $layout_class = 'pa-featured';
-        if ( $card_index === 1 ) $layout_class = 'pa-tall';
-        if ( $card_index === 4 ) $layout_class = 'pa-wide';
-
         // Placeholder colour cycles if no thumbnail
         $ph_colors = array( 'pa-ph-1', 'pa-ph-2', 'pa-ph-3', 'pa-ph-4', 'pa-ph-5' );
         $ph_class  = $ph_colors[ $card_index % 5 ];
-
         $delay_class = 'd' . ( ( $card_index % 4 ) + 1 );
+
+        // First card is the orange-accented "featured" one.
+        $feat_class = $card_index === 0 ? 'pa-feat' : '';
+
+        // Client logo (image) + name; single category tag.
+        $client_logo_id  = (int) get_post_meta( $post_id, '_project_client_logo', true );
+        $client_logo_url = $client_logo_id ? wp_get_attachment_image_url( $client_logo_id, 'medium' ) : '';
+        $client_name     = get_post_meta( $post_id, '_od_client', true );
+        $cat_tag         = ! empty( $cat_names ) ? $cat_names[0] : '';
+        $read_label      = $lang === 'en' ? 'Read' : 'Ətraflı';
     ?>
 
     <a href="<?php the_permalink(); ?>"
-       class="pa-card <?php echo esc_attr( $layout_class ); ?> has_fade_anim <?php echo esc_attr( $delay_class ); ?>"
+       class="pa-card <?php echo esc_attr( $feat_class ); ?> has_fade_anim <?php echo esc_attr( $delay_class ); ?>"
        data-cat="<?php echo esc_attr( $cat_slugs ); ?>">
 
       <div class="pa-thumb">
@@ -113,46 +116,28 @@ $all_terms = get_terms( array(
 
       <div class="pa-body">
 
-        <?php if ( ! empty( $cat_names ) ) : ?>
-        <div class="pa-tags">
-          <span class="pa-tag pa-tag-lime"><?php echo esc_html( $cat_names[0] ); ?></span>
-          <?php for ( $i = 1; $i < count( $cat_names ); $i++ ) : ?>
-            <span class="pa-tag"><?php echo esc_html( $cat_names[ $i ] ); ?></span>
-          <?php endfor; ?>
-        </div>
-        <?php endif; ?>
-
-        <div class="pa-client"><?php the_title(); ?></div>
-
-        <?php if ( $excerpt ) : ?>
-          <p class="pa-desc"><?php echo esc_html( wp_trim_words( $excerpt, 20 ) ); ?></p>
-        <?php endif; ?>
-
-        <?php if ( $result_num ) : ?>
-        <div class="pa-result">
-          <div>
-            <div class="pa-result-n">
-              <?php echo esc_html( $result_num ); ?>
-              <?php if ( $result_label ) : ?>
-                <span><?php echo esc_html( $result_label ); ?></span>
-              <?php endif; ?>
-            </div>
-            <?php if ( $result_sub ) : ?>
-              <div class="pa-result-l"><?php echo esc_html( $result_sub ); ?></div>
+        <div class="pa-head">
+          <div class="pa-client">
+            <?php if ( $client_logo_url ) : ?>
+              <img class="pa-client-logo" src="<?php echo esc_url( $client_logo_url ); ?>" alt="<?php echo esc_attr( $client_name ?: get_the_title() ); ?>">
+            <?php elseif ( $client_name ) : ?>
+              <span class="pa-client-name"><?php echo esc_html( $client_name ); ?></span>
             <?php endif; ?>
           </div>
-          <div class="pa-arrow">
-            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </div>
+          <?php if ( $cat_tag ) : ?>
+            <span class="pa-cat"><?php echo esc_html( $cat_tag ); ?></span>
+          <?php endif; ?>
         </div>
-        <?php else : ?>
-        <div class="pa-result">
-          <div class="pa-result-l"><?php esc_html_e( 'Ətraflı bax →', 'ondigital' ); ?></div>
-          <div class="pa-arrow">
-            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </div>
-        </div>
+
+        <h3 class="pa-title"><?php the_title(); ?></h3>
+
+        <?php if ( $excerpt ) : ?>
+          <p class="pa-desc"><?php echo esc_html( wp_trim_words( $excerpt, 18 ) ); ?></p>
         <?php endif; ?>
+
+        <span class="pa-read"><?php echo esc_html( $read_label ); ?>
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
 
       </div>
     </a>
@@ -164,12 +149,12 @@ $all_terms = get_terms( array(
 
     else : ?>
 
-      <!-- No projects yet — placeholder cards -->
-      <div class="pa-card pa-featured has_fade_anim">
+      <!-- No projects yet — placeholder card -->
+      <div class="pa-card has_fade_anim">
         <div class="pa-thumb"><div class="pa-thumb-ph pa-ph-1"><span class="pa-ph-lbl">Tezliklə</span></div></div>
         <div class="pa-body">
-          <div class="pa-tags"><span class="pa-tag pa-tag-lime">Layihə</span></div>
-          <div class="pa-client"><?php esc_html_e( 'Layihələr yüklənir...', 'ondigital' ); ?></div>
+          <div class="pa-head"><span class="pa-cat">Layihə</span></div>
+          <h3 class="pa-title"><?php esc_html_e( 'Layihələr yüklənir...', 'ondigital' ); ?></h3>
         </div>
       </div>
 

@@ -1132,6 +1132,7 @@ function ondigital_project_archive_card_callback( $post ) {
     <p class="description" style="padding:0 12px 8px;"><?php esc_html_e( 'These fields appear on the projects archive grid card.', 'ondigital' ); ?></p>
     <table class="form-table">
         <?php
+        od_mb_image( '_project_client_logo', __( 'Client Logo (shown on card header)', 'ondigital' ), get_post_meta( $id, '_project_client_logo', true ) );
         od_mb_text( 'project_result_number', __( 'Result Number', 'ondigital' ),  get_post_meta( $id, 'project_result_number', true ), __( 'e.g. +340%', 'ondigital' ) );
         od_mb_text( 'project_result_label',  __( 'Result Label', 'ondigital' ),   get_post_meta( $id, 'project_result_label', true ),  __( 'e.g. Gəlir artımı', 'ondigital' ) );
         od_mb_text( 'project_result_sub',    __( 'Result Subtitle', 'ondigital' ), get_post_meta( $id, 'project_result_sub', true ),    __( 'e.g. 4 ayda', 'ondigital' ) );
@@ -1374,7 +1375,7 @@ function ondigital_save_meta_boxes( $post_id ) {
         }
 
         // Image IDs
-        $image_fields = array( '_od_hero_image', '_od_gallery_1', '_od_gallery_2', '_od_gallery_3' );
+        $image_fields = array( '_od_hero_image', '_od_gallery_1', '_od_gallery_2', '_od_gallery_3', '_project_client_logo' );
         foreach ( $image_fields as $field ) {
             if ( isset( $_POST[ $field ] ) ) {
                 update_post_meta( $post_id, $field, absint( $_POST[ $field ] ) );
