@@ -9,8 +9,9 @@
   --pa-border:  rgba(0,0,0,.08);
   --pa-muted:   rgba(0,0,0,.45);
   --pa-ease:    cubic-bezier(.22,1,.36,1);
-  --pa-orange:  #e8551e;
-  --pa-cream:   #f7f4ef;
+  --pa-accent:     #3d5a00;
+  --pa-accent-bar: #c2f971;
+  --pa-cream:      #f7f4ef;
 }
 
 /* ── Section wrapper ── */
@@ -212,14 +213,15 @@
 .pa-read svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 .pa-card:hover .pa-read { gap: 12px; }
 
-/* ── Featured (first) card — orange accent ── */
+/* ── Featured (first) card — brand green accent ── */
 .pa-feat {
-  border-color: rgba(232,85,30,.45);
-  box-shadow: inset 3px 0 0 var(--pa-orange);
+  border-color: rgba(120,160,40,.45);
+  box-shadow: inset 3px 0 0 var(--pa-accent-bar);
 }
-.pa-feat .pa-title { color: var(--pa-orange); }
-.pa-feat .pa-read  { color: var(--pa-orange); }
-.pa-feat:hover { box-shadow: inset 3px 0 0 var(--pa-orange), 0 18px 50px rgba(232,85,30,.16); }
+.pa-feat .pa-title { color: var(--pa-accent); }
+.pa-feat .pa-read  { color: var(--pa-accent); }
+.pa-feat .pa-read svg { stroke: var(--pa-accent); }
+.pa-feat:hover { box-shadow: inset 3px 0 0 var(--pa-accent-bar), 0 18px 50px rgba(120,160,40,.16); }
 
 /* ── Lottie decoration ── */
 .pa-hero-lottie {
