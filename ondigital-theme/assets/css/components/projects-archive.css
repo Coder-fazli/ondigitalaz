@@ -191,13 +191,13 @@
   color: rgba(0,0,0,.45); white-space: nowrap; flex-shrink: 0;
 }
 
-/* title — the case-study headline */
-.pa-title {
+/* title — the case-study headline (scoped to cards so it never hits the hero h1.pa-title) */
+.pa-card .pa-title {
   font-size: 19px; font-weight: 800; letter-spacing: -.02em; line-height: 1.3;
   color: var(--pa-dark); margin: 0 0 10px;
 }
 
-.pa-desc {
+.pa-card .pa-desc {
   font-size: 14px; line-height: 1.6; color: var(--pa-muted);
   margin: 0 0 18px; flex: 1;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
