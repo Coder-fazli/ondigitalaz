@@ -132,7 +132,7 @@ $an_textarea = function( string $base, string $label, array $options, string $hi
             $an_text( 'an_funnel_stat1_lbl', __( 'Footer Stat 1 — Label', 'ondigital' ), $options, 'e.g. Average ROAS' );
         od_row_close();
         od_row_open();
-            od_text( 'an_funnel_stat2_num', __( 'Footer Stat 2 — Number', 'ondigital' ), $options, 'e.g. 90 days' );
+            $an_text( 'an_funnel_stat2_num', __( 'Footer Stat 2 — Number', 'ondigital' ), $options, 'e.g. 90 days / 90 gün' );
             $an_text( 'an_funnel_stat2_lbl', __( 'Footer Stat 2 — Label', 'ondigital' ), $options, 'e.g. To first results' );
         od_row_close();
         od_divider();
