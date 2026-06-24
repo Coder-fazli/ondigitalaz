@@ -20,7 +20,9 @@ $project_query = new WP_Query( array(
     'posts_per_page' => -1,
     'orderby'        => 'menu_order date',
     'order'          => 'ASC',
-    'lang'           => '',
+    // Only the current language's projects, so cards link to same-language pages
+    // (was '' = all languages, which mixed AZ/EN and linked to the wrong language).
+    'lang'           => function_exists( 'pll_current_language' ) ? pll_current_language() : '',
 ) );
 
 // Collect all project_category terms for filter bar
