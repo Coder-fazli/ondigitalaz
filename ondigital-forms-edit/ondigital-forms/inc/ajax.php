@@ -36,8 +36,43 @@ function odf_handle_submit(): void {
         : array();
     $form_source = sanitize_text_field( wp_unslash( $_POST['odf_form_source'] ?? '' ) );
 
+    // Language for messages: from the form (set via Polylang at render), else Polylang, else AZ.
+    $lang = 'az';
+    if ( isset( $_POST['odf_lang'] ) ) {
+        $lang = ( sanitize_text_field( wp_unslash( $_POST['odf_lang'] ) ) === 'en' ) ? 'en' : 'az';
+    } elseif ( function_exists( 'pll_current_language' ) ) {
+        $lang = ( pll_current_language() === 'en' ) ? 'en' : 'az';
+    }
+    $odf_msg = array(
+        'one_field' => array( 'az' => 'Zəhmət olmasa ən azı bir sahəni doldurun.',                 'en' => 'Please fill in at least one field.' ),
+        'phone'     => array( 'az' => 'Zəhmət olmasa düzgün Azərbaycan telefon nömrəsi daxil edin.', 'en' => 'Please enter a valid Azerbaijani phone number.' ),
+        'email'     => array( 'az' => 'Zəhmət olmasa düzgün e-poçt ünvanı daxil edin.',              'en' => 'Please enter a valid email address.' ),
+        'send_fail' => array( 'az' => 'Mesaj göndərilə bilmədi. Zəhmət olmasa yenidən cəhd edin.',   'en' => 'Could not send email. Please try again.' ),
+    );
+
     if ( ! $name && ! $email && ! $phone ) {
-        wp_send_json_error( array( 'message' => 'Please fill in at least one field.' ) );
+        wp_send_json_error( array( 'message' => $odf_msg['one_field'][ $lang ] ) );
+    }
+
+    // Azerbaijan phone validation (only when a phone was entered).
+    // Accepts +994 / 994 / 0 / bare forms; operator code + 7 digits.
+    if ( $phone !== '' ) {
+        $digits = preg_replace( '/\D/', '', $phone );   // digits only
+        $digits = preg_replace( '/^00/', '', $digits ); // drop intl 00 prefix
+        if ( strpos( $digits, '994' ) === 0 ) {
+            $digits = substr( $digits, 3 );             // drop +994 country code
+        } elseif ( isset( $digits[0] ) && $digits[0] === '0' ) {
+            $digits = substr( $digits, 1 );             // drop trunk 0
+        }
+        // AZ mobile operator codes (10/50/51/55/60/70/77/99) + 7-digit subscriber number.
+        if ( ! preg_match( '/^(10|50|51|55|60|70|77|99)\d{7}$/', $digits ) ) {
+            wp_send_json_error( array( 'message' => $odf_msg['phone'][ $lang ] ) );
+        }
+    }
+
+    // Validate email format when one was entered.
+    if ( $email !== '' && ! is_email( $email ) ) {
+        wp_send_json_error( array( 'message' => $odf_msg['email'][ $lang ] ) );
     }
 
     // Save to database
@@ -91,6 +126,6 @@ function odf_handle_submit(): void {
     if ( $sent ) {
         wp_send_json_success( array( 'message' => 'ok' ) );
     } else {
-        wp_send_json_error( array( 'message' => 'Could not send email. Please try again.' ) );
+        wp_send_json_error( array( 'message' => $odf_msg['send_fail'][ $lang ] ) );
     }
 }

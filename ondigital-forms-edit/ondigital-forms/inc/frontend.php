@@ -15,6 +15,9 @@ function odf_enqueue_frontend(): void {
         return file_exists( $path ) ? (string) filemtime( $path ) : ODF_VERSION;
     };
 
+    // Shared styles (loading spinner, etc.) — needed on every form, was missing.
+    wp_enqueue_style( 'odf-forms-base', ODF_URI . 'assets/css/forms.css', array(), $v( 'assets/css/forms.css' ) );
+
     wp_enqueue_style( 'odf-contact-popup', ODF_URI . 'assets/css/forms-contact-popup.css', array(), $v( 'assets/css/forms-contact-popup.css' ) );
 
     if ( is_page_template( 'templates/page-contact.php' ) ) {
@@ -112,6 +115,7 @@ function odf_render_contact_page_inline(): void {
             <?php wp_nonce_field( 'odf_submit', 'odf_nonce' ); ?>
             <input type="text" name="odf_hp" class="odf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <input type="hidden" name="odf_form_source" value="contact-page">
+            <input type="hidden" name="odf_lang" value="<?php echo esc_attr( $lang ); ?>">
 
             <div class="odf-cp-row">
                 <div class="odf-cp-group">
@@ -123,7 +127,7 @@ function odf_render_contact_page_inline(): void {
             </div>
             <div class="odf-cp-row">
                 <div class="odf-cp-group">
-                    <input type="tel" name="odf_phone" placeholder="<?php echo esc_attr( $ph['phone'] ); ?>">
+                    <input type="tel" name="odf_phone" inputmode="tel" placeholder="<?php echo esc_attr( $ph['phone'] ); ?>">
                 </div>
             </div>
 
@@ -183,6 +187,7 @@ function odf_render_service_page_inline(): void {
             <?php wp_nonce_field( 'odf_submit', 'odf_nonce' ); ?>
             <input type="text" name="odf_hp" class="odf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <input type="hidden" name="odf_form_source" value="service-page">
+            <input type="hidden" name="odf_lang" value="<?php echo esc_attr( $lang ); ?>">
 
             <div class="odf-sp-row">
                 <div class="odf-sp-group">
@@ -193,7 +198,7 @@ function odf_render_service_page_inline(): void {
                 </div>
             </div>
             <div class="odf-sp-group">
-                <input type="tel" name="odf_phone" placeholder="<?php echo esc_attr( $ph['phone'] ); ?>">
+                <input type="tel" name="odf_phone" inputmode="tel" placeholder="<?php echo esc_attr( $ph['phone'] ); ?>">
             </div>
             <div class="odf-sp-group">
                 <textarea name="odf_message" placeholder="<?php echo esc_attr( $ph['message'] ); ?>"></textarea>
@@ -238,6 +243,7 @@ function odf_render_about_page_inline(): void {
             <?php wp_nonce_field( 'odf_submit', 'odf_nonce' ); ?>
             <input type="text" name="odf_hp" class="odf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <input type="hidden" name="odf_form_source" value="about-page">
+            <input type="hidden" name="odf_lang" value="<?php echo esc_attr( $lang ); ?>">
             <div class="odf-ap-row">
                 <div class="odf-ap-group">
                     <input type="text" name="odf_name" placeholder="<?php echo esc_attr( $ph['name'] ); ?>">
@@ -247,7 +253,7 @@ function odf_render_about_page_inline(): void {
                 </div>
             </div>
             <div class="odf-ap-group">
-                <input type="tel" name="odf_phone" placeholder="<?php echo esc_attr( $ph['phone'] ); ?>">
+                <input type="tel" name="odf_phone" inputmode="tel" placeholder="<?php echo esc_attr( $ph['phone'] ); ?>">
             </div>
             <div class="odf-ap-group">
                 <textarea name="odf_message" placeholder="<?php echo esc_attr( $ph['message'] ); ?>"></textarea>
@@ -348,6 +354,7 @@ function odf_render_modal(): void {
                 <?php wp_nonce_field( 'odf_submit', 'odf_nonce' ); ?>
                 <input type="text" name="odf_hp" class="odf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <input type="hidden" name="odf_form_source" value="popup">
+            <input type="hidden" name="odf_lang" value="<?php echo esc_attr( $lang ); ?>">
 
                 <?php if ( $show( 'field_name' ) || $show( 'field_email' ) ) : ?>
                 <div class="odf-row">
@@ -371,7 +378,7 @@ function odf_render_modal(): void {
                     <?php if ( $show( 'field_phone' ) ) : ?>
                     <div class="odf-field">
                         <label><?php echo esc_html( $labels['phone'] ); ?></label>
-                        <input type="tel" name="odf_phone" placeholder="<?php echo esc_attr( $labels['ph_phone'] ); ?>">
+                        <input type="tel" name="odf_phone" inputmode="tel" placeholder="<?php echo esc_attr( $labels['ph_phone'] ); ?>">
                     </div>
                     <?php endif; ?>
                     <?php if ( $show( 'field_company' ) ) : ?>
