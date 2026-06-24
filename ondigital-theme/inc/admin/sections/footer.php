@@ -11,6 +11,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
+
+/**
+ * Render one bilingual footer-link repeater row (EN/AZ label + URL).
+ * Falls back to legacy single label/url for existing rows.
+ */
+if ( ! function_exists( 'od_footer_link_row' ) ) {
+    function od_footer_link_row( int $i, array $row, string $name, string $label_word ): void {
+        $head     = $row['label_en'] ?? $row['label'] ?? '';
+        $head     = $head !== '' ? $head : sprintf( '%s %d', $label_word, $i + 1 );
+        $en_label = $row['label_en'] ?? $row['label'] ?? '';
+        $en_url   = $row['url_en']   ?? $row['url']   ?? '';
+        $az_label = $row['label_az'] ?? '';
+        $az_url   = $row['url_az']   ?? '';
+
+        echo '<div class="od-repeater-row">';
+        echo '<div class="od-repeater-row-head"><span>' . esc_html( $head ) . '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>';
+        echo '<div class="od-lang-wrap"><div class="od-lang-tabs"><span class="od-lang-tab active" data-lang="en">🇬🇧 EN</span><span class="od-lang-tab" data-lang="az">🇦🇿 AZ</span></div>';
+
+        echo '<div class="od-lang-pane active" data-lang="en"><div class="od-field-row">';
+        echo '<div class="od-field"><label>' . esc_html__( 'Label', 'ondigital' ) . '</label><input type="text" name="' . esc_attr( $name ) . '[' . $i . '][label_en]" value="' . esc_attr( $en_label ) . '"></div>';
+        echo '<div class="od-field"><label>' . esc_html__( 'URL', 'ondigital' ) . '</label><input type="url" name="' . esc_attr( $name ) . '[' . $i . '][url_en]" value="' . esc_url( $en_url ) . '" placeholder="https://"></div>';
+        echo '</div></div>';
+
+        echo '<div class="od-lang-pane" data-lang="az"><div class="od-field-row">';
+        echo '<div class="od-field"><label>' . esc_html__( 'Label', 'ondigital' ) . '</label><input type="text" name="' . esc_attr( $name ) . '[' . $i . '][label_az]" value="' . esc_attr( $az_label ) . '"></div>';
+        echo '<div class="od-field"><label>' . esc_html__( 'URL', 'ondigital' ) . '</label><input type="url" name="' . esc_attr( $name ) . '[' . $i . '][url_az]" value="' . esc_url( $az_url ) . '" placeholder="https://"></div>';
+        echo '</div></div>';
+
+        echo '</div></div>';
+    }
+}
 ?>
 <div class="od-section active" data-section="footer">
 
@@ -40,13 +71,7 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
     od_lang_close();
     od_divider();
     od_repeater( $footer_quick_links, 'footer_quick_link', 'ondigital_footer_quick_links', function( $i, $row ) {
-        echo '<div class="od-repeater-row">';
-        echo '<div class="od-repeater-row-head"><span>' . ( ! empty( $row['label'] ) ? esc_html( $row['label'] ) : sprintf( __( 'Link %d', 'ondigital' ), $i + 1 ) ) . '</span>';
-        echo '<div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>';
-        echo '<div class="od-field-row">';
-        echo '<div class="od-field"><label>' . esc_html__( 'Label', 'ondigital' ) . '</label><input type="text" name="ondigital_footer_quick_links[' . $i . '][label]" value="' . esc_attr( $row['label'] ?? '' ) . '"></div>';
-        echo '<div class="od-field"><label>' . esc_html__( 'URL', 'ondigital' ) . '</label><input type="url" name="ondigital_footer_quick_links[' . $i . '][url]" value="' . esc_url( $row['url'] ?? '' ) . '" placeholder="https://"></div>';
-        echo '</div></div>';
+        od_footer_link_row( (int) $i, (array) $row, 'ondigital_footer_quick_links', __( 'Link', 'ondigital' ) );
     } );
     od_card_close();
     ?>
@@ -64,13 +89,7 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
     od_lang_close();
     od_divider();
     od_repeater( $footer_services_links, 'footer_service_link', 'ondigital_footer_services_links', function( $i, $row ) {
-        echo '<div class="od-repeater-row">';
-        echo '<div class="od-repeater-row-head"><span>' . ( ! empty( $row['label'] ) ? esc_html( $row['label'] ) : sprintf( __( 'Service %d', 'ondigital' ), $i + 1 ) ) . '</span>';
-        echo '<div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>';
-        echo '<div class="od-field-row">';
-        echo '<div class="od-field"><label>' . esc_html__( 'Service Name', 'ondigital' ) . '</label><input type="text" name="ondigital_footer_services_links[' . $i . '][label]" value="' . esc_attr( $row['label'] ?? '' ) . '"></div>';
-        echo '<div class="od-field"><label>' . esc_html__( 'Link URL', 'ondigital' ) . '</label><input type="url" name="ondigital_footer_services_links[' . $i . '][url]" value="' . esc_url( $row['url'] ?? '' ) . '" placeholder="https://"></div>';
-        echo '</div></div>';
+        od_footer_link_row( (int) $i, (array) $row, 'ondigital_footer_services_links', __( 'Service', 'ondigital' ) );
     } );
     od_card_close();
     ?>

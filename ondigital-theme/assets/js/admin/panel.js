@@ -63,6 +63,23 @@
     }
 
     // ── Repeater: add row ──────────────────────────────────────────
+    // Bilingual (EN/AZ) footer link row — label + URL per language.
+    function footerLinkRow(name, i, word) {
+        function pane(lang, active) {
+            return '<div class="od-lang-pane' + (active ? ' active' : '') + '" data-lang="' + lang + '">' +
+                '<div class="od-field-row">' +
+                '<div class="od-field"><label>Label</label><input type="text" name="' + name + '[' + i + '][label_' + lang + ']" value=""></div>' +
+                '<div class="od-field"><label>URL</label><input type="url" name="' + name + '[' + i + '][url_' + lang + ']" value="" placeholder="https://"></div>' +
+                '</div></div>';
+        }
+        return '<div class="od-repeater-row">' +
+            '<div class="od-repeater-row-head"><span>' + word + ' ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
+            '<div class="od-lang-wrap">' +
+            '<div class="od-lang-tabs"><span class="od-lang-tab active" data-lang="en">🇬🇧 EN</span><span class="od-lang-tab" data-lang="az">🇦🇿 AZ</span></div>' +
+            pane('en', true) + pane('az', false) +
+            '</div></div>';
+    }
+
     var templates = {
         partner: function (i) {
             return '<div class="od-repeater-row">' +
@@ -200,20 +217,10 @@
                 '</div></div>';
         },
         footer_quick_link: function (i) {
-            return '<div class="od-repeater-row">' +
-                '<div class="od-repeater-row-head"><span>Link ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
-                '<div class="od-field-row">' +
-                '<div class="od-field"><label>Label</label><input type="text" name="ondigital_footer_quick_links[' + i + '][label]" value=""></div>' +
-                '<div class="od-field"><label>URL</label><input type="url" name="ondigital_footer_quick_links[' + i + '][url]" value="" placeholder="https://"></div>' +
-                '</div></div>';
+            return footerLinkRow('ondigital_footer_quick_links', i, 'Link');
         },
         footer_service_link: function (i) {
-            return '<div class="od-repeater-row">' +
-                '<div class="od-repeater-row-head"><span>Service ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
-                '<div class="od-field-row">' +
-                '<div class="od-field"><label>Label</label><input type="text" name="ondigital_footer_services_links[' + i + '][label]" value=""></div>' +
-                '<div class="od-field"><label>URL</label><input type="url" name="ondigital_footer_services_links[' + i + '][url]" value="" placeholder="https://"></div>' +
-                '</div></div>';
+            return footerLinkRow('ondigital_footer_services_links', i, 'Service');
         },
         services_card: function (i) {
             return '<div class="od-repeater-row od-sc-row">' +

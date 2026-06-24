@@ -157,8 +157,10 @@ function ondigital_sanitize_repeater( string $key, array $raw ): array {
             case 'footer_quick_links':
             case 'footer_services_links':
                 $out[] = array(
-                    'label' => sanitize_text_field( $item['label'] ?? '' ),
-                    'url'   => esc_url_raw( $item['url'] ?? '' ),
+                    'label_en' => sanitize_text_field( $item['label_en'] ?? $item['label'] ?? '' ),
+                    'label_az' => sanitize_text_field( $item['label_az'] ?? '' ),
+                    'url_en'   => esc_url_raw( $item['url_en'] ?? $item['url'] ?? '' ),
+                    'url_az'   => esc_url_raw( $item['url_az'] ?? '' ),
                 );
                 break;
             case 'services_cards':

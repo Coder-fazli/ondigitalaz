@@ -95,14 +95,20 @@ $footer_terms_url  = home_url( '/privacy-policy' );
             <h2 class="title"><?php echo esc_html( $footer_quick_links_title ); ?></h2>
             <?php if ( ! empty( $footer_quick_links ) ) : ?>
                 <ul class="footer-nav-list">
-                    <?php foreach ( $footer_quick_links as $link ) :
-                        if ( empty( $link['label'] ) ) continue;
+                    <?php
+                    $footer_lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
+                    foreach ( $footer_quick_links as $link ) :
+                        $l_label = $link[ 'label_' . $footer_lang ] ?? '';
+                        if ( $l_label === '' ) { $l_label = $link['label_en'] ?? $link['label'] ?? ''; }
+                        $l_url = $link[ 'url_' . $footer_lang ] ?? '';
+                        if ( $l_url === '' ) { $l_url = $link['url_en'] ?? $link['url'] ?? ''; }
+                        if ( $l_label === '' ) continue;
                     ?>
                         <li>
-                            <?php if ( ! empty( $link['url'] ) ) : ?>
-                                <a href="<?php echo esc_url( $link['url'] ); ?>"><?php echo esc_html( $link['label'] ); ?></a>
+                            <?php if ( $l_url !== '' ) : ?>
+                                <a href="<?php echo esc_url( $l_url ); ?>"><?php echo esc_html( $l_label ); ?></a>
                             <?php else : ?>
-                                <?php echo esc_html( $link['label'] ); ?>
+                                <?php echo esc_html( $l_label ); ?>
                             <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
@@ -115,14 +121,20 @@ $footer_terms_url  = home_url( '/privacy-policy' );
             <h2 class="title"><?php echo esc_html( $footer_services_col_title ); ?></h2>
             <?php if ( ! empty( $footer_services_links ) ) : ?>
                 <ul class="footer-nav-list">
-                    <?php foreach ( $footer_services_links as $link ) :
-                        if ( empty( $link['label'] ) ) continue;
+                    <?php
+                    $footer_lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
+                    foreach ( $footer_services_links as $link ) :
+                        $l_label = $link[ 'label_' . $footer_lang ] ?? '';
+                        if ( $l_label === '' ) { $l_label = $link['label_en'] ?? $link['label'] ?? ''; }
+                        $l_url = $link[ 'url_' . $footer_lang ] ?? '';
+                        if ( $l_url === '' ) { $l_url = $link['url_en'] ?? $link['url'] ?? ''; }
+                        if ( $l_label === '' ) continue;
                     ?>
                         <li>
-                            <?php if ( ! empty( $link['url'] ) ) : ?>
-                                <a href="<?php echo esc_url( $link['url'] ); ?>"><?php echo esc_html( $link['label'] ); ?></a>
+                            <?php if ( $l_url !== '' ) : ?>
+                                <a href="<?php echo esc_url( $l_url ); ?>"><?php echo esc_html( $l_label ); ?></a>
                             <?php else : ?>
-                                <?php echo esc_html( $link['label'] ); ?>
+                                <?php echo esc_html( $l_label ); ?>
                             <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
