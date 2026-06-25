@@ -12,7 +12,7 @@ $grid_body  = ondigital_get_option( 'services_grid_body', 'We bet on brands that
 
 $cards = get_option( 'ondigital_services_cards', array() );
 ?>
-<section class="od-sg-section">
+<section class="od-sg-section" id="services-grid">
     <div class="container">
 
         <div class="od-sg-header">

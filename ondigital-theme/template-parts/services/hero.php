@@ -27,10 +27,10 @@ $services_icon_dark  = ondigital_img( 'services_hero_icon_dark', '/assets/imgs/s
                         <?php echo esc_html( $services_hero_body ); ?>
                     </p>
                 </div>
-                <div class="icon has_fade_anim" data-on-scroll="0">
+                <a href="#services-grid" class="icon has_fade_anim services-hero-scroll" data-on-scroll="0" aria-label="<?php esc_attr_e( 'Scroll to services', 'ondigital' ); ?>">
                     <img class="show-light" src="<?php echo esc_url( $services_icon_light ); ?>" alt="<?php esc_attr_e( 'dekor', 'ondigital' ); ?>">
                     <img class="show-dark"  src="<?php echo esc_url( $services_icon_dark ); ?>"  alt="<?php esc_attr_e( 'dekor', 'ondigital' ); ?>">
-                </div>
+                </a>
             </div>
             <div class="thumb">
                 <img src="<?php echo esc_url( $services_hero_thumb ); ?>" class="has_fade_anim" data-fade-offset="0" data-delay="0.45" alt="<?php esc_attr_e( 'Xidmətlər', 'ondigital' ); ?>">
@@ -38,3 +38,20 @@ $services_icon_dark  = ondigital_img( 'services_hero_icon_dark', '/assets/imgs/s
         </div>
     </div>
 </section>
+<script>
+(function () {
+    var btn = document.querySelector('.services-hero-scroll');
+    if (!btn) return;
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var target = document.querySelector('#services-grid');
+        if (!target) return;
+        // Works with the theme's GSAP ScrollSmoother; falls back to native scroll.
+        if (window.ScrollSmoother && ScrollSmoother.get && ScrollSmoother.get()) {
+            ScrollSmoother.get().scrollTo(target, true, 'top 90px');
+        } else {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+})();
+</script>
