@@ -53,7 +53,7 @@ $all_terms = get_terms( array(
   <?php if ( ! empty( $all_terms ) && ! is_wp_error( $all_terms ) ) : ?>
   <div class="pa-filter">
     <button class="pa-filter-btn active" data-filter="all">
-      <?php esc_html_e( 'Hamısı', 'ondigital' ); ?>
+      <?php echo esc_html( $lang === 'en' ? 'All' : 'Hamısı' ); ?>
     </button>
     <?php foreach ( $all_terms as $term ) : ?>
       <button class="pa-filter-btn" data-filter="<?php echo esc_attr( $term->slug ); ?>">
@@ -154,7 +154,7 @@ $all_terms = get_terms( array(
         <div class="pa-thumb"><div class="pa-thumb-ph pa-ph-1"><span class="pa-ph-lbl">Tezliklə</span></div></div>
         <div class="pa-body">
           <div class="pa-head"><span class="pa-cat">Layihə</span></div>
-          <h3 class="pa-title"><?php esc_html_e( 'Layihələr yüklənir...', 'ondigital' ); ?></h3>
+          <h3 class="pa-title"><?php echo esc_html( $lang === 'en' ? 'Loading projects...' : 'Layihələr yüklənir...' ); ?></h3>
         </div>
       </div>
 

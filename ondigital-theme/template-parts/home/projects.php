@@ -10,7 +10,8 @@ $projects_query = new WP_Query( array(
     'posts_per_page' => 8,
     'orderby'        => 'date',
     'order'          => 'DESC',
-    'lang'           => '',
+    // Current language only, so cards link to same-language project pages.
+    'lang'           => function_exists( 'pll_current_language' ) ? pll_current_language() : '',
 ) );
 
 // Fallback static projects

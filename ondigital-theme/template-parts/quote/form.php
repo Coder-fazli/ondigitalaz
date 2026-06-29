@@ -14,7 +14,8 @@ $services_query = new WP_Query( array(
     'posts_per_page' => -1,
     'orderby'        => 'menu_order',
     'order'          => 'ASC',
-    'lang'           => '',
+    // Current language only — avoids listing both AZ and EN of each service.
+    'lang'           => function_exists( 'pll_current_language' ) ? pll_current_language() : '',
 ) );
 
 $service_options = array();
