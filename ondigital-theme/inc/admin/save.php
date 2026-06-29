@@ -52,7 +52,7 @@ function ondigital_panel_save(): void {
     update_option( 'ondigital_options', $updated );
 
     // Handle repeaters
-    $repeater_keys = array( 'partners', 'features', 'pricing', 'faq', 'about_faq', 'stats', 'testimonials', 'text_slider', 'about_clients', 'about_faq_items', 'footer_quick_links', 'footer_services_links', 'project_steps', 'services_cards' );
+    $repeater_keys = array( 'partners', 'features', 'pricing', 'faq', 'about_faq', 'stats', 'testimonials', 'text_slider', 'about_clients', 'about_faq_items', 'footer_quick_links', 'footer_services_links', 'project_steps', 'services_cards', 'brand_logos' );
 
     foreach ( $repeater_keys as $rkey ) {
         if ( ! isset( $_POST[ 'ondigital_' . $rkey ] ) ) {
@@ -152,6 +152,13 @@ function ondigital_sanitize_repeater( string $key, array $raw ): array {
                     'img_light' => absint( $item['img_light'] ?? 0 ),
                     'img_dark'  => absint( $item['img_dark'] ?? 0 ),
                     'alt'       => sanitize_text_field( $item['alt'] ?? '' ),
+                );
+                break;
+            case 'brand_logos':
+                $out[] = array(
+                    'logo'  => absint( $item['logo'] ?? 0 ),
+                    'url'   => esc_url_raw( $item['url'] ?? '' ),
+                    'group' => sanitize_text_field( $item['group'] ?? '' ),
                 );
                 break;
             case 'footer_quick_links':

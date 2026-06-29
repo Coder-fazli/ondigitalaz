@@ -36,6 +36,35 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
 
     <?php od_card_close(); ?>
 
+    <!-- ── BRANDS GRID ── -->
+    <?php
+    $brand_logos = ondigital_get_repeater( 'brand_logos', array() );
+    od_card_open( __( 'Brands We Worked With (Grid)', 'ondigital' ), 'dashicons-grid-view' );
+    ?>
+        <?php od_lang_open(); ?>
+        <?php foreach ( $langs as $lang => $label ) : ?>
+            <?php od_lang_pane( $lang ); ?>
+                <?php od_text( 'brands_grid_title_' . $lang, __( 'Section Title', 'ondigital' ), $options, __( 'e.g. Birlikdə çalışdığımız brendlər', 'ondigital' ) ); ?>
+            <?php od_lang_pane_close(); ?>
+        <?php endforeach; ?>
+        <?php od_lang_close(); ?>
+        <p style="color:#646970;font-size:12px;margin:0 0 12px;"><?php esc_html_e( 'Add brand logos. Each can link to a URL that opens in a new tab. "Group" is optional — logos with the same group are shown under that heading.', 'ondigital' ); ?></p>
+        <?php
+        od_repeater( $brand_logos, 'brand_logo', 'ondigital_brand_logos', function( $i, $row ) {
+            $logo_id  = absint( $row['logo'] ?? 0 );
+            $logo_url = $logo_id ? wp_get_attachment_image_url( $logo_id, 'thumbnail' ) : '';
+            echo '<div class="od-repeater-row">';
+            echo '<div class="od-repeater-row-head"><span>' . sprintf( esc_html__( 'Brand %d', 'ondigital' ), $i + 1 ) . '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>';
+            echo '<div class="od-field-row">';
+            echo '<div class="od-field"><label>' . esc_html__( 'Logo', 'ondigital' ) . '</label><div class="od-image-field"><div class="od-image-preview ' . ( $logo_url ? '' : 'empty' ) . '">' . ( $logo_url ? '<img src="' . esc_url( $logo_url ) . '">' : '' ) . '</div><div class="od-image-btns"><input type="hidden" name="ondigital_brand_logos[' . $i . '][logo]" value="' . esc_attr( $logo_id ) . '" class="od-img-id"><button type="button" class="button od-upload-img">' . esc_html__( 'Select', 'ondigital' ) . '</button><button type="button" class="button od-remove-img">' . esc_html__( 'Remove', 'ondigital' ) . '</button></div></div></div>';
+            echo '<div class="od-field"><label>' . esc_html__( 'Link (opens in new tab)', 'ondigital' ) . '</label><input type="url" name="ondigital_brand_logos[' . $i . '][url]" value="' . esc_url( $row['url'] ?? '' ) . '" placeholder="https://"></div>';
+            echo '</div>';
+            echo '<div class="od-field"><label>' . esc_html__( 'Group / Category (optional)', 'ondigital' ) . '</label><input type="text" name="ondigital_brand_logos[' . $i . '][group]" value="' . esc_attr( $row['group'] ?? '' ) . '" placeholder="' . esc_attr__( 'e.g. B2B', 'ondigital' ) . '"></div>';
+            echo '</div>';
+        } );
+        ?>
+    <?php od_card_close(); ?>
+
     <!-- ── SEO ── -->
     <?php od_card_open( __( 'Archive Page SEO', 'ondigital' ), 'dashicons-search' ); ?>
 

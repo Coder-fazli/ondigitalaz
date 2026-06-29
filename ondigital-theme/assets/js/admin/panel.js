@@ -216,6 +216,16 @@
                 '<div class="od-field"><label>Highlighted Word</label><input type="text" name="ondigital_text_slider[' + i + '][highlighted]" value=""></div>' +
                 '</div></div>';
         },
+        brand_logo: function (i) {
+            return '<div class="od-repeater-row">' +
+                '<div class="od-repeater-row-head"><span>Brand ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
+                '<div class="od-field-row">' +
+                imgField('ondigital_brand_logos[' + i + '][logo]', 'Logo') +
+                '<div class="od-field"><label>Link (opens in new tab)</label><input type="url" name="ondigital_brand_logos[' + i + '][url]" value="" placeholder="https://"></div>' +
+                '</div>' +
+                '<div class="od-field"><label>Group / Category (optional)</label><input type="text" name="ondigital_brand_logos[' + i + '][group]" value="" placeholder="e.g. B2B"></div>' +
+                '</div>';
+        },
         footer_quick_link: function (i) {
             return footerLinkRow('ondigital_footer_quick_links', i, 'Link');
         },
