@@ -24,6 +24,7 @@ require_once ONDIGITAL_DIR . '/inc/contact-form.php';
 require_once ONDIGITAL_DIR . '/inc/cpt-glossary.php';
 require_once ONDIGITAL_DIR . '/inc/setup-pages.php';
 require_once ONDIGITAL_DIR . '/inc/schema.php';
+require_once ONDIGITAL_DIR . '/inc/seo.php';
 
 // =============================================================================
 // 1. THEME SETUP

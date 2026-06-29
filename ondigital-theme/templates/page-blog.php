@@ -5,16 +5,7 @@
  * @package OnDigital
  */
 
-add_action( 'wp_head', function () {
-    $meta_title = ondigital_get_option( 'blog_meta_title', '' );
-    $meta_desc  = ondigital_get_option( 'blog_meta_desc',  '' );
-    if ( $meta_title ) {
-        echo '<title>' . esc_html( $meta_title ) . '</title>' . "\n";
-    }
-    if ( $meta_desc ) {
-        echo '<meta name="description" content="' . esc_attr( $meta_desc ) . '">' . "\n";
-    }
-}, 1 );
+// SEO meta title/description handled centrally in inc/seo.php (via Rank Math).
 
 get_header();
 
