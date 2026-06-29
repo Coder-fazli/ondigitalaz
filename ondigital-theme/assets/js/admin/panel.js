@@ -217,14 +217,18 @@
                 '</div></div>';
         },
         brand_logo: function (i) {
-            return '<div class="od-repeater-row">' +
-                '<div class="od-repeater-row-head"><span>Brand ' + (i + 1) + '</span><div class="od-row-actions"><button type="button" class="od-remove-row">&times;</button></div></div>' +
+            return '<div class="od-repeater-row od-sc-row">' +
+                '<div class="od-repeater-row-head od-sc-toggle" style="cursor:pointer;user-select:none;display:flex;align-items:center;gap:10px;">' +
+                '<span>Brand ' + (i + 1) + '</span>' +
+                '<div class="od-row-actions" style="margin-left:auto;"><span class="od-sc-arrow" style="margin-right:8px;font-size:11px;opacity:.5;">▲</span><button type="button" class="od-remove-row">&times;</button></div>' +
+                '</div>' +
+                '<div class="od-sc-body">' +
                 '<div class="od-field-row">' +
                 imgField('ondigital_brand_logos[' + i + '][logo]', 'Logo') +
                 '<div class="od-field"><label>Link (opens in new tab)</label><input type="url" name="ondigital_brand_logos[' + i + '][url]" value="" placeholder="https://"></div>' +
                 '</div>' +
                 '<div class="od-field"><label>Group / Category (optional)</label><input type="text" name="ondigital_brand_logos[' + i + '][group]" value="" placeholder="e.g. B2B"></div>' +
-                '</div>';
+                '</div></div>';
         },
         footer_quick_link: function (i) {
             return footerLinkRow('ondigital_footer_quick_links', i, 'Link');
