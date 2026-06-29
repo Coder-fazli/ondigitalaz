@@ -52,8 +52,11 @@ function ondigital_panel_assets( string $hook ): void {
         return;
     }
     wp_enqueue_media();
-    wp_enqueue_style( 'ondigital-panel', ONDIGITAL_URI . '/assets/css/admin/panel.css', array(), ONDIGITAL_VERSION );
-    wp_enqueue_script( 'ondigital-panel', ONDIGITAL_URI . '/assets/js/admin/panel.js', array( 'jquery' ), ONDIGITAL_VERSION, true );
+    // Version by file modified-time so uploads always bust the browser cache.
+    $panel_css_v = @filemtime( ONDIGITAL_DIR . '/assets/css/admin/panel.css' ) ?: ONDIGITAL_VERSION;
+    $panel_js_v  = @filemtime( ONDIGITAL_DIR . '/assets/js/admin/panel.js' )   ?: ONDIGITAL_VERSION;
+    wp_enqueue_style( 'ondigital-panel', ONDIGITAL_URI . '/assets/css/admin/panel.css', array(), $panel_css_v );
+    wp_enqueue_script( 'ondigital-panel', ONDIGITAL_URI . '/assets/js/admin/panel.js', array( 'jquery' ), $panel_js_v, true );
     wp_localize_script( 'ondigital-panel', 'odPanel', array(
         'nonce'   => wp_create_nonce( 'ondigital_save' ),
         'ajaxurl' => admin_url( 'admin-ajax.php' ),
