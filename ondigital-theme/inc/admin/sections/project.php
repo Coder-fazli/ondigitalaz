@@ -24,7 +24,7 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
         <?php od_lang_open(); ?>
         <?php foreach ( $langs as $lang => $label ) : ?>
             <?php od_lang_pane( $lang ); ?>
-                <?php od_text( 'projects_archive_title_' . $lang, __( 'Page Title', 'ondigital' ), $options, __( 'e.g. Our Projects', 'ondigital' ) ); ?>
+                <?php od_text( 'projects_archive_title_' . $lang, __( 'Hero Title', 'ondigital' ), $options, __( 'e.g. Nəticə danışır. — wrap a word in &lt;span&gt;…&lt;/span&gt; for the green accent', 'ondigital' ) ); ?>
                 <?php od_textarea( 'projects_archive_desc_' . $lang, __( 'Page Description', 'ondigital' ), $options ); ?>
                 <?php od_row_open(); ?>
                     <?php od_text( 'projects_archive_badge_' . $lang, __( 'Badge / Eyebrow Text', 'ondigital' ), $options, __( 'e.g. Case Studies', 'ondigital' ) ); ?>

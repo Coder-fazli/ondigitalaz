@@ -42,7 +42,7 @@
 .pa-hero::after {
   content: '';
   position: absolute;
-  top: 50%; right: -180px;
+  top: 50%; right: 40px;
   transform: translateY(-50%);
   width: 680px; height: 680px;
   border-radius: 50%;
@@ -88,6 +88,8 @@
   color: var(--pa-dark); margin-bottom: 0;
 }
 .pa-title em { font-style: normal; color: var(--pa-lime); }
+/* Green accent word in the hero title — wrap in <span> from the admin */
+.pa-hero .pa-title span { color: #5a8a00; font-style: italic; }
 
 .pa-hero-bottom {
   display: flex; align-items: flex-end; justify-content: space-between;
