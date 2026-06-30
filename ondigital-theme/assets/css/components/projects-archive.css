@@ -352,45 +352,47 @@
    ============================================================ */
 .pa-filter,
 .pa-grid { display: none !important; }
+/* Partners marquee hidden too (for now). */
+.pa-section .clients-area { display: none !important; }
 /* Grid removed: collapse the forced full-height hero wrapper so there's no gap. */
 .pa-section { min-height: auto !important; padding-bottom: 0 !important; }
 
 /* ============================================================
    Sectoral Distribution — light section, green animated bars
    ============================================================ */
-.sd-section { background: #fff; padding: 96px 0; }
+.sd-section { background: #fff; padding: 130px 0; }
 .sd-inner {
   max-width: 1280px; margin: 0 auto; padding: 0 60px;
-  display: grid; grid-template-columns: 1fr 1.25fr; gap: 80px; align-items: center;
+  display: grid; grid-template-columns: 1fr 1.3fr; gap: 100px; align-items: center;
 }
 .sd-eyebrow {
   display: inline-block;
-  font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--pa-accent, #3d5a00); margin-bottom: 22px;
+  font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: #5a8a00; margin-bottom: 24px;
 }
 .sd-title {
-  font-size: clamp(34px, 4vw, 56px); font-weight: 900; letter-spacing: -.03em; line-height: 1.05;
-  color: var(--pa-dark, #0a0a0a); margin: 0 0 22px;
+  font-size: clamp(36px, 4.2vw, 60px); font-weight: 900; letter-spacing: -.03em; line-height: 1.04;
+  color: var(--pa-dark, #0a0a0a); margin: 0 0 26px;
 }
-.sd-title span { color: var(--pa-accent, #3d5a00); font-style: italic; font-weight: 800; }
+.sd-title span { color: #5a8a00; font-style: italic; font-weight: 800; }
 .sd-desc {
-  font-size: 16px; line-height: 1.7; color: var(--pa-muted, rgba(0,0,0,.5));
-  max-width: 420px; margin: 0;
+  font-size: 17px; line-height: 1.75; color: var(--pa-muted, rgba(0,0,0,.5));
+  max-width: 440px; margin: 0;
 }
 
-.sd-right { display: flex; flex-direction: column; gap: 22px; }
+.sd-right { display: flex; flex-direction: column; gap: 32px; }
 .sd-row {
-  display: grid; grid-template-columns: 210px 1fr 48px;
-  align-items: center; gap: 18px;
+  display: grid; grid-template-columns: 220px 1fr 52px;
+  align-items: center; gap: 20px;
 }
-.sd-label { font-size: 15px; font-weight: 600; color: var(--pa-dark, #0a0a0a); }
+.sd-label { font-size: 16px; font-weight: 600; color: var(--pa-dark, #0a0a0a); }
 .sd-track {
-  height: 8px; border-radius: 100px;
-  background: rgba(0,0,0,.07); overflow: hidden;
+  height: 10px; border-radius: 100px;
+  background: rgba(0,0,0,.06); overflow: hidden;
 }
 .sd-fill {
   height: 100%; width: 0; border-radius: 100px;
-  background: linear-gradient(90deg, #3d5a00, #9fd84a);
+  background: linear-gradient(90deg, #9ad406, var(--pa-lime, #c2f971));
   transition: width 1.1s cubic-bezier(.22,1,.36,1);
 }
 .sd-animate .sd-fill { width: var(--pct); }
