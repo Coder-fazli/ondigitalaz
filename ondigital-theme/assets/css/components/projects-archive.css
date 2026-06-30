@@ -38,6 +38,26 @@
   pointer-events: none;
 }
 
+/* Soft brand-green glow filling the empty right side of the hero */
+.pa-hero::after {
+  content: '';
+  position: absolute;
+  top: 50%; right: -180px;
+  transform: translateY(-50%);
+  width: 680px; height: 680px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(194,249,113,.38) 0%,
+    rgba(194,249,113,.12) 40%,
+    transparent 68%);
+  filter: blur(12px);
+  pointer-events: none;
+  z-index: 0;
+}
+@media (max-width: 991px) {
+  .pa-hero::after { width: 420px; height: 420px; right: -160px; opacity: .7; }
+}
+
 /* Growing accent line */
 .pa-hero-line {
   position: absolute; top: 0; left: 0;
