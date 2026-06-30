@@ -36,6 +36,43 @@ $langs = array( 'en' => '🇬🇧 EN', 'az' => '🇦🇿 AZ' );
 
     <?php od_card_close(); ?>
 
+    <!-- ── SECTORAL DISTRIBUTION ── -->
+    <?php
+    $sector_bars = ondigital_get_repeater( 'sector_bars', array() );
+    od_card_open( __( 'Sectoral Distribution (Bars)', 'ondigital' ), 'dashicons-chart-bar' );
+    ?>
+        <?php od_lang_open(); ?>
+        <?php foreach ( $langs as $lang => $label ) : ?>
+            <?php od_lang_pane( $lang ); ?>
+                <?php od_text( 'sectors_eyebrow_' . $lang, __( 'Eyebrow', 'ondigital' ), $options, __( 'e.g. Sektoral təcrübə', 'ondigital' ) ); ?>
+                <?php od_text( 'sectors_title_' . $lang, __( 'Title', 'ondigital' ), $options, __( 'Wrap a word in <span></span> for the green accent', 'ondigital' ) ); ?>
+                <?php od_textarea( 'sectors_desc_' . $lang, __( 'Description', 'ondigital' ), $options ); ?>
+            <?php od_lang_pane_close(); ?>
+        <?php endforeach; ?>
+        <?php od_lang_close(); ?>
+        <p style="color:#646970;font-size:12px;margin:0 0 12px;"><?php esc_html_e( 'Add sectors with a percentage (0–100). Leave all rows empty to show the demo defaults.', 'ondigital' ); ?></p>
+        <?php
+        od_repeater( $sector_bars, 'sector_bar', 'ondigital_sector_bars', function( $i, $row ) {
+            $le  = $row['label_en'] ?? '';
+            $la  = $row['label_az'] ?? '';
+            $pct = $row['percent'] ?? '';
+            $head = sprintf( esc_html__( 'Sector %d', 'ondigital' ), $i + 1 ) . ( $le !== '' ? ' — ' . esc_html( $le ) : '' ) . ( $pct !== '' ? ' (' . esc_html( $pct ) . '%)' : '' );
+            echo '<div class="od-repeater-row od-sc-row">';
+            echo '<div class="od-repeater-row-head od-sc-toggle" style="cursor:pointer;user-select:none;display:flex;align-items:center;gap:10px;">';
+            echo '<span>' . $head . '</span>';
+            echo '<div class="od-row-actions" style="margin-left:auto;"><span class="od-sc-arrow" style="margin-right:8px;font-size:11px;opacity:.5;">▼</span><button type="button" class="od-remove-row">&times;</button></div>';
+            echo '</div>';
+            echo '<div class="od-sc-body" style="display:none;">';
+            echo '<div class="od-field-row">';
+            echo '<div class="od-field"><label>' . esc_html__( 'Label (EN)', 'ondigital' ) . '</label><input type="text" name="ondigital_sector_bars[' . $i . '][label_en]" value="' . esc_attr( $le ) . '"></div>';
+            echo '<div class="od-field"><label>' . esc_html__( 'Label (AZ)', 'ondigital' ) . '</label><input type="text" name="ondigital_sector_bars[' . $i . '][label_az]" value="' . esc_attr( $la ) . '"></div>';
+            echo '</div>';
+            echo '<div class="od-field"><label>' . esc_html__( 'Percentage (0–100)', 'ondigital' ) . '</label><input type="number" min="0" max="100" name="ondigital_sector_bars[' . $i . '][percent]" value="' . esc_attr( $pct ) . '" placeholder="e.g. 26" style="max-width:120px;"></div>';
+            echo '</div></div>';
+        } );
+        ?>
+    <?php od_card_close(); ?>
+
     <!-- ── BRANDS GRID ── -->
     <?php
     $brand_logos = ondigital_get_repeater( 'brand_logos', array() );

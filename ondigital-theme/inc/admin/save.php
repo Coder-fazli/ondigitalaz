@@ -52,7 +52,7 @@ function ondigital_panel_save(): void {
     update_option( 'ondigital_options', $updated );
 
     // Handle repeaters
-    $repeater_keys = array( 'partners', 'features', 'pricing', 'faq', 'about_faq', 'stats', 'testimonials', 'text_slider', 'about_clients', 'about_faq_items', 'footer_quick_links', 'footer_services_links', 'project_steps', 'services_cards', 'brand_logos' );
+    $repeater_keys = array( 'partners', 'features', 'pricing', 'faq', 'about_faq', 'stats', 'testimonials', 'text_slider', 'about_clients', 'about_faq_items', 'footer_quick_links', 'footer_services_links', 'project_steps', 'services_cards', 'brand_logos', 'sector_bars' );
 
     foreach ( $repeater_keys as $rkey ) {
         if ( ! isset( $_POST[ 'ondigital_' . $rkey ] ) ) {
@@ -159,6 +159,13 @@ function ondigital_sanitize_repeater( string $key, array $raw ): array {
                     'logo'  => absint( $item['logo'] ?? 0 ),
                     'url'   => esc_url_raw( $item['url'] ?? '' ),
                     'group' => sanitize_text_field( $item['group'] ?? '' ),
+                );
+                break;
+            case 'sector_bars':
+                $out[] = array(
+                    'label_en' => sanitize_text_field( $item['label_en'] ?? '' ),
+                    'label_az' => sanitize_text_field( $item['label_az'] ?? '' ),
+                    'percent'  => (string) max( 0, min( 100, absint( $item['percent'] ?? 0 ) ) ),
                 );
                 break;
             case 'footer_quick_links':
