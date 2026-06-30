@@ -25,7 +25,11 @@
 
         // Clone until 3× viewport
         var origBoxes = Array.from(track.querySelectorAll('.client-box'));
-        while (track.scrollWidth < window.innerWidth * 3) {
+        // Guard: bail if there are no logos or the track is hidden (scrollWidth 0),
+        // otherwise the loop would clone forever and freeze the page.
+        if (!origBoxes.length || track.scrollWidth === 0) return;
+        var guard = 0;
+        while (track.scrollWidth < window.innerWidth * 3 && guard++ < 50) {
             origBoxes.forEach(function (box) {
                 track.appendChild(box.cloneNode(true));
             });

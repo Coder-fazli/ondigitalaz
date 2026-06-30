@@ -47,7 +47,7 @@ $all_terms = get_terms( array(
     </div>
   </div>
 
-  <?php get_template_part( 'template-parts/projects/partners' ); ?>
+  <?php // Partners marquee disabled for now (was infinite-looping logo-cloud.js when hidden). ?>
 
   <!-- ── Filter bar ── -->
   <?php if ( ! empty( $all_terms ) && ! is_wp_error( $all_terms ) ) : ?>
