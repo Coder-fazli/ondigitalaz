@@ -5,6 +5,8 @@
  * @package OnDigital
  */
 
+$lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'en';
+
 // Prefer the Contact Page options (per-language); fall back to the Customizer values.
 $phone   = ondigital_get_option( 'contact_phone' )   ?: get_theme_mod( 'ondigital_phone', '+994 50 123 45 67' );
 $email   = ondigital_get_option( 'contact_email' )   ?: get_theme_mod( 'ondigital_email', 'info@ondigital.az' );
@@ -32,7 +34,7 @@ $social_facebook  = get_theme_mod( 'ondigital_facebook', '#' );
                         <svg viewBox="0 0 24 24" fill="none" stroke="#c2f971" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
                     </div>
                     <div class="contact-info-text">
-                        <span class="contact-info-label"><?php esc_html_e( 'Telefon', 'ondigital' ); ?></span>
+                        <span class="contact-info-label"><?php echo esc_html( $lang === 'en' ? 'Phone' : 'Telefon' ); ?></span>
                         <span class="contact-info-value"><a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>"><?php echo esc_html( $phone ); ?></a></span>
                     </div>
                 </div>
@@ -42,7 +44,7 @@ $social_facebook  = get_theme_mod( 'ondigital_facebook', '#' );
                         <svg viewBox="0 0 24 24" fill="none" stroke="#c2f971" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     </div>
                     <div class="contact-info-text">
-                        <span class="contact-info-label"><?php esc_html_e( 'E-mail', 'ondigital' ); ?></span>
+                        <span class="contact-info-label"><?php echo esc_html( $lang === 'en' ? 'Email' : 'E-mail' ); ?></span>
                         <span class="contact-info-value"><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></span>
                     </div>
                 </div>
@@ -52,7 +54,7 @@ $social_facebook  = get_theme_mod( 'ondigital_facebook', '#' );
                         <svg viewBox="0 0 24 24" fill="none" stroke="#c2f971" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     </div>
                     <div class="contact-info-text">
-                        <span class="contact-info-label"><?php esc_html_e( 'Ünvan', 'ondigital' ); ?></span>
+                        <span class="contact-info-label"><?php echo esc_html( $lang === 'en' ? 'Address' : 'Ünvan' ); ?></span>
                         <span class="contact-info-value"><?php echo esc_html( $address ); ?></span>
                     </div>
                 </div>
