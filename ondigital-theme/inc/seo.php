@@ -84,3 +84,68 @@ add_action( 'wp_head', function () {
         echo '<meta name="description" content="' . esc_attr( $d ) . '">' . "\n";
     }
 }, 1 );
+
+/* ============================================================================
+ * Canonical URL — self-referencing and language-aware (Polylang).
+ * The site was outputting no canonical at all; we emit exactly one per page,
+ * each language pointing to its own URL.
+ * ========================================================================== */
+
+/**
+ * Resolve the canonical URL for the current request.
+ */
+function ondigital_canonical_url(): string {
+    // Home / front page — current language home.
+    if ( is_front_page() ) {
+        return function_exists( 'pll_home_url' ) ? pll_home_url() : home_url( '/' );
+    }
+    // Blog posts index (if a separate page).
+    if ( is_home() ) {
+        $blog_id = (int) get_option( 'page_for_posts' );
+        if ( $blog_id ) {
+            return get_permalink( $blog_id );
+        }
+    }
+    // Singular posts, pages and CPTs (page templates included) — language-specific permalink.
+    if ( is_singular() ) {
+        return get_permalink();
+    }
+    // Custom post type archives (services, projects, glossary…).
+    if ( is_post_type_archive() ) {
+        $pt = get_query_var( 'post_type' );
+        if ( is_array( $pt ) ) {
+            $pt = reset( $pt );
+        }
+        $link = get_post_type_archive_link( $pt );
+        if ( $link ) {
+            return $link;
+        }
+    }
+    // Taxonomy / category / tag archives.
+    if ( is_category() || is_tag() || is_tax() ) {
+        $term = get_queried_object();
+        if ( $term && ! is_wp_error( $term ) ) {
+            $link = get_term_link( $term );
+            if ( ! is_wp_error( $link ) ) {
+                return $link;
+            }
+        }
+    }
+    // Fallback: current path without the query string (drops tracking params).
+    $path = isset( $_SERVER['REQUEST_URI'] ) ? strtok( wp_unslash( $_SERVER['REQUEST_URI'] ), '?' ) : '/';
+    return home_url( $path );
+}
+
+// Remove WordPress core's canonical and Rank Math's (which was empty) so ours is the only one.
+remove_action( 'wp_head', 'rel_canonical' );
+add_filter( 'rank_math/frontend/canonical', '__return_empty_string' );
+
+add_action( 'wp_head', function () {
+    if ( is_404() || is_search() ) {
+        return;
+    }
+    $url = ondigital_canonical_url();
+    if ( $url ) {
+        echo '<link rel="canonical" href="' . esc_url( $url ) . '">' . "\n";
+    }
+}, 2 );
