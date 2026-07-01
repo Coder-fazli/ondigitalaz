@@ -25,8 +25,8 @@ get_template_part( 'template-parts/home/services' );
 // Section 6: Report / Conversion
 get_template_part( 'template-parts/home/report' );
 
-// Section 7: Projects slider
-get_template_part( 'template-parts/home/projects' );
+// Section 7: Projects slider — removed for now
+// get_template_part( 'template-parts/home/projects' );
 
 // Section 8: Fun Facts / Stats counters
 get_template_part( 'template-parts/home/stats' );
