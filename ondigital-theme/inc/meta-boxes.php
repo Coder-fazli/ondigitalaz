@@ -330,6 +330,7 @@ function ondigital_service_meta_callback( $post ) {
         od_mb_text( '_service_stat_number', __( 'Hero Stat Number', 'ondigital' ), get_post_meta( $post->ID, '_service_stat_number', true ), __( 'e.g. +240%', 'ondigital' ) );
         od_mb_text( '_service_stat_label',  __( 'Hero Stat Label',  'ondigital' ), get_post_meta( $post->ID, '_service_stat_label',  true ), __( 'e.g. Üzvi trafik artımı', 'ondigital' ) );
         od_mb_text( '_service_hero_badge',     __( 'Hero Badge / Eyebrow', 'ondigital' ),  get_post_meta( $post->ID, '_service_hero_badge', true ),     __( 'e.g. Ondigital — Xidmət', 'ondigital' ) );
+        od_mb_textarea( '_service_hero_desc',  __( 'Hero Description', 'ondigital' ),       get_post_meta( $post->ID, '_service_hero_desc', true ),      __( 'Short text under the hero title (separate from the main content below)', 'ondigital' ) );
         od_mb_text( '_service_hero_btn1_text', __( 'Primary Button — Text', 'ondigital' ), get_post_meta( $post->ID, '_service_hero_btn1_text', true ), __( 'e.g. Başlayaq', 'ondigital' ) );
         od_mb_text( '_service_hero_btn1_url',  __( 'Primary Button — Link', 'ondigital' ), get_post_meta( $post->ID, '_service_hero_btn1_url', true ),  __( 'e.g. /elaqe/ or full https:// link', 'ondigital' ) );
         od_mb_text( '_service_hero_btn2_text', __( 'Ghost Button — Text', 'ondigital' ),   get_post_meta( $post->ID, '_service_hero_btn2_text', true ), __( 'e.g. Prosesi gör', 'ondigital' ) );
@@ -1193,6 +1194,9 @@ function ondigital_save_meta_boxes( $post_id ) {
         }
         if ( isset( $_POST['_service_features'] ) ) {
             update_post_meta( $post_id, '_service_features', sanitize_textarea_field( $_POST['_service_features'] ) );
+        }
+        if ( isset( $_POST['_service_hero_desc'] ) ) {
+            update_post_meta( $post_id, '_service_hero_desc', sanitize_textarea_field( $_POST['_service_hero_desc'] ) );
         }
     }
 

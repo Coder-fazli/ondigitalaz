@@ -72,7 +72,15 @@ body { overflow: auto !important; height: auto !important; }
                 <div class="ss-hero-left">
                     <span class="ss-badge"><?php echo esc_html( $hero_badge ); ?></span>
                     <h1 class="ss-hero-title"><?php the_title(); ?></h1>
-                    <p class="ss-hero-desc"><?php echo esc_html( get_the_excerpt() ?: $demo_excerpt ); ?></p>
+                    <?php
+                    // Hero description: dedicated field first, then a manual excerpt, then demo.
+                    // Never the auto-generated excerpt, so the main content doesn't leak in.
+                    $hero_desc = get_post_meta( $id, '_service_hero_desc', true );
+                    if ( '' === $hero_desc ) {
+                        $hero_desc = has_excerpt() ? get_the_excerpt() : $demo_excerpt;
+                    }
+                    ?>
+                    <p class="ss-hero-desc"><?php echo esc_html( $hero_desc ); ?></p>
                     <div class="ss-hero-btns">
                         <a href="<?php echo esc_url( $hero_btn_primary_url ); ?>" class="ss-btn-primary"><?php echo esc_html( $hero_btn_primary ); ?></a>
                         <a href="<?php echo esc_attr( $hero_btn_ghost_url ); ?>" class="ss-btn-ghost"><?php echo esc_html( $hero_btn_ghost ); ?></a>
