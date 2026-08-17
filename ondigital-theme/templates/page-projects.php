@@ -6,15 +6,20 @@
  */
 
 add_action( 'wp_enqueue_scripts', function() {
+    // Version by file modified-time so uploads always bust the cache.
+    $ver = function ( string $rel ) {
+        $path = get_template_directory() . $rel;
+        return file_exists( $path ) ? (string) filemtime( $path ) : ONDIGITAL_VERSION;
+    };
     wp_enqueue_style(
         'ondigital-projects-archive',
         get_template_directory_uri() . '/assets/css/components/projects-archive.css',
         array(),
-        ONDIGITAL_VERSION
+        $ver( '/assets/css/components/projects-archive.css' )
     );
     // Logo cloud for partners section
-    wp_enqueue_style( 'ondigital-logo-cloud', get_template_directory_uri() . '/assets/css/components/logo-cloud.css', array(), ONDIGITAL_VERSION );
-    wp_enqueue_script( 'ondigital-logo-cloud', get_template_directory_uri() . '/assets/js/components/logo-cloud.js', array(), ONDIGITAL_VERSION, true );
+    wp_enqueue_style( 'ondigital-logo-cloud', get_template_directory_uri() . '/assets/css/components/logo-cloud.css', array(), $ver( '/assets/css/components/logo-cloud.css' ) );
+    wp_enqueue_script( 'ondigital-logo-cloud', get_template_directory_uri() . '/assets/js/components/logo-cloud.js', array(), $ver( '/assets/js/components/logo-cloud.js' ), true );
 }, 20 );
 
 get_header();
