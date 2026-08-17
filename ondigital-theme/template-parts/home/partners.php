@@ -17,6 +17,35 @@ $default_brands = array(
 );
 
 $brands = ondigital_get_repeater( 'partners', $default_brands );
+
+// Build the logo markup for a single brand.
+$od_build_logo = function ( $brand ) {
+    $alt = esc_attr( $brand['alt'] ?? '' );
+
+    if ( ! empty( $brand['image_light'] ) ) {
+        $light_url = wp_get_attachment_image_url( $brand['image_light'], 'medium' );
+    } else {
+        $light_url = ONDIGITAL_URI . '/assets/imgs/brand/' . ( $brand['_fallback_light'] ?? 'img-s-13' ) . '.webp';
+    }
+
+    if ( ! empty( $brand['image_dark'] ) ) {
+        $dark_url = wp_get_attachment_image_url( $brand['image_dark'], 'medium' );
+    } else {
+        $dark_url = ONDIGITAL_URI . '/assets/imgs/brand/' . ( $brand['_fallback_dark'] ?? 'img-s-13-light' ) . '.webp';
+    }
+
+    return '<div class="client-box">'
+        . '<img class="show-light" src="' . esc_url( $light_url ) . '" alt="' . $alt . '" loading="lazy">'
+        . '<img class="show-dark" src="' . esc_url( $dark_url ) . '" alt="' . $alt . '" loading="lazy">'
+        . '</div>';
+};
+
+// Split the logos across up to 3 rows (no duplication): more logos → fill the
+// 3rd row. Few logos stay in 2 (or 1) rows.
+$od_total     = count( $brands );
+$od_per_row   = max( 1, (int) ceil( $od_total / 3 ) );
+$od_rows      = array_chunk( $brands, $od_per_row );
+$od_dirs      = array( 'left', 'right', 'left' );
 ?>
 <div class="clients-area">
     <div class="container">
@@ -29,37 +58,18 @@ $brands = ondigital_get_repeater( 'partners', $default_brands );
                 </div>
             </div>
             <div class="client-slider has_fade_anim">
-                <?php
-                $logo_items = '';
-                foreach ( $brands as $brand ) :
-                    $alt = esc_attr( $brand['alt'] ?? '' );
-
-                    if ( ! empty( $brand['image_light'] ) ) {
-                        $light_url = wp_get_attachment_image_url( $brand['image_light'], 'medium' );
-                    } else {
-                        $fallback  = $brand['_fallback_light'] ?? 'img-s-13';
-                        $light_url = ONDIGITAL_URI . '/assets/imgs/brand/' . $fallback . '.webp';
+                <?php foreach ( $od_rows as $od_i => $od_row ) :
+                    $od_items = '';
+                    foreach ( $od_row as $od_brand ) {
+                        $od_items .= $od_build_logo( $od_brand );
                     }
-
-                    if ( ! empty( $brand['image_dark'] ) ) {
-                        $dark_url = wp_get_attachment_image_url( $brand['image_dark'], 'medium' );
-                    } else {
-                        $fallback = $brand['_fallback_dark'] ?? 'img-s-13-light';
-                        $dark_url = ONDIGITAL_URI . '/assets/imgs/brand/' . $fallback . '.webp';
+                    if ( '' === $od_items ) {
+                        continue;
                     }
-
-                    $logo_items .= '<div class="client-box">';
-                    $logo_items .= '<img class="show-light" src="' . esc_url( $light_url ) . '" alt="' . $alt . '" loading="lazy">';
-                    $logo_items .= '<img class="show-dark" src="' . esc_url( $dark_url ) . '" alt="' . $alt . '" loading="lazy">';
-                    $logo_items .= '</div>';
-                endforeach;
+                    $od_dir = $od_dirs[ $od_i ] ?? ( ( $od_i % 2 ) ? 'right' : 'left' );
                 ?>
-                <!-- Row 1: scrolls left -->
-                <div class="logo-marquee-track" data-direction="left"><?php echo $logo_items; ?></div>
-                <!-- Row 2: scrolls right -->
-                <div class="logo-marquee-track" data-direction="right"><?php echo $logo_items; ?></div>
-                <!-- Row 3: scrolls left -->
-                <div class="logo-marquee-track" data-direction="left"><?php echo $logo_items; ?></div>
+                <div class="logo-marquee-track" data-direction="<?php echo esc_attr( $od_dir ); ?>"><?php echo $od_items; ?></div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
