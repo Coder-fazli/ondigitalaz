@@ -58,6 +58,8 @@ $brands = ondigital_get_repeater( 'partners', $default_brands );
                 <div class="logo-marquee-track" data-direction="left"><?php echo $logo_items; ?></div>
                 <!-- Row 2: scrolls right -->
                 <div class="logo-marquee-track" data-direction="right"><?php echo $logo_items; ?></div>
+                <!-- Row 3: scrolls left -->
+                <div class="logo-marquee-track" data-direction="left"><?php echo $logo_items; ?></div>
             </div>
         </div>
     </div>
