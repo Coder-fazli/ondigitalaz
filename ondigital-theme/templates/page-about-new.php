@@ -71,12 +71,23 @@ $funnel_stages = array(
                 <p class="ab-hero-desc">
                     <?php echo esc_html( $o( 'an_hero_desc', "We don't just deliver services — we rebuild your entire digital ecosystem on a foundation of data, strategy, and technical excellence." ) ); ?>
                 </p>
+                <?php
+                // On-page anchor buttons: keep the #fragment but bind it to the
+                // CURRENT page URL so each language scrolls on its own page
+                // (was a hardcoded /about/ URL → AZ jumped to the EN page).
+                $ab_anchor_url = function ( $raw ) {
+                    $hash = strrchr( (string) $raw, '#' );
+                    return $hash !== false ? ( get_permalink() . $hash ) : $raw;
+                };
+                $ab_btn1_url = $ab_anchor_url( $o( 'an_hero_btn1_url', '#ab-story' ) );
+                $ab_btn2_url = $ab_anchor_url( $o( 'an_hero_btn2_url', '#ab-cta' ) );
+                ?>
                 <div class="ab-hero-btns">
-                    <a href="<?php echo esc_url( $o( 'an_hero_btn1_url', '#ab-story' ) ); ?>" class="btn-accent">
+                    <a href="<?php echo esc_url( $ab_btn1_url ); ?>" class="btn-accent">
                         <?php echo esc_html( $o( 'an_hero_btn1_text', 'Our Story' ) ); ?>
                         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
-                    <a href="<?php echo esc_url( $o( 'an_hero_btn2_url', '#ab-cta' ) ); ?>" class="btn-primary">
+                    <a href="<?php echo esc_url( $ab_btn2_url ); ?>" class="btn-primary">
                         <?php echo esc_html( $o( 'an_hero_btn2_text', 'Get in Touch' ) ); ?>
                     </a>
                 </div>
