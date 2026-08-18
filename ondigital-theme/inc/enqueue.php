@@ -28,10 +28,10 @@ function ondigital_enqueue_assets() {
     wp_enqueue_style( 'magnific-popup',  ONDIGITAL_URI . '/assets/css/vendor/magnific-popup.css',      array(),            '1.1.0' );
 
     // --- Nav overrides (global) ---
-    wp_enqueue_style( 'ondigital-nav', ONDIGITAL_URI . '/assets/css/components/nav.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+    wp_enqueue_style( 'ondigital-nav', ONDIGITAL_URI . '/assets/css/components/nav.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/components/nav.css' ) );
 
     // --- Promo bar (global) ---
-    wp_enqueue_style( 'ondigital-promo-bar', ONDIGITAL_URI . '/assets/css/components/promo-bar.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+    wp_enqueue_style( 'ondigital-promo-bar', ONDIGITAL_URI . '/assets/css/components/promo-bar.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/components/promo-bar.css' ) );
 
     // --- Page-specific CSS / JS ---
     ondigital_enqueue_page_assets();
@@ -52,7 +52,7 @@ function ondigital_enqueue_assets() {
     wp_enqueue_script( 'lottie',              ONDIGITAL_URI . '/assets/js/vendor/lottie.min.js',             array(),            '5.12.2', true );
 
     // --- Global Theme JS ---
-    wp_enqueue_script( 'ondigital-global', ONDIGITAL_URI . '/assets/js/global.js', array( 'jquery', 'gsap', 'bootstrap-bundle' ), ONDIGITAL_VERSION, true );
+    wp_enqueue_script( 'ondigital-global', ONDIGITAL_URI . '/assets/js/global.js', array( 'jquery', 'gsap', 'bootstrap-bundle' ), ondigital_asset_ver( '/assets/js/global.js' ), true );
 
     wp_localize_script( 'ondigital-global', 'ondigital_ajax', array(
         'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -61,7 +61,7 @@ function ondigital_enqueue_assets() {
     ) );
 
     // Form redirect — runs on all pages, redirects to thank-you after successful submission
-    wp_enqueue_script( 'ondigital-form-redirect', ONDIGITAL_URI . '/assets/js/components/form-redirect.js', array(), ONDIGITAL_VERSION, true );
+    wp_enqueue_script( 'ondigital-form-redirect', ONDIGITAL_URI . '/assets/js/components/form-redirect.js', array(), ondigital_asset_ver( '/assets/js/components/form-redirect.js' ), true );
     wp_localize_script( 'ondigital-form-redirect', 'odFormRedirect', array(
         'thankYouUrl' => home_url( '/thank-you/' ),
     ) );
@@ -77,7 +77,7 @@ add_action( 'wp_enqueue_scripts', function () {
         'ondigital-footer',
         ONDIGITAL_URI . '/assets/css/footer.css',
         array( 'bootstrap' ),
-        ONDIGITAL_VERSION
+        ondigital_asset_ver( '/assets/css/footer.css' )
     );
 }, 20 );
 
@@ -109,35 +109,35 @@ function ondigital_enqueue_page_assets() {
 
         // Contact page uses clean scoped CSS — load global base first
         if ( 'contact' === $slug ) {
-            wp_enqueue_style( 'ondigital-global-base', ONDIGITAL_URI . '/assets/css/global.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-global-base', ONDIGITAL_URI . '/assets/css/global.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/global.css' ) );
         }
 
         $css = ONDIGITAL_DIR . '/assets/css/pages/' . $slug . '.css';
         if ( file_exists( $css ) ) {
             $deps = 'contact' === $slug ? array( 'bootstrap', 'ondigital-global-base' ) : array( 'bootstrap' );
-            wp_enqueue_style( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/css/pages/' . $slug . '.css', $deps, ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/css/pages/' . $slug . '.css', $deps, @filemtime( $css ) ?: ONDIGITAL_VERSION );
         }
 
         $js = ONDIGITAL_DIR . '/assets/js/pages/' . $slug . '.js';
         if ( file_exists( $js ) ) {
-            wp_enqueue_script( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/js/pages/' . $slug . '.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
+            wp_enqueue_script( 'ondigital-' . $slug, ONDIGITAL_URI . '/assets/js/pages/' . $slug . '.js', array( 'jquery', 'swiper', 'ondigital-global' ), @filemtime( $js ) ?: ONDIGITAL_VERSION, true );
         }
 
         // Services page: load clean grid component CSS + partners marquee
         if ( 'services' === $slug ) {
-            wp_enqueue_style(  'ondigital-services-page', ONDIGITAL_URI . '/assets/css/components/services-page.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-            wp_enqueue_style(  'ondigital-logo-cloud',    ONDIGITAL_URI . '/assets/css/components/logo-cloud.css',    array( 'bootstrap' ), ONDIGITAL_VERSION );
-            wp_enqueue_script( 'ondigital-logo-cloud',    ONDIGITAL_URI . '/assets/js/components/logo-cloud.js',      array( 'jquery' ),    ONDIGITAL_VERSION, true );
+            wp_enqueue_style(  'ondigital-services-page', ONDIGITAL_URI . '/assets/css/components/services-page.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/components/services-page.css' ) );
+            wp_enqueue_style(  'ondigital-logo-cloud',    ONDIGITAL_URI . '/assets/css/components/logo-cloud.css',    array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/components/logo-cloud.css' ) );
+            wp_enqueue_script( 'ondigital-logo-cloud',    ONDIGITAL_URI . '/assets/js/components/logo-cloud.js',      array( 'jquery' ),    ondigital_asset_ver( '/assets/js/components/logo-cloud.js' ), true );
         }
 
         // Blog page: load component CSS (featured posts + blog grid)
         if ( 'blog' === $slug ) {
-            wp_enqueue_style( 'ondigital-blog-page', ONDIGITAL_URI . '/assets/css/components/blog-page.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-blog-page', ONDIGITAL_URI . '/assets/css/components/blog-page.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/components/blog-page.css' ) );
         }
 
         // About page: load FAQ styles + override compiled dark styles
         if ( 'about' === $slug ) {
-            wp_enqueue_style( 'ondigital-faq-about', ONDIGITAL_URI . '/assets/css/pages/faq.css', array( 'ondigital-about' ), ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-faq-about', ONDIGITAL_URI . '/assets/css/pages/faq.css', array( 'ondigital-about' ), ondigital_asset_ver( '/assets/css/pages/faq.css' ) );
             wp_add_inline_style( 'ondigital-faq-about', '
                 .faq-area .section-content { background-color: transparent !important; display: grid !important; gap: 30px 60px !important; grid-template-columns: 485px 960px !important; justify-content: unset !important; }
                 @media only screen and (max-width: 1919px) { .faq-area .section-content { grid-template-columns: 400px 1fr !important; } }
@@ -155,17 +155,17 @@ function ondigital_enqueue_page_assets() {
 
         // Home page: component CSS overrides (loaded after home.css)
         if ( 'home' === $slug ) {
-            wp_enqueue_style( 'ondigital-logo-cloud',   ONDIGITAL_URI . '/assets/css/components/logo-cloud.css',   array( 'ondigital-home' ), ONDIGITAL_VERSION );
-            wp_enqueue_script( 'ondigital-logo-cloud',  ONDIGITAL_URI . '/assets/js/components/logo-cloud.js',    array(), ONDIGITAL_VERSION, true );
-            wp_enqueue_style( 'ondigital-hero-redesign', ONDIGITAL_URI . '/assets/css/components/hero-redesign.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
-            wp_enqueue_style( 'ondigital-counter',       ONDIGITAL_URI . '/assets/css/components/counter.css',       array( 'ondigital-home' ), ONDIGITAL_VERSION );
-            wp_enqueue_style( 'ondigital-services-home', ONDIGITAL_URI . '/assets/css/components/services-home.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
-            wp_enqueue_style( 'ondigital-blog-home',     ONDIGITAL_URI . '/assets/css/components/blog-home.css',     array( 'ondigital-home' ), ONDIGITAL_VERSION );
-            wp_enqueue_style( 'ondigital-projects-home', ONDIGITAL_URI . '/assets/css/components/projects-home.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
-            wp_enqueue_script( 'ondigital-hero-redesign', ONDIGITAL_URI . '/assets/js/components/hero-redesign.js', array(), ONDIGITAL_VERSION, true );
-            wp_enqueue_style(  'ondigital-seo-chart', ONDIGITAL_URI . '/assets/css/components/seo-chart.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
-            wp_enqueue_script( 'ondigital-seo-chart', ONDIGITAL_URI . '/assets/js/components/seo-chart.js',   array(), ONDIGITAL_VERSION, true );
-            wp_enqueue_style( 'ondigital-faq', ONDIGITAL_URI . '/assets/css/pages/faq.css', array( 'ondigital-home' ), ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-logo-cloud',   ONDIGITAL_URI . '/assets/css/components/logo-cloud.css',   array( 'ondigital-home' ), ondigital_asset_ver( '/assets/css/components/logo-cloud.css' ) );
+            wp_enqueue_script( 'ondigital-logo-cloud',  ONDIGITAL_URI . '/assets/js/components/logo-cloud.js',    array(), ondigital_asset_ver( '/assets/js/components/logo-cloud.js' ), true );
+            wp_enqueue_style( 'ondigital-hero-redesign', ONDIGITAL_URI . '/assets/css/components/hero-redesign.css', array( 'ondigital-home' ), ondigital_asset_ver( '/assets/css/components/hero-redesign.css' ) );
+            wp_enqueue_style( 'ondigital-counter',       ONDIGITAL_URI . '/assets/css/components/counter.css',       array( 'ondigital-home' ), ondigital_asset_ver( '/assets/css/components/counter.css' ) );
+            wp_enqueue_style( 'ondigital-services-home', ONDIGITAL_URI . '/assets/css/components/services-home.css', array( 'ondigital-home' ), ondigital_asset_ver( '/assets/css/components/services-home.css' ) );
+            wp_enqueue_style( 'ondigital-blog-home',     ONDIGITAL_URI . '/assets/css/components/blog-home.css',     array( 'ondigital-home' ), ondigital_asset_ver( '/assets/css/components/blog-home.css' ) );
+            wp_enqueue_style( 'ondigital-projects-home', ONDIGITAL_URI . '/assets/css/components/projects-home.css', array( 'ondigital-home' ), ondigital_asset_ver( '/assets/css/components/projects-home.css' ) );
+            wp_enqueue_script( 'ondigital-hero-redesign', ONDIGITAL_URI . '/assets/js/components/hero-redesign.js', array(), ondigital_asset_ver( '/assets/js/components/hero-redesign.js' ), true );
+            wp_enqueue_style(  'ondigital-seo-chart', ONDIGITAL_URI . '/assets/css/components/seo-chart.css', array( 'ondigital-home' ), ondigital_asset_ver( '/assets/css/components/seo-chart.css' ) );
+            wp_enqueue_script( 'ondigital-seo-chart', ONDIGITAL_URI . '/assets/js/components/seo-chart.js',   array(), ondigital_asset_ver( '/assets/js/components/seo-chart.js' ), true );
+            wp_enqueue_style( 'ondigital-faq', ONDIGITAL_URI . '/assets/css/pages/faq.css', array( 'ondigital-home' ), ondigital_asset_ver( '/assets/css/pages/faq.css' ) );
             wp_add_inline_style( 'ondigital-faq', '
                 .faq-area .section-title.large { font-size: 36px !important; font-weight: 600 !important; line-height: 1.3 !important; margin-top: 0 !important; letter-spacing: -.02em; }
                 @media only screen and (max-width: 991px) { .faq-area .section-title.large { font-size: 28px !important; } }
@@ -239,15 +239,15 @@ function ondigital_enqueue_page_assets() {
     if ( is_post_type_archive( 'service' ) ) {
         $css = ONDIGITAL_DIR . '/assets/css/pages/services.css';
         if ( file_exists( $css ) ) {
-            wp_enqueue_style( 'ondigital-services', ONDIGITAL_URI . '/assets/css/pages/services.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-services', ONDIGITAL_URI . '/assets/css/pages/services.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/pages/services.css' ) );
         }
         $js = ONDIGITAL_DIR . '/assets/js/pages/services.js';
         if ( file_exists( $js ) ) {
-            wp_enqueue_script( 'ondigital-services', ONDIGITAL_URI . '/assets/js/pages/services.js', array( 'jquery', 'swiper', 'ondigital-global' ), ONDIGITAL_VERSION, true );
+            wp_enqueue_script( 'ondigital-services', ONDIGITAL_URI . '/assets/js/pages/services.js', array( 'jquery', 'swiper', 'ondigital-global' ), ondigital_asset_ver( '/assets/js/pages/services.js' ), true );
         }
-        wp_enqueue_style( 'ondigital-services-page', ONDIGITAL_URI . '/assets/css/components/services-page.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-        wp_enqueue_style( 'ondigital-logo-cloud', ONDIGITAL_URI . '/assets/css/components/logo-cloud.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-        wp_enqueue_script( 'ondigital-logo-cloud', ONDIGITAL_URI . '/assets/js/components/logo-cloud.js', array( 'jquery' ), ONDIGITAL_VERSION, true );
+        wp_enqueue_style( 'ondigital-services-page', ONDIGITAL_URI . '/assets/css/components/services-page.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/components/services-page.css' ) );
+        wp_enqueue_style( 'ondigital-logo-cloud', ONDIGITAL_URI . '/assets/css/components/logo-cloud.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/components/logo-cloud.css' ) );
+        wp_enqueue_script( 'ondigital-logo-cloud', ONDIGITAL_URI . '/assets/js/components/logo-cloud.js', array( 'jquery' ), ondigital_asset_ver( '/assets/js/components/logo-cloud.js' ), true );
     }
 
     // Project archive CSS/JS is handled directly in archive-project.php
@@ -256,26 +256,26 @@ function ondigital_enqueue_page_assets() {
     if ( is_singular( 'post' ) ) {
         $css = ONDIGITAL_DIR . '/assets/css/pages/blog-details.css';
         if ( file_exists( $css ) ) {
-            wp_enqueue_style( 'ondigital-blog-details', ONDIGITAL_URI . '/assets/css/pages/blog-details.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-blog-details', ONDIGITAL_URI . '/assets/css/pages/blog-details.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/pages/blog-details.css' ) );
         }
-        wp_enqueue_style( 'ondigital-blog-typography', ONDIGITAL_URI . '/assets/css/components/blog-typography.css', array( 'ondigital-blog-details' ), ONDIGITAL_VERSION );
+        wp_enqueue_style( 'ondigital-blog-typography', ONDIGITAL_URI . '/assets/css/components/blog-typography.css', array( 'ondigital-blog-details' ), ondigital_asset_ver( '/assets/css/components/blog-typography.css' ) );
         $js = ONDIGITAL_DIR . '/assets/js/pages/blog-details.js';
         if ( file_exists( $js ) ) {
-            wp_enqueue_script( 'ondigital-blog-details', ONDIGITAL_URI . '/assets/js/pages/blog-details.js', array( 'bootstrap' ), ONDIGITAL_VERSION, true );
+            wp_enqueue_script( 'ondigital-blog-details', ONDIGITAL_URI . '/assets/js/pages/blog-details.js', array( 'bootstrap' ), ondigital_asset_ver( '/assets/js/pages/blog-details.js' ), true );
         }
     }
 
     if ( is_singular( 'service' ) ) {
         $css = ONDIGITAL_DIR . '/assets/css/pages/service-details.css';
         if ( file_exists( $css ) ) {
-            wp_enqueue_style( 'ondigital-service-details', ONDIGITAL_URI . '/assets/css/pages/service-details.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-service-details', ONDIGITAL_URI . '/assets/css/pages/service-details.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/pages/service-details.css' ) );
         }
     }
 
     if ( is_singular( 'project' ) ) {
         $css = ONDIGITAL_DIR . '/assets/css/pages/project-details.css';
         if ( file_exists( $css ) ) {
-            wp_enqueue_style( 'ondigital-project-details', ONDIGITAL_URI . '/assets/css/pages/project-details.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-project-details', ONDIGITAL_URI . '/assets/css/pages/project-details.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/pages/project-details.css' ) );
         }
     }
 
@@ -283,10 +283,10 @@ function ondigital_enqueue_page_assets() {
         || ( is_page() && 'templates/page-glossary.php' === get_page_template_slug() ) ) {
         wp_enqueue_style( 'roboto', 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap', array(), null );
         // Load full base theme CSS first (same as global.css fallback) so offcanvas/nav/preloader styles are present
-        wp_enqueue_style( 'ondigital-default', ONDIGITAL_URI . '/assets/css/global.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-        wp_enqueue_style( 'ondigital-glossary', ONDIGITAL_URI . '/assets/css/pages/glossary.css', array( 'ondigital-default' ), ONDIGITAL_VERSION );
+        wp_enqueue_style( 'ondigital-default', ONDIGITAL_URI . '/assets/css/global.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/global.css' ) );
+        wp_enqueue_style( 'ondigital-glossary', ONDIGITAL_URI . '/assets/css/pages/glossary.css', array( 'ondigital-default' ), ondigital_asset_ver( '/assets/css/pages/glossary.css' ) );
         if ( is_singular( 'od_glossary' ) ) {
-            wp_enqueue_style( 'ondigital-glossary-single', ONDIGITAL_URI . '/assets/css/pages/glossary-single.css', array( 'ondigital-glossary' ), ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-glossary-single', ONDIGITAL_URI . '/assets/css/pages/glossary-single.css', array( 'ondigital-glossary' ), ondigital_asset_ver( '/assets/css/pages/glossary-single.css' ) );
         }
     }
 
@@ -294,7 +294,7 @@ function ondigital_enqueue_page_assets() {
     if ( is_404() ) {
         $css = ONDIGITAL_DIR . '/assets/css/pages/404.css';
         if ( file_exists( $css ) ) {
-            wp_enqueue_style( 'ondigital-404', ONDIGITAL_URI . '/assets/css/pages/404.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+            wp_enqueue_style( 'ondigital-404', ONDIGITAL_URI . '/assets/css/pages/404.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/pages/404.css' ) );
         }
         return;
     }
@@ -311,5 +311,5 @@ function ondigital_enqueue_page_assets() {
         }
     }
 
-    wp_enqueue_style( 'ondigital-default', ONDIGITAL_URI . '/assets/css/global.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+    wp_enqueue_style( 'ondigital-default', ONDIGITAL_URI . '/assets/css/global.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/global.css' ) );
 }

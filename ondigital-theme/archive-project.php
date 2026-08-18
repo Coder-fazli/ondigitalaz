@@ -10,7 +10,7 @@ add_action( 'wp_enqueue_scripts', function() {
         'ondigital-projects-archive',
         get_template_directory_uri() . '/assets/css/components/projects-archive.css',
         array(),
-        ONDIGITAL_VERSION
+        ondigital_asset_ver( '/assets/css/components/projects-archive.css' )
     );
 }, 20 );
 

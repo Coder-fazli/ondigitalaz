@@ -7,7 +7,7 @@
 
 add_action( 'wp_enqueue_scripts', function() {
     wp_enqueue_style( 'plus-jakarta-sans', 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap', array(), null );
-    wp_enqueue_style( 'ondigital-default', get_template_directory_uri() . '/assets/css/global.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
+    wp_enqueue_style( 'ondigital-default', get_template_directory_uri() . '/assets/css/global.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/global.css' ) );
     wp_enqueue_style(
         'ondigital-about-new',
         get_template_directory_uri() . '/assets/css/pages/about-new.css',

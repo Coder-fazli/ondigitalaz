@@ -41,7 +41,7 @@ function ondigital_theme_options_scripts( $hook ) {
         'ondigital-theme-options',
         ONDIGITAL_URI . '/assets/js/admin/theme-options.js',
         array( 'jquery' ),
-        ONDIGITAL_VERSION,
+        ondigital_asset_ver( '/assets/js/admin/theme-options.js' ),
         true
     );
     wp_add_inline_style( 'wp-admin', '

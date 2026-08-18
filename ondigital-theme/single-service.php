@@ -6,7 +6,7 @@
  */
 
 add_action( 'wp_enqueue_scripts', function() {
-    wp_enqueue_style( 'ondigital-default',        get_template_directory_uri() . '/assets/css/global.css',               array( 'bootstrap' ),        ONDIGITAL_VERSION );
+    wp_enqueue_style( 'ondigital-default',        get_template_directory_uri() . '/assets/css/global.css',               array( 'bootstrap' ),        ondigital_asset_ver( '/assets/css/global.css' ) );
     wp_enqueue_style( 'ondigital-service-single', get_template_directory_uri() . '/assets/css/pages/service-single.css', array( 'ondigital-default' ), @filemtime( get_template_directory() . '/assets/css/pages/service-single.css' ) ?: ONDIGITAL_VERSION );
     wp_dequeue_style( 'ondigital-service-details' );
 }, 99 );

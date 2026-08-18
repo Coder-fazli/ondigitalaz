@@ -6,9 +6,9 @@
  */
 
 add_action( 'wp_enqueue_scripts', function() {
-    wp_enqueue_style( 'ondigital-default', get_template_directory_uri() . '/assets/css/global.css', array( 'bootstrap' ), ONDIGITAL_VERSION );
-    wp_enqueue_style( 'ondigital-project-details-template', get_template_directory_uri() . '/assets/css/pages/project-details-template.css', array( 'ondigital-default' ), ONDIGITAL_VERSION );
-    wp_enqueue_script( 'ondigital-project-details-template', get_template_directory_uri() . '/assets/js/pages/project-details-template.js', array( 'jquery' ), ONDIGITAL_VERSION, true );
+    wp_enqueue_style( 'ondigital-default', get_template_directory_uri() . '/assets/css/global.css', array( 'bootstrap' ), ondigital_asset_ver( '/assets/css/global.css' ) );
+    wp_enqueue_style( 'ondigital-project-details-template', get_template_directory_uri() . '/assets/css/pages/project-details-template.css', array( 'ondigital-default' ), ondigital_asset_ver( '/assets/css/pages/project-details-template.css' ) );
+    wp_enqueue_script( 'ondigital-project-details-template', get_template_directory_uri() . '/assets/js/pages/project-details-template.js', array( 'jquery' ), ondigital_asset_ver( '/assets/js/pages/project-details-template.js' ), true );
     wp_dequeue_script( 'meanmenu' );
 }, 99 );
 

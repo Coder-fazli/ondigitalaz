@@ -10,6 +10,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Cache-busting version string for a theme asset, based on the file's own
+ * modified time instead of the theme-wide ONDIGITAL_VERSION (which only
+ * changes when style.css is touched). Pass a path relative to the theme
+ * root, e.g. '/assets/css/pages/services.css'.
+ */
+function ondigital_asset_ver( string $rel ): string {
+    static $cache = array();
+    if ( isset( $cache[ $rel ] ) ) {
+        return $cache[ $rel ];
+    }
+    $mtime = @filemtime( ONDIGITAL_DIR . $rel );
+    $cache[ $rel ] = $mtime ? (string) $mtime : ONDIGITAL_VERSION;
+    return $cache[ $rel ];
+}
+
+/**
  * Get the current language code (en, az, etc.).
  * Defaults to 'en' when Polylang is not active.
  */
