@@ -7,12 +7,10 @@
 }
 .hero-area .services-hero-scroll:hover { transform: translateY(4px); }
 
-/* Services hero: align description under the title (remove inherited left indent) */
-.hero-area .section-content .text-wrapper {
-    margin-inline-start: 0 !important;
-    padding-inline-start: 0 !important;
-}
+/* Services hero: the base rule sets text-indent:60px on this paragraph
+   (first line only), which reads as empty space in front of the text.
+   Remove it so the description aligns flush under the title. */
 .hero-area .section-content .text {
-    margin-inline-start: 0 !important;
+    text-indent: 0 !important;
     max-width: 460px;
 }
